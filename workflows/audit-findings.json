@@ -1,0 +1,58 @@
+{
+  "auditDate": "2026-05-29",
+  "auditedBy": "Claude Code",
+  "repositoryName": "ffmpeg-render-service",
+  "repositoryPurpose": "FastAPI microservice wrapping FFmpeg for video clip concatenation, text overlay, and voiceover mixing — used as a render backend for social media video generation",
+  "existingWorkflows": {
+    "n8nWorkflows": {
+      "found": 0,
+      "notes": "No n8n workflow JSON files are stored in this repository. The n8n workflows (Apify scraping, social scraping, rescripting, carousel building, video stitching, Google Sheets pipelines, Blotato schedulers, archived experiments) are stored separately in the n8n instance database, not in this repo."
+    },
+    "reusableComponents": {
+      "ffmpegRenderService": {
+        "file": "app.py",
+        "endpoints": [
+          "GET /health",
+          "POST /render"
+        ],
+        "capabilities": [
+          "Download video clips from URLs",
+          "Normalize clips to 1080x1920 vertical (9:16) at 30fps, 1.5s each",
+          "Concatenate multiple clips",
+          "Draw text overlays with timing (start_s / end_s)",
+          "Mix voiceover audio (MP3 URL)",
+          "Output: final.mp4 per job_id"
+        ],
+        "reuseSuggestion": "Keep as-is for video reel generation. Can be extended for Puppeteer PNG → FFmpeg slideshow video if Blotato carousel quality is insufficient."
+      }
+    }
+  },
+  "phaseOneDecision": {
+    "approach": "Use Blotato Visual > Create API directly via HTTP Request nodes in n8n, with full JSON payload logging",
+    "rationale": "HTTP Request nodes give full payload visibility for audit. Avoids dependency on Blotato n8n community node version compatibility.",
+    "workflowBuilt": "workflows/blotato-carousel-test-poc.json",
+    "testTopic": "Why AI Needs Nuclear Power",
+    "templatesTested": 2,
+    "slideCount": 8,
+    "doNotPublish": true
+  },
+  "fallbackPlan": {
+    "trigger": "If Blotato carousel output fails quality bar (not premium dark finance look)",
+    "stack": [
+      "1. Build HTML/CSS slide template (dark Bloomberg theme, 1080x1080px)",
+      "2. Render slides via Puppeteer (headless Chrome) in a new microservice or extend app.py",
+      "3. Store PNG slides in cloud storage (GCS/S3/Cloudflare R2)",
+      "4. Pass media_url array to Blotato Post Create API (bypass Blotato Visual renderer)",
+      "5. Schedule via Blotato Scheduler nodes already in n8n"
+    ],
+    "repoRole": "This repo (ffmpeg-render-service) would be extended with a /render-carousel endpoint if fallback is chosen"
+  },
+  "creditEstimatesMonthly": {
+    "note": "Placeholder — update avgCreditsPerCarousel in workflow after test results",
+    "assuming_10_credits_per_carousel": {
+      "1_post_per_day": 300,
+      "2_posts_per_day": 610,
+      "3_posts_per_day": 910
+    }
+  }
+}

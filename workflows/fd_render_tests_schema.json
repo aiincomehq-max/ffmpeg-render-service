@@ -1,0 +1,64 @@
+{
+  "sheet": "fd_render_tests",
+  "purpose": "Records all Blotato carousel render test results for FirstDropHQ POC evaluation",
+  "headerRow": [
+    "testRunId",
+    "testIndex",
+    "testDateTime",
+    "templateName",
+    "templateId",
+    "styleDescription",
+    "slideCount",
+    "renderTimeMs",
+    "renderTimeSec",
+    "creditCost",
+    "outputUrl",
+    "status",
+    "errorMessage",
+    "visualQualityNotes",
+    "isPremiumLook",
+    "recommendation",
+    "fullRequestPayload",
+    "rawApiResponse"
+  ],
+  "creditEstimateRows": {
+    "note": "Appended below render test rows when workflow completes the loop",
+    "fields": [
+      "rowType",
+      "estimatedAt",
+      "frequency",
+      "postsPerDay",
+      "postsPerWeek",
+      "postsPerMonth",
+      "avgCreditsPerCarousel",
+      "estimatedMonthlyCredits",
+      "note"
+    ]
+  },
+  "qualityReviewInstructions": {
+    "step1": "After workflow runs, open the outputUrl for each template",
+    "step2": "Fill in visualQualityNotes with detailed observations",
+    "step3": "Set isPremiumLook to YES / NO / MARGINAL",
+    "step4": "Set recommendation to USE / FALLBACK / ADJUST",
+    "qualityChecklist": [
+      "Dark Bloomberg-style background (not white/grey)",
+      "Clean professional typography (no comic/meme fonts)",
+      "Ticker/badge elements visible (e.g. OKLO, DATA, HOOK)",
+      "No cheap clip-art or stock photo meme aesthetic",
+      "Slide layout legible on mobile (1080x1080)",
+      "Brand name FirstDropHQ present on final slide",
+      "Consistent visual theme across all 8 slides",
+      "Financial/investor tone feels credible"
+    ]
+  },
+  "creditEstimateMonthlyTargets": {
+    "1_post_per_day": { "postsPerMonth": 30 },
+    "2_posts_per_day": { "postsPerMonth": 61 },
+    "3_posts_per_day": { "postsPerMonth": 91 }
+  },
+  "fallbackDecisionCriteria": {
+    "useBlotato": "If both templates score isPremiumLook=YES and style matches Bloomberg dark aesthetic",
+    "useFallback": "If Blotato cannot produce premium dark finance look — switch to: HTML/CSS template → Puppeteer screenshot → PNG URL → Blotato scheduler",
+    "fallbackStack": "Custom HTML slide → headless Chrome/Puppeteer render → cloud storage PNG URL → Blotato Create Post with media_url"
+  }
+}

@@ -1,0 +1,314 @@
+{
+  "name": "Blotato Carousel Quality Test — AI Nuclear Power [POC]",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## 🧪 Blotato Carousel Quality Test — POC\n**Topic:** Why AI Needs Nuclear Power\n**Brand:** FirstDropHQ | *The companies building the next decade.*\n**Status:** POC — DO NOT PUBLISH\n\n---\n\n### ⚠️ SETUP CHECKLIST (before running)\n\n**1. Blotato API credential**\n- In n8n: Credentials → New → **Header Auth**\n- Name: `Blotato API Auth`\n- Header Name: `Authorization`\n- Header Value: `Bearer YOUR_BLOTATO_API_KEY`\n- Attach to the `Blotato Visual Create` node\n\n**2. Blotato API endpoint**\n- Open: Blotato Dashboard → API → Visual / Create\n- Confirm the correct endpoint URL\n- Update the URL in `Blotato Visual Create` node\n- Default assumed: `https://api.blotato.com/v1/media/create`\n\n**3. Template IDs**\n- Open: Blotato Dashboard → Visuals → Templates\n- Find 2 dark/finance-style carousel templates\n- Copy their IDs into `Prepare Template Tests` node\n- Replace `BLOTATO_TEMPLATE_1_ID` and `BLOTATO_TEMPLATE_2_ID`\n\n**4. Google Sheets**\n- Create credential: Google Sheets OAuth2\n- Name it: `Google Sheets OAuth`\n- Copy your Spreadsheet ID from the URL\n- Replace `YOUR_GOOGLE_SHEET_SPREADSHEET_ID` in both Sheets nodes\n- Ensure tab `fd_render_tests` exists in the sheet\n\n---\n\n### 📊 fd_render_tests tab headers (Row 1)\nPaste this row into your sheet before running:\n`testRunId | testIndex | testDateTime | templateName | templateId | styleDescription | slideCount | renderTimeMs | renderTimeSec | creditCost | outputUrl | status | errorMessage | visualQualityNotes | isPremiumLook | recommendation | fullRequestPayload | rawApiResponse`",
+        "height": 700,
+        "width": 680,
+        "color": 7
+      },
+      "id": "sticky-setup",
+      "name": "Setup Instructions",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [-740, 200]
+    },
+    {
+      "parameters": {
+        "content": "### 🔁 Loop: runs once per template\nWith 2 templates configured, this loop fires twice.\nEach pass: builds payload → calls Blotato → records timing → writes to Sheets.\n\nAfter both complete, the **done** output fires → Credit Estimates.",
+        "height": 180,
+        "width": 300,
+        "color": 5
+      },
+      "id": "sticky-loop",
+      "name": "Loop Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [880, 320]
+    },
+    {
+      "parameters": {
+        "content": "### 💳 Credit Estimate\nUpdate `avgCreditsPerCarousel` in the\n`Calculate Credit Estimates` node after\nyou see the actual credit cost in the\nBlotato API response or dashboard.\n\nThen re-run this node to get accurate\nmonthly projections.",
+        "height": 200,
+        "width": 280,
+        "color": 4
+      },
+      "id": "sticky-credits",
+      "name": "Credits Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [1100, 720]
+    },
+    {
+      "parameters": {},
+      "id": "trigger-manual",
+      "name": "Run Test Manually",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [240, 520]
+    },
+    {
+      "parameters": {
+        "jsCode": "// ============================================================\n// SLIDE CONTENT: Why AI Needs Nuclear Power\n// 8 slides | FirstDropHQ | Bloomberg dark investor style\n// ============================================================\n\nconst testRunId = `render_test_${new Date().toISOString().replace(/[:.]/g, '_')}`;\n\nconst slides = [\n  {\n    slideNumber: 1,\n    type: 'hook',\n    headline: 'AI Has a Power Problem',\n    subheadline: 'The infrastructure crisis no one is talking about.',\n    body: 'The AI revolution is devouring electricity at unprecedented speed. Data centre energy consumption is doubling every two years.',\n    badge: 'HOOK',\n    stat: null\n  },\n  {\n    slideNumber: 2,\n    type: 'data',\n    headline: 'Data Centres Need Massive Electricity',\n    subheadline: 'Scale most investors have not priced in.',\n    body: 'A single large AI training run consumes 1+ GWh. By 2030, AI data centres may require 1,000 TWh/year \\u2014 more than most nations consume today.',\n    badge: 'DATA',\n    stat: '1,000 TWh/yr by 2030'\n  },\n  {\n    slideNumber: 3,\n    type: 'analysis',\n    headline: 'Why Renewables Alone Fall Short',\n    subheadline: 'Intermittency vs. always-on AI demand.',\n    body: 'Solar and wind are intermittent. AI inference demands 24/7 baseload power. Grid-scale battery storage remains economically unproven at the required scale.',\n    badge: 'ANALYSIS',\n    stat: null\n  },\n  {\n    slideNumber: 4,\n    type: 'catalyst',\n    headline: 'Why Nuclear Is Back in Focus',\n    subheadline: 'Big Tech is signing nuclear deals at record pace.',\n    body: 'Nuclear delivers 24/7 carbon-free baseload. Microsoft, Google, and Amazon all signed nuclear power agreements in 2024 \\u2014 a first for Big Tech.',\n    badge: 'CATALYST',\n    stat: '3 Big Tech nuclear deals in 2024'\n  },\n  {\n    slideNumber: 5,\n    type: 'stock',\n    headline: 'Where OKLO Fits',\n    subheadline: 'Small modular reactors for the AI age.',\n    body: 'OKLO (NYSE: OKLO) is building small modular reactors targeting tech campuses and remote AI data centre deployments. Sam Altman serves as Chairman.',\n    badge: 'OKLO \\u25cf NYSE',\n    stat: 'NYSE: OKLO'\n  },\n  {\n    slideNumber: 6,\n    type: 'supply_chain',\n    headline: 'The Uranium & Fuel Supply Chain',\n    subheadline: 'More reactors means tighter uranium supply.',\n    body: 'Demand for nuclear fuel is structurally rising. Key names: Cameco (CCJ), Sprott Physical Uranium Trust (U.UN), NexGen Energy (NXE).',\n    badge: 'SUPPLY CHAIN',\n    stat: 'Uranium +300% since 2020'\n  },\n  {\n    slideNumber: 7,\n    type: 'risks',\n    headline: 'Key Risks to Watch',\n    subheadline: 'What could slow the nuclear thesis.',\n    body: 'Regulatory delays. Construction cost overruns. SMR technology unproven at commercial scale. Uranium price volatility. Political and community opposition.',\n    badge: 'RISKS',\n    stat: null\n  },\n  {\n    slideNumber: 8,\n    type: 'cta',\n    headline: 'Follow @FirstDropHQ',\n    subheadline: 'The companies building the next decade.',\n    body: 'We track AI Infrastructure \\u00b7 Nuclear \\u00b7 Semiconductors \\u00b7 Quantum \\u00b7 Robotics \\u00b7 Energy Grid \\u00b7 Data Centres',\n    badge: 'FIRSTDROPHQ',\n    stat: '@firstdrophq'\n  }\n];\n\nreturn [{\n  json: {\n    testRunId,\n    testCreatedAt: new Date().toISOString(),\n    topic: 'Why AI Needs Nuclear Power',\n    brand: 'FirstDropHQ',\n    tagline: 'The companies building the next decade.',\n    slideCount: slides.length,\n    slides\n  }\n}];"
+      },
+      "id": "code-slides",
+      "name": "Define Slide Content",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 520]
+    },
+    {
+      "parameters": {
+        "jsCode": "// ============================================================\n// TEMPLATE CONFIGURATION\n// TODO: Replace the two template IDs with real values from\n//       Blotato Dashboard > Visuals > Templates\n// ============================================================\n\nconst input = $input.item.json;\n\nconst templates = [\n  {\n    testIndex: 1,\n    templateName: 'Bloomberg Dark Finance',\n    templateId: 'BLOTATO_TEMPLATE_1_ID',\n    styleDescription: 'Dark background, white/gold typography, finance badge, data-heavy layout',\n    targetAesthetic: 'Bloomberg Terminal / Dark finance dashboard'\n  },\n  {\n    testIndex: 2,\n    templateName: 'Dark News Ticker',\n    templateId: 'BLOTATO_TEMPLATE_2_ID',\n    styleDescription: 'Dark newsroom style, ticker tape accents, bold headlines, investment focus',\n    targetAesthetic: 'Premium investment newsletter / CNBC dark mode'\n  }\n];\n\n// Return one item per template so SplitInBatches loops over both\nreturn templates.map(template => ({\n  json: {\n    ...template,\n    testRunId: input.testRunId,\n    testCreatedAt: input.testCreatedAt,\n    topic: input.topic,\n    brand: input.brand,\n    tagline: input.tagline,\n    slideCount: input.slideCount,\n    slides: input.slides\n  }\n}));"
+      },
+      "id": "code-templates",
+      "name": "Prepare Template Tests",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 520]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "loop-templates",
+      "name": "Loop: Each Template",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [900, 520]
+    },
+    {
+      "parameters": {
+        "jsCode": "// ============================================================\n// BUILD BLOTATO VISUAL CREATE API PAYLOAD\n// Records start time for render timing measurement.\n// Adjust field names to match the actual Blotato API spec:\n//   Blotato Dashboard > API Reference > Visual > Create\n// ============================================================\n\nconst input = $input.item.json;\nconst startTime = Date.now();\n\nconst payload = {\n  templateId: input.templateId,\n  format: 'carousel',\n  slideCount: input.slides.length,\n\n  // Slide content array\n  slides: input.slides.map(slide => ({\n    slideNumber:  slide.slideNumber,\n    headline:     slide.headline,\n    subheadline:  slide.subheadline,\n    body:         slide.body,\n    badge:        slide.badge,\n    stat:         slide.stat || null\n  })),\n\n  // Brand / account identity\n  branding: {\n    accountName: input.brand,\n    tagline:     input.tagline,\n    colorScheme: 'dark'\n  },\n\n  // Render settings\n  settings: {\n    aspectRatio:  '1:1',\n    outputFormat: 'carousel',\n    quality:      'high',\n    publish:      false\n  },\n\n  // Audit / test metadata\n  metadata: {\n    testRunId:    input.testRunId,\n    testIndex:    input.testIndex,\n    topic:        input.topic,\n    doNotPublish: true\n  }\n};\n\nreturn [{\n  json: {\n    ...input,\n    startTime,\n    payload,\n    payloadJson: JSON.stringify(payload, null, 2)\n  }\n}];"
+      },
+      "id": "code-payload",
+      "name": "Build API Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1120, 520]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.blotato.com/v1/media/create",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.payload }}",
+        "options": {
+          "timeout": 120000,
+          "response": {
+            "response": {
+              "fullResponse": false,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "http-blotato",
+      "name": "Blotato Visual Create",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1340, 520],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REPLACE_WITH_YOUR_CREDENTIAL_ID",
+          "name": "Blotato API Auth"
+        }
+      },
+      "notes": "TODO: 1) Verify endpoint URL matches Blotato API docs. 2) Attach 'Blotato API Auth' Header Auth credential (Bearer token)."
+    },
+    {
+      "parameters": {
+        "jsCode": "// ============================================================\n// PROCESS BLOTATO API RESPONSE\n// Calculates render time, extracts output URL and credit cost,\n// formats the row for Google Sheets.\n// ============================================================\n\nconst endTime = Date.now();\n\n// Retrieve pre-HTTP context (startTime, templateName, payload, etc.)\nconst preData     = $node['Build API Payload'].json;\nconst apiResponse = $input.item.json;   // Blotato API response body\n\nconst renderTimeMs  = endTime - preData.startTime;\nconst renderTimeSec = parseFloat((renderTimeMs / 1000).toFixed(2));\n\n// Extract output URL — try every common Blotato field name\nconst outputUrl = (\n  apiResponse.url                 ||\n  apiResponse.output_url          ||\n  apiResponse.media_url           ||\n  apiResponse.carousel_url        ||\n  apiResponse.result?.url         ||\n  apiResponse.data?.url           ||\n  apiResponse.data?.output_url    ||\n  'URL_NOT_IN_RESPONSE'\n);\n\n// Extract credit cost — try every common field name\nconst creditCost = (\n  apiResponse.credits_used        ??\n  apiResponse.creditCost          ??\n  apiResponse.credits             ??\n  apiResponse.cost                ??\n  apiResponse.data?.credits_used  ??\n  'CHECK_BLOTATO_DASHBOARD'\n);\n\nconst status =\n  apiResponse.status ||\n  apiResponse.state  ||\n  (apiResponse.error ? 'ERROR' : 'COMPLETED');\n\nconst errorMessage = apiResponse.error || apiResponse.message || null;\n\nreturn [{\n  json: {\n    // Identification\n    testRunId:          preData.testRunId,\n    testIndex:          preData.testIndex,\n    testDateTime:       new Date().toISOString(),\n\n    // Template\n    templateName:       preData.templateName,\n    templateId:         preData.templateId,\n    styleDescription:   preData.styleDescription,\n\n    // Performance\n    slideCount:         preData.slideCount,\n    renderTimeMs,\n    renderTimeSec,\n\n    // Results\n    creditCost,\n    outputUrl,\n    status,\n    errorMessage,\n\n    // Quality assessment (fill in manually after reviewing the carousel URL)\n    visualQualityNotes: 'PENDING — open outputUrl and review visually',\n    isPremiumLook:      'PENDING',\n    recommendation:     'PENDING',\n\n    // Full payloads for audit log\n    fullRequestPayload: preData.payloadJson,\n    rawApiResponse:     JSON.stringify(apiResponse, null, 2)\n  }\n}];"
+      },
+      "id": "code-response",
+      "name": "Process API Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1560, 520]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_SPREADSHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "fd_render_tests",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {
+          "valueInputMode": "USER_ENTERED",
+          "cellFormat": "USER_ENTERED"
+        }
+      },
+      "id": "sheets-result",
+      "name": "Append Result to Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [1780, 520],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REPLACE_WITH_YOUR_SHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets OAuth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// ============================================================\n// MONTHLY CREDIT COST ESTIMATES\n// Calculates projected Blotato credit usage at 3 posting rates.\n//\n// !!! UPDATE avgCreditsPerCarousel after seeing the actual\n//     credit cost in the test results above !!!\n// ============================================================\n\n// --- UPDATE THIS VALUE after reviewing test results ---\nconst avgCreditsPerCarousel = 10; // PLACEHOLDER — replace with actual credit cost\n// -------------------------------------------------------\n\nconst scenarios = [\n  { frequency: '1 post/day',  postsPerDay: 1, postsPerWeek: 7,  postsPerMonth: 30 },\n  { frequency: '2 posts/day', postsPerDay: 2, postsPerWeek: 14, postsPerMonth: 61 },\n  { frequency: '3 posts/day', postsPerDay: 3, postsPerWeek: 21, postsPerMonth: 91 }\n];\n\nreturn scenarios.map(s => ({\n  json: {\n    rowType:                   'CREDIT_ESTIMATE',\n    estimatedAt:               new Date().toISOString(),\n    frequency:                 s.frequency,\n    postsPerDay:               s.postsPerDay,\n    postsPerWeek:              s.postsPerWeek,\n    postsPerMonth:             s.postsPerMonth,\n    avgCreditsPerCarousel,\n    estimatedMonthlyCredits:   s.postsPerMonth * avgCreditsPerCarousel,\n    note: `avgCreditsPerCarousel is ${avgCreditsPerCarousel} (PLACEHOLDER). Update from render test results.`\n  }\n}));"
+      },
+      "id": "code-credits",
+      "name": "Calculate Credit Estimates",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1120, 760]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_SPREADSHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "fd_render_tests",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {
+          "valueInputMode": "USER_ENTERED"
+        }
+      },
+      "id": "sheets-summary",
+      "name": "Append Credit Summary",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [1340, 760],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REPLACE_WITH_YOUR_SHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets OAuth"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Run Test Manually": {
+      "main": [
+        [
+          { "node": "Define Slide Content", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Define Slide Content": {
+      "main": [
+        [
+          { "node": "Prepare Template Tests", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Prepare Template Tests": {
+      "main": [
+        [
+          { "node": "Loop: Each Template", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Loop: Each Template": {
+      "main": [
+        [
+          { "node": "Build API Payload", "type": "main", "index": 0 }
+        ],
+        [
+          { "node": "Calculate Credit Estimates", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Build API Payload": {
+      "main": [
+        [
+          { "node": "Blotato Visual Create", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Blotato Visual Create": {
+      "main": [
+        [
+          { "node": "Process API Response", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Process API Response": {
+      "main": [
+        [
+          { "node": "Append Result to Sheets", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Append Result to Sheets": {
+      "main": [
+        [
+          { "node": "Loop: Each Template", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Calculate Credit Estimates": {
+      "main": [
+        [
+          { "node": "Append Credit Summary", "type": "main", "index": 0 }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "versionId": "1.0.0",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "firstdrophq"
+  },
+  "id": "blotato-carousel-test-poc-001",
+  "tags": [
+    { "name": "POC" },
+    { "name": "FirstDropHQ" },
+    { "name": "Blotato" },
+    { "name": "carousel-test" },
+    { "name": "DO-NOT-PUBLISH" }
+  ]
+}
