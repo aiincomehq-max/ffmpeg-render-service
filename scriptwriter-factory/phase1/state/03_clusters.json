@@ -1,0 +1,3145 @@
+{
+  "stage": "WF-12",
+  "generated_at": "2026-08-31T21:29:53.703Z",
+  "source_stage": "WF-11",
+  "assertion_count": 236,
+  "cost_pressure_index": 0.434,
+  "economics_signal_count": 18,
+  "format_trend_signal_count": 8,
+  "clusters": {
+    "world_supply": {
+      "bomb_disposal": {
+        "key": "bomb_disposal",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV001"
+        ],
+        "index": 0.16666666666666666
+      },
+      "emergency_services": {
+        "key": "emergency_services",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV001"
+        ],
+        "index": 0.16666666666666666
+      },
+      "police": {
+        "key": "police",
+        "weighted": 4.2,
+        "count": 6,
+        "evidence_ids": [
+          "EV002",
+          "EV003",
+          "EV005",
+          "EV008",
+          "EV013",
+          "EV030"
+        ],
+        "index": 1
+      },
+      "small_town": {
+        "key": "small_town",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV003"
+        ],
+        "index": 0.16666666666666666
+      },
+      "suburban_family": {
+        "key": "suburban_family",
+        "weighted": 1.1,
+        "count": 2,
+        "evidence_ids": [
+          "EV004",
+          "EV019"
+        ],
+        "index": 0.2619047619047619
+      },
+      "academia": {
+        "key": "academia",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV005"
+        ],
+        "index": 0.16666666666666666
+      },
+      "aviation": {
+        "key": "aviation",
+        "weighted": 1.4,
+        "count": 2,
+        "evidence_ids": [
+          "EV006",
+          "EV015"
+        ],
+        "index": 0.3333333333333333
+      },
+      "intelligence_services": {
+        "key": "intelligence_services",
+        "weighted": 2.1999999999999997,
+        "count": 4,
+        "evidence_ids": [
+          "EV006",
+          "EV007",
+          "EV012",
+          "EV031"
+        ],
+        "index": 0.5238095238095237
+      },
+      "taxi_transport": {
+        "key": "taxi_transport",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV008"
+        ],
+        "index": 0.16666666666666666
+      },
+      "criminal_justice": {
+        "key": "criminal_justice",
+        "weighted": 4.1000000000000005,
+        "count": 5,
+        "evidence_ids": [
+          "EV008",
+          "EV026",
+          "EV027",
+          "EV029",
+          "EV033"
+        ],
+        "index": 0.9761904761904763
+      },
+      "witness_protection": {
+        "key": "witness_protection",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV009"
+        ],
+        "index": 0.16666666666666666
+      },
+      "rural_scotland": {
+        "key": "rural_scotland",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV009"
+        ],
+        "index": 0.16666666666666666
+      },
+      "small_community": {
+        "key": "small_community",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV009"
+        ],
+        "index": 0.16666666666666666
+      },
+      "royal_household": {
+        "key": "royal_household",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV010"
+        ],
+        "index": 0.16666666666666666
+      },
+      "domestic_service": {
+        "key": "domestic_service",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV010"
+        ],
+        "index": 0.16666666666666666
+      },
+      "finance": {
+        "key": "finance",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV010"
+        ],
+        "index": 0.16666666666666666
+      },
+      "tudor_court": {
+        "key": "tudor_court",
+        "weighted": 0.4,
+        "count": 1,
+        "evidence_ids": [
+          "EV011"
+        ],
+        "index": 0.09523809523809523
+      },
+      "government": {
+        "key": "government",
+        "weighted": 0.4,
+        "count": 1,
+        "evidence_ids": [
+          "EV012"
+        ],
+        "index": 0.09523809523809523
+      },
+      "press": {
+        "key": "press",
+        "weighted": 0.4,
+        "count": 1,
+        "evidence_ids": [
+          "EV012"
+        ],
+        "index": 0.09523809523809523
+      },
+      "anti_corruption": {
+        "key": "anti_corruption",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV013"
+        ],
+        "index": 0.16666666666666666
+      },
+      "space_programme": {
+        "key": "space_programme",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV014"
+        ],
+        "index": 0.16666666666666666
+      },
+      "rural_folk_horror": {
+        "key": "rural_folk_horror",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV014"
+        ],
+        "index": 0.16666666666666666
+      },
+      "deaf_community": {
+        "key": "deaf_community",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV014"
+        ],
+        "index": 0.16666666666666666
+      },
+      "country_house": {
+        "key": "country_house",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV014"
+        ],
+        "index": 0.16666666666666666
+      },
+      "investment_banking": {
+        "key": "investment_banking",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV015"
+        ],
+        "index": 0.16666666666666666
+      },
+      "regency_society": {
+        "key": "regency_society",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV015"
+        ],
+        "index": 0.16666666666666666
+      },
+      "parliament": {
+        "key": "parliament",
+        "weighted": 1.4,
+        "count": 2,
+        "evidence_ids": [
+          "EV015",
+          "EV016"
+        ],
+        "index": 0.3333333333333333
+      },
+      "counter_terrorism": {
+        "key": "counter_terrorism",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV016"
+        ],
+        "index": 0.16666666666666666
+      },
+      "customs_border_force": {
+        "key": "customs_border_force",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV017"
+        ],
+        "index": 0.16666666666666666
+      },
+      "smuggling": {
+        "key": "smuggling",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV017"
+        ],
+        "index": 0.16666666666666666
+      },
+      "unspecified": {
+        "key": "unspecified",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV018"
+        ],
+        "index": 0.16666666666666666
+      },
+      "glasgow_underworld": {
+        "key": "glasgow_underworld",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV020"
+        ],
+        "index": 0.16666666666666666
+      },
+      "organised_crime": {
+        "key": "organised_crime",
+        "weighted": 1.1,
+        "count": 2,
+        "evidence_ids": [
+          "EV021",
+          "EV031"
+        ],
+        "index": 0.2619047619047619
+      },
+      "london_underworld": {
+        "key": "london_underworld",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV021"
+        ],
+        "index": 0.16666666666666666
+      },
+      "small_town_america": {
+        "key": "small_town_america",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV022"
+        ],
+        "index": 0.16666666666666666
+      },
+      "law": {
+        "key": "law",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV022"
+        ],
+        "index": 0.16666666666666666
+      },
+      "hospitality": {
+        "key": "hospitality",
+        "weighted": 2,
+        "count": 2,
+        "evidence_ids": [
+          "EV023",
+          "EV025"
+        ],
+        "index": 0.47619047619047616
+      },
+      "later_life": {
+        "key": "later_life",
+        "weighted": 1,
+        "count": 1,
+        "evidence_ids": [
+          "EV023"
+        ],
+        "index": 0.23809523809523808
+      },
+      "antiques": {
+        "key": "antiques",
+        "weighted": 1,
+        "count": 1,
+        "evidence_ids": [
+          "EV024"
+        ],
+        "index": 0.23809523809523808
+      },
+      "french_expat_community": {
+        "key": "french_expat_community",
+        "weighted": 1,
+        "count": 1,
+        "evidence_ids": [
+          "EV024"
+        ],
+        "index": 0.23809523809523808
+      },
+      "cruise_ship": {
+        "key": "cruise_ship",
+        "weighted": 1,
+        "count": 1,
+        "evidence_ids": [
+          "EV025"
+        ],
+        "index": 0.23809523809523808
+      },
+      "various": {
+        "key": "various",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV028"
+        ],
+        "index": 0.16666666666666666
+      },
+      "courts": {
+        "key": "courts",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV029"
+        ],
+        "index": 0.16666666666666666
+      },
+      "northern_ireland": {
+        "key": "northern_ireland",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV030"
+        ],
+        "index": 0.16666666666666666
+      },
+      "working_class_community": {
+        "key": "working_class_community",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV030"
+        ],
+        "index": 0.16666666666666666
+      },
+      "medicine": {
+        "key": "medicine",
+        "weighted": 0.4,
+        "count": 1,
+        "evidence_ids": [
+          "EV031"
+        ],
+        "index": 0.09523809523809523
+      },
+      "mining_community": {
+        "key": "mining_community",
+        "weighted": 0.4,
+        "count": 1,
+        "evidence_ids": [
+          "EV031"
+        ],
+        "index": 0.09523809523809523
+      },
+      "media": {
+        "key": "media",
+        "weighted": 0.4,
+        "count": 1,
+        "evidence_ids": [
+          "EV031"
+        ],
+        "index": 0.09523809523809523
+      },
+      "prison": {
+        "key": "prison",
+        "weighted": 0.4,
+        "count": 1,
+        "evidence_ids": [
+          "EV032"
+        ],
+        "index": 0.09523809523809523
+      },
+      "young_offenders_institution": {
+        "key": "young_offenders_institution",
+        "weighted": 0.4,
+        "count": 1,
+        "evidence_ids": [
+          "EV032"
+        ],
+        "index": 0.09523809523809523
+      },
+      "forensic_science": {
+        "key": "forensic_science",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV033"
+        ],
+        "index": 0.16666666666666666
+      },
+      "travel_tourism": {
+        "key": "travel_tourism",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV033"
+        ],
+        "index": 0.16666666666666666
+      },
+      "food_hospitality": {
+        "key": "food_hospitality",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV035"
+        ],
+        "index": 0.16666666666666666
+      }
+    },
+    "engine_supply": {
+      "terrorism": {
+        "key": "terrorism",
+        "weighted": 2.8,
+        "count": 4,
+        "evidence_ids": [
+          "EV001",
+          "EV016"
+        ],
+        "index": 0.1538461538461539
+      },
+      "institutional_concealment": {
+        "key": "institutional_concealment",
+        "weighted": 5.3999999999999995,
+        "count": 9,
+        "evidence_ids": [
+          "EV001",
+          "EV006",
+          "EV012",
+          "EV013"
+        ],
+        "index": 0.2967032967032968
+      },
+      "murder": {
+        "key": "murder",
+        "weighted": 18.199999999999992,
+        "count": 26,
+        "evidence_ids": [
+          "EV002",
+          "EV003",
+          "EV005",
+          "EV010",
+          "EV014",
+          "EV020",
+          "EV022",
+          "EV024",
+          "EV025",
+          "EV026",
+          "EV031",
+          "EV035"
+        ],
+        "index": 1
+      },
+      "serial_offending": {
+        "key": "serial_offending",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV002"
+        ],
+        "index": 0.03846153846153848
+      },
+      "betrayal": {
+        "key": "betrayal",
+        "weighted": 3.7999999999999994,
+        "count": 8,
+        "evidence_ids": [
+          "EV004",
+          "EV007",
+          "EV011",
+          "EV031"
+        ],
+        "index": 0.20879120879120885
+      },
+      "family_secrets": {
+        "key": "family_secrets",
+        "weighted": 2.5,
+        "count": 4,
+        "evidence_ids": [
+          "EV004",
+          "EV019",
+          "EV022"
+        ],
+        "index": 0.13736263736263743
+      },
+      "conspiracy": {
+        "key": "conspiracy",
+        "weighted": 4.9,
+        "count": 7,
+        "evidence_ids": [
+          "EV006",
+          "EV007",
+          "EV015"
+        ],
+        "index": 0.2692307692307694
+      },
+      "sexual_offending": {
+        "key": "sexual_offending",
+        "weighted": 2.0999999999999996,
+        "count": 3,
+        "evidence_ids": [
+          "EV008"
+        ],
+        "index": 0.11538461538461542
+      },
+      "institutional_failure": {
+        "key": "institutional_failure",
+        "weighted": 2.8999999999999995,
+        "count": 5,
+        "evidence_ids": [
+          "EV008",
+          "EV032"
+        ],
+        "index": 0.15934065934065939
+      },
+      "concealed_identity": {
+        "key": "concealed_identity",
+        "weighted": 2.0999999999999996,
+        "count": 3,
+        "evidence_ids": [
+          "EV009"
+        ],
+        "index": 0.11538461538461542
+      },
+      "organised_crime": {
+        "key": "organised_crime",
+        "weighted": 6.300000000000001,
+        "count": 9,
+        "evidence_ids": [
+          "EV009",
+          "EV020",
+          "EV021",
+          "EV030"
+        ],
+        "index": 0.34615384615384637
+      },
+      "class_transgression": {
+        "key": "class_transgression",
+        "weighted": 2.0999999999999996,
+        "count": 3,
+        "evidence_ids": [
+          "EV010"
+        ],
+        "index": 0.11538461538461542
+      },
+      "power_struggle": {
+        "key": "power_struggle",
+        "weighted": 0.4,
+        "count": 1,
+        "evidence_ids": [
+          "EV011"
+        ],
+        "index": 0.02197802197802199
+      },
+      "whistleblowing": {
+        "key": "whistleblowing",
+        "weighted": 1.2000000000000002,
+        "count": 3,
+        "evidence_ids": [
+          "EV012"
+        ],
+        "index": 0.06593406593406598
+      },
+      "corruption": {
+        "key": "corruption",
+        "weighted": 3.3999999999999995,
+        "count": 7,
+        "evidence_ids": [
+          "EV013",
+          "EV031"
+        ],
+        "index": 0.18681318681318687
+      },
+      "survival": {
+        "key": "survival",
+        "weighted": 2.8,
+        "count": 4,
+        "evidence_ids": [
+          "EV014"
+        ],
+        "index": 0.1538461538461539
+      },
+      "supernatural_threat": {
+        "key": "supernatural_threat",
+        "weighted": 2.8,
+        "count": 4,
+        "evidence_ids": [
+          "EV014"
+        ],
+        "index": 0.1538461538461539
+      },
+      "ambition": {
+        "key": "ambition",
+        "weighted": 2.8,
+        "count": 4,
+        "evidence_ids": [
+          "EV015"
+        ],
+        "index": 0.1538461538461539
+      },
+      "siege": {
+        "key": "siege",
+        "weighted": 4.2,
+        "count": 6,
+        "evidence_ids": [
+          "EV015",
+          "EV016"
+        ],
+        "index": 0.23076923076923087
+      },
+      "smuggling": {
+        "key": "smuggling",
+        "weighted": 1.4,
+        "count": 2,
+        "evidence_ids": [
+          "EV017"
+        ],
+        "index": 0.07692307692307696
+      },
+      "undercover_operation": {
+        "key": "undercover_operation",
+        "weighted": 1.4,
+        "count": 2,
+        "evidence_ids": [
+          "EV017"
+        ],
+        "index": 0.07692307692307696
+      },
+      "unspecified": {
+        "key": "unspecified",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV018"
+        ],
+        "index": 0.03846153846153848
+      },
+      "disappearance": {
+        "key": "disappearance",
+        "weighted": 0.4,
+        "count": 1,
+        "evidence_ids": [
+          "EV019"
+        ],
+        "index": 0.02197802197802199
+      },
+      "succession": {
+        "key": "succession",
+        "weighted": 1.4,
+        "count": 2,
+        "evidence_ids": [
+          "EV021"
+        ],
+        "index": 0.07692307692307696
+      },
+      "reinvention": {
+        "key": "reinvention",
+        "weighted": 2,
+        "count": 2,
+        "evidence_ids": [
+          "EV023"
+        ],
+        "index": 0.10989010989010994
+      },
+      "complicity": {
+        "key": "complicity",
+        "weighted": 1,
+        "count": 1,
+        "evidence_ids": [
+          "EV026"
+        ],
+        "index": 0.05494505494505497
+      },
+      "real_events": {
+        "key": "real_events",
+        "weighted": 1,
+        "count": 1,
+        "evidence_ids": [
+          "EV027"
+        ],
+        "index": 0.05494505494505497
+      },
+      "sectarian_legacy": {
+        "key": "sectarian_legacy",
+        "weighted": 2.0999999999999996,
+        "count": 3,
+        "evidence_ids": [
+          "EV030"
+        ],
+        "index": 0.11538461538461542
+      },
+      "redemption": {
+        "key": "redemption",
+        "weighted": 0.8,
+        "count": 2,
+        "evidence_ids": [
+          "EV032"
+        ],
+        "index": 0.04395604395604398
+      }
+    },
+    "genre_supply": {
+      "thriller": {
+        "key": "thriller",
+        "weighted": 14.649999999999999,
+        "count": 13,
+        "evidence_ids": [
+          "EV001",
+          "EV002",
+          "EV003",
+          "EV006",
+          "EV007",
+          "EV014",
+          "EV015",
+          "EV017",
+          "EV019",
+          "EV022",
+          "EV028",
+          "EV031"
+        ],
+        "index": 1
+      },
+      "procedural": {
+        "key": "procedural",
+        "weighted": 2.0999999999999996,
+        "count": 3,
+        "evidence_ids": [
+          "EV001",
+          "EV013",
+          "EV030"
+        ],
+        "index": 0.14334470989761092
+      },
+      "crime": {
+        "key": "crime",
+        "weighted": 14.249999999999996,
+        "count": 13,
+        "evidence_ids": [
+          "EV002",
+          "EV003",
+          "EV005",
+          "EV013",
+          "EV014",
+          "EV017",
+          "EV020",
+          "EV021",
+          "EV022",
+          "EV030",
+          "EV031",
+          "EV035"
+        ],
+        "index": 0.9726962457337882
+      },
+      "domestic_drama": {
+        "key": "domestic_drama",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV004"
+        ],
+        "index": 0.04778156996587031
+      },
+      "cosy_crime": {
+        "key": "cosy_crime",
+        "weighted": 4.1,
+        "count": 4,
+        "evidence_ids": [
+          "EV005",
+          "EV024",
+          "EV025",
+          "EV028"
+        ],
+        "index": 0.27986348122866894
+      },
+      "espionage": {
+        "key": "espionage",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV007"
+        ],
+        "index": 0.04778156996587031
+      },
+      "true_crime_drama": {
+        "key": "true_crime_drama",
+        "weighted": 2.4,
+        "count": 3,
+        "evidence_ids": [
+          "EV008",
+          "EV010",
+          "EV026"
+        ],
+        "index": 0.16382252559726965
+      },
+      "psychological_thriller": {
+        "key": "psychological_thriller",
+        "weighted": 1.4,
+        "count": 2,
+        "evidence_ids": [
+          "EV009",
+          "EV018"
+        ],
+        "index": 0.09556313993174062
+      },
+      "period_drama": {
+        "key": "period_drama",
+        "weighted": 3.1999999999999997,
+        "count": 2,
+        "evidence_ids": [
+          "EV011",
+          "EV015"
+        ],
+        "index": 0.21843003412969283
+      },
+      "political_thriller": {
+        "key": "political_thriller",
+        "weighted": 1.1,
+        "count": 2,
+        "evidence_ids": [
+          "EV012",
+          "EV016"
+        ],
+        "index": 0.07508532423208192
+      },
+      "supernatural": {
+        "key": "supernatural",
+        "weighted": 2.8,
+        "count": 1,
+        "evidence_ids": [
+          "EV014"
+        ],
+        "index": 0.19112627986348124
+      },
+      "period_crime": {
+        "key": "period_crime",
+        "weighted": 3.5,
+        "count": 2,
+        "evidence_ids": [
+          "EV014",
+          "EV017"
+        ],
+        "index": 0.23890784982935157
+      },
+      "drama": {
+        "key": "drama",
+        "weighted": 5.8,
+        "count": 3,
+        "evidence_ids": [
+          "EV015",
+          "EV023",
+          "EV031"
+        ],
+        "index": 0.39590443686006827
+      },
+      "comedy_thriller": {
+        "key": "comedy_thriller",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV020"
+        ],
+        "index": 0.04778156996587031
+      },
+      "comedy": {
+        "key": "comedy",
+        "weighted": 2.4499999999999997,
+        "count": 2,
+        "evidence_ids": [
+          "EV021",
+          "EV076"
+        ],
+        "index": 0.16723549488054607
+      },
+      "factual_drama": {
+        "key": "factual_drama",
+        "weighted": 1,
+        "count": 1,
+        "evidence_ids": [
+          "EV027"
+        ],
+        "index": 0.06825938566552901
+      },
+      "family_drama": {
+        "key": "family_drama",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV028"
+        ],
+        "index": 0.04778156996587031
+      },
+      "factual": {
+        "key": "factual",
+        "weighted": 2.0999999999999996,
+        "count": 2,
+        "evidence_ids": [
+          "EV029",
+          "EV033"
+        ],
+        "index": 0.14334470989761092
+      },
+      "true_crime": {
+        "key": "true_crime",
+        "weighted": 4.199999999999999,
+        "count": 4,
+        "evidence_ids": [
+          "EV029",
+          "EV033",
+          "EV078",
+          "EV079"
+        ],
+        "index": 0.28668941979522183
+      },
+      "social_realist_drama": {
+        "key": "social_realist_drama",
+        "weighted": 0.4,
+        "count": 1,
+        "evidence_ids": [
+          "EV032"
+        ],
+        "index": 0.027303754266211608
+      },
+      "kids": {
+        "key": "kids",
+        "weighted": 1.0499999999999998,
+        "count": 1,
+        "evidence_ids": [
+          "EV076"
+        ],
+        "index": 0.07167235494880546
+      }
+    },
+    "genre_demand": {
+      "thriller": {
+        "key": "thriller",
+        "weighted": 9.075000000000003,
+        "count": 15,
+        "evidence_ids": [
+          "EV001",
+          "EV002",
+          "EV003",
+          "EV006",
+          "EV007",
+          "EV014",
+          "EV017",
+          "EV019",
+          "EV022",
+          "EV028",
+          "EV031",
+          "EV071"
+        ],
+        "index": 0.9007444168734493
+      },
+      "procedural": {
+        "key": "procedural",
+        "weighted": 2.0999999999999996,
+        "count": 3,
+        "evidence_ids": [
+          "EV001",
+          "EV030",
+          "EV082"
+        ],
+        "index": 0.20843672456575676
+      },
+      "crime": {
+        "key": "crime",
+        "weighted": 10.075000000000001,
+        "count": 16,
+        "evidence_ids": [
+          "EV002",
+          "EV003",
+          "EV005",
+          "EV014",
+          "EV017",
+          "EV020",
+          "EV021",
+          "EV022",
+          "EV030",
+          "EV031",
+          "EV035",
+          "EV071"
+        ],
+        "index": 1
+      },
+      "domestic_drama": {
+        "key": "domestic_drama",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV004"
+        ],
+        "index": 0.0694789081885856
+      },
+      "cosy_crime": {
+        "key": "cosy_crime",
+        "weighted": 4.1000000000000005,
+        "count": 5,
+        "evidence_ids": [
+          "EV005",
+          "EV024",
+          "EV025",
+          "EV028",
+          "EV082"
+        ],
+        "index": 0.40694789081885857
+      },
+      "espionage": {
+        "key": "espionage",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV007"
+        ],
+        "index": 0.0694789081885856
+      },
+      "true_crime_drama": {
+        "key": "true_crime_drama",
+        "weighted": 2.4,
+        "count": 3,
+        "evidence_ids": [
+          "EV008",
+          "EV010",
+          "EV026"
+        ],
+        "index": 0.23821339950372206
+      },
+      "psychological_thriller": {
+        "key": "psychological_thriller",
+        "weighted": 1.4,
+        "count": 2,
+        "evidence_ids": [
+          "EV009",
+          "EV018"
+        ],
+        "index": 0.1389578163771712
+      },
+      "period_drama": {
+        "key": "period_drama",
+        "weighted": 0.4,
+        "count": 1,
+        "evidence_ids": [
+          "EV011"
+        ],
+        "index": 0.03970223325062035
+      },
+      "political_thriller": {
+        "key": "political_thriller",
+        "weighted": 0.4,
+        "count": 1,
+        "evidence_ids": [
+          "EV012"
+        ],
+        "index": 0.03970223325062035
+      },
+      "supernatural": {
+        "key": "supernatural",
+        "weighted": 2.0999999999999996,
+        "count": 3,
+        "evidence_ids": [
+          "EV014"
+        ],
+        "index": 0.20843672456575676
+      },
+      "period_crime": {
+        "key": "period_crime",
+        "weighted": 2.8,
+        "count": 4,
+        "evidence_ids": [
+          "EV014",
+          "EV017"
+        ],
+        "index": 0.2779156327543424
+      },
+      "comedy_thriller": {
+        "key": "comedy_thriller",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV020"
+        ],
+        "index": 0.0694789081885856
+      },
+      "comedy": {
+        "key": "comedy",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV021"
+        ],
+        "index": 0.0694789081885856
+      },
+      "drama": {
+        "key": "drama",
+        "weighted": 1.7999999999999998,
+        "count": 3,
+        "evidence_ids": [
+          "EV023",
+          "EV031"
+        ],
+        "index": 0.17866004962779153
+      },
+      "factual_drama": {
+        "key": "factual_drama",
+        "weighted": 1,
+        "count": 1,
+        "evidence_ids": [
+          "EV027"
+        ],
+        "index": 0.09925558312655086
+      },
+      "family_drama": {
+        "key": "family_drama",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV028"
+        ],
+        "index": 0.0694789081885856
+      },
+      "factual": {
+        "key": "factual",
+        "weighted": 1.4,
+        "count": 2,
+        "evidence_ids": [
+          "EV029",
+          "EV033"
+        ],
+        "index": 0.1389578163771712
+      },
+      "true_crime": {
+        "key": "true_crime",
+        "weighted": 1.4,
+        "count": 2,
+        "evidence_ids": [
+          "EV029",
+          "EV033"
+        ],
+        "index": 0.1389578163771712
+      },
+      "social_realist_drama": {
+        "key": "social_realist_drama",
+        "weighted": 0.4,
+        "count": 1,
+        "evidence_ids": [
+          "EV032"
+        ],
+        "index": 0.03970223325062035
+      },
+      "romance": {
+        "key": "romance",
+        "weighted": 1.575,
+        "count": 3,
+        "evidence_ids": [
+          "EV071",
+          "EV073",
+          "EV075"
+        ],
+        "index": 0.1563275434243176
+      }
+    },
+    "audience_by_genre": {
+      "crime": {
+        "key": "crime",
+        "weighted": 1.1,
+        "count": 2,
+        "evidence_ids": [
+          "EV034",
+          "EV066"
+        ],
+        "index": 1
+      },
+      "true_crime_drama": {
+        "key": "true_crime_drama",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV066"
+        ],
+        "index": 0.6363636363636362
+      },
+      "domestic_thriller": {
+        "key": "domestic_thriller",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV066"
+        ],
+        "index": 0.6363636363636362
+      }
+    },
+    "buyer_demand": {
+      "itv": {
+        "key": "itv",
+        "weighted": 5.300000000000001,
+        "count": 8,
+        "evidence_ids": [
+          "EV001",
+          "EV002",
+          "EV003",
+          "EV004",
+          "EV005",
+          "EV006",
+          "EV014",
+          "EV031"
+        ],
+        "index": 0.8281250000000001
+      },
+      "itvx": {
+        "key": "itvx",
+        "weighted": 2.0999999999999996,
+        "count": 3,
+        "evidence_ids": [
+          "EV007",
+          "EV008",
+          "EV035"
+        ],
+        "index": 0.32812499999999994
+      },
+      "channel_4": {
+        "key": "channel_4",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV009"
+        ],
+        "index": 0.10937499999999999
+      },
+      "bbc": {
+        "key": "bbc",
+        "weighted": 3.7,
+        "count": 7,
+        "evidence_ids": [
+          "EV010",
+          "EV011",
+          "EV012",
+          "EV014",
+          "EV030",
+          "EV031",
+          "EV032"
+        ],
+        "index": 0.578125
+      },
+      "britbox": {
+        "key": "britbox",
+        "weighted": 1.4,
+        "count": 2,
+        "evidence_ids": [
+          "EV014",
+          "EV035"
+        ],
+        "index": 0.21874999999999997
+      },
+      "netflix": {
+        "key": "netflix",
+        "weighted": 1.7999999999999998,
+        "count": 3,
+        "evidence_ids": [
+          "EV017",
+          "EV018",
+          "EV019"
+        ],
+        "index": 0.28124999999999994
+      },
+      "sky": {
+        "key": "sky",
+        "weighted": 2.0999999999999996,
+        "count": 3,
+        "evidence_ids": [
+          "EV020",
+          "EV021",
+          "EV022"
+        ],
+        "index": 0.32812499999999994
+      },
+      "channel_5": {
+        "key": "channel_5",
+        "weighted": 6.4,
+        "count": 7,
+        "evidence_ids": [
+          "EV023",
+          "EV024",
+          "EV025",
+          "EV026",
+          "EV027",
+          "EV028",
+          "EV029"
+        ],
+        "index": 1
+      },
+      "true_crime_channel": {
+        "key": "true_crime_channel",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV033"
+        ],
+        "index": 0.10937499999999999
+      },
+      "itv_studios": {
+        "key": "itv_studios",
+        "weighted": 0.175,
+        "count": 1,
+        "evidence_ids": [
+          "EV110"
+        ],
+        "index": 0.027343749999999997
+      }
+    },
+    "format_supply": {
+      "returnable_series": {
+        "key": "returnable_series",
+        "weighted": 15.099999999999998,
+        "count": 22,
+        "evidence_ids": [
+          "EV001",
+          "EV005",
+          "EV006",
+          "EV013",
+          "EV021",
+          "EV023",
+          "EV024",
+          "EV025",
+          "EV029",
+          "EV030",
+          "EV031",
+          "EV032"
+        ],
+        "index": 0.8779069767441862
+      },
+      "limited_series": {
+        "key": "limited_series",
+        "weighted": 17.199999999999996,
+        "count": 25,
+        "evidence_ids": [
+          "EV002",
+          "EV003",
+          "EV004",
+          "EV007",
+          "EV008",
+          "EV009",
+          "EV010",
+          "EV011",
+          "EV012",
+          "EV016",
+          "EV017",
+          "EV018"
+        ],
+        "index": 1
+      },
+      "mixed": {
+        "key": "mixed",
+        "weighted": 7.000000000000001,
+        "count": 10,
+        "evidence_ids": [
+          "EV014",
+          "EV015",
+          "EV028"
+        ],
+        "index": 0.4069767441860467
+      }
+    },
+    "format_demand": {
+      "returnable_series": {
+        "key": "returnable_series",
+        "weighted": 9.1,
+        "count": 13,
+        "evidence_ids": [
+          "EV001",
+          "EV005",
+          "EV006",
+          "EV021",
+          "EV023",
+          "EV024",
+          "EV025",
+          "EV029",
+          "EV030",
+          "EV031",
+          "EV032",
+          "EV033"
+        ],
+        "index": 0.7398373983739838
+      },
+      "limited_series": {
+        "key": "limited_series",
+        "weighted": 12.299999999999999,
+        "count": 18,
+        "evidence_ids": [
+          "EV002",
+          "EV003",
+          "EV004",
+          "EV007",
+          "EV008",
+          "EV009",
+          "EV010",
+          "EV011",
+          "EV012",
+          "EV017",
+          "EV018",
+          "EV019"
+        ],
+        "index": 1
+      },
+      "mixed": {
+        "key": "mixed",
+        "weighted": 2.8,
+        "count": 4,
+        "evidence_ids": [
+          "EV014",
+          "EV028"
+        ],
+        "index": 0.22764227642276424
+      },
+      "vertical_microdrama": {
+        "key": "vertical_microdrama",
+        "weighted": 5.2,
+        "count": 8,
+        "evidence_ids": [
+          "EV090",
+          "EV091",
+          "EV092",
+          "EV093",
+          "EV094",
+          "EV095",
+          "EV098",
+          "EV099"
+        ],
+        "index": 0.42276422764227645
+      }
+    },
+    "buyer_genre": {
+      "itv|thriller": {
+        "key": "itv|thriller",
+        "weighted": 3.9,
+        "count": 6,
+        "evidence_ids": [
+          "EV001",
+          "EV002",
+          "EV003",
+          "EV006",
+          "EV014",
+          "EV031"
+        ],
+        "index": 1
+      },
+      "itv|procedural": {
+        "key": "itv|procedural",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV001"
+        ],
+        "index": 0.1794871794871795
+      },
+      "itv|crime": {
+        "key": "itv|crime",
+        "weighted": 3.1999999999999997,
+        "count": 5,
+        "evidence_ids": [
+          "EV002",
+          "EV003",
+          "EV005",
+          "EV014",
+          "EV031"
+        ],
+        "index": 0.8205128205128205
+      },
+      "itv|domestic_drama": {
+        "key": "itv|domestic_drama",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV004"
+        ],
+        "index": 0.1794871794871795
+      },
+      "itv|cosy_crime": {
+        "key": "itv|cosy_crime",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV005"
+        ],
+        "index": 0.1794871794871795
+      },
+      "itvx|espionage": {
+        "key": "itvx|espionage",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV007"
+        ],
+        "index": 0.1794871794871795
+      },
+      "itvx|thriller": {
+        "key": "itvx|thriller",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV007"
+        ],
+        "index": 0.1794871794871795
+      },
+      "itvx|true_crime_drama": {
+        "key": "itvx|true_crime_drama",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV008"
+        ],
+        "index": 0.1794871794871795
+      },
+      "channel_4|psychological_thriller": {
+        "key": "channel_4|psychological_thriller",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV009"
+        ],
+        "index": 0.1794871794871795
+      },
+      "bbc|true_crime_drama": {
+        "key": "bbc|true_crime_drama",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV010"
+        ],
+        "index": 0.1794871794871795
+      },
+      "bbc|period_drama": {
+        "key": "bbc|period_drama",
+        "weighted": 0.4,
+        "count": 1,
+        "evidence_ids": [
+          "EV011"
+        ],
+        "index": 0.10256410256410257
+      },
+      "bbc|political_thriller": {
+        "key": "bbc|political_thriller",
+        "weighted": 0.4,
+        "count": 1,
+        "evidence_ids": [
+          "EV012"
+        ],
+        "index": 0.10256410256410257
+      },
+      "itv|supernatural": {
+        "key": "itv|supernatural",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV014"
+        ],
+        "index": 0.1794871794871795
+      },
+      "itv|period_crime": {
+        "key": "itv|period_crime",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV014"
+        ],
+        "index": 0.1794871794871795
+      },
+      "bbc|thriller": {
+        "key": "bbc|thriller",
+        "weighted": 1.1,
+        "count": 2,
+        "evidence_ids": [
+          "EV014",
+          "EV031"
+        ],
+        "index": 0.2820512820512821
+      },
+      "bbc|supernatural": {
+        "key": "bbc|supernatural",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV014"
+        ],
+        "index": 0.1794871794871795
+      },
+      "bbc|crime": {
+        "key": "bbc|crime",
+        "weighted": 1.7999999999999998,
+        "count": 3,
+        "evidence_ids": [
+          "EV014",
+          "EV030",
+          "EV031"
+        ],
+        "index": 0.4615384615384615
+      },
+      "bbc|period_crime": {
+        "key": "bbc|period_crime",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV014"
+        ],
+        "index": 0.1794871794871795
+      },
+      "britbox|thriller": {
+        "key": "britbox|thriller",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV014"
+        ],
+        "index": 0.1794871794871795
+      },
+      "britbox|supernatural": {
+        "key": "britbox|supernatural",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV014"
+        ],
+        "index": 0.1794871794871795
+      },
+      "britbox|crime": {
+        "key": "britbox|crime",
+        "weighted": 1.4,
+        "count": 2,
+        "evidence_ids": [
+          "EV014",
+          "EV035"
+        ],
+        "index": 0.358974358974359
+      },
+      "britbox|period_crime": {
+        "key": "britbox|period_crime",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV014"
+        ],
+        "index": 0.1794871794871795
+      },
+      "netflix|crime": {
+        "key": "netflix|crime",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV017"
+        ],
+        "index": 0.1794871794871795
+      },
+      "netflix|thriller": {
+        "key": "netflix|thriller",
+        "weighted": 1.1,
+        "count": 2,
+        "evidence_ids": [
+          "EV017",
+          "EV019"
+        ],
+        "index": 0.2820512820512821
+      },
+      "netflix|period_crime": {
+        "key": "netflix|period_crime",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV017"
+        ],
+        "index": 0.1794871794871795
+      },
+      "netflix|psychological_thriller": {
+        "key": "netflix|psychological_thriller",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV018"
+        ],
+        "index": 0.1794871794871795
+      },
+      "sky|crime": {
+        "key": "sky|crime",
+        "weighted": 2.0999999999999996,
+        "count": 3,
+        "evidence_ids": [
+          "EV020",
+          "EV021",
+          "EV022"
+        ],
+        "index": 0.5384615384615384
+      },
+      "sky|comedy_thriller": {
+        "key": "sky|comedy_thriller",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV020"
+        ],
+        "index": 0.1794871794871795
+      },
+      "sky|comedy": {
+        "key": "sky|comedy",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV021"
+        ],
+        "index": 0.1794871794871795
+      },
+      "sky|thriller": {
+        "key": "sky|thriller",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV022"
+        ],
+        "index": 0.1794871794871795
+      },
+      "channel_5|drama": {
+        "key": "channel_5|drama",
+        "weighted": 1,
+        "count": 1,
+        "evidence_ids": [
+          "EV023"
+        ],
+        "index": 0.25641025641025644
+      },
+      "channel_5|cosy_crime": {
+        "key": "channel_5|cosy_crime",
+        "weighted": 2.7,
+        "count": 3,
+        "evidence_ids": [
+          "EV024",
+          "EV025",
+          "EV028"
+        ],
+        "index": 0.6923076923076924
+      },
+      "channel_5|true_crime_drama": {
+        "key": "channel_5|true_crime_drama",
+        "weighted": 1,
+        "count": 1,
+        "evidence_ids": [
+          "EV026"
+        ],
+        "index": 0.25641025641025644
+      },
+      "channel_5|factual_drama": {
+        "key": "channel_5|factual_drama",
+        "weighted": 1,
+        "count": 1,
+        "evidence_ids": [
+          "EV027"
+        ],
+        "index": 0.25641025641025644
+      },
+      "channel_5|thriller": {
+        "key": "channel_5|thriller",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV028"
+        ],
+        "index": 0.1794871794871795
+      },
+      "channel_5|family_drama": {
+        "key": "channel_5|family_drama",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV028"
+        ],
+        "index": 0.1794871794871795
+      },
+      "channel_5|factual": {
+        "key": "channel_5|factual",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV029"
+        ],
+        "index": 0.1794871794871795
+      },
+      "channel_5|true_crime": {
+        "key": "channel_5|true_crime",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV029"
+        ],
+        "index": 0.1794871794871795
+      },
+      "bbc|procedural": {
+        "key": "bbc|procedural",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV030"
+        ],
+        "index": 0.1794871794871795
+      },
+      "bbc|drama": {
+        "key": "bbc|drama",
+        "weighted": 0.4,
+        "count": 1,
+        "evidence_ids": [
+          "EV031"
+        ],
+        "index": 0.10256410256410257
+      },
+      "itv|drama": {
+        "key": "itv|drama",
+        "weighted": 0.4,
+        "count": 1,
+        "evidence_ids": [
+          "EV031"
+        ],
+        "index": 0.10256410256410257
+      },
+      "bbc|social_realist_drama": {
+        "key": "bbc|social_realist_drama",
+        "weighted": 0.4,
+        "count": 1,
+        "evidence_ids": [
+          "EV032"
+        ],
+        "index": 0.10256410256410257
+      },
+      "true_crime_channel|true_crime": {
+        "key": "true_crime_channel|true_crime",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV033"
+        ],
+        "index": 0.1794871794871795
+      },
+      "true_crime_channel|factual": {
+        "key": "true_crime_channel|factual",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV033"
+        ],
+        "index": 0.1794871794871795
+      },
+      "itvx|crime": {
+        "key": "itvx|crime",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV035"
+        ],
+        "index": 0.1794871794871795
+      }
+    },
+    "buyer_format": {
+      "itv|returnable_series": {
+        "key": "itv|returnable_series",
+        "weighted": 2.4999999999999996,
+        "count": 4,
+        "evidence_ids": [
+          "EV001",
+          "EV005",
+          "EV006",
+          "EV031"
+        ],
+        "index": 0.6756756756756755
+      },
+      "itv|limited_series": {
+        "key": "itv|limited_series",
+        "weighted": 2.0999999999999996,
+        "count": 3,
+        "evidence_ids": [
+          "EV002",
+          "EV003",
+          "EV004"
+        ],
+        "index": 0.5675675675675674
+      },
+      "itvx|limited_series": {
+        "key": "itvx|limited_series",
+        "weighted": 2.0999999999999996,
+        "count": 3,
+        "evidence_ids": [
+          "EV007",
+          "EV008",
+          "EV035"
+        ],
+        "index": 0.5675675675675674
+      },
+      "channel_4|limited_series": {
+        "key": "channel_4|limited_series",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV009"
+        ],
+        "index": 0.18918918918918917
+      },
+      "bbc|limited_series": {
+        "key": "bbc|limited_series",
+        "weighted": 1.5,
+        "count": 3,
+        "evidence_ids": [
+          "EV010",
+          "EV011",
+          "EV012"
+        ],
+        "index": 0.4054054054054054
+      },
+      "itv|mixed": {
+        "key": "itv|mixed",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV014"
+        ],
+        "index": 0.18918918918918917
+      },
+      "bbc|mixed": {
+        "key": "bbc|mixed",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV014"
+        ],
+        "index": 0.18918918918918917
+      },
+      "britbox|mixed": {
+        "key": "britbox|mixed",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV014"
+        ],
+        "index": 0.18918918918918917
+      },
+      "netflix|limited_series": {
+        "key": "netflix|limited_series",
+        "weighted": 1.7999999999999998,
+        "count": 3,
+        "evidence_ids": [
+          "EV017",
+          "EV018",
+          "EV019"
+        ],
+        "index": 0.4864864864864864
+      },
+      "sky|limited_series": {
+        "key": "sky|limited_series",
+        "weighted": 1.4,
+        "count": 2,
+        "evidence_ids": [
+          "EV020",
+          "EV022"
+        ],
+        "index": 0.37837837837837834
+      },
+      "sky|returnable_series": {
+        "key": "sky|returnable_series",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV021"
+        ],
+        "index": 0.18918918918918917
+      },
+      "channel_5|returnable_series": {
+        "key": "channel_5|returnable_series",
+        "weighted": 3.7,
+        "count": 4,
+        "evidence_ids": [
+          "EV023",
+          "EV024",
+          "EV025",
+          "EV029"
+        ],
+        "index": 1
+      },
+      "channel_5|limited_series": {
+        "key": "channel_5|limited_series",
+        "weighted": 2,
+        "count": 2,
+        "evidence_ids": [
+          "EV026",
+          "EV027"
+        ],
+        "index": 0.5405405405405405
+      },
+      "channel_5|mixed": {
+        "key": "channel_5|mixed",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV028"
+        ],
+        "index": 0.18918918918918917
+      },
+      "bbc|returnable_series": {
+        "key": "bbc|returnable_series",
+        "weighted": 1.5,
+        "count": 3,
+        "evidence_ids": [
+          "EV030",
+          "EV031",
+          "EV032"
+        ],
+        "index": 0.4054054054054054
+      },
+      "true_crime_channel|returnable_series": {
+        "key": "true_crime_channel|returnable_series",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV033"
+        ],
+        "index": 0.18918918918918917
+      },
+      "britbox|limited_series": {
+        "key": "britbox|limited_series",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV035"
+        ],
+        "index": 0.18918918918918917
+      }
+    },
+    "route_by_type": {
+      "open_free": {
+        "key": "open_free",
+        "weighted": 2.7,
+        "count": 3,
+        "evidence_ids": [
+          "EV120",
+          "EV121",
+          "EV122"
+        ],
+        "index": 1
+      },
+      "closed": {
+        "key": "closed",
+        "weighted": -1.7,
+        "count": 2,
+        "evidence_ids": [
+          "EV123",
+          "EV124"
+        ],
+        "index": -0.6296296296296295
+      },
+      "open_paid": {
+        "key": "open_paid",
+        "weighted": 0.2,
+        "count": 2,
+        "evidence_ids": [
+          "EV125",
+          "EV126"
+        ],
+        "index": 0.07407407407407407
+      },
+      "open_competition": {
+        "key": "open_competition",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV127"
+        ],
+        "index": 0.25925925925925924
+      },
+      "market": {
+        "key": "market",
+        "weighted": 1,
+        "count": 1,
+        "evidence_ids": [
+          "EV128"
+        ],
+        "index": 0.37037037037037035
+      },
+      "unspecified": {
+        "key": "unspecified",
+        "weighted": 0.7999999999999999,
+        "count": 2,
+        "evidence_ids": [
+          "EV129",
+          "EV130"
+        ],
+        "index": 0.2962962962962963
+      }
+    }
+  },
+  "legal_flagged_worlds": {
+    "police": 1,
+    "taxi_transport": 1,
+    "criminal_justice": 3,
+    "royal_household": 1,
+    "domestic_service": 1,
+    "finance": 1
+  },
+  "economics_signals": [
+    {
+      "evidence_id": "EV040",
+      "metric": "uk_film_hetv_spend_2025_gbp_bn",
+      "value": 6.8,
+      "dir": 1,
+      "weight": 1,
+      "interpretation": null
+    },
+    {
+      "evidence_id": "EV041",
+      "metric": "uk_domestic_hetv_share_pct",
+      "value": 17,
+      "dir": -1,
+      "weight": 1,
+      "interpretation": "Domestic commissioning is a small minority of UK production activity"
+    },
+    {
+      "evidence_id": "EV042",
+      "metric": "uk_spend_change_h1_2026_pct",
+      "value": -16.6,
+      "dir": -1,
+      "weight": 0.7,
+      "interpretation": null
+    },
+    {
+      "evidence_id": "EV043",
+      "metric": "inward_tv_spend_change_pct",
+      "value": -23.5,
+      "dir": -1,
+      "weight": 0.7,
+      "interpretation": null
+    },
+    {
+      "evidence_id": "EV044",
+      "metric": "uk_domestic_spend_h1_2026_gbp_m",
+      "value": 337,
+      "dir": 1,
+      "weight": 0.7,
+      "interpretation": "Domestic production is flat-to-slightly-up while inward investment collapses — domestic share of programme count is rising"
+    },
+    {
+      "evidence_id": "EV045",
+      "metric": "uk_feature_spend_change_pct",
+      "value": -6,
+      "dir": 0.25,
+      "weight": 0.7,
+      "interpretation": null
+    },
+    {
+      "evidence_id": "EV046",
+      "metric": "uk_coproduction_spend_gbp_m",
+      "value": 19.6,
+      "dir": -1,
+      "weight": 0.7,
+      "interpretation": null
+    },
+    {
+      "evidence_id": "EV047",
+      "metric": "domestic_hetv_commissions_change_pct",
+      "value": -22,
+      "dir": -1,
+      "weight": 0.7,
+      "interpretation": null
+    },
+    {
+      "evidence_id": "EV048",
+      "metric": "uk_domestic_spend_gbp_m",
+      "value": 598.2,
+      "dir": -1,
+      "weight": 0.7,
+      "interpretation": null
+    },
+    {
+      "evidence_id": "EV049",
+      "metric": null,
+      "value": null,
+      "dir": -1,
+      "weight": 0.7,
+      "interpretation": "The binding constraint on UK drama is deficit financing, not commissioning appetite"
+    },
+    {
+      "evidence_id": "EV051",
+      "metric": null,
+      "value": null,
+      "dir": 1,
+      "weight": 0.4,
+      "interpretation": "Low-budget genre specialisation is functioning as a commissioning advantage"
+    },
+    {
+      "evidence_id": "EV052",
+      "metric": null,
+      "value": null,
+      "dir": 1,
+      "weight": 0.4,
+      "interpretation": null
+    },
+    {
+      "evidence_id": "EV053",
+      "metric": null,
+      "value": null,
+      "dir": -1,
+      "weight": 0.4,
+      "interpretation": null
+    },
+    {
+      "evidence_id": "EV054",
+      "metric": null,
+      "value": null,
+      "dir": 1,
+      "weight": 0.4,
+      "interpretation": "Pre-existing IP is a commissioning precondition, disadvantaging original spec material"
+    },
+    {
+      "evidence_id": "EV055",
+      "metric": null,
+      "value": null,
+      "dir": 1,
+      "weight": 1,
+      "interpretation": null
+    },
+    {
+      "evidence_id": "EV056",
+      "metric": null,
+      "value": null,
+      "dir": 1,
+      "weight": 0.7,
+      "interpretation": "A new financing route opening precisely as the co-production market collapses"
+    },
+    {
+      "evidence_id": "EV057",
+      "metric": null,
+      "value": null,
+      "dir": 1,
+      "weight": 1,
+      "interpretation": null
+    },
+    {
+      "evidence_id": "EV062",
+      "metric": "uk_svod_revenue_gbp_bn",
+      "value": 5.17,
+      "dir": 1,
+      "weight": 1,
+      "interpretation": null
+    }
+  ],
+  "format_trend_signals": [
+    {
+      "evidence_id": "EV090",
+      "metric": "microdrama_revenue_2026_usd_bn",
+      "value": 7.8,
+      "dir": 1,
+      "weight": 1,
+      "interpretation": "The fastest-growing scripted revenue pool identified anywhere in this corpus",
+      "buyers": []
+    },
+    {
+      "evidence_id": "EV091",
+      "metric": "microdrama_q1_revenue_usd_m",
+      "value": 700,
+      "dir": 1,
+      "weight": 1,
+      "interpretation": "Deloitte explicitly identifies independent studios, not incumbents, as beneficiaries",
+      "buyers": []
+    },
+    {
+      "evidence_id": "EV092",
+      "metric": "dramabox_mau_m",
+      "value": 44,
+      "dir": 1,
+      "weight": 0.7,
+      "interpretation": null,
+      "buyers": []
+    },
+    {
+      "evidence_id": "EV093",
+      "metric": "reelshort_revenue_usd_m",
+      "value": 400,
+      "dir": 1,
+      "weight": 0.7,
+      "interpretation": null,
+      "buyers": []
+    },
+    {
+      "evidence_id": "EV094",
+      "metric": null,
+      "value": null,
+      "dir": 0,
+      "weight": 0.4,
+      "interpretation": "Format is radically cheaper and faster to produce than high-end TV",
+      "buyers": []
+    },
+    {
+      "evidence_id": "EV095",
+      "metric": null,
+      "value": null,
+      "dir": 1,
+      "weight": 0.4,
+      "interpretation": "Mainstream US broadcasters are now licensing micro-drama, legitimising the format",
+      "buyers": [
+        "peacock",
+        "bravo"
+      ]
+    },
+    {
+      "evidence_id": "EV098",
+      "metric": null,
+      "value": null,
+      "dir": 1,
+      "weight": 0.7,
+      "interpretation": null,
+      "buyers": []
+    },
+    {
+      "evidence_id": "EV099",
+      "metric": null,
+      "value": null,
+      "dir": 1,
+      "weight": 0.7,
+      "interpretation": "Microdrama growth is occurring inside otherwise contracting scripted markets",
+      "buyers": []
+    }
+  ],
+  "rankings": {
+    "top_worlds_by_supply": [
+      {
+        "key": "police",
+        "weighted": 4.2,
+        "count": 6,
+        "evidence_ids": [
+          "EV002",
+          "EV003",
+          "EV005",
+          "EV008",
+          "EV013",
+          "EV030"
+        ]
+      },
+      {
+        "key": "criminal_justice",
+        "weighted": 4.1,
+        "count": 5,
+        "evidence_ids": [
+          "EV008",
+          "EV026",
+          "EV027",
+          "EV029",
+          "EV033"
+        ]
+      },
+      {
+        "key": "intelligence_services",
+        "weighted": 2.2,
+        "count": 4,
+        "evidence_ids": [
+          "EV006",
+          "EV007",
+          "EV012",
+          "EV031"
+        ]
+      },
+      {
+        "key": "hospitality",
+        "weighted": 2,
+        "count": 2,
+        "evidence_ids": [
+          "EV023",
+          "EV025"
+        ]
+      },
+      {
+        "key": "aviation",
+        "weighted": 1.4,
+        "count": 2,
+        "evidence_ids": [
+          "EV006",
+          "EV015"
+        ]
+      },
+      {
+        "key": "parliament",
+        "weighted": 1.4,
+        "count": 2,
+        "evidence_ids": [
+          "EV015",
+          "EV016"
+        ]
+      },
+      {
+        "key": "suburban_family",
+        "weighted": 1.1,
+        "count": 2,
+        "evidence_ids": [
+          "EV004",
+          "EV019"
+        ]
+      },
+      {
+        "key": "organised_crime",
+        "weighted": 1.1,
+        "count": 2,
+        "evidence_ids": [
+          "EV021",
+          "EV031"
+        ]
+      },
+      {
+        "key": "later_life",
+        "weighted": 1,
+        "count": 1,
+        "evidence_ids": [
+          "EV023"
+        ]
+      },
+      {
+        "key": "antiques",
+        "weighted": 1,
+        "count": 1,
+        "evidence_ids": [
+          "EV024"
+        ]
+      },
+      {
+        "key": "french_expat_community",
+        "weighted": 1,
+        "count": 1,
+        "evidence_ids": [
+          "EV024"
+        ]
+      },
+      {
+        "key": "cruise_ship",
+        "weighted": 1,
+        "count": 1,
+        "evidence_ids": [
+          "EV025"
+        ]
+      },
+      {
+        "key": "bomb_disposal",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV001"
+        ]
+      },
+      {
+        "key": "emergency_services",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV001"
+        ]
+      },
+      {
+        "key": "small_town",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV003"
+        ]
+      },
+      {
+        "key": "academia",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV005"
+        ]
+      },
+      {
+        "key": "taxi_transport",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV008"
+        ]
+      },
+      {
+        "key": "witness_protection",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV009"
+        ]
+      },
+      {
+        "key": "rural_scotland",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV009"
+        ]
+      },
+      {
+        "key": "small_community",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV009"
+        ]
+      }
+    ],
+    "top_genres_by_supply": [
+      {
+        "key": "thriller",
+        "weighted": 14.65,
+        "count": 13,
+        "evidence_ids": [
+          "EV001",
+          "EV002",
+          "EV003",
+          "EV006",
+          "EV007",
+          "EV014",
+          "EV015",
+          "EV017",
+          "EV019",
+          "EV022",
+          "EV028",
+          "EV031"
+        ]
+      },
+      {
+        "key": "crime",
+        "weighted": 14.25,
+        "count": 13,
+        "evidence_ids": [
+          "EV002",
+          "EV003",
+          "EV005",
+          "EV013",
+          "EV014",
+          "EV017",
+          "EV020",
+          "EV021",
+          "EV022",
+          "EV030",
+          "EV031",
+          "EV035"
+        ]
+      },
+      {
+        "key": "drama",
+        "weighted": 5.8,
+        "count": 3,
+        "evidence_ids": [
+          "EV015",
+          "EV023",
+          "EV031"
+        ]
+      },
+      {
+        "key": "true_crime",
+        "weighted": 4.2,
+        "count": 4,
+        "evidence_ids": [
+          "EV029",
+          "EV033",
+          "EV078",
+          "EV079"
+        ]
+      },
+      {
+        "key": "cosy_crime",
+        "weighted": 4.1,
+        "count": 4,
+        "evidence_ids": [
+          "EV005",
+          "EV024",
+          "EV025",
+          "EV028"
+        ]
+      },
+      {
+        "key": "period_crime",
+        "weighted": 3.5,
+        "count": 2,
+        "evidence_ids": [
+          "EV014",
+          "EV017"
+        ]
+      },
+      {
+        "key": "period_drama",
+        "weighted": 3.2,
+        "count": 2,
+        "evidence_ids": [
+          "EV011",
+          "EV015"
+        ]
+      },
+      {
+        "key": "supernatural",
+        "weighted": 2.8,
+        "count": 1,
+        "evidence_ids": [
+          "EV014"
+        ]
+      },
+      {
+        "key": "comedy",
+        "weighted": 2.45,
+        "count": 2,
+        "evidence_ids": [
+          "EV021",
+          "EV076"
+        ]
+      },
+      {
+        "key": "true_crime_drama",
+        "weighted": 2.4,
+        "count": 3,
+        "evidence_ids": [
+          "EV008",
+          "EV010",
+          "EV026"
+        ]
+      },
+      {
+        "key": "procedural",
+        "weighted": 2.1,
+        "count": 3,
+        "evidence_ids": [
+          "EV001",
+          "EV013",
+          "EV030"
+        ]
+      },
+      {
+        "key": "factual",
+        "weighted": 2.1,
+        "count": 2,
+        "evidence_ids": [
+          "EV029",
+          "EV033"
+        ]
+      },
+      {
+        "key": "psychological_thriller",
+        "weighted": 1.4,
+        "count": 2,
+        "evidence_ids": [
+          "EV009",
+          "EV018"
+        ]
+      },
+      {
+        "key": "political_thriller",
+        "weighted": 1.1,
+        "count": 2,
+        "evidence_ids": [
+          "EV012",
+          "EV016"
+        ]
+      },
+      {
+        "key": "kids",
+        "weighted": 1.05,
+        "count": 1,
+        "evidence_ids": [
+          "EV076"
+        ]
+      }
+    ],
+    "top_genres_by_demand": [
+      {
+        "key": "crime",
+        "weighted": 10.075,
+        "count": 16,
+        "evidence_ids": [
+          "EV002",
+          "EV003",
+          "EV005",
+          "EV014",
+          "EV017",
+          "EV020",
+          "EV021",
+          "EV022",
+          "EV030",
+          "EV031",
+          "EV035",
+          "EV071"
+        ]
+      },
+      {
+        "key": "thriller",
+        "weighted": 9.075,
+        "count": 15,
+        "evidence_ids": [
+          "EV001",
+          "EV002",
+          "EV003",
+          "EV006",
+          "EV007",
+          "EV014",
+          "EV017",
+          "EV019",
+          "EV022",
+          "EV028",
+          "EV031",
+          "EV071"
+        ]
+      },
+      {
+        "key": "cosy_crime",
+        "weighted": 4.1,
+        "count": 5,
+        "evidence_ids": [
+          "EV005",
+          "EV024",
+          "EV025",
+          "EV028",
+          "EV082"
+        ]
+      },
+      {
+        "key": "period_crime",
+        "weighted": 2.8,
+        "count": 4,
+        "evidence_ids": [
+          "EV014",
+          "EV017"
+        ]
+      },
+      {
+        "key": "true_crime_drama",
+        "weighted": 2.4,
+        "count": 3,
+        "evidence_ids": [
+          "EV008",
+          "EV010",
+          "EV026"
+        ]
+      },
+      {
+        "key": "procedural",
+        "weighted": 2.1,
+        "count": 3,
+        "evidence_ids": [
+          "EV001",
+          "EV030",
+          "EV082"
+        ]
+      },
+      {
+        "key": "supernatural",
+        "weighted": 2.1,
+        "count": 3,
+        "evidence_ids": [
+          "EV014"
+        ]
+      },
+      {
+        "key": "drama",
+        "weighted": 1.8,
+        "count": 3,
+        "evidence_ids": [
+          "EV023",
+          "EV031"
+        ]
+      },
+      {
+        "key": "romance",
+        "weighted": 1.575,
+        "count": 3,
+        "evidence_ids": [
+          "EV071",
+          "EV073",
+          "EV075"
+        ]
+      },
+      {
+        "key": "psychological_thriller",
+        "weighted": 1.4,
+        "count": 2,
+        "evidence_ids": [
+          "EV009",
+          "EV018"
+        ]
+      },
+      {
+        "key": "factual",
+        "weighted": 1.4,
+        "count": 2,
+        "evidence_ids": [
+          "EV029",
+          "EV033"
+        ]
+      },
+      {
+        "key": "true_crime",
+        "weighted": 1.4,
+        "count": 2,
+        "evidence_ids": [
+          "EV029",
+          "EV033"
+        ]
+      },
+      {
+        "key": "factual_drama",
+        "weighted": 1,
+        "count": 1,
+        "evidence_ids": [
+          "EV027"
+        ]
+      },
+      {
+        "key": "domestic_drama",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV004"
+        ]
+      },
+      {
+        "key": "espionage",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV007"
+        ]
+      }
+    ],
+    "top_buyers_by_demand": [
+      {
+        "key": "channel_5",
+        "weighted": 6.4,
+        "count": 7,
+        "evidence_ids": [
+          "EV023",
+          "EV024",
+          "EV025",
+          "EV026",
+          "EV027",
+          "EV028",
+          "EV029"
+        ]
+      },
+      {
+        "key": "itv",
+        "weighted": 5.3,
+        "count": 8,
+        "evidence_ids": [
+          "EV001",
+          "EV002",
+          "EV003",
+          "EV004",
+          "EV005",
+          "EV006",
+          "EV014",
+          "EV031"
+        ]
+      },
+      {
+        "key": "bbc",
+        "weighted": 3.7,
+        "count": 7,
+        "evidence_ids": [
+          "EV010",
+          "EV011",
+          "EV012",
+          "EV014",
+          "EV030",
+          "EV031",
+          "EV032"
+        ]
+      },
+      {
+        "key": "itvx",
+        "weighted": 2.1,
+        "count": 3,
+        "evidence_ids": [
+          "EV007",
+          "EV008",
+          "EV035"
+        ]
+      },
+      {
+        "key": "sky",
+        "weighted": 2.1,
+        "count": 3,
+        "evidence_ids": [
+          "EV020",
+          "EV021",
+          "EV022"
+        ]
+      },
+      {
+        "key": "netflix",
+        "weighted": 1.8,
+        "count": 3,
+        "evidence_ids": [
+          "EV017",
+          "EV018",
+          "EV019"
+        ]
+      },
+      {
+        "key": "britbox",
+        "weighted": 1.4,
+        "count": 2,
+        "evidence_ids": [
+          "EV014",
+          "EV035"
+        ]
+      },
+      {
+        "key": "channel_4",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV009"
+        ]
+      },
+      {
+        "key": "true_crime_channel",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV033"
+        ]
+      },
+      {
+        "key": "itv_studios",
+        "weighted": 0.175,
+        "count": 1,
+        "evidence_ids": [
+          "EV110"
+        ]
+      }
+    ],
+    "formats_by_demand": [
+      {
+        "key": "limited_series",
+        "weighted": 12.3,
+        "count": 18,
+        "evidence_ids": [
+          "EV002",
+          "EV003",
+          "EV004",
+          "EV007",
+          "EV008",
+          "EV009",
+          "EV010",
+          "EV011",
+          "EV012",
+          "EV017",
+          "EV018",
+          "EV019"
+        ]
+      },
+      {
+        "key": "returnable_series",
+        "weighted": 9.1,
+        "count": 13,
+        "evidence_ids": [
+          "EV001",
+          "EV005",
+          "EV006",
+          "EV021",
+          "EV023",
+          "EV024",
+          "EV025",
+          "EV029",
+          "EV030",
+          "EV031",
+          "EV032",
+          "EV033"
+        ]
+      },
+      {
+        "key": "vertical_microdrama",
+        "weighted": 5.2,
+        "count": 8,
+        "evidence_ids": [
+          "EV090",
+          "EV091",
+          "EV092",
+          "EV093",
+          "EV094",
+          "EV095",
+          "EV098",
+          "EV099"
+        ]
+      },
+      {
+        "key": "mixed",
+        "weighted": 2.8,
+        "count": 4,
+        "evidence_ids": [
+          "EV014",
+          "EV028"
+        ]
+      }
+    ],
+    "routes": [
+      {
+        "key": "open_free",
+        "weighted": 2.7,
+        "count": 3,
+        "evidence_ids": [
+          "EV120",
+          "EV121",
+          "EV122"
+        ]
+      },
+      {
+        "key": "market",
+        "weighted": 1,
+        "count": 1,
+        "evidence_ids": [
+          "EV128"
+        ]
+      },
+      {
+        "key": "unspecified",
+        "weighted": 0.8,
+        "count": 2,
+        "evidence_ids": [
+          "EV129",
+          "EV130"
+        ]
+      },
+      {
+        "key": "open_competition",
+        "weighted": 0.7,
+        "count": 1,
+        "evidence_ids": [
+          "EV127"
+        ]
+      },
+      {
+        "key": "open_paid",
+        "weighted": 0.2,
+        "count": 2,
+        "evidence_ids": [
+          "EV125",
+          "EV126"
+        ]
+      },
+      {
+        "key": "closed",
+        "weighted": -1.7,
+        "count": 2,
+        "evidence_ids": [
+          "EV123",
+          "EV124"
+        ]
+      }
+    ]
+  }
+}

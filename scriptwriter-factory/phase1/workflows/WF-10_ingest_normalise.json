@@ -1,0 +1,154 @@
+{
+  "id": "SWFwf10Ingest0001",
+  "name": "WF-10 Signal Ingest and Normalise",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "a1000000-0000-4000-8000-000000000001",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "/home/user/ffmpeg-render-service/scriptwriter-factory/phase1/evidence/raw_signals.json",
+        "options": {}
+      },
+      "id": "a1000000-0000-4000-8000-000000000002",
+      "name": "Read Raw Signals",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        20,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "fromJson",
+        "binaryPropertyName": "data",
+        "options": {}
+      },
+      "id": "a1000000-0000-4000-8000-000000000003",
+      "name": "Parse JSON",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const crypto = require('crypto');\nconst sha256 = (s) => crypto.createHash('sha256').update(s).digest('hex');\n\nconst _raw = $input.first().json;\nconst corpus = (_raw && _raw.data && _raw.data.signals) ? _raw.data : _raw;\nconst signals = corpus.signals || [];\n\nconst norm = (v) => (v === undefined || v === null) ? [] : (Array.isArray(v) ? v : [v]);\nconst slug = (s) => String(s).toLowerCase().trim().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');\n\nconst seen = new Set();\nconst out = [];\nlet duplicates = 0;\n\nfor (const s of signals) {\n  const canonical = JSON.stringify({\n    u: s.source_url || '',\n    c: s.claim || '',\n    t: s.signal_type || ''\n  });\n  const content_hash = sha256(canonical);\n\n  if (seen.has(content_hash)) { duplicates++; continue; }\n  seen.add(content_hash);\n\n  out.push({\n    json: {\n      evidence_id: s.id,\n      arm: corpus.arm,\n      status: 'normalised',\n      content_hash,\n      signal_type: s.signal_type || 'unclassified',\n      source_name: s.source_name || null,\n      source_url: s.source_url || null,\n      title: s.title || null,\n      claim: s.claim || null,\n      evidence_grade: s.grade || 'E3',\n      retrieved_at: corpus.acquired_at,\n      direction: s.direction || 'neutral',\n      buyers: norm(s.buyers).map(slug),\n      producers: norm(s.producers).map(slug),\n      titles: norm(s.titles),\n      genres: norm(s.genres).map(slug),\n      worlds: norm(s.worlds).map(slug),\n      engines: norm(s.engines).map(slug),\n      format: s.format ? slug(s.format) : null,\n      territory: s.territory || null,\n      route_type: s.route_type || null,\n      metric_name: s.metric_name || null,\n      metric_value: (s.metric_value !== undefined) ? s.metric_value : null,\n      interpretation: s.interpretation || null,\n      legal_flag: s.legal_flag || null,\n      conflict_note: s.conflict_note || null,\n      source_ip: s.source_ip || null\n    }\n  });\n}\n\nreturn [{ json: {\n  stage: 'WF-10',\n  generated_at: new Date().toISOString(),\n  input_signal_count: signals.length,\n  normalised_count: out.length,\n  duplicates_dropped: duplicates,\n  hash_algorithm: 'sha256',\n  records: out.map(o => o.json)\n} }];"
+      },
+      "id": "a1000000-0000-4000-8000-000000000004",
+      "name": "Normalise and Hash",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "toJson",
+        "mode": "all",
+        "options": {
+          "fileName": "01_normalised.json",
+          "format": true
+        }
+      },
+      "id": "a1000000-0000-4000-8000-000000000005",
+      "name": "To File",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1,
+      "position": [
+        680,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "/home/user/ffmpeg-render-service/scriptwriter-factory/phase1/state/01_normalised.json",
+        "dataPropertyName": "data",
+        "options": {}
+      },
+      "id": "a1000000-0000-4000-8000-000000000006",
+      "name": "Write Normalised State",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        900,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Read Raw Signals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Raw Signals": {
+      "main": [
+        [
+          {
+            "node": "Parse JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse JSON": {
+      "main": [
+        [
+          {
+            "node": "Normalise and Hash",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalise and Hash": {
+      "main": [
+        [
+          {
+            "node": "To File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "To File": {
+      "main": [
+        [
+          {
+            "node": "Write Normalised State",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

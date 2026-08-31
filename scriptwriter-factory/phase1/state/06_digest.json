@@ -1,0 +1,383 @@
+{
+  "stage": "WF-15",
+  "generated_at": "2026-08-31T21:35:57.390Z",
+  "scoring_model_version": "SCORING_MODEL_V2",
+  "candidates_screened": 360,
+  "blocked_count": 63,
+  "distinct_worlds": 43,
+  "confidence_gate_min_evidence": 2,
+  "worlds_passing_gate": 6,
+  "worlds_held_thin": 37,
+  "thin_worlds": [
+    {
+      "world": "food_hospitality",
+      "score": 77.19,
+      "evidence_count": 1
+    },
+    {
+      "world": "small_town",
+      "score": 72.52,
+      "evidence_count": 1
+    },
+    {
+      "world": "small_town_america",
+      "score": 72.52,
+      "evidence_count": 1
+    },
+    {
+      "world": "law",
+      "score": 72.52,
+      "evidence_count": 1
+    },
+    {
+      "world": "medicine",
+      "score": 69.56,
+      "evidence_count": 1
+    },
+    {
+      "world": "mining_community",
+      "score": 69.56,
+      "evidence_count": 1
+    },
+    {
+      "world": "media",
+      "score": 69.56,
+      "evidence_count": 1
+    },
+    {
+      "world": "academia",
+      "score": 68.95,
+      "evidence_count": 1
+    },
+    {
+      "world": "customs_border_force",
+      "score": 68.93,
+      "evidence_count": 1
+    },
+    {
+      "world": "smuggling",
+      "score": 68.93,
+      "evidence_count": 1
+    },
+    {
+      "world": "anti_corruption",
+      "score": 68.08,
+      "evidence_count": 1
+    },
+    {
+      "world": "northern_ireland",
+      "score": 68.08,
+      "evidence_count": 1
+    },
+    {
+      "world": "working_class_community",
+      "score": 68.08,
+      "evidence_count": 1
+    },
+    {
+      "world": "glasgow_underworld",
+      "score": 66.82,
+      "evidence_count": 1
+    },
+    {
+      "world": "london_underworld",
+      "score": 66.52,
+      "evidence_count": 1
+    }
+  ],
+  "band_counts": {
+    "eligible_for_development": 1,
+    "chairman_review": 137,
+    "blocked": 63,
+    "archive": 159
+  },
+  "format_findings": [
+    {
+      "format": "limited_series",
+      "n": 99,
+      "mean_score": 60.74,
+      "mean_route": 0.703,
+      "mean_feasibility": 0.73,
+      "mean_buyer_demand": 0.785
+    },
+    {
+      "format": "vertical_microdrama",
+      "n": 99,
+      "mean_score": 56.51,
+      "mean_route": 0.589,
+      "mean_feasibility": 1,
+      "mean_buyer_demand": 0.439
+    },
+    {
+      "format": "returnable_series",
+      "n": 99,
+      "mean_score": 55.19,
+      "mean_route": 0.703,
+      "mean_feasibility": 0.548,
+      "mean_buyer_demand": 0.629
+    }
+  ],
+  "top_10": [
+    {
+      "rank": 1,
+      "intersection_id": "organised_crime__organised_crime__limited_series",
+      "world": "organised_crime",
+      "engine": "organised_crime",
+      "format": "limited_series",
+      "genres": [
+        "comedy",
+        "crime",
+        "drama",
+        "thriller"
+      ],
+      "score_total": 63.47,
+      "governance_band": "chairman_review",
+      "legal_review_required": false,
+      "world_supply_weight": 1.1,
+      "world_evidence_count": 2,
+      "evidence_support": [
+        "EV021",
+        "EV031",
+        "EV009",
+        "EV020",
+        "EV030",
+        "EV002",
+        "EV003",
+        "EV004",
+        "EV007",
+        "EV008",
+        "EV010",
+        "EV011",
+        "EV012",
+        "EV017"
+      ],
+      "top_drivers": [
+        "buyer demand (14.67)",
+        "route accessibility (12.65)",
+        "production feasibility (10.95)"
+      ],
+      "weakest_dimensions": [
+        "audience demand 25%",
+        "evidence breadth 25%"
+      ],
+      "thesis": "A limited series set in organised crime, driven by organised crime. This setting is already well served. Reachable: the strongest route for this format is a public-service buyer, and those are the only buyers in the corpus with evidenced open-access submission schemes. Contained format, consistent with corpus evidence that buyers are prioritising cheaper, faster-to-make material."
+    },
+    {
+      "rank": 2,
+      "intersection_id": "suburban_family__betrayal__limited_series",
+      "world": "suburban_family",
+      "engine": "betrayal",
+      "format": "limited_series",
+      "genres": [
+        "domestic_drama",
+        "thriller"
+      ],
+      "score_total": 60.65,
+      "governance_band": "chairman_review",
+      "legal_review_required": false,
+      "world_supply_weight": 1.1,
+      "world_evidence_count": 2,
+      "evidence_support": [
+        "EV004",
+        "EV019",
+        "EV007",
+        "EV011",
+        "EV031",
+        "EV002",
+        "EV003",
+        "EV008",
+        "EV009",
+        "EV010",
+        "EV012",
+        "EV017",
+        "EV018",
+        "EV001"
+      ],
+      "top_drivers": [
+        "buyer demand (14.29)",
+        "route accessibility (12.65)",
+        "production feasibility (10.95)"
+      ],
+      "weakest_dimensions": [
+        "audience demand 0%",
+        "evidence breadth 25%"
+      ],
+      "thesis": "A limited series set in suburban family, driven by betrayal. This setting is already well served. Reachable: the strongest route for this format is a public-service buyer, and those are the only buyers in the corpus with evidenced open-access submission schemes. Contained format, consistent with corpus evidence that buyers are prioritising cheaper, faster-to-make material."
+    },
+    {
+      "rank": 3,
+      "intersection_id": "intelligence_services__conspiracy__limited_series",
+      "world": "intelligence_services",
+      "engine": "conspiracy",
+      "format": "limited_series",
+      "genres": [
+        "thriller",
+        "espionage",
+        "political_thriller",
+        "drama",
+        "crime"
+      ],
+      "score_total": 59.15,
+      "governance_band": "archive",
+      "legal_review_required": false,
+      "world_supply_weight": 2.2,
+      "world_evidence_count": 4,
+      "evidence_support": [
+        "EV006",
+        "EV007",
+        "EV012",
+        "EV031",
+        "EV015",
+        "EV002",
+        "EV003",
+        "EV004",
+        "EV008",
+        "EV009",
+        "EV010",
+        "EV011",
+        "EV017",
+        "EV018"
+      ],
+      "top_drivers": [
+        "buyer demand (13.95)",
+        "route accessibility (12.65)",
+        "production feasibility (10.95)"
+      ],
+      "weakest_dimensions": [
+        "audience demand 20%",
+        "under service 33%"
+      ],
+      "thesis": "A limited series set in intelligence services, driven by conspiracy. This setting is already well served. Reachable: the strongest route for this format is a public-service buyer, and those are the only buyers in the corpus with evidenced open-access submission schemes. Contained format, consistent with corpus evidence that buyers are prioritising cheaper, faster-to-make material."
+    },
+    {
+      "rank": 4,
+      "intersection_id": "aviation__conspiracy__limited_series",
+      "world": "aviation",
+      "engine": "conspiracy",
+      "format": "limited_series",
+      "genres": [
+        "thriller",
+        "drama",
+        "period_drama"
+      ],
+      "score_total": 56.87,
+      "governance_band": "archive",
+      "legal_review_required": false,
+      "world_supply_weight": 1.4,
+      "world_evidence_count": 2,
+      "evidence_support": [
+        "EV006",
+        "EV015",
+        "EV007",
+        "EV002",
+        "EV003",
+        "EV004",
+        "EV008",
+        "EV009",
+        "EV010",
+        "EV011",
+        "EV012",
+        "EV017",
+        "EV018",
+        "EV019"
+      ],
+      "top_drivers": [
+        "buyer demand (13.49)",
+        "route accessibility (12.65)",
+        "production feasibility (10.95)"
+      ],
+      "weakest_dimensions": [
+        "audience demand 0%",
+        "evidence breadth 25%"
+      ],
+      "thesis": "A limited series set in aviation, driven by conspiracy. This setting is already well served. Reachable: the strongest route for this format is a public-service buyer, and those are the only buyers in the corpus with evidenced open-access submission schemes. Contained format, consistent with corpus evidence that buyers are prioritising cheaper, faster-to-make material."
+    },
+    {
+      "rank": 5,
+      "intersection_id": "parliament__ambition__limited_series",
+      "world": "parliament",
+      "engine": "ambition",
+      "format": "limited_series",
+      "genres": [
+        "drama",
+        "thriller",
+        "period_drama",
+        "political_thriller"
+      ],
+      "score_total": 55.71,
+      "governance_band": "archive",
+      "legal_review_required": false,
+      "world_supply_weight": 1.4,
+      "world_evidence_count": 2,
+      "evidence_support": [
+        "EV015",
+        "EV016",
+        "EV002",
+        "EV003",
+        "EV004",
+        "EV007",
+        "EV008",
+        "EV009",
+        "EV010",
+        "EV011",
+        "EV012",
+        "EV017",
+        "EV018",
+        "EV019"
+      ],
+      "top_drivers": [
+        "buyer demand (12.89)",
+        "route accessibility (12.65)",
+        "production feasibility (10.95)"
+      ],
+      "weakest_dimensions": [
+        "audience demand 0%",
+        "evidence breadth 25%"
+      ],
+      "thesis": "A limited series set in parliament, driven by ambition. This setting is already well served. Reachable: the strongest route for this format is a public-service buyer, and those are the only buyers in the corpus with evidenced open-access submission schemes. Contained format, consistent with corpus evidence that buyers are prioritising cheaper, faster-to-make material."
+    },
+    {
+      "rank": 6,
+      "intersection_id": "hospitality__reinvention__limited_series",
+      "world": "hospitality",
+      "engine": "reinvention",
+      "format": "limited_series",
+      "genres": [
+        "drama",
+        "cosy_crime"
+      ],
+      "score_total": 51.96,
+      "governance_band": "archive",
+      "legal_review_required": false,
+      "world_supply_weight": 2,
+      "world_evidence_count": 2,
+      "evidence_support": [
+        "EV023",
+        "EV025",
+        "EV002",
+        "EV003",
+        "EV004",
+        "EV007",
+        "EV008",
+        "EV009",
+        "EV010",
+        "EV011",
+        "EV012",
+        "EV017",
+        "EV018",
+        "EV019"
+      ],
+      "top_drivers": [
+        "buyer demand (12.91)",
+        "route accessibility (12.65)",
+        "production feasibility (10.95)"
+      ],
+      "weakest_dimensions": [
+        "audience demand 0%",
+        "under service 21%"
+      ],
+      "thesis": "A limited series set in hospitality, driven by reinvention. This setting is already well served. Reachable: the strongest route for this format is a public-service buyer, and those are the only buyers in the corpus with evidenced open-access submission schemes. Contained format, consistent with corpus evidence that buyers are prioritising cheaper, faster-to-make material."
+    }
+  ],
+  "markdown": "# FILM/TV DEMAND MINE v0.1 — CHAIRMAN DIGEST\n\nGenerated: 2026-08-31T21:35:57.390Z\nScoring model: SCORING_MODEL_V2\nCandidates scored: 360 | Legally blocked: 63 | Distinct worlds: 43 | Passing evidence gate (>=2 records): 6 | Held out as thin: 37\n\n## Governance bands\n\n- eligible for development: 1\n- chairman review: 137\n- blocked: 63\n- archive: 159\n\n## Format-level finding\n\n| Format | Mean score | Buyer demand | Route access | Feasibility |\n|---|---|---|---|---|\n| limited series | 60.74 | 79% | 70% | 73% |\n| vertical microdrama | 56.51 | 44% | 59% | 100% |\n| returnable series | 55.19 | 63% | 70% | 55% |\n\n## Top 10 opportunity theses\n\n### 1. organised crime x organised crime — score 63.47\n\n- **Format:** limited series\n- **Genres:** comedy, crime, drama, thriller\n- **Band:** chairman review\n- **Top drivers:** buyer demand (14.67); route accessibility (12.65); production feasibility (10.95)\n- **Weakest:** audience demand 25%; evidence breadth 25%\n- **Evidence:** EV021, EV031, EV009, EV020, EV030, EV002, EV003, EV004, EV007, EV008, EV010, EV011, EV012, EV017\n\nA limited series set in organised crime, driven by organised crime. This setting is already well served. Reachable: the strongest route for this format is a public-service buyer, and those are the only buyers in the corpus with evidenced open-access submission schemes. Contained format, consistent with corpus evidence that buyers are prioritising cheaper, faster-to-make material.\n\n### 2. suburban family x betrayal — score 60.65\n\n- **Format:** limited series\n- **Genres:** domestic drama, thriller\n- **Band:** chairman review\n- **Top drivers:** buyer demand (14.29); route accessibility (12.65); production feasibility (10.95)\n- **Weakest:** audience demand 0%; evidence breadth 25%\n- **Evidence:** EV004, EV019, EV007, EV011, EV031, EV002, EV003, EV008, EV009, EV010, EV012, EV017, EV018, EV001\n\nA limited series set in suburban family, driven by betrayal. This setting is already well served. Reachable: the strongest route for this format is a public-service buyer, and those are the only buyers in the corpus with evidenced open-access submission schemes. Contained format, consistent with corpus evidence that buyers are prioritising cheaper, faster-to-make material.\n\n### 3. intelligence services x conspiracy — score 59.15\n\n- **Format:** limited series\n- **Genres:** thriller, espionage, political thriller, drama, crime\n- **Band:** archive\n- **Top drivers:** buyer demand (13.95); route accessibility (12.65); production feasibility (10.95)\n- **Weakest:** audience demand 20%; under service 33%\n- **Evidence:** EV006, EV007, EV012, EV031, EV015, EV002, EV003, EV004, EV008, EV009, EV010, EV011, EV017, EV018\n\nA limited series set in intelligence services, driven by conspiracy. This setting is already well served. Reachable: the strongest route for this format is a public-service buyer, and those are the only buyers in the corpus with evidenced open-access submission schemes. Contained format, consistent with corpus evidence that buyers are prioritising cheaper, faster-to-make material.\n\n### 4. aviation x conspiracy — score 56.87\n\n- **Format:** limited series\n- **Genres:** thriller, drama, period drama\n- **Band:** archive\n- **Top drivers:** buyer demand (13.49); route accessibility (12.65); production feasibility (10.95)\n- **Weakest:** audience demand 0%; evidence breadth 25%\n- **Evidence:** EV006, EV015, EV007, EV002, EV003, EV004, EV008, EV009, EV010, EV011, EV012, EV017, EV018, EV019\n\nA limited series set in aviation, driven by conspiracy. This setting is already well served. Reachable: the strongest route for this format is a public-service buyer, and those are the only buyers in the corpus with evidenced open-access submission schemes. Contained format, consistent with corpus evidence that buyers are prioritising cheaper, faster-to-make material.\n\n### 5. parliament x ambition — score 55.71\n\n- **Format:** limited series\n- **Genres:** drama, thriller, period drama, political thriller\n- **Band:** archive\n- **Top drivers:** buyer demand (12.89); route accessibility (12.65); production feasibility (10.95)\n- **Weakest:** audience demand 0%; evidence breadth 25%\n- **Evidence:** EV015, EV016, EV002, EV003, EV004, EV007, EV008, EV009, EV010, EV011, EV012, EV017, EV018, EV019\n\nA limited series set in parliament, driven by ambition. This setting is already well served. Reachable: the strongest route for this format is a public-service buyer, and those are the only buyers in the corpus with evidenced open-access submission schemes. Contained format, consistent with corpus evidence that buyers are prioritising cheaper, faster-to-make material.\n\n### 6. hospitality x reinvention — score 51.96\n\n- **Format:** limited series\n- **Genres:** drama, cosy crime\n- **Band:** archive\n- **Top drivers:** buyer demand (12.91); route accessibility (12.65); production feasibility (10.95)\n- **Weakest:** audience demand 0%; under service 21%\n- **Evidence:** EV023, EV025, EV002, EV003, EV004, EV007, EV008, EV009, EV010, EV011, EV012, EV017, EV018, EV019\n\nA limited series set in hospitality, driven by reinvention. This setting is already well served. Reachable: the strongest route for this format is a public-service buyer, and those are the only buyers in the corpus with evidenced open-access submission schemes. Contained format, consistent with corpus evidence that buyers are prioritising cheaper, faster-to-make material.\n"
+}

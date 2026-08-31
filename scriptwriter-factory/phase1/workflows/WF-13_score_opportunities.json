@@ -1,0 +1,235 @@
+{
+  "id": "SWFwf13Score00001",
+  "name": "WF-13 Intersection Scoring and Opportunity Build",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "d1000000-0000-4000-8000-000000000001",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "/home/user/ffmpeg-render-service/scriptwriter-factory/phase1/state/02_assertions.json",
+        "options": {}
+      },
+      "id": "d1000000-0000-4000-8000-000000000002",
+      "name": "Read Assertions",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        -140
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "fromJson",
+        "binaryPropertyName": "data",
+        "options": {}
+      },
+      "id": "d1000000-0000-4000-8000-000000000003",
+      "name": "Parse Assertions",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        20,
+        -140
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "/home/user/ffmpeg-render-service/scriptwriter-factory/phase1/state/03_clusters.json",
+        "options": {}
+      },
+      "id": "d1000000-0000-4000-8000-000000000004",
+      "name": "Read Clusters",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "fromJson",
+        "binaryPropertyName": "data",
+        "options": {}
+      },
+      "id": "d1000000-0000-4000-8000-000000000005",
+      "name": "Parse Clusters",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        20,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "append",
+        "numberInputs": 2
+      },
+      "id": "d1000000-0000-4000-8000-000000000006",
+      "name": "Merge Inputs",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "\nconst unwrap = (it) => { const j = it.json; const p = (j && j.data) ? j.data : j; return Array.isArray(p) ? p[0] : p; };\nconst items = $input.all().map(unwrap);\nconst AS = items.find(x => x && x.stage === 'WF-11');\nconst CL = items.find(x => x && x.stage === 'WF-12');\nif (!AS || !CL) throw new Error('Missing WF-11 or WF-12 input');\n\nconst A = AS.assertions;\nconst C = CL.clusters;\nconst idx = (m,k) => (m[k] && typeof m[k].index === 'number') ? Math.max(0, m[k].index) : 0;\nconst wt  = (m,k) => (m[k] && typeof m[k].weighted === 'number') ? m[k].weighted : 0;\nconst ev  = (m,k) => (m[k] && m[k].evidence_ids) ? m[k].evidence_ids : [];\n\n// Rank-percentile normalisation. Spreads a distribution across 0..1 regardless of\n// outliers. Replaces max-normalisation, which collapsed 47 of 53 worlds into a\n// narrow band and made the model non-discriminating (defect DEF-01).\nconst rankNorm = (vals) => {\n  const uniq = [...new Set(vals)].sort((a,b)=>a-b);\n  const m = new Map();\n  uniq.forEach((v,i)=> m.set(v, uniq.length > 1 ? i/(uniq.length-1) : 0.5));\n  return m;\n};\n\n// ---- world context maps ----\nconst worldGenres={}, worldEngines={}, worldEvidence={}, engineEvidence={}, worldSupplyW={};\nfor (const a of A) {\n  if (a.assertion_type === 'supply' && a.world) {\n    const w=a.world;\n    worldGenres[w]=worldGenres[w]||new Set();\n    worldEngines[w]=worldEngines[w]||new Set();\n    worldEvidence[w]=worldEvidence[w]||new Set();\n    (a.genres||[]).forEach(g=>worldGenres[w].add(g));\n    (a.engines||[]).forEach(e=>{worldEngines[w].add(e); engineEvidence[e]=engineEvidence[e]||new Set(); engineEvidence[e].add(a.evidence_id);});\n    worldEvidence[w].add(a.evidence_id);\n    worldSupplyW[w]=(worldSupplyW[w]||0)+a.weight;\n  }\n}\n\nconst ARCHETYPE = { bbc:'public_service', channel_4:'public_service',\n  itv:'commercial_fta', itvx:'commercial_fta', channel_5:'commercial_fta', itv_studios:'commercial_fta',\n  netflix:'streamer', sky:'streamer', apple_tv:'streamer', hbo:'streamer', peacock:'streamer', bravo:'streamer',\n  britbox:'niche_channel', acorn_tv:'niche_channel', true_crime_channel:'niche_channel' };\n\nconst routeOpen={};\nfor (const a of A) if (a.assertion_type==='route') {\n  const rt=a.route_type||'unspecified';\n  routeOpen[rt]=(routeOpen[rt]||0)+a.weight*a.direction_value;\n}\nconst maxRoute=Math.max(1e-9, ...Object.values(routeOpen).map(Math.abs));\nconst rnorm=(k)=>(routeOpen[k]||0)/maxRoute;\n\nlet indieOpen=0, indieW=0;\nfor (const f of (CL.format_trend_signals||[])) {\n  const t=(f.interpretation||'')+' '+(f.metric||'');\n  if (/independent|indie|empower/i.test(t)) indieOpen+=f.weight;\n  indieW+=f.weight;\n}\nconst indieOpenness = indieW>0 ? Math.min(1, 0.5+0.5*(indieOpen/indieW)) : 0.5;\n\nconst ARCH_ROUTE = {\n  public_service: Math.max(0, rnorm('open_free')),\n  commercial_fta: 0.35,\n  streamer: Math.max(0.05, 1 + rnorm('closed')),\n  niche_channel: 0.45,\n  direct_app: indieOpenness\n};\n\nconst formatDemand = C.format_demand||{};\nconst formats = Object.keys(formatDemand).filter(f=>f!=='mixed');\nconst FORMAT_FEASIBILITY = { vertical_microdrama:1.0, limited_series:0.6, returnable_series:0.45 };\n\nconst buyerFormat = C.buyer_format||{};\nconst formatArchetypes={};\nfor (const k of Object.keys(buyerFormat)) {\n  const [b,f]=k.split('|');\n  const arch=ARCHETYPE[b]||'commercial_fta';\n  formatArchetypes[f]=formatArchetypes[f]||{};\n  formatArchetypes[f][arch]=Math.max(formatArchetypes[f][arch]||0, buyerFormat[k].index);\n}\nformatArchetypes['vertical_microdrama']={ direct_app:1.0 };\n\nconst buyerGenre=C.buyer_genre||{}, genreDemand=C.genre_demand||{}, genreSupply=C.genre_supply||{},\n      audienceByGenre=C.audience_by_genre||{};\n\n// ---- per-world derived measures ----\nconst worlds = Object.keys(worldGenres).filter(w => worldGenres[w].size > 0);\nconst demandCtxRaw={}, underServeRaw={}, breadthRaw={};\nfor (const w of worlds) {\n  const gs=Array.from(worldGenres[w]);\n  const gd=gs.reduce((s,g)=>s+Math.max(0,wt(genreDemand,g)),0)/Math.max(1,gs.length);\n  const ga=gs.reduce((s,g)=>s+Math.max(0,wt(audienceByGenre,g)),0)/Math.max(1,gs.length);\n  demandCtxRaw[w]=gd+ga;\n  underServeRaw[w]=(gd+ga)/(1+(worldSupplyW[w]||0));\n  breadthRaw[w]=(worldEvidence[w]?worldEvidence[w].size:0);\n}\nconst usMap=rankNorm(worlds.map(w=>underServeRaw[w]));\nconst satMap=rankNorm(worlds.map(w=>worldSupplyW[w]||0));\nconst brMap=rankNorm(worlds.map(w=>breadthRaw[w]));\n\nconst territoriesByGenre={};\nfor (const a of A) if (a.assertion_type==='buyer_demand' && a.territory)\n  for (const g of (a.genres||[])) { territoriesByGenre[g]=territoriesByGenre[g]||new Set(); territoriesByGenre[g].add(a.territory); }\n\nconst mean=(x)=>x.length?x.reduce((a,b)=>a+b,0)/x.length:0;\nconst costPressure=CL.cost_pressure_index||0;\nconst legalFlagged=CL.legal_flagged_worlds||{};\n\nconst WEIGHTS={ buyer_demand:18, route_accessibility:18, production_feasibility:15,\n  under_service:12, audience_demand:10, saturation_inverse:10, buyer_fit:7,\n  international_potential:5, evidence_breadth:5 };\n\nconst scored=[];\nfor (const w of worlds) {\n  const gs=Array.from(worldGenres[w]);\n  const es=Array.from(worldEngines[w]);\n  if (!es.length) continue;\n  for (const e of es) for (const f of formats) {\n    const gDemand=mean(gs.map(g=>idx(genreDemand,g)));\n    const gAudience=mean(gs.map(g=>idx(audienceByGenre,g)));\n    const gSupply=mean(gs.map(g=>idx(genreSupply,g)));\n    const fDemand=idx(formatDemand,f);\n\n    const archs=formatArchetypes[f]||{commercial_fta:0.5};\n    let routeScore=0;\n    for (const [arch,aff] of Object.entries(archs))\n      routeScore=Math.max(routeScore,(ARCH_ROUTE[arch]||0.3)*(0.5+0.5*aff));\n\n    const baseFeas=FORMAT_FEASIBILITY[f]!==undefined?FORMAT_FEASIBILITY[f]:0.5;\n    const feas=Math.min(1, baseFeas*(1+costPressure*0.5));\n\n    let bFit=0;\n    for (const g of gs) for (const b of Object.keys(ARCHETYPE)) {\n      const k=b+'|'+g; if (buyerGenre[k]) bFit=Math.max(bFit,buyerGenre[k].index);\n    }\n    const terr=mean(gs.map(g=>territoriesByGenre[g]?territoriesByGenre[g].size:0));\n\n    const dims={\n      buyer_demand: fDemand*0.6+gDemand*0.4,\n      route_accessibility: routeScore,\n      production_feasibility: feas,\n      under_service: usMap.get(underServeRaw[w]),\n      audience_demand: gAudience,\n      saturation_inverse: 1-(0.5*satMap.get(worldSupplyW[w]||0)+0.5*Math.min(1,gSupply)),\n      buyer_fit: bFit,\n      international_potential: Math.min(1,terr/3),\n      evidence_breadth: brMap.get(breadthRaw[w])\n    };\n\n    let total=0; const contrib={};\n    for (const [k,g] of Object.entries(WEIGHTS)) {\n      const v=Math.max(0,Math.min(1,dims[k]||0));\n      contrib[k]=Number((v*g).toFixed(2)); total+=v*g;\n    }\n\n    const support=Array.from(new Set([].concat(\n      Array.from(worldEvidence[w]||[]), Array.from(engineEvidence[e]||[]),\n      ev(formatDemand,f), ...gs.map(g=>ev(genreDemand,g))\n    ))).slice(0,14);\n\n    scored.push({\n      intersection_id:[w,e,f].join('__'), world:w, engine:e, format:f, genres:gs,\n      score_total:Number(total.toFixed(2)),\n      score_vector:Object.fromEntries(Object.entries(dims).map(([k,v])=>[k,Number(Math.max(0,Math.min(1,v||0)).toFixed(3))])),\n      score_contribution:contrib,\n      world_supply_weight:Number((worldSupplyW[w]||0).toFixed(2)),\n      world_demand_context:Number(demandCtxRaw[w].toFixed(2)),\n      world_evidence_count:breadthRaw[w],\n      evidence_support:support, evidence_support_count:support.length,\n      legal_flag_count:legalFlagged[w]||0,\n      scoring_model_version:'SCORING_MODEL_V2'\n    });\n  }\n}\nscored.sort((a,b)=>b.score_total-a.score_total);\n\nconst fmtAgg={};\nfor (const s of scored) { fmtAgg[s.format]=fmtAgg[s.format]||[]; fmtAgg[s.format].push(s.score_total); }\n\nreturn [{ json:{\n  stage:'WF-13', generated_at:new Date().toISOString(),\n  scoring_model_version:'SCORING_MODEL_V2',\n  repair_note:'V2 replaces max-normalisation with rank-percentile normalisation (defect DEF-01) and replaces originality_space with under_service = world demand context / (1 + world supply).',\n  known_limitation:'Candidate worlds are drawn only from supply assertions, so every scored world is already in commission. The corpus cannot surface a zero-supply world. See DEF-02.',\n  weights:WEIGHTS, archetype_route_openness:ARCH_ROUTE, cost_pressure_index:costPressure,\n  format_pool:formats, candidate_count:scored.length, worlds_considered:worlds.length,\n  format_summary:Object.fromEntries(Object.entries(fmtAgg).map(([k,v])=>[k,{mean:Number((v.reduce((a,b)=>a+b,0)/v.length).toFixed(2)),max:Number(Math.max(...v).toFixed(2)),n:v.length}])),\n  opportunities:scored\n}}];\n"
+      },
+      "id": "d1000000-0000-4000-8000-000000000007",
+      "name": "Score Intersections",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "toJson",
+        "mode": "all",
+        "options": {
+          "fileName": "04_opportunities.json",
+          "format": true
+        }
+      },
+      "id": "d1000000-0000-4000-8000-000000000008",
+      "name": "To File",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1,
+      "position": [
+        680,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "/home/user/ffmpeg-render-service/scriptwriter-factory/phase1/state/04_opportunities.json",
+        "dataPropertyName": "data",
+        "options": {}
+      },
+      "id": "d1000000-0000-4000-8000-000000000009",
+      "name": "Write Opportunities",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        900,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Read Assertions",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Read Clusters",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Assertions": {
+      "main": [
+        [
+          {
+            "node": "Parse Assertions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Assertions": {
+      "main": [
+        [
+          {
+            "node": "Merge Inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Clusters": {
+      "main": [
+        [
+          {
+            "node": "Parse Clusters",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Clusters": {
+      "main": [
+        [
+          {
+            "node": "Merge Inputs",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge Inputs": {
+      "main": [
+        [
+          {
+            "node": "Score Intersections",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Score Intersections": {
+      "main": [
+        [
+          {
+            "node": "To File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "To File": {
+      "main": [
+        [
+          {
+            "node": "Write Opportunities",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

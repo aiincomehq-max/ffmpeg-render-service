@@ -1,0 +1,3744 @@
+{
+  "stage": "WF-11",
+  "generated_at": "2026-08-31T21:29:48.932Z",
+  "source_stage": "WF-10",
+  "input_record_count": 102,
+  "assertion_count": 236,
+  "assertions_by_type": {
+    "buyer_demand": 36,
+    "supply": 70,
+    "genre_supply": 57,
+    "legal_flag": 4,
+    "ip_provenance": 4,
+    "audience_demand": 8,
+    "economics": 18,
+    "genre_demand": 9,
+    "saturation": 6,
+    "format_trend": 8,
+    "structure": 5,
+    "route": 11
+  },
+  "assertions": [
+    {
+      "assertion_id": "AS0001",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV001",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "itv",
+      "genres": [
+        "thriller",
+        "procedural"
+      ],
+      "format": "returnable_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0002",
+      "assertion_type": "supply",
+      "evidence_id": "EV001",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "bomb_disposal",
+      "genres": [
+        "thriller",
+        "procedural"
+      ],
+      "engines": [
+        "terrorism",
+        "institutional_concealment"
+      ],
+      "titles": [
+        "Trigger Point"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0003",
+      "assertion_type": "supply",
+      "evidence_id": "EV001",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "emergency_services",
+      "genres": [
+        "thriller",
+        "procedural"
+      ],
+      "engines": [
+        "terrorism",
+        "institutional_concealment"
+      ],
+      "titles": [
+        "Trigger Point"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0004",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV001",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "thriller",
+      "format": "returnable_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0005",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV001",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "procedural",
+      "format": "returnable_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0006",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV002",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "itv",
+      "genres": [
+        "crime",
+        "thriller"
+      ],
+      "format": "limited_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0007",
+      "assertion_type": "supply",
+      "evidence_id": "EV002",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "police",
+      "genres": [
+        "crime",
+        "thriller"
+      ],
+      "engines": [
+        "murder",
+        "serial_offending"
+      ],
+      "titles": [
+        "The Dark"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0008",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV002",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "crime",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0009",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV002",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "thriller",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0010",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV003",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "itv",
+      "genres": [
+        "crime",
+        "thriller"
+      ],
+      "format": "limited_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0011",
+      "assertion_type": "supply",
+      "evidence_id": "EV003",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "police",
+      "genres": [
+        "crime",
+        "thriller"
+      ],
+      "engines": [
+        "murder"
+      ],
+      "titles": [
+        "The Blame"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0012",
+      "assertion_type": "supply",
+      "evidence_id": "EV003",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "small_town",
+      "genres": [
+        "crime",
+        "thriller"
+      ],
+      "engines": [
+        "murder"
+      ],
+      "titles": [
+        "The Blame"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0013",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV003",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "crime",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0014",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV003",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "thriller",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0015",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV004",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "itv",
+      "genres": [
+        "domestic_drama"
+      ],
+      "format": "limited_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0016",
+      "assertion_type": "supply",
+      "evidence_id": "EV004",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "suburban_family",
+      "genres": [
+        "domestic_drama"
+      ],
+      "engines": [
+        "betrayal",
+        "family_secrets"
+      ],
+      "titles": [
+        "Adultery"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0017",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV004",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "domestic_drama",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0018",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV005",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "itv",
+      "genres": [
+        "crime",
+        "cosy_crime"
+      ],
+      "format": "returnable_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0019",
+      "assertion_type": "supply",
+      "evidence_id": "EV005",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "police",
+      "genres": [
+        "crime",
+        "cosy_crime"
+      ],
+      "engines": [
+        "murder"
+      ],
+      "titles": [
+        "Professor T",
+        "Van Der Valk"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0020",
+      "assertion_type": "supply",
+      "evidence_id": "EV005",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "academia",
+      "genres": [
+        "crime",
+        "cosy_crime"
+      ],
+      "engines": [
+        "murder"
+      ],
+      "titles": [
+        "Professor T",
+        "Van Der Valk"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0021",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV005",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "crime",
+      "format": "returnable_series",
+      "title_count": 2
+    },
+    {
+      "assertion_id": "AS0022",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV005",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "cosy_crime",
+      "format": "returnable_series",
+      "title_count": 2
+    },
+    {
+      "assertion_id": "AS0023",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV006",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "itv",
+      "genres": [
+        "thriller"
+      ],
+      "format": "returnable_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0024",
+      "assertion_type": "supply",
+      "evidence_id": "EV006",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "aviation",
+      "genres": [
+        "thriller"
+      ],
+      "engines": [
+        "conspiracy",
+        "institutional_concealment"
+      ],
+      "titles": [
+        "Red Eye"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0025",
+      "assertion_type": "supply",
+      "evidence_id": "EV006",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "intelligence_services",
+      "genres": [
+        "thriller"
+      ],
+      "engines": [
+        "conspiracy",
+        "institutional_concealment"
+      ],
+      "titles": [
+        "Red Eye"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0026",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV006",
+      "source_url": "https://www.tvzoneuk.com/post/itv-2026dramaslate-april26",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "thriller",
+      "format": "returnable_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0027",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV007",
+      "source_url": "https://en.wikipedia.org/wiki/Secret_Service_(2026_TV_series)",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "itvx",
+      "genres": [
+        "espionage",
+        "thriller"
+      ],
+      "format": "limited_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0028",
+      "assertion_type": "supply",
+      "evidence_id": "EV007",
+      "source_url": "https://en.wikipedia.org/wiki/Secret_Service_(2026_TV_series)",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "intelligence_services",
+      "genres": [
+        "espionage",
+        "thriller"
+      ],
+      "engines": [
+        "betrayal",
+        "conspiracy"
+      ],
+      "titles": [
+        "Secret Service"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0029",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV007",
+      "source_url": "https://en.wikipedia.org/wiki/Secret_Service_(2026_TV_series)",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "espionage",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0030",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV007",
+      "source_url": "https://en.wikipedia.org/wiki/Secret_Service_(2026_TV_series)",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "thriller",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0031",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV008",
+      "source_url": "https://www.denofgeek.com/tv/upcoming-british-tv-shows-2026/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "itvx",
+      "genres": [
+        "true_crime_drama"
+      ],
+      "format": "limited_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0032",
+      "assertion_type": "supply",
+      "evidence_id": "EV008",
+      "source_url": "https://www.denofgeek.com/tv/upcoming-british-tv-shows-2026/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "police",
+      "genres": [
+        "true_crime_drama"
+      ],
+      "engines": [
+        "sexual_offending",
+        "institutional_failure"
+      ],
+      "titles": [
+        "Believe Me"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0033",
+      "assertion_type": "supply",
+      "evidence_id": "EV008",
+      "source_url": "https://www.denofgeek.com/tv/upcoming-british-tv-shows-2026/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "taxi_transport",
+      "genres": [
+        "true_crime_drama"
+      ],
+      "engines": [
+        "sexual_offending",
+        "institutional_failure"
+      ],
+      "titles": [
+        "Believe Me"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0034",
+      "assertion_type": "supply",
+      "evidence_id": "EV008",
+      "source_url": "https://www.denofgeek.com/tv/upcoming-british-tv-shows-2026/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "criminal_justice",
+      "genres": [
+        "true_crime_drama"
+      ],
+      "engines": [
+        "sexual_offending",
+        "institutional_failure"
+      ],
+      "titles": [
+        "Believe Me"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0035",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV008",
+      "source_url": "https://www.denofgeek.com/tv/upcoming-british-tv-shows-2026/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "true_crime_drama",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0036",
+      "assertion_type": "legal_flag",
+      "evidence_id": "EV008",
+      "source_url": "https://www.denofgeek.com/tv/upcoming-british-tv-shows-2026/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "flag": "real_case_living_individuals",
+      "titles": [
+        "Believe Me"
+      ],
+      "worlds": [
+        "police",
+        "taxi_transport",
+        "criminal_justice"
+      ]
+    },
+    {
+      "assertion_id": "AS0037",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV009",
+      "source_url": "https://www.denofgeek.com/tv/upcoming-british-tv-shows-2026/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "channel_4",
+      "genres": [
+        "psychological_thriller"
+      ],
+      "format": "limited_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0038",
+      "assertion_type": "supply",
+      "evidence_id": "EV009",
+      "source_url": "https://www.denofgeek.com/tv/upcoming-british-tv-shows-2026/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "witness_protection",
+      "genres": [
+        "psychological_thriller"
+      ],
+      "engines": [
+        "concealed_identity",
+        "organised_crime"
+      ],
+      "titles": [
+        "Maya"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0039",
+      "assertion_type": "supply",
+      "evidence_id": "EV009",
+      "source_url": "https://www.denofgeek.com/tv/upcoming-british-tv-shows-2026/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "rural_scotland",
+      "genres": [
+        "psychological_thriller"
+      ],
+      "engines": [
+        "concealed_identity",
+        "organised_crime"
+      ],
+      "titles": [
+        "Maya"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0040",
+      "assertion_type": "supply",
+      "evidence_id": "EV009",
+      "source_url": "https://www.denofgeek.com/tv/upcoming-british-tv-shows-2026/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "small_community",
+      "genres": [
+        "psychological_thriller"
+      ],
+      "engines": [
+        "concealed_identity",
+        "organised_crime"
+      ],
+      "titles": [
+        "Maya"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0041",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV009",
+      "source_url": "https://www.denofgeek.com/tv/upcoming-british-tv-shows-2026/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "psychological_thriller",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0042",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV010",
+      "source_url": "https://www.denofgeek.com/tv/upcoming-british-tv-shows-2026/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "bbc",
+      "genres": [
+        "true_crime_drama"
+      ],
+      "format": "limited_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0043",
+      "assertion_type": "supply",
+      "evidence_id": "EV010",
+      "source_url": "https://www.denofgeek.com/tv/upcoming-british-tv-shows-2026/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "royal_household",
+      "genres": [
+        "true_crime_drama"
+      ],
+      "engines": [
+        "murder",
+        "class_transgression"
+      ],
+      "titles": [
+        "The Lady"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0044",
+      "assertion_type": "supply",
+      "evidence_id": "EV010",
+      "source_url": "https://www.denofgeek.com/tv/upcoming-british-tv-shows-2026/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "domestic_service",
+      "genres": [
+        "true_crime_drama"
+      ],
+      "engines": [
+        "murder",
+        "class_transgression"
+      ],
+      "titles": [
+        "The Lady"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0045",
+      "assertion_type": "supply",
+      "evidence_id": "EV010",
+      "source_url": "https://www.denofgeek.com/tv/upcoming-british-tv-shows-2026/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "finance",
+      "genres": [
+        "true_crime_drama"
+      ],
+      "engines": [
+        "murder",
+        "class_transgression"
+      ],
+      "titles": [
+        "The Lady"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0046",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV010",
+      "source_url": "https://www.denofgeek.com/tv/upcoming-british-tv-shows-2026/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "true_crime_drama",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0047",
+      "assertion_type": "legal_flag",
+      "evidence_id": "EV010",
+      "source_url": "https://www.denofgeek.com/tv/upcoming-british-tv-shows-2026/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "flag": "real_case_living_individuals",
+      "titles": [
+        "The Lady"
+      ],
+      "worlds": [
+        "royal_household",
+        "domestic_service",
+        "finance"
+      ]
+    },
+    {
+      "assertion_id": "AS0048",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV011",
+      "source_url": "https://www.scriptmatch.ai/buyers/bbc",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "buyer": "bbc",
+      "genres": [
+        "period_drama"
+      ],
+      "format": "limited_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0049",
+      "assertion_type": "supply",
+      "evidence_id": "EV011",
+      "source_url": "https://www.scriptmatch.ai/buyers/bbc",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "world": "tudor_court",
+      "genres": [
+        "period_drama"
+      ],
+      "engines": [
+        "power_struggle",
+        "betrayal"
+      ],
+      "titles": [
+        "1536"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0050",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV011",
+      "source_url": "https://www.scriptmatch.ai/buyers/bbc",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "genre": "period_drama",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0051",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV012",
+      "source_url": "https://www.scriptmatch.ai/buyers/bbc",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "buyer": "bbc",
+      "genres": [
+        "political_thriller"
+      ],
+      "format": "limited_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0052",
+      "assertion_type": "supply",
+      "evidence_id": "EV012",
+      "source_url": "https://www.scriptmatch.ai/buyers/bbc",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "world": "government",
+      "genres": [
+        "political_thriller"
+      ],
+      "engines": [
+        "institutional_concealment",
+        "whistleblowing"
+      ],
+      "titles": [
+        "D-Notice"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0053",
+      "assertion_type": "supply",
+      "evidence_id": "EV012",
+      "source_url": "https://www.scriptmatch.ai/buyers/bbc",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "world": "press",
+      "genres": [
+        "political_thriller"
+      ],
+      "engines": [
+        "institutional_concealment",
+        "whistleblowing"
+      ],
+      "titles": [
+        "D-Notice"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0054",
+      "assertion_type": "supply",
+      "evidence_id": "EV012",
+      "source_url": "https://www.scriptmatch.ai/buyers/bbc",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "world": "intelligence_services",
+      "genres": [
+        "political_thriller"
+      ],
+      "engines": [
+        "institutional_concealment",
+        "whistleblowing"
+      ],
+      "titles": [
+        "D-Notice"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0055",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV012",
+      "source_url": "https://www.scriptmatch.ai/buyers/bbc",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "genre": "political_thriller",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0056",
+      "assertion_type": "supply",
+      "evidence_id": "EV013",
+      "source_url": "https://www.tvmaze.com/news/5483/line-of-duty-line-of-duty-returns-for-series-seven",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "police",
+      "genres": [
+        "crime",
+        "procedural"
+      ],
+      "engines": [
+        "corruption",
+        "institutional_concealment"
+      ],
+      "titles": [
+        "Line of Duty"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0057",
+      "assertion_type": "supply",
+      "evidence_id": "EV013",
+      "source_url": "https://www.tvmaze.com/news/5483/line-of-duty-line-of-duty-returns-for-series-seven",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "anti_corruption",
+      "genres": [
+        "crime",
+        "procedural"
+      ],
+      "engines": [
+        "corruption",
+        "institutional_concealment"
+      ],
+      "titles": [
+        "Line of Duty"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0058",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV013",
+      "source_url": "https://www.tvmaze.com/news/5483/line-of-duty-line-of-duty-returns-for-series-seven",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "crime",
+      "format": "returnable_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0059",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV013",
+      "source_url": "https://www.tvmaze.com/news/5483/line-of-duty-line-of-duty-returns-for-series-seven",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "procedural",
+      "format": "returnable_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0060",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV014",
+      "source_url": "https://www.broadcastnow.co.uk/indies/bad-wolf-production-chief-heads-to-mammoth-screen/5216066.article",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "itv",
+      "genres": [
+        "thriller",
+        "supernatural",
+        "crime",
+        "period_crime"
+      ],
+      "format": "mixed",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0061",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV014",
+      "source_url": "https://www.broadcastnow.co.uk/indies/bad-wolf-production-chief-heads-to-mammoth-screen/5216066.article",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "bbc",
+      "genres": [
+        "thriller",
+        "supernatural",
+        "crime",
+        "period_crime"
+      ],
+      "format": "mixed",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0062",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV014",
+      "source_url": "https://www.broadcastnow.co.uk/indies/bad-wolf-production-chief-heads-to-mammoth-screen/5216066.article",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "britbox",
+      "genres": [
+        "thriller",
+        "supernatural",
+        "crime",
+        "period_crime"
+      ],
+      "format": "mixed",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0063",
+      "assertion_type": "supply",
+      "evidence_id": "EV014",
+      "source_url": "https://www.broadcastnow.co.uk/indies/bad-wolf-production-chief-heads-to-mammoth-screen/5216066.article",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "space_programme",
+      "genres": [
+        "thriller",
+        "supernatural",
+        "crime",
+        "period_crime"
+      ],
+      "engines": [
+        "survival",
+        "supernatural_threat",
+        "murder"
+      ],
+      "titles": [
+        "First Woman",
+        "The Witch Farm",
+        "Code of Silence",
+        "Endless Night"
+      ],
+      "format": "mixed"
+    },
+    {
+      "assertion_id": "AS0064",
+      "assertion_type": "supply",
+      "evidence_id": "EV014",
+      "source_url": "https://www.broadcastnow.co.uk/indies/bad-wolf-production-chief-heads-to-mammoth-screen/5216066.article",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "rural_folk_horror",
+      "genres": [
+        "thriller",
+        "supernatural",
+        "crime",
+        "period_crime"
+      ],
+      "engines": [
+        "survival",
+        "supernatural_threat",
+        "murder"
+      ],
+      "titles": [
+        "First Woman",
+        "The Witch Farm",
+        "Code of Silence",
+        "Endless Night"
+      ],
+      "format": "mixed"
+    },
+    {
+      "assertion_id": "AS0065",
+      "assertion_type": "supply",
+      "evidence_id": "EV014",
+      "source_url": "https://www.broadcastnow.co.uk/indies/bad-wolf-production-chief-heads-to-mammoth-screen/5216066.article",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "deaf_community",
+      "genres": [
+        "thriller",
+        "supernatural",
+        "crime",
+        "period_crime"
+      ],
+      "engines": [
+        "survival",
+        "supernatural_threat",
+        "murder"
+      ],
+      "titles": [
+        "First Woman",
+        "The Witch Farm",
+        "Code of Silence",
+        "Endless Night"
+      ],
+      "format": "mixed"
+    },
+    {
+      "assertion_id": "AS0066",
+      "assertion_type": "supply",
+      "evidence_id": "EV014",
+      "source_url": "https://www.broadcastnow.co.uk/indies/bad-wolf-production-chief-heads-to-mammoth-screen/5216066.article",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "country_house",
+      "genres": [
+        "thriller",
+        "supernatural",
+        "crime",
+        "period_crime"
+      ],
+      "engines": [
+        "survival",
+        "supernatural_threat",
+        "murder"
+      ],
+      "titles": [
+        "First Woman",
+        "The Witch Farm",
+        "Code of Silence",
+        "Endless Night"
+      ],
+      "format": "mixed"
+    },
+    {
+      "assertion_id": "AS0067",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV014",
+      "source_url": "https://www.broadcastnow.co.uk/indies/bad-wolf-production-chief-heads-to-mammoth-screen/5216066.article",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "thriller",
+      "format": "mixed",
+      "title_count": 4
+    },
+    {
+      "assertion_id": "AS0068",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV014",
+      "source_url": "https://www.broadcastnow.co.uk/indies/bad-wolf-production-chief-heads-to-mammoth-screen/5216066.article",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "supernatural",
+      "format": "mixed",
+      "title_count": 4
+    },
+    {
+      "assertion_id": "AS0069",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV014",
+      "source_url": "https://www.broadcastnow.co.uk/indies/bad-wolf-production-chief-heads-to-mammoth-screen/5216066.article",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "crime",
+      "format": "mixed",
+      "title_count": 4
+    },
+    {
+      "assertion_id": "AS0070",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV014",
+      "source_url": "https://www.broadcastnow.co.uk/indies/bad-wolf-production-chief-heads-to-mammoth-screen/5216066.article",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "period_crime",
+      "format": "mixed",
+      "title_count": 4
+    },
+    {
+      "assertion_id": "AS0071",
+      "assertion_type": "supply",
+      "evidence_id": "EV015",
+      "source_url": "https://bad-wolf.com/news/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "investment_banking",
+      "genres": [
+        "drama",
+        "thriller",
+        "period_drama"
+      ],
+      "engines": [
+        "ambition",
+        "conspiracy",
+        "siege"
+      ],
+      "titles": [
+        "Industry",
+        "Red Eye",
+        "The Other Bennet Sister",
+        "The Lords' Day"
+      ],
+      "format": "mixed"
+    },
+    {
+      "assertion_id": "AS0072",
+      "assertion_type": "supply",
+      "evidence_id": "EV015",
+      "source_url": "https://bad-wolf.com/news/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "aviation",
+      "genres": [
+        "drama",
+        "thriller",
+        "period_drama"
+      ],
+      "engines": [
+        "ambition",
+        "conspiracy",
+        "siege"
+      ],
+      "titles": [
+        "Industry",
+        "Red Eye",
+        "The Other Bennet Sister",
+        "The Lords' Day"
+      ],
+      "format": "mixed"
+    },
+    {
+      "assertion_id": "AS0073",
+      "assertion_type": "supply",
+      "evidence_id": "EV015",
+      "source_url": "https://bad-wolf.com/news/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "regency_society",
+      "genres": [
+        "drama",
+        "thriller",
+        "period_drama"
+      ],
+      "engines": [
+        "ambition",
+        "conspiracy",
+        "siege"
+      ],
+      "titles": [
+        "Industry",
+        "Red Eye",
+        "The Other Bennet Sister",
+        "The Lords' Day"
+      ],
+      "format": "mixed"
+    },
+    {
+      "assertion_id": "AS0074",
+      "assertion_type": "supply",
+      "evidence_id": "EV015",
+      "source_url": "https://bad-wolf.com/news/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "parliament",
+      "genres": [
+        "drama",
+        "thriller",
+        "period_drama"
+      ],
+      "engines": [
+        "ambition",
+        "conspiracy",
+        "siege"
+      ],
+      "titles": [
+        "Industry",
+        "Red Eye",
+        "The Other Bennet Sister",
+        "The Lords' Day"
+      ],
+      "format": "mixed"
+    },
+    {
+      "assertion_id": "AS0075",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV015",
+      "source_url": "https://bad-wolf.com/news/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "drama",
+      "format": "mixed",
+      "title_count": 4
+    },
+    {
+      "assertion_id": "AS0076",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV015",
+      "source_url": "https://bad-wolf.com/news/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "thriller",
+      "format": "mixed",
+      "title_count": 4
+    },
+    {
+      "assertion_id": "AS0077",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV015",
+      "source_url": "https://bad-wolf.com/news/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "period_drama",
+      "format": "mixed",
+      "title_count": 4
+    },
+    {
+      "assertion_id": "AS0078",
+      "assertion_type": "supply",
+      "evidence_id": "EV016",
+      "source_url": "https://www.screendaily.com/news/2026-film-and-high-end-tv-productions-shooting-in-the-uk-and-ireland-latest-updates/5212395.article",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "parliament",
+      "genres": [
+        "political_thriller"
+      ],
+      "engines": [
+        "siege",
+        "terrorism"
+      ],
+      "titles": [
+        "The Lords' Day"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0079",
+      "assertion_type": "supply",
+      "evidence_id": "EV016",
+      "source_url": "https://www.screendaily.com/news/2026-film-and-high-end-tv-productions-shooting-in-the-uk-and-ireland-latest-updates/5212395.article",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "counter_terrorism",
+      "genres": [
+        "political_thriller"
+      ],
+      "engines": [
+        "siege",
+        "terrorism"
+      ],
+      "titles": [
+        "The Lords' Day"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0080",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV016",
+      "source_url": "https://www.screendaily.com/news/2026-film-and-high-end-tv-productions-shooting-in-the-uk-and-ireland-latest-updates/5212395.article",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "political_thriller",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0081",
+      "assertion_type": "ip_provenance",
+      "evidence_id": "EV016",
+      "source_url": "https://www.screendaily.com/news/2026-film-and-high-end-tv-productions-shooting-in-the-uk-and-ireland-latest-updates/5212395.article",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "source_ip": "novel",
+      "titles": [
+        "The Lords' Day"
+      ],
+      "buyers": [
+        "netflix"
+      ]
+    },
+    {
+      "assertion_id": "AS0082",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV017",
+      "source_url": "https://en.wikipedia.org/wiki/Legends_(2026_TV_series)",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "netflix",
+      "genres": [
+        "crime",
+        "thriller",
+        "period_crime"
+      ],
+      "format": "limited_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0083",
+      "assertion_type": "supply",
+      "evidence_id": "EV017",
+      "source_url": "https://en.wikipedia.org/wiki/Legends_(2026_TV_series)",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "customs_border_force",
+      "genres": [
+        "crime",
+        "thriller",
+        "period_crime"
+      ],
+      "engines": [
+        "smuggling",
+        "undercover_operation"
+      ],
+      "titles": [
+        "Legends"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0084",
+      "assertion_type": "supply",
+      "evidence_id": "EV017",
+      "source_url": "https://en.wikipedia.org/wiki/Legends_(2026_TV_series)",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "smuggling",
+      "genres": [
+        "crime",
+        "thriller",
+        "period_crime"
+      ],
+      "engines": [
+        "smuggling",
+        "undercover_operation"
+      ],
+      "titles": [
+        "Legends"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0085",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV017",
+      "source_url": "https://en.wikipedia.org/wiki/Legends_(2026_TV_series)",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "crime",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0086",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV017",
+      "source_url": "https://en.wikipedia.org/wiki/Legends_(2026_TV_series)",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "thriller",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0087",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV017",
+      "source_url": "https://en.wikipedia.org/wiki/Legends_(2026_TV_series)",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "period_crime",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0088",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV018",
+      "source_url": "https://en.wikipedia.org/wiki/Unchosen",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "netflix",
+      "genres": [
+        "psychological_thriller"
+      ],
+      "format": "limited_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0089",
+      "assertion_type": "supply",
+      "evidence_id": "EV018",
+      "source_url": "https://en.wikipedia.org/wiki/Unchosen",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "unspecified",
+      "genres": [
+        "psychological_thriller"
+      ],
+      "engines": [
+        "unspecified"
+      ],
+      "titles": [
+        "Unchosen"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0090",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV018",
+      "source_url": "https://en.wikipedia.org/wiki/Unchosen",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "psychological_thriller",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0091",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV019",
+      "source_url": "https://www.whats-on-netflix.com/coming-soon/new-british-netflix-series-movies-2026-2027/",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "buyer": "netflix",
+      "genres": [
+        "thriller"
+      ],
+      "format": "limited_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0092",
+      "assertion_type": "supply",
+      "evidence_id": "EV019",
+      "source_url": "https://www.whats-on-netflix.com/coming-soon/new-british-netflix-series-movies-2026-2027/",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "world": "suburban_family",
+      "genres": [
+        "thriller"
+      ],
+      "engines": [
+        "family_secrets",
+        "disappearance"
+      ],
+      "titles": [
+        "Untitled Coben adaptation"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0093",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV019",
+      "source_url": "https://www.whats-on-netflix.com/coming-soon/new-british-netflix-series-movies-2026-2027/",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "genre": "thriller",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0094",
+      "assertion_type": "ip_provenance",
+      "evidence_id": "EV019",
+      "source_url": "https://www.whats-on-netflix.com/coming-soon/new-british-netflix-series-movies-2026-2027/",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "source_ip": "novel",
+      "titles": [
+        "Untitled Coben adaptation"
+      ],
+      "buyers": [
+        "netflix"
+      ]
+    },
+    {
+      "assertion_id": "AS0095",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV020",
+      "source_url": "https://www.skygroup.sky/article/up-next-sky-unveils-an-unmissable-genre-spanning-slate-of-new-shows-exclusive-previews-and-first-looks-for-2026-and-beyond",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "sky",
+      "genres": [
+        "crime",
+        "comedy_thriller"
+      ],
+      "format": "limited_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0096",
+      "assertion_type": "supply",
+      "evidence_id": "EV020",
+      "source_url": "https://www.skygroup.sky/article/up-next-sky-unveils-an-unmissable-genre-spanning-slate-of-new-shows-exclusive-previews-and-first-looks-for-2026-and-beyond",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "glasgow_underworld",
+      "genres": [
+        "crime",
+        "comedy_thriller"
+      ],
+      "engines": [
+        "murder",
+        "organised_crime"
+      ],
+      "titles": [
+        "Meantime"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0097",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV020",
+      "source_url": "https://www.skygroup.sky/article/up-next-sky-unveils-an-unmissable-genre-spanning-slate-of-new-shows-exclusive-previews-and-first-looks-for-2026-and-beyond",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "crime",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0098",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV020",
+      "source_url": "https://www.skygroup.sky/article/up-next-sky-unveils-an-unmissable-genre-spanning-slate-of-new-shows-exclusive-previews-and-first-looks-for-2026-and-beyond",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "comedy_thriller",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0099",
+      "assertion_type": "ip_provenance",
+      "evidence_id": "EV020",
+      "source_url": "https://www.skygroup.sky/article/up-next-sky-unveils-an-unmissable-genre-spanning-slate-of-new-shows-exclusive-previews-and-first-looks-for-2026-and-beyond",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "source_ip": "novel",
+      "titles": [
+        "Meantime"
+      ],
+      "buyers": [
+        "sky"
+      ]
+    },
+    {
+      "assertion_id": "AS0100",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV021",
+      "source_url": "https://www.skygroup.sky/article/up-next-sky-unveils-an-unmissable-genre-spanning-slate-of-new-shows-exclusive-previews-and-first-looks-for-2026-and-beyond",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "sky",
+      "genres": [
+        "comedy",
+        "crime"
+      ],
+      "format": "returnable_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0101",
+      "assertion_type": "supply",
+      "evidence_id": "EV021",
+      "source_url": "https://www.skygroup.sky/article/up-next-sky-unveils-an-unmissable-genre-spanning-slate-of-new-shows-exclusive-previews-and-first-looks-for-2026-and-beyond",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "organised_crime",
+      "genres": [
+        "comedy",
+        "crime"
+      ],
+      "engines": [
+        "organised_crime",
+        "succession"
+      ],
+      "titles": [
+        "Mr Bigstuff",
+        "Gangs of London"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0102",
+      "assertion_type": "supply",
+      "evidence_id": "EV021",
+      "source_url": "https://www.skygroup.sky/article/up-next-sky-unveils-an-unmissable-genre-spanning-slate-of-new-shows-exclusive-previews-and-first-looks-for-2026-and-beyond",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "london_underworld",
+      "genres": [
+        "comedy",
+        "crime"
+      ],
+      "engines": [
+        "organised_crime",
+        "succession"
+      ],
+      "titles": [
+        "Mr Bigstuff",
+        "Gangs of London"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0103",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV021",
+      "source_url": "https://www.skygroup.sky/article/up-next-sky-unveils-an-unmissable-genre-spanning-slate-of-new-shows-exclusive-previews-and-first-looks-for-2026-and-beyond",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "comedy",
+      "format": "returnable_series",
+      "title_count": 2
+    },
+    {
+      "assertion_id": "AS0104",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV021",
+      "source_url": "https://www.skygroup.sky/article/up-next-sky-unveils-an-unmissable-genre-spanning-slate-of-new-shows-exclusive-previews-and-first-looks-for-2026-and-beyond",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "crime",
+      "format": "returnable_series",
+      "title_count": 2
+    },
+    {
+      "assertion_id": "AS0105",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV022",
+      "source_url": "https://www.skygroup.sky/article/up-next-sky-unveils-an-unmissable-genre-spanning-slate-of-new-shows-exclusive-previews-and-first-looks-for-2026-and-beyond",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "sky",
+      "genres": [
+        "crime",
+        "thriller"
+      ],
+      "format": "limited_series",
+      "direction_value": 1,
+      "territory": "US_UK"
+    },
+    {
+      "assertion_id": "AS0106",
+      "assertion_type": "supply",
+      "evidence_id": "EV022",
+      "source_url": "https://www.skygroup.sky/article/up-next-sky-unveils-an-unmissable-genre-spanning-slate-of-new-shows-exclusive-previews-and-first-looks-for-2026-and-beyond",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "small_town_america",
+      "genres": [
+        "crime",
+        "thriller"
+      ],
+      "engines": [
+        "murder",
+        "family_secrets"
+      ],
+      "titles": [
+        "The Good Daughter"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0107",
+      "assertion_type": "supply",
+      "evidence_id": "EV022",
+      "source_url": "https://www.skygroup.sky/article/up-next-sky-unveils-an-unmissable-genre-spanning-slate-of-new-shows-exclusive-previews-and-first-looks-for-2026-and-beyond",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "law",
+      "genres": [
+        "crime",
+        "thriller"
+      ],
+      "engines": [
+        "murder",
+        "family_secrets"
+      ],
+      "titles": [
+        "The Good Daughter"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0108",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV022",
+      "source_url": "https://www.skygroup.sky/article/up-next-sky-unveils-an-unmissable-genre-spanning-slate-of-new-shows-exclusive-previews-and-first-looks-for-2026-and-beyond",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "crime",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0109",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV022",
+      "source_url": "https://www.skygroup.sky/article/up-next-sky-unveils-an-unmissable-genre-spanning-slate-of-new-shows-exclusive-previews-and-first-looks-for-2026-and-beyond",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "thriller",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0110",
+      "assertion_type": "ip_provenance",
+      "evidence_id": "EV022",
+      "source_url": "https://www.skygroup.sky/article/up-next-sky-unveils-an-unmissable-genre-spanning-slate-of-new-shows-exclusive-previews-and-first-looks-for-2026-and-beyond",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "source_ip": "novel",
+      "titles": [
+        "The Good Daughter"
+      ],
+      "buyers": [
+        "sky"
+      ]
+    },
+    {
+      "assertion_id": "AS0111",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV023",
+      "source_url": "https://www.paramount-mediahub.co.uk/press-releases/5-commissions-new-drama-series-last-resort-(wt)-from-pernel-media-starring-caroline-quentin,-tessa-peake-jones,-jason-watkins-and-john-hannah",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "buyer": "channel_5",
+      "genres": [
+        "drama"
+      ],
+      "format": "returnable_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0112",
+      "assertion_type": "supply",
+      "evidence_id": "EV023",
+      "source_url": "https://www.paramount-mediahub.co.uk/press-releases/5-commissions-new-drama-series-last-resort-(wt)-from-pernel-media-starring-caroline-quentin,-tessa-peake-jones,-jason-watkins-and-john-hannah",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "world": "hospitality",
+      "genres": [
+        "drama"
+      ],
+      "engines": [
+        "reinvention"
+      ],
+      "titles": [
+        "Last Resort"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0113",
+      "assertion_type": "supply",
+      "evidence_id": "EV023",
+      "source_url": "https://www.paramount-mediahub.co.uk/press-releases/5-commissions-new-drama-series-last-resort-(wt)-from-pernel-media-starring-caroline-quentin,-tessa-peake-jones,-jason-watkins-and-john-hannah",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "world": "later_life",
+      "genres": [
+        "drama"
+      ],
+      "engines": [
+        "reinvention"
+      ],
+      "titles": [
+        "Last Resort"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0114",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV023",
+      "source_url": "https://www.paramount-mediahub.co.uk/press-releases/5-commissions-new-drama-series-last-resort-(wt)-from-pernel-media-starring-caroline-quentin,-tessa-peake-jones,-jason-watkins-and-john-hannah",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "genre": "drama",
+      "format": "returnable_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0115",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV024",
+      "source_url": "https://www.paramount-mediahub.co.uk/press-releases/the-madame-blanc-mysteries-to-return-to-5-for-fifth-series-as-filming-gets-underway",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "buyer": "channel_5",
+      "genres": [
+        "cosy_crime"
+      ],
+      "format": "returnable_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0116",
+      "assertion_type": "supply",
+      "evidence_id": "EV024",
+      "source_url": "https://www.paramount-mediahub.co.uk/press-releases/the-madame-blanc-mysteries-to-return-to-5-for-fifth-series-as-filming-gets-underway",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "world": "antiques",
+      "genres": [
+        "cosy_crime"
+      ],
+      "engines": [
+        "murder"
+      ],
+      "titles": [
+        "The Madame Blanc Mysteries"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0117",
+      "assertion_type": "supply",
+      "evidence_id": "EV024",
+      "source_url": "https://www.paramount-mediahub.co.uk/press-releases/the-madame-blanc-mysteries-to-return-to-5-for-fifth-series-as-filming-gets-underway",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "world": "french_expat_community",
+      "genres": [
+        "cosy_crime"
+      ],
+      "engines": [
+        "murder"
+      ],
+      "titles": [
+        "The Madame Blanc Mysteries"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0118",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV024",
+      "source_url": "https://www.paramount-mediahub.co.uk/press-releases/the-madame-blanc-mysteries-to-return-to-5-for-fifth-series-as-filming-gets-underway",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "genre": "cosy_crime",
+      "format": "returnable_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0119",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV025",
+      "source_url": "https://www.viacomcbs-mediahub.co.uk/press-releases",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "buyer": "channel_5",
+      "genres": [
+        "cosy_crime"
+      ],
+      "format": "returnable_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0120",
+      "assertion_type": "supply",
+      "evidence_id": "EV025",
+      "source_url": "https://www.viacomcbs-mediahub.co.uk/press-releases",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "world": "cruise_ship",
+      "genres": [
+        "cosy_crime"
+      ],
+      "engines": [
+        "murder"
+      ],
+      "titles": [
+        "The Good Ship Murder"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0121",
+      "assertion_type": "supply",
+      "evidence_id": "EV025",
+      "source_url": "https://www.viacomcbs-mediahub.co.uk/press-releases",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "world": "hospitality",
+      "genres": [
+        "cosy_crime"
+      ],
+      "engines": [
+        "murder"
+      ],
+      "titles": [
+        "The Good Ship Murder"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0122",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV025",
+      "source_url": "https://www.viacomcbs-mediahub.co.uk/press-releases",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "genre": "cosy_crime",
+      "format": "returnable_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0123",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV026",
+      "source_url": "https://www.paramount-mediahub.co.uk/press-releases/channel-5-commissions-first-true-crime-drama-maxine-from-clapperboard",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "buyer": "channel_5",
+      "genres": [
+        "true_crime_drama"
+      ],
+      "format": "limited_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0124",
+      "assertion_type": "supply",
+      "evidence_id": "EV026",
+      "source_url": "https://www.paramount-mediahub.co.uk/press-releases/channel-5-commissions-first-true-crime-drama-maxine-from-clapperboard",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "world": "criminal_justice",
+      "genres": [
+        "true_crime_drama"
+      ],
+      "engines": [
+        "murder",
+        "complicity"
+      ],
+      "titles": [
+        "Maxine"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0125",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV026",
+      "source_url": "https://www.paramount-mediahub.co.uk/press-releases/channel-5-commissions-first-true-crime-drama-maxine-from-clapperboard",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "genre": "true_crime_drama",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0126",
+      "assertion_type": "legal_flag",
+      "evidence_id": "EV026",
+      "source_url": "https://www.paramount-mediahub.co.uk/press-releases/channel-5-commissions-first-true-crime-drama-maxine-from-clapperboard",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "flag": "real_case_living_individuals",
+      "titles": [
+        "Maxine"
+      ],
+      "worlds": [
+        "criminal_justice"
+      ]
+    },
+    {
+      "assertion_id": "AS0127",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV027",
+      "source_url": "https://www.paramount-mediahub.co.uk/press-releases/5-commissions-major-new-factual-drama-'to-nicola,-love-peter'-(wt)-",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "buyer": "channel_5",
+      "genres": [
+        "factual_drama"
+      ],
+      "format": "limited_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0128",
+      "assertion_type": "supply",
+      "evidence_id": "EV027",
+      "source_url": "https://www.paramount-mediahub.co.uk/press-releases/5-commissions-major-new-factual-drama-'to-nicola,-love-peter'-(wt)-",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "world": "criminal_justice",
+      "genres": [
+        "factual_drama"
+      ],
+      "engines": [
+        "real_events"
+      ],
+      "titles": [
+        "To Nicola, Love Peter"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0129",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV027",
+      "source_url": "https://www.paramount-mediahub.co.uk/press-releases/5-commissions-major-new-factual-drama-'to-nicola,-love-peter'-(wt)-",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "genre": "factual_drama",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0130",
+      "assertion_type": "legal_flag",
+      "evidence_id": "EV027",
+      "source_url": "https://www.paramount-mediahub.co.uk/press-releases/5-commissions-major-new-factual-drama-'to-nicola,-love-peter'-(wt)-",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "flag": "real_case_living_individuals",
+      "titles": [
+        "To Nicola, Love Peter"
+      ],
+      "worlds": [
+        "criminal_justice"
+      ]
+    },
+    {
+      "assertion_id": "AS0131",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV028",
+      "source_url": "https://www.televisual.com/news/c5-reveals-six-new-drama-commissions/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "channel_5",
+      "genres": [
+        "thriller",
+        "cosy_crime",
+        "family_drama"
+      ],
+      "format": "mixed",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0132",
+      "assertion_type": "supply",
+      "evidence_id": "EV028",
+      "source_url": "https://www.televisual.com/news/c5-reveals-six-new-drama-commissions/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "various",
+      "genres": [
+        "thriller",
+        "cosy_crime",
+        "family_drama"
+      ],
+      "engines": [],
+      "titles": [],
+      "format": "mixed"
+    },
+    {
+      "assertion_id": "AS0133",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV028",
+      "source_url": "https://www.televisual.com/news/c5-reveals-six-new-drama-commissions/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "thriller",
+      "format": "mixed",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0134",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV028",
+      "source_url": "https://www.televisual.com/news/c5-reveals-six-new-drama-commissions/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "cosy_crime",
+      "format": "mixed",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0135",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV028",
+      "source_url": "https://www.televisual.com/news/c5-reveals-six-new-drama-commissions/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "family_drama",
+      "format": "mixed",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0136",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV029",
+      "source_url": "https://www.viacomcbs-mediahub.co.uk/press-releases",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "channel_5",
+      "genres": [
+        "factual",
+        "true_crime"
+      ],
+      "format": "returnable_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0137",
+      "assertion_type": "supply",
+      "evidence_id": "EV029",
+      "source_url": "https://www.viacomcbs-mediahub.co.uk/press-releases",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "criminal_justice",
+      "genres": [
+        "factual",
+        "true_crime"
+      ],
+      "engines": [],
+      "titles": [
+        "The Accused"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0138",
+      "assertion_type": "supply",
+      "evidence_id": "EV029",
+      "source_url": "https://www.viacomcbs-mediahub.co.uk/press-releases",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "courts",
+      "genres": [
+        "factual",
+        "true_crime"
+      ],
+      "engines": [],
+      "titles": [
+        "The Accused"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0139",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV029",
+      "source_url": "https://www.viacomcbs-mediahub.co.uk/press-releases",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "factual",
+      "format": "returnable_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0140",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV029",
+      "source_url": "https://www.viacomcbs-mediahub.co.uk/press-releases",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "true_crime",
+      "format": "returnable_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0141",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV030",
+      "source_url": "https://www.countryandtownhouse.com/culture/blue-lights-series-4/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "bbc",
+      "genres": [
+        "crime",
+        "procedural"
+      ],
+      "format": "returnable_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0142",
+      "assertion_type": "supply",
+      "evidence_id": "EV030",
+      "source_url": "https://www.countryandtownhouse.com/culture/blue-lights-series-4/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "police",
+      "genres": [
+        "crime",
+        "procedural"
+      ],
+      "engines": [
+        "organised_crime",
+        "sectarian_legacy"
+      ],
+      "titles": [
+        "Blue Lights"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0143",
+      "assertion_type": "supply",
+      "evidence_id": "EV030",
+      "source_url": "https://www.countryandtownhouse.com/culture/blue-lights-series-4/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "northern_ireland",
+      "genres": [
+        "crime",
+        "procedural"
+      ],
+      "engines": [
+        "organised_crime",
+        "sectarian_legacy"
+      ],
+      "titles": [
+        "Blue Lights"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0144",
+      "assertion_type": "supply",
+      "evidence_id": "EV030",
+      "source_url": "https://www.countryandtownhouse.com/culture/blue-lights-series-4/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "working_class_community",
+      "genres": [
+        "crime",
+        "procedural"
+      ],
+      "engines": [
+        "organised_crime",
+        "sectarian_legacy"
+      ],
+      "titles": [
+        "Blue Lights"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0145",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV030",
+      "source_url": "https://www.countryandtownhouse.com/culture/blue-lights-series-4/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "crime",
+      "format": "returnable_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0146",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV030",
+      "source_url": "https://www.countryandtownhouse.com/culture/blue-lights-series-4/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "procedural",
+      "format": "returnable_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0147",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV031",
+      "source_url": "https://www.tvguide.co.uk/articles/top-tier-dramas-returning-in-2026-from-doctor-foster-to-sherwood-and-the-night-manager/",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "buyer": "bbc",
+      "genres": [
+        "drama",
+        "crime",
+        "thriller"
+      ],
+      "format": "returnable_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0148",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV031",
+      "source_url": "https://www.tvguide.co.uk/articles/top-tier-dramas-returning-in-2026-from-doctor-foster-to-sherwood-and-the-night-manager/",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "buyer": "itv",
+      "genres": [
+        "drama",
+        "crime",
+        "thriller"
+      ],
+      "format": "returnable_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0149",
+      "assertion_type": "supply",
+      "evidence_id": "EV031",
+      "source_url": "https://www.tvguide.co.uk/articles/top-tier-dramas-returning-in-2026-from-doctor-foster-to-sherwood-and-the-night-manager/",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "world": "medicine",
+      "genres": [
+        "drama",
+        "crime",
+        "thriller"
+      ],
+      "engines": [
+        "betrayal",
+        "murder",
+        "corruption"
+      ],
+      "titles": [
+        "Doctor Foster",
+        "Sherwood",
+        "The Night Manager",
+        "Peaky Blinders",
+        "Rivals"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0150",
+      "assertion_type": "supply",
+      "evidence_id": "EV031",
+      "source_url": "https://www.tvguide.co.uk/articles/top-tier-dramas-returning-in-2026-from-doctor-foster-to-sherwood-and-the-night-manager/",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "world": "mining_community",
+      "genres": [
+        "drama",
+        "crime",
+        "thriller"
+      ],
+      "engines": [
+        "betrayal",
+        "murder",
+        "corruption"
+      ],
+      "titles": [
+        "Doctor Foster",
+        "Sherwood",
+        "The Night Manager",
+        "Peaky Blinders",
+        "Rivals"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0151",
+      "assertion_type": "supply",
+      "evidence_id": "EV031",
+      "source_url": "https://www.tvguide.co.uk/articles/top-tier-dramas-returning-in-2026-from-doctor-foster-to-sherwood-and-the-night-manager/",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "world": "intelligence_services",
+      "genres": [
+        "drama",
+        "crime",
+        "thriller"
+      ],
+      "engines": [
+        "betrayal",
+        "murder",
+        "corruption"
+      ],
+      "titles": [
+        "Doctor Foster",
+        "Sherwood",
+        "The Night Manager",
+        "Peaky Blinders",
+        "Rivals"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0152",
+      "assertion_type": "supply",
+      "evidence_id": "EV031",
+      "source_url": "https://www.tvguide.co.uk/articles/top-tier-dramas-returning-in-2026-from-doctor-foster-to-sherwood-and-the-night-manager/",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "world": "organised_crime",
+      "genres": [
+        "drama",
+        "crime",
+        "thriller"
+      ],
+      "engines": [
+        "betrayal",
+        "murder",
+        "corruption"
+      ],
+      "titles": [
+        "Doctor Foster",
+        "Sherwood",
+        "The Night Manager",
+        "Peaky Blinders",
+        "Rivals"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0153",
+      "assertion_type": "supply",
+      "evidence_id": "EV031",
+      "source_url": "https://www.tvguide.co.uk/articles/top-tier-dramas-returning-in-2026-from-doctor-foster-to-sherwood-and-the-night-manager/",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "world": "media",
+      "genres": [
+        "drama",
+        "crime",
+        "thriller"
+      ],
+      "engines": [
+        "betrayal",
+        "murder",
+        "corruption"
+      ],
+      "titles": [
+        "Doctor Foster",
+        "Sherwood",
+        "The Night Manager",
+        "Peaky Blinders",
+        "Rivals"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0154",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV031",
+      "source_url": "https://www.tvguide.co.uk/articles/top-tier-dramas-returning-in-2026-from-doctor-foster-to-sherwood-and-the-night-manager/",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "genre": "drama",
+      "format": "returnable_series",
+      "title_count": 5
+    },
+    {
+      "assertion_id": "AS0155",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV031",
+      "source_url": "https://www.tvguide.co.uk/articles/top-tier-dramas-returning-in-2026-from-doctor-foster-to-sherwood-and-the-night-manager/",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "genre": "crime",
+      "format": "returnable_series",
+      "title_count": 5
+    },
+    {
+      "assertion_id": "AS0156",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV031",
+      "source_url": "https://www.tvguide.co.uk/articles/top-tier-dramas-returning-in-2026-from-doctor-foster-to-sherwood-and-the-night-manager/",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "genre": "thriller",
+      "format": "returnable_series",
+      "title_count": 5
+    },
+    {
+      "assertion_id": "AS0157",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV032",
+      "source_url": "https://www.aol.com/articles/renewed-tv-shows-2026-series-190121594.html",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "buyer": "bbc",
+      "genres": [
+        "social_realist_drama"
+      ],
+      "format": "returnable_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0158",
+      "assertion_type": "supply",
+      "evidence_id": "EV032",
+      "source_url": "https://www.aol.com/articles/renewed-tv-shows-2026-series-190121594.html",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "world": "prison",
+      "genres": [
+        "social_realist_drama"
+      ],
+      "engines": [
+        "institutional_failure",
+        "redemption"
+      ],
+      "titles": [
+        "Unforgivable/Time franchise"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0159",
+      "assertion_type": "supply",
+      "evidence_id": "EV032",
+      "source_url": "https://www.aol.com/articles/renewed-tv-shows-2026-series-190121594.html",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "world": "young_offenders_institution",
+      "genres": [
+        "social_realist_drama"
+      ],
+      "engines": [
+        "institutional_failure",
+        "redemption"
+      ],
+      "titles": [
+        "Unforgivable/Time franchise"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0160",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV032",
+      "source_url": "https://www.aol.com/articles/renewed-tv-shows-2026-series-190121594.html",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "genre": "social_realist_drama",
+      "format": "returnable_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0161",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV033",
+      "source_url": "https://www.amcglobalmedia.com/2026/07/23/true-crime-channel-expands-original-slate-with-new-commissions-returning-franchise-and-podcast-adaptation/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "true_crime_channel",
+      "genres": [
+        "true_crime",
+        "factual"
+      ],
+      "format": "returnable_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0162",
+      "assertion_type": "supply",
+      "evidence_id": "EV033",
+      "source_url": "https://www.amcglobalmedia.com/2026/07/23/true-crime-channel-expands-original-slate-with-new-commissions-returning-franchise-and-podcast-adaptation/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "forensic_science",
+      "genres": [
+        "true_crime",
+        "factual"
+      ],
+      "engines": [],
+      "titles": [
+        "UK Forensic Breakthroughs",
+        "Deadly Destinations"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0163",
+      "assertion_type": "supply",
+      "evidence_id": "EV033",
+      "source_url": "https://www.amcglobalmedia.com/2026/07/23/true-crime-channel-expands-original-slate-with-new-commissions-returning-franchise-and-podcast-adaptation/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "travel_tourism",
+      "genres": [
+        "true_crime",
+        "factual"
+      ],
+      "engines": [],
+      "titles": [
+        "UK Forensic Breakthroughs",
+        "Deadly Destinations"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0164",
+      "assertion_type": "supply",
+      "evidence_id": "EV033",
+      "source_url": "https://www.amcglobalmedia.com/2026/07/23/true-crime-channel-expands-original-slate-with-new-commissions-returning-franchise-and-podcast-adaptation/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "criminal_justice",
+      "genres": [
+        "true_crime",
+        "factual"
+      ],
+      "engines": [],
+      "titles": [
+        "UK Forensic Breakthroughs",
+        "Deadly Destinations"
+      ],
+      "format": "returnable_series"
+    },
+    {
+      "assertion_id": "AS0165",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV033",
+      "source_url": "https://www.amcglobalmedia.com/2026/07/23/true-crime-channel-expands-original-slate-with-new-commissions-returning-franchise-and-podcast-adaptation/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "true_crime",
+      "format": "returnable_series",
+      "title_count": 2
+    },
+    {
+      "assertion_id": "AS0166",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV033",
+      "source_url": "https://www.amcglobalmedia.com/2026/07/23/true-crime-channel-expands-original-slate-with-new-commissions-returning-franchise-and-podcast-adaptation/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "factual",
+      "format": "returnable_series",
+      "title_count": 2
+    },
+    {
+      "assertion_id": "AS0167",
+      "assertion_type": "audience_demand",
+      "evidence_id": "EV034",
+      "source_url": "https://collider.com/inspector-ellis-streaming-success-acorn-tv-july-2026/",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "genres": [
+        "crime"
+      ],
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": 1,
+      "titles": [
+        "Inspector Ellis"
+      ]
+    },
+    {
+      "assertion_id": "AS0168",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV035",
+      "source_url": "https://en.wikipedia.org/wiki/A_Taste_for_Murder",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "itvx",
+      "genres": [
+        "crime"
+      ],
+      "format": "limited_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0169",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV035",
+      "source_url": "https://en.wikipedia.org/wiki/A_Taste_for_Murder",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "britbox",
+      "genres": [
+        "crime"
+      ],
+      "format": "limited_series",
+      "direction_value": 1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0170",
+      "assertion_type": "supply",
+      "evidence_id": "EV035",
+      "source_url": "https://en.wikipedia.org/wiki/A_Taste_for_Murder",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "world": "food_hospitality",
+      "genres": [
+        "crime"
+      ],
+      "engines": [
+        "murder"
+      ],
+      "titles": [
+        "A Taste for Murder"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0171",
+      "assertion_type": "genre_supply",
+      "evidence_id": "EV035",
+      "source_url": "https://en.wikipedia.org/wiki/A_Taste_for_Murder",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genre": "crime",
+      "format": "limited_series",
+      "title_count": 1
+    },
+    {
+      "assertion_id": "AS0172",
+      "assertion_type": "economics",
+      "evidence_id": "EV040",
+      "source_url": "https://www.bfi.org.uk/news/official-bfi-statistics-2025",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "metric_name": "uk_film_hetv_spend_2025_gbp_bn",
+      "metric_value": 6.8,
+      "direction_value": 1,
+      "interpretation": null,
+      "genres": [],
+      "format": null
+    },
+    {
+      "assertion_id": "AS0173",
+      "assertion_type": "economics",
+      "evidence_id": "EV041",
+      "source_url": "https://www.bfi.org.uk/news/official-bfi-statistics-2025",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "metric_name": "uk_domestic_hetv_share_pct",
+      "metric_value": 17,
+      "direction_value": -1,
+      "interpretation": "Domestic commissioning is a small minority of UK production activity",
+      "genres": [],
+      "format": null
+    },
+    {
+      "assertion_id": "AS0174",
+      "assertion_type": "economics",
+      "evidence_id": "EV042",
+      "source_url": "https://www.prolificnorth.co.uk/news/bright-spots-but-overall-16-6-drop-in-uk-film-and-high-end-tv-production-spend-as-bfi-reports-h1-2026-figures/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "metric_name": "uk_spend_change_h1_2026_pct",
+      "metric_value": -16.6,
+      "direction_value": -1,
+      "interpretation": null,
+      "genres": [],
+      "format": null
+    },
+    {
+      "assertion_id": "AS0175",
+      "assertion_type": "economics",
+      "evidence_id": "EV043",
+      "source_url": "https://www.prolificnorth.co.uk/news/bright-spots-but-overall-16-6-drop-in-uk-film-and-high-end-tv-production-spend-as-bfi-reports-h1-2026-figures/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "metric_name": "inward_tv_spend_change_pct",
+      "metric_value": -23.5,
+      "direction_value": -1,
+      "interpretation": null,
+      "genres": [],
+      "format": null
+    },
+    {
+      "assertion_id": "AS0176",
+      "assertion_type": "economics",
+      "evidence_id": "EV044",
+      "source_url": "https://www.prolificnorth.co.uk/news/bright-spots-but-overall-16-6-drop-in-uk-film-and-high-end-tv-production-spend-as-bfi-reports-h1-2026-figures/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "metric_name": "uk_domestic_spend_h1_2026_gbp_m",
+      "metric_value": 337,
+      "direction_value": 1,
+      "interpretation": "Domestic production is flat-to-slightly-up while inward investment collapses — domestic share of programme count is rising",
+      "genres": [],
+      "format": null
+    },
+    {
+      "assertion_id": "AS0177",
+      "assertion_type": "economics",
+      "evidence_id": "EV045",
+      "source_url": "https://www.screendaily.com/news/total-uk-feature-production-spend-drops-6-in-first-half-of-2026-but-local-films-and-co-pros-enjoy-boosts/5219283.article",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "metric_name": "uk_feature_spend_change_pct",
+      "metric_value": -6,
+      "direction_value": 0.25,
+      "interpretation": null,
+      "genres": [],
+      "format": null
+    },
+    {
+      "assertion_id": "AS0178",
+      "assertion_type": "economics",
+      "evidence_id": "EV046",
+      "source_url": "https://deadline.com/2025/02/british-tv-co-productions-plummet-2024-1236280157/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "metric_name": "uk_coproduction_spend_gbp_m",
+      "metric_value": 19.6,
+      "direction_value": -1,
+      "interpretation": null,
+      "genres": [],
+      "format": null
+    },
+    {
+      "assertion_id": "AS0179",
+      "assertion_type": "economics",
+      "evidence_id": "EV047",
+      "source_url": "https://deadline.com/2025/02/british-tv-co-productions-plummet-2024-1236280157/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "metric_name": "domestic_hetv_commissions_change_pct",
+      "metric_value": -22,
+      "direction_value": -1,
+      "interpretation": null,
+      "genres": [],
+      "format": null
+    },
+    {
+      "assertion_id": "AS0180",
+      "assertion_type": "economics",
+      "evidence_id": "EV048",
+      "source_url": "https://deadline.com/2025/02/british-tv-co-productions-plummet-2024-1236280157/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "metric_name": "uk_domestic_spend_gbp_m",
+      "metric_value": 598.2,
+      "direction_value": -1,
+      "interpretation": null,
+      "genres": [],
+      "format": null
+    },
+    {
+      "assertion_id": "AS0181",
+      "assertion_type": "economics",
+      "evidence_id": "EV049",
+      "source_url": "https://deadline.com/2025/02/british-tv-dramatists-lament-austerity-era-1236284139/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": -1,
+      "interpretation": "The binding constraint on UK drama is deficit financing, not commissioning appetite",
+      "genres": [],
+      "format": null
+    },
+    {
+      "assertion_id": "AS0182",
+      "assertion_type": "economics",
+      "evidence_id": "EV051",
+      "source_url": "https://vitrina.ai/blog/limited-series-production-companies-2026",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": 1,
+      "interpretation": "Low-budget genre specialisation is functioning as a commissioning advantage",
+      "genres": [
+        "horror",
+        "psychological_thriller"
+      ],
+      "format": "limited_series"
+    },
+    {
+      "assertion_id": "AS0183",
+      "assertion_type": "economics",
+      "evidence_id": "EV052",
+      "source_url": "https://vitrina.ai/blog/film-production-budget-guide/",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": 1,
+      "interpretation": null,
+      "genres": [
+        "horror",
+        "thriller",
+        "contained_drama"
+      ],
+      "format": null
+    },
+    {
+      "assertion_id": "AS0184",
+      "assertion_type": "economics",
+      "evidence_id": "EV053",
+      "source_url": "https://theankler.com/the-three-budget-buckets-running/",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": -1,
+      "interpretation": null,
+      "genres": [],
+      "format": null
+    },
+    {
+      "assertion_id": "AS0185",
+      "assertion_type": "economics",
+      "evidence_id": "EV054",
+      "source_url": "https://vitrina.ai/blog/limited-series-production-companies-2026",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": 1,
+      "interpretation": "Pre-existing IP is a commissioning precondition, disadvantaging original spec material",
+      "genres": [
+        "thriller",
+        "crime",
+        "historical_drama"
+      ],
+      "format": null
+    },
+    {
+      "assertion_id": "AS0186",
+      "assertion_type": "economics",
+      "evidence_id": "EV055",
+      "source_url": "https://www.screenireland.ie/funding/production-loans/tv-drama-production",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": 1,
+      "interpretation": null,
+      "genres": [],
+      "format": null
+    },
+    {
+      "assertion_id": "AS0187",
+      "assertion_type": "economics",
+      "evidence_id": "EV056",
+      "source_url": "https://www.screendaily.com/news/northern-ireland-screen-explores-all-ireland-co-funding-mechanism-and-cash-flowing-tax-credit-in-four-year-strategy/5215822.article",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": 1,
+      "interpretation": "A new financing route opening precisely as the co-production market collapses",
+      "genres": [],
+      "format": null
+    },
+    {
+      "assertion_id": "AS0188",
+      "assertion_type": "economics",
+      "evidence_id": "EV057",
+      "source_url": "https://www.screenireland.ie/news/screen-ireland-launches-its-slate-of-productions-coming-to-audiences-in-2026",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": 1,
+      "interpretation": null,
+      "genres": [],
+      "format": null
+    },
+    {
+      "assertion_id": "AS0189",
+      "assertion_type": "audience_demand",
+      "evidence_id": "EV060",
+      "source_url": "https://www.ofcom.org.uk/media-use-and-attitudes/media-habits-adults/media-nations-2026",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "genres": [],
+      "metric_name": "netflix_first_choice_pct",
+      "metric_value": 26,
+      "direction_value": -1,
+      "titles": []
+    },
+    {
+      "assertion_id": "AS0190",
+      "assertion_type": "audience_demand",
+      "evidence_id": "EV061",
+      "source_url": "https://www.ispreview.co.uk/index.php/2026/07/ofcom-subscription-streaming-services-in-uk-homes-have-plateaued.html",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "genres": [],
+      "metric_name": "uk_svod_penetration_pct",
+      "metric_value": 70,
+      "direction_value": -1,
+      "titles": []
+    },
+    {
+      "assertion_id": "AS0191",
+      "assertion_type": "economics",
+      "evidence_id": "EV062",
+      "source_url": "https://www.broadbandtvnews.com/2026/07/29/netflix-overtakes-bbc-as-uk-viewers-first-choice-says-ofcom/",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "metric_name": "uk_svod_revenue_gbp_bn",
+      "metric_value": 5.17,
+      "direction_value": 1,
+      "interpretation": null,
+      "genres": [],
+      "format": null
+    },
+    {
+      "assertion_id": "AS0192",
+      "assertion_type": "audience_demand",
+      "evidence_id": "EV063",
+      "source_url": "https://www.itv.com/presscentre/media-releases/itv-announces-biggest-ever-month-streaming-history-0",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "genres": [],
+      "metric_name": "itvx_monthly_streams_m",
+      "metric_value": 468,
+      "direction_value": 1,
+      "titles": []
+    },
+    {
+      "assertion_id": "AS0193",
+      "assertion_type": "audience_demand",
+      "evidence_id": "EV064",
+      "source_url": "https://www.tvzoneuk.com/post/itvx-2026-onebillionstreams-ann1",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genres": [],
+      "metric_name": "gone_viewers_m",
+      "metric_value": 5.5,
+      "direction_value": 1,
+      "titles": [
+        "Gone"
+      ]
+    },
+    {
+      "assertion_id": "AS0194",
+      "assertion_type": "audience_demand",
+      "evidence_id": "EV065",
+      "source_url": "https://www.itv.com/presscentre/media-releases/itvx-records-best-ever-may-performance-19-year-year-growth",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "genres": [],
+      "metric_name": "believe_me_completion_pct",
+      "metric_value": 58,
+      "direction_value": 1,
+      "titles": [
+        "Believe Me",
+        "Secret Service"
+      ]
+    },
+    {
+      "assertion_id": "AS0195",
+      "assertion_type": "audience_demand",
+      "evidence_id": "EV066",
+      "source_url": "https://www.tvzoneuk.com/post/itvx-2026-onebillionstreams-ann1",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genres": [
+        "crime",
+        "true_crime_drama",
+        "domestic_thriller"
+      ],
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": 1,
+      "titles": [
+        "Vera",
+        "Believe Me",
+        "The Family Next Door",
+        "Cape Rock Killer",
+        "The Affair",
+        "Love Island"
+      ]
+    },
+    {
+      "assertion_id": "AS0196",
+      "assertion_type": "audience_demand",
+      "evidence_id": "EV067",
+      "source_url": "https://www.itv.com/presscentre/media-releases/itvx-hits-billion-streams-sport-drama-surge-throughout-march",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "genres": [],
+      "metric_name": "soap_streams_m",
+      "metric_value": 54,
+      "direction_value": 1,
+      "titles": []
+    },
+    {
+      "assertion_id": "AS0197",
+      "assertion_type": "genre_demand",
+      "evidence_id": "EV070",
+      "source_url": "https://variety.com/2026/global/spotlight/post-peak-tv-supply-chain-crunch-ampere-analysis-1236696837/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genres": [],
+      "metric_name": "production_duration_increase_pct",
+      "metric_value": 40,
+      "direction_value": 0.25
+    },
+    {
+      "assertion_id": "AS0198",
+      "assertion_type": "genre_demand",
+      "evidence_id": "EV071",
+      "source_url": "https://variety.com/2026/global/spotlight/post-peak-tv-supply-chain-crunch-ampere-analysis-1236696837/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genres": [
+        "crime",
+        "thriller",
+        "romance"
+      ],
+      "metric_name": "crime_thriller_favourite_pct",
+      "metric_value": 11,
+      "direction_value": 0.25
+    },
+    {
+      "assertion_id": "AS0199",
+      "assertion_type": "genre_demand",
+      "evidence_id": "EV072",
+      "source_url": "https://variety.com/2026/global/spotlight/post-peak-tv-supply-chain-crunch-ampere-analysis-1236696837/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genres": [],
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": -1
+    },
+    {
+      "assertion_id": "AS0200",
+      "assertion_type": "genre_demand",
+      "evidence_id": "EV073",
+      "source_url": "https://www.broadbandtvnews.com/2026/06/29/streamers-shift-towards-scripted-romance-as-reality-dating-shows-decline/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genres": [
+        "romance"
+      ],
+      "metric_name": "romance_scripted_share_pct",
+      "metric_value": 83,
+      "direction_value": 1
+    },
+    {
+      "assertion_id": "AS0201",
+      "assertion_type": "genre_demand",
+      "evidence_id": "EV074",
+      "source_url": "https://cineuropa.org/en/newsdetail/492940",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genres": [],
+      "metric_name": "book_adaptation_growth_pct",
+      "metric_value": 73,
+      "direction_value": 1
+    },
+    {
+      "assertion_id": "AS0202",
+      "assertion_type": "genre_demand",
+      "evidence_id": "EV075",
+      "source_url": "https://www.advanced-television.com/2026/06/29/analysis-streamers-favouring-scripted-romance-over-reality-shows/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genres": [
+        "romance"
+      ],
+      "metric_name": "romance_1824_enjoyment_pct",
+      "metric_value": 49,
+      "direction_value": 1
+    },
+    {
+      "assertion_id": "AS0203",
+      "assertion_type": "saturation",
+      "evidence_id": "EV076",
+      "source_url": "https://deadline.com/2024/03/bbc-scripted-research-ampere-analysis-1235867117/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genres": [
+        "crime",
+        "thriller",
+        "comedy",
+        "kids"
+      ],
+      "metric_name": "bbc_share_of_uk_scripted_pct",
+      "metric_value": 50,
+      "direction_value": 0.25,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0204",
+      "assertion_type": "saturation",
+      "evidence_id": "EV077",
+      "source_url": "https://www.hollywoodreporter.com/tv/tv-news/uk-scripted-content-2023-bbc-ampere-1235859448/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genres": [],
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": -1,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0205",
+      "assertion_type": "saturation",
+      "evidence_id": "EV078",
+      "source_url": "https://www.c21media.net/marketplace/truecrimeandinvestigation26/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genres": [
+        "true_crime"
+      ],
+      "metric_name": "true_crime_doc_share_pct",
+      "metric_value": 16,
+      "direction_value": 0.25,
+      "territory": null
+    },
+    {
+      "assertion_id": "AS0206",
+      "assertion_type": "saturation",
+      "evidence_id": "EV079",
+      "source_url": "https://www.c21media.net/marketplace/truecrimeandinvestigation26/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genres": [
+        "true_crime"
+      ],
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": -1,
+      "territory": null
+    },
+    {
+      "assertion_id": "AS0207",
+      "assertion_type": "saturation",
+      "evidence_id": "EV080",
+      "source_url": "https://www.c21media.net/news/ampere-analysis-highlights-sharp-drop-in-nordic-commissioning-levels/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genres": [],
+      "metric_name": "scripted_commissioning_change_since_peak_pct",
+      "metric_value": -25,
+      "direction_value": -1,
+      "territory": "NORDIC"
+    },
+    {
+      "assertion_id": "AS0208",
+      "assertion_type": "saturation",
+      "evidence_id": "EV081",
+      "source_url": "https://senalnews.com/en/data/romance-becomes-latin-americas-top-scripted-tv-genre-as-microdramas-drive-new-growth",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genres": [],
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": -1,
+      "territory": "LATAM"
+    },
+    {
+      "assertion_id": "AS0209",
+      "assertion_type": "genre_demand",
+      "evidence_id": "EV082",
+      "source_url": "https://www.hollywoodreporter.com/tv/tv-news/mipcom-2024-trends-review-safe-international-tv-1236045234/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genres": [
+        "cosy_crime",
+        "procedural"
+      ],
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": 1
+    },
+    {
+      "assertion_id": "AS0210",
+      "assertion_type": "genre_demand",
+      "evidence_id": "EV083",
+      "source_url": "https://www.screendaily.com/news/stay-in-the-mix-till-2026-was-the-reworked-refrain-of-mipcom-2024/5198439.article",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genres": [],
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": 1
+    },
+    {
+      "assertion_id": "AS0211",
+      "assertion_type": "genre_demand",
+      "evidence_id": "EV084",
+      "source_url": "https://www.ibc.org/distribution-consumption/news/south-korean-drama-commissions-shrink-despite-global-demand/22164",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "genres": [],
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": -1
+    },
+    {
+      "assertion_id": "AS0212",
+      "assertion_type": "format_trend",
+      "evidence_id": "EV090",
+      "source_url": "https://www.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions/2026/short-form-video-series.html",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "metric_name": "microdrama_revenue_2026_usd_bn",
+      "metric_value": 7.8,
+      "direction_value": 1,
+      "interpretation": "The fastest-growing scripted revenue pool identified anywhere in this corpus",
+      "buyers": []
+    },
+    {
+      "assertion_id": "AS0213",
+      "assertion_type": "format_trend",
+      "evidence_id": "EV091",
+      "source_url": "https://www.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions/2026/short-form-video-series.html",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "metric_name": "microdrama_q1_revenue_usd_m",
+      "metric_value": 700,
+      "direction_value": 1,
+      "interpretation": "Deloitte explicitly identifies independent studios, not incumbents, as beneficiaries",
+      "buyers": []
+    },
+    {
+      "assertion_id": "AS0214",
+      "assertion_type": "format_trend",
+      "evidence_id": "EV092",
+      "source_url": "https://en.wikipedia.org/wiki/DramaBox",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "metric_name": "dramabox_mau_m",
+      "metric_value": 44,
+      "direction_value": 1,
+      "interpretation": null,
+      "buyers": []
+    },
+    {
+      "assertion_id": "AS0215",
+      "assertion_type": "format_trend",
+      "evidence_id": "EV093",
+      "source_url": "https://en.wikipedia.org/wiki/ReelShort",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "metric_name": "reelshort_revenue_usd_m",
+      "metric_value": 400,
+      "direction_value": 1,
+      "interpretation": null,
+      "buyers": []
+    },
+    {
+      "assertion_id": "AS0216",
+      "assertion_type": "format_trend",
+      "evidence_id": "EV094",
+      "source_url": "https://filmustage.com/blog/vertical-drama-explained-what-you-need-to-know-in-2026/",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": 0,
+      "interpretation": "Format is radically cheaper and faster to produce than high-end TV",
+      "buyers": []
+    },
+    {
+      "assertion_id": "AS0217",
+      "assertion_type": "format_trend",
+      "evidence_id": "EV095",
+      "source_url": "https://www.producinghollywood.com/blog/why-vertical-series-are-the-next-big-playground-for-producers-in-2026",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": 1,
+      "interpretation": "Mainstream US broadcasters are now licensing micro-drama, legitimising the format",
+      "buyers": [
+        "peacock",
+        "bravo"
+      ]
+    },
+    {
+      "assertion_id": "AS0218",
+      "assertion_type": "structure",
+      "evidence_id": "EV097",
+      "source_url": "https://rts.org.uk/events/vertical-dramas-micro-macro",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "direction_value": 1,
+      "interpretation": "UK industry establishment is actively convening on the format — early institutional attention",
+      "buyers": []
+    },
+    {
+      "assertion_id": "AS0219",
+      "assertion_type": "format_trend",
+      "evidence_id": "EV098",
+      "source_url": "https://variety.com/2026/tv/global/london-tv-screenings-buzz-titles-baywatch-asia-microdramas-1236674474/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": 1,
+      "interpretation": null,
+      "buyers": []
+    },
+    {
+      "assertion_id": "AS0220",
+      "assertion_type": "format_trend",
+      "evidence_id": "EV099",
+      "source_url": "https://senalnews.com/en/data/romance-becomes-latin-americas-top-scripted-tv-genre-as-microdramas-drive-new-growth",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "metric_name": null,
+      "metric_value": null,
+      "direction_value": 1,
+      "interpretation": "Microdrama growth is occurring inside otherwise contracting scripted markets",
+      "buyers": []
+    },
+    {
+      "assertion_id": "AS0221",
+      "assertion_type": "buyer_demand",
+      "evidence_id": "EV110",
+      "source_url": "https://www.leeandthompson.com/news/lt-advises-on-itv-studios-acquisition-of-scripted-indie-eagle-eye-drama/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "buyer": "itv_studios",
+      "genres": [],
+      "format": null,
+      "direction_value": 0.25,
+      "territory": "UK"
+    },
+    {
+      "assertion_id": "AS0222",
+      "assertion_type": "structure",
+      "evidence_id": "EV111",
+      "source_url": "https://www.broadcastnow.co.uk/indies/bad-wolf-production-chief-heads-to-mammoth-screen/5216066.article",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "direction_value": 0,
+      "interpretation": null,
+      "buyers": []
+    },
+    {
+      "assertion_id": "AS0223",
+      "assertion_type": "structure",
+      "evidence_id": "EV112",
+      "source_url": "https://doi.org/10.1177/13675494261429087",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "direction_value": -1,
+      "interpretation": null,
+      "buyers": []
+    },
+    {
+      "assertion_id": "AS0224",
+      "assertion_type": "structure",
+      "evidence_id": "EV113",
+      "source_url": "https://eprints.whiterose.ac.uk/id/eprint/240507/",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "direction_value": 0.25,
+      "interpretation": "Both major public-service buyers are formally engaged with a finding that working-class life is under-represented on screen",
+      "buyers": [
+        "bbc",
+        "channel_4"
+      ]
+    },
+    {
+      "assertion_id": "AS0225",
+      "assertion_type": "structure",
+      "evidence_id": "EV114",
+      "source_url": "https://www.thelocationguide.com/industrynews/%E2%80%9Cthe-risk-is-all-ours%E2%80%9D-working-class-talent-fights-to-survive-a-contracting-uk-screen-industry",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "direction_value": -1,
+      "interpretation": null,
+      "buyers": [
+        "bbc",
+        "channel_4"
+      ]
+    },
+    {
+      "assertion_id": "AS0226",
+      "assertion_type": "route",
+      "evidence_id": "EV120",
+      "source_url": "https://grin.coop/bbc-open-call-for-script-submissions-from-writers-whose-talent-can-be-nurtured-and-developed-for-bbc-broadcast-submission-deadline-2nd-december-2025/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "route_type": "open_free",
+      "buyers": [
+        "bbc"
+      ],
+      "direction_value": 1,
+      "metric_name": null,
+      "metric_value": null
+    },
+    {
+      "assertion_id": "AS0227",
+      "assertion_type": "route",
+      "evidence_id": "EV121",
+      "source_url": "https://careers.channel4.com/4Skills/C4NewWritersScheme",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "route_type": "open_free",
+      "buyers": [
+        "channel_4"
+      ],
+      "direction_value": 1,
+      "metric_name": null,
+      "metric_value": null
+    },
+    {
+      "assertion_id": "AS0228",
+      "assertion_type": "route",
+      "evidence_id": "EV122",
+      "source_url": "https://careers.channel4.com/4skills/talent-schemes/4screenwriting",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "route_type": "open_free",
+      "buyers": [
+        "channel_4"
+      ],
+      "direction_value": 1,
+      "metric_name": null,
+      "metric_value": null
+    },
+    {
+      "assertion_id": "AS0229",
+      "assertion_type": "route",
+      "evidence_id": "EV123",
+      "source_url": "https://help.netflix.com/en/node/100386",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "route_type": "closed",
+      "buyers": [
+        "netflix"
+      ],
+      "direction_value": -1,
+      "metric_name": null,
+      "metric_value": null
+    },
+    {
+      "assertion_id": "AS0230",
+      "assertion_type": "route",
+      "evidence_id": "EV124",
+      "source_url": "https://www.indiewire.com/features/commentary/coverfly-shutting-down-screenplay-industrial-complex-1235120359/",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "route_type": "closed",
+      "buyers": [],
+      "direction_value": -1,
+      "metric_name": null,
+      "metric_value": null
+    },
+    {
+      "assertion_id": "AS0231",
+      "assertion_type": "route",
+      "evidence_id": "EV125",
+      "source_url": "https://www.storynotes.app/blog/black-list-2026-pricing-explained",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "route_type": "open_paid",
+      "buyers": [],
+      "direction_value": 0.25,
+      "metric_name": "blacklist_run_cost_usd",
+      "metric_value": 380
+    },
+    {
+      "assertion_id": "AS0232",
+      "assertion_type": "route",
+      "evidence_id": "EV126",
+      "source_url": "https://www.inktip.com/sa_services_products.php",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "route_type": "open_paid",
+      "buyers": [],
+      "direction_value": 0.25,
+      "metric_name": "inktip_pro_monthly_usd",
+      "metric_value": 32.5
+    },
+    {
+      "assertion_id": "AS0233",
+      "assertion_type": "route",
+      "evidence_id": "EV127",
+      "source_url": "https://press.oscars.org/news/academy-announces-2025-2026-nicholl-fellowships-screenwriting",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "route_type": "open_competition",
+      "buyers": [],
+      "direction_value": 1,
+      "metric_name": "nicholl_fellowship_usd",
+      "metric_value": 35000
+    },
+    {
+      "assertion_id": "AS0234",
+      "assertion_type": "route",
+      "evidence_id": "EV128",
+      "source_url": "https://veniceproductionbridge.org/news/book-adaptation-rights-market-2026-publishers-and-literary-agents-selected",
+      "evidence_grade": "E1",
+      "weight": 1,
+      "route_type": "market",
+      "buyers": [],
+      "direction_value": 1,
+      "metric_name": null,
+      "metric_value": null
+    },
+    {
+      "assertion_id": "AS0235",
+      "assertion_type": "route",
+      "evidence_id": "EV129",
+      "source_url": "https://www.whats-on-netflix.com/news/netflix-options-over-25-books-for-tv-series-movie-development-for-2026-and-beyond/",
+      "evidence_grade": "E3",
+      "weight": 0.4,
+      "route_type": "unspecified",
+      "buyers": [
+        "netflix"
+      ],
+      "direction_value": 0.25,
+      "metric_name": null,
+      "metric_value": null
+    },
+    {
+      "assertion_id": "AS0236",
+      "assertion_type": "route",
+      "evidence_id": "EV130",
+      "source_url": "https://www.penguin.co.uk/about/company-articles/book-to-film-and-tv-adaptations",
+      "evidence_grade": "E2",
+      "weight": 0.7,
+      "route_type": "unspecified",
+      "buyers": [],
+      "direction_value": 1,
+      "metric_name": null,
+      "metric_value": null
+    }
+  ]
+}

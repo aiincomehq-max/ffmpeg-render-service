@@ -1,0 +1,26 @@
+{
+  "id": "SWFwf14Legal00001",
+  "name": "WF-14 Legal Screen and Governance Gate",
+  "nodes": [
+    { "parameters": {}, "id": "e1000000-0000-4000-8000-000000000001", "name": "Manual Trigger", "type": "n8n-nodes-base.manualTrigger", "typeVersion": 1, "position": [-200, 0] },
+    { "parameters": { "fileSelector": "/home/user/ffmpeg-render-service/scriptwriter-factory/phase1/state/04_opportunities.json", "options": {} }, "id": "e1000000-0000-4000-8000-000000000002", "name": "Read Opportunities", "type": "n8n-nodes-base.readWriteFile", "typeVersion": 1, "position": [20, 0] },
+    { "parameters": { "operation": "fromJson", "binaryPropertyName": "data", "options": {} }, "id": "e1000000-0000-4000-8000-000000000003", "name": "Parse JSON", "type": "n8n-nodes-base.extractFromFile", "typeVersion": 1, "position": [240, 0] },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const _r = $input.first().json;\nconst p = (_r && _r.data) ? _r.data : _r;\nconst state = Array.isArray(p) ? p[0] : p;\nconst ops = state.opportunities || [];\n\n// Phase 0 section 3.5 constraints, enforced in workflow logic rather than prompt text.\n// A score can never override a block.\nconst BLOCKING_ENGINES = ['real_events'];\nconst REVIEW_ENGINES = ['sexual_offending', 'complicity', 'murder', 'terrorism', 'institutional_failure'];\nconst BLOCKING_WORLDS = ['criminal_justice', 'royal_household'];\n\nlet blocked = 0, review = 0, clear = 0;\nconst screened = ops.map(o => {\n  const reasons = [];\n  if (o.legal_flag_count > 0) reasons.push('world_carries_real_case_evidence');\n  if (BLOCKING_ENGINES.includes(o.engine)) reasons.push('engine_is_direct_real_events');\n  if (BLOCKING_WORLDS.includes(o.world)) reasons.push('world_derived_from_identifiable_real_proceedings');\n\n  const legal_block = reasons.length > 0;\n  const needs_review = !legal_block && REVIEW_ENGINES.includes(o.engine);\n\n  if (legal_block) blocked++; else if (needs_review) review++; else clear++;\n\n  // Governance bands from Phase 0 section 4.1\n  let band;\n  if (legal_block) band = 'blocked';\n  else if (o.score_total >= 75) band = 'eligible_for_development';\n  else if (o.score_total >= 60) band = 'chairman_review';\n  else band = 'archive';\n\n  return Object.assign({}, o, {\n    legal_block,\n    legal_block_reasons: reasons,\n    legal_review_required: needs_review || legal_block,\n    governance_band: band,\n    status: legal_block ? 'blocked' : 'screened'\n  });\n});\n\nreturn [{ json: {\n  stage: 'WF-14',\n  generated_at: new Date().toISOString(),\n  source_stage: state.stage,\n  scoring_model_version: state.scoring_model_version,\n  input_count: ops.length,\n  blocked_count: blocked,\n  review_required_count: review,\n  clear_count: clear,\n  band_counts: screened.reduce((a, o) => { a[o.governance_band] = (a[o.governance_band] || 0) + 1; return a; }, {}),\n  opportunities: screened\n} }];"
+      },
+      "id": "e1000000-0000-4000-8000-000000000004", "name": "Apply Legal Screen", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [460, 0]
+    },
+    { "parameters": { "operation": "toJson", "mode": "all", "options": { "fileName": "05_screened.json", "format": true } }, "id": "e1000000-0000-4000-8000-000000000005", "name": "To File", "type": "n8n-nodes-base.convertToFile", "typeVersion": 1, "position": [680, 0] },
+    { "parameters": { "operation": "write", "fileName": "/home/user/ffmpeg-render-service/scriptwriter-factory/phase1/state/05_screened.json", "dataPropertyName": "data", "options": {} }, "id": "e1000000-0000-4000-8000-000000000006", "name": "Write Screened", "type": "n8n-nodes-base.readWriteFile", "typeVersion": 1, "position": [900, 0] }
+  ],
+  "connections": {
+    "Manual Trigger": { "main": [[{ "node": "Read Opportunities", "type": "main", "index": 0 }]] },
+    "Read Opportunities": { "main": [[{ "node": "Parse JSON", "type": "main", "index": 0 }]] },
+    "Parse JSON": { "main": [[{ "node": "Apply Legal Screen", "type": "main", "index": 0 }]] },
+    "Apply Legal Screen": { "main": [[{ "node": "To File", "type": "main", "index": 0 }]] },
+    "To File": { "main": [[{ "node": "Write Screened", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" }
+}

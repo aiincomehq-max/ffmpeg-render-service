@@ -1,0 +1,203 @@
+{
+  "id": "SWFwf15Digest0001",
+  "name": "WF-15 Rank and Chairman Digest",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "f1000000-0000-4000-8000-000000000001",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "/home/user/ffmpeg-render-service/scriptwriter-factory/phase1/state/05_screened.json",
+        "options": {}
+      },
+      "id": "f1000000-0000-4000-8000-000000000002",
+      "name": "Read Screened",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "fromJson",
+        "binaryPropertyName": "data",
+        "options": {}
+      },
+      "id": "f1000000-0000-4000-8000-000000000003",
+      "name": "Parse JSON",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        20,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const _r = $input.first().json;\nconst p = (_r && _r.data) ? _r.data : _r;\nconst state = Array.isArray(p) ? p[0] : p;\nconst ops = (state.opportunities || []).filter(o => !o.legal_block);\n\n// Deduplicate to one entry per world: keep the highest-scoring engine/format variant.\n// Without this the top ten is ten near-identical rows for the same setting.\nconst best = {};\nfor (const o of ops) if (!best[o.world] || o.score_total > best[o.world].score_total) best[o.world] = o;\nconst ranked = Object.values(best).sort((a, b) => b.score_total - a.score_total);\n// DEF-03 confidence gate. under_service and evidence_breadth are anti-correlated by\n// construction: a world seen once looks under-supplied when in fact it is merely\n// under-observed. Worlds carrying fewer than MIN_EVIDENCE distinct evidence records\n// are scored but held out of the ranked digest as thin-evidence candidates.\nconst MIN_EVIDENCE = 2;\nconst confident = ranked.filter(o => o.world_evidence_count >= MIN_EVIDENCE);\nconst thin = ranked.filter(o => o.world_evidence_count < MIN_EVIDENCE);\nconst top = confident.slice(0, 10);\n\nconst pretty = (s) => String(s).replace(/_/g, ' ');\nconst pct = (x) => Math.round(x * 100) + '%';\n\nconst theses = top.map((o, i) => {\n  const v = o.score_vector;\n  const drivers = Object.entries(o.score_contribution).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([k, val]) => pretty(k) + ' (' + val + ')');\n  const weak = Object.entries(o.score_vector).sort((a, b) => a[1] - b[1]).slice(0, 2).map(([k, val]) => pretty(k) + ' ' + pct(val));\n\n  const routeRead = v.route_accessibility >= 0.65\n    ? 'Reachable: the strongest route for this format is a public-service buyer, and those are the only buyers in the corpus with evidenced open-access submission schemes.'\n    : (v.route_accessibility >= 0.5\n      ? 'Partially reachable: the dominant buyers for this format run no evidenced open submission route, so access depends on a producer relationship.'\n      : 'Hard to reach: the dominant buyers for this format are evidenced as closed to unsolicited material.');\n\n  const feasRead = v.production_feasibility >= 0.9\n    ? 'Very low production cost relative to high-end TV, which matters because the corpus shows a deficit-financing crisis rather than a commissioning-appetite crisis.'\n    : (v.production_feasibility >= 0.7\n      ? 'Contained format, consistent with corpus evidence that buyers are prioritising cheaper, faster-to-make material.'\n      : 'Higher production load; this competes directly for the scarcest financing in the corpus.');\n\n  const serviceRead = v.under_service >= 0.85\n    ? 'This setting is materially under-supplied relative to the genre demand attached to it.'\n    : (v.under_service >= 0.6 ? 'This setting is modestly under-supplied relative to its genre demand.' : 'This setting is already well served.');\n\n  return {\n    rank: i + 1,\n    intersection_id: o.intersection_id,\n    world: o.world,\n    engine: o.engine,\n    format: o.format,\n    genres: o.genres,\n    score_total: o.score_total,\n    governance_band: o.governance_band,\n    legal_review_required: o.legal_review_required,\n    world_supply_weight: o.world_supply_weight,\n    world_evidence_count: o.world_evidence_count,\n    evidence_support: o.evidence_support,\n    top_drivers: drivers,\n    weakest_dimensions: weak,\n    thesis: 'A ' + pretty(o.format) + ' set in ' + pretty(o.world) + ', driven by ' + pretty(o.engine) + '. ' + serviceRead + ' ' + routeRead + ' ' + feasRead\n  };\n});\n\n// ---- Format-level finding, independent of any single intersection ----\nconst fmt = {};\nfor (const o of ops) { fmt[o.format] = fmt[o.format] || []; fmt[o.format].push(o); }\nconst formatFindings = Object.entries(fmt).map(([f, arr]) => ({\n  format: f,\n  n: arr.length,\n  mean_score: Number((arr.reduce((s, o) => s + o.score_total, 0) / arr.length).toFixed(2)),\n  mean_route: Number((arr.reduce((s, o) => s + o.score_vector.route_accessibility, 0) / arr.length).toFixed(3)),\n  mean_feasibility: Number((arr.reduce((s, o) => s + o.score_vector.production_feasibility, 0) / arr.length).toFixed(3)),\n  mean_buyer_demand: Number((arr.reduce((s, o) => s + o.score_vector.buyer_demand, 0) / arr.length).toFixed(3))\n})).sort((a, b) => b.mean_score - a.mean_score);\n\n// ---- Markdown digest ----\nconst L = [];\nL.push('# FILM/TV DEMAND MINE v0.1 \u2014 CHAIRMAN DIGEST');\nL.push('');\nL.push('Generated: ' + new Date().toISOString());\nL.push('Scoring model: ' + state.scoring_model_version);\nL.push('Candidates scored: ' + state.input_count + ' | Legally blocked: ' + state.blocked_count + ' | Distinct worlds: ' + ranked.length + ' | Passing evidence gate (>=2 records): ' + confident.length + ' | Held out as thin: ' + thin.length);\nL.push('');\nL.push('## Governance bands');\nL.push('');\nfor (const [b, n] of Object.entries(state.band_counts || {})) L.push('- ' + pretty(b) + ': ' + n);\nL.push('');\nL.push('## Format-level finding');\nL.push('');\nL.push('| Format | Mean score | Buyer demand | Route access | Feasibility |');\nL.push('|---|---|---|---|---|');\nfor (const f of formatFindings) L.push('| ' + pretty(f.format) + ' | ' + f.mean_score + ' | ' + pct(f.mean_buyer_demand) + ' | ' + pct(f.mean_route) + ' | ' + pct(f.mean_feasibility) + ' |');\nL.push('');\nL.push('## Top 10 opportunity theses');\nL.push('');\nfor (const t of theses) {\n  L.push('### ' + t.rank + '. ' + pretty(t.world) + ' x ' + pretty(t.engine) + ' \u2014 score ' + t.score_total);\n  L.push('');\n  L.push('- **Format:** ' + pretty(t.format));\n  L.push('- **Genres:** ' + t.genres.map(pretty).join(', '));\n  L.push('- **Band:** ' + pretty(t.governance_band) + (t.legal_review_required ? ' \u2014 LEGAL REVIEW REQUIRED' : ''));\n  L.push('- **Top drivers:** ' + t.top_drivers.join('; '));\n  L.push('- **Weakest:** ' + t.weakest_dimensions.join('; '));\n  L.push('- **Evidence:** ' + t.evidence_support.join(', '));\n  L.push('');\n  L.push(t.thesis);\n  L.push('');\n}\n\nreturn [{ json: {\n  stage: 'WF-15',\n  generated_at: new Date().toISOString(),\n  scoring_model_version: state.scoring_model_version,\n  candidates_screened: state.input_count,\n  blocked_count: state.blocked_count,\n  distinct_worlds: ranked.length,\n  confidence_gate_min_evidence: MIN_EVIDENCE,\n  worlds_passing_gate: confident.length,\n  worlds_held_thin: thin.length,\n  thin_worlds: thin.slice(0,15).map(o=>({world:o.world,score:o.score_total,evidence_count:o.world_evidence_count})),\n  band_counts: state.band_counts,\n  format_findings: formatFindings,\n  top_10: theses,\n  markdown: L.join('\\n')\n} }];"
+      },
+      "id": "f1000000-0000-4000-8000-000000000004",
+      "name": "Rank and Build Digest",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "toJson",
+        "mode": "all",
+        "options": {
+          "fileName": "06_digest.json",
+          "format": true
+        }
+      },
+      "id": "f1000000-0000-4000-8000-000000000005",
+      "name": "To JSON File",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1,
+      "position": [
+        460,
+        -140
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "/home/user/ffmpeg-render-service/scriptwriter-factory/phase1/state/06_digest.json",
+        "dataPropertyName": "data",
+        "options": {}
+      },
+      "id": "f1000000-0000-4000-8000-000000000006",
+      "name": "Write Digest JSON",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        680,
+        -140
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "markdown",
+        "options": {
+          "fileName": "CHAIRMAN_DIGEST.md"
+        }
+      },
+      "id": "f1000000-0000-4000-8000-000000000007",
+      "name": "To Markdown File",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1,
+      "position": [
+        460,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "/home/user/ffmpeg-render-service/scriptwriter-factory/phase1/output/CHAIRMAN_DIGEST.md",
+        "dataPropertyName": "data",
+        "options": {}
+      },
+      "id": "f1000000-0000-4000-8000-000000000008",
+      "name": "Write Digest Markdown",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        680,
+        140
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Read Screened",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Screened": {
+      "main": [
+        [
+          {
+            "node": "Parse JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse JSON": {
+      "main": [
+        [
+          {
+            "node": "Rank and Build Digest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rank and Build Digest": {
+      "main": [
+        [
+          {
+            "node": "To JSON File",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "To Markdown File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "To JSON File": {
+      "main": [
+        [
+          {
+            "node": "Write Digest JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "To Markdown File": {
+      "main": [
+        [
+          {
+            "node": "Write Digest Markdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "captured_at": "2026-08-31",
+  "n8n_version": "2.35.7",
+  "database": "sqlite (docker daemon unavailable, so PostgreSQL not used)",
+  "workflows": [
+    {
+      "workflow_id": "SWFwf10Ingest0001",
+      "name": "WF-10 Signal Ingest and Normalise",
+      "active": false
+    },
+    {
+      "workflow_id": "SWFwf11Assert0001",
+      "name": "WF-11 Structured Assertion Extraction",
+      "active": false
+    },
+    {
+      "workflow_id": "SWFwf12Cluster001",
+      "name": "WF-12 Clustering and Saturation Analysis",
+      "active": false
+    },
+    {
+      "workflow_id": "SWFwf13Score00001",
+      "name": "WF-13 Intersection Scoring and Opportunity Build",
+      "active": false
+    },
+    {
+      "workflow_id": "SWFwf14Legal00001",
+      "name": "WF-14 Legal Screen and Governance Gate",
+      "active": false
+    },
+    {
+      "workflow_id": "SWFwf15Digest0001",
+      "name": "WF-15 Rank and Chairman Digest",
+      "active": false
+    }
+  ],
+  "executions": [
+    {
+      "execution_id": 1,
+      "workflow_id": "SWFwf10Ingest0001",
+      "status": "success",
+      "started_at": "2026-08-31 21:27:17.326",
+      "stopped_at": "2026-08-31 21:27:18.589",
+      "mode": "cli"
+    },
+    {
+      "execution_id": 2,
+      "workflow_id": "SWFwf10Ingest0001",
+      "status": "success",
+      "started_at": "2026-08-31 21:27:42.298",
+      "stopped_at": "2026-08-31 21:27:43.557",
+      "mode": "cli"
+    },
+    {
+      "execution_id": 3,
+      "workflow_id": "SWFwf10Ingest0001",
+      "status": "success",
+      "started_at": "2026-08-31 21:28:00.944",
+      "stopped_at": "2026-08-31 21:28:02.123",
+      "mode": "cli"
+    },
+    {
+      "execution_id": 4,
+      "workflow_id": "SWFwf11Assert0001",
+      "status": "success",
+      "started_at": "2026-08-31 21:29:47.729",
+      "stopped_at": "2026-08-31 21:29:48.953",
+      "mode": "cli"
+    },
+    {
+      "execution_id": 5,
+      "workflow_id": "SWFwf12Cluster001",
+      "status": "success",
+      "started_at": "2026-08-31 21:29:52.474",
+      "stopped_at": "2026-08-31 21:29:53.721",
+      "mode": "cli"
+    },
+    {
+      "execution_id": 6,
+      "workflow_id": "SWFwf13Score00001",
+      "status": "success",
+      "started_at": "2026-08-31 21:31:23.744",
+      "stopped_at": "2026-08-31 21:31:25.002",
+      "mode": "cli"
+    },
+    {
+      "execution_id": 7,
+      "workflow_id": "SWFwf13Score00001",
+      "status": "success",
+      "started_at": "2026-08-31 21:33:20.392",
+      "stopped_at": "2026-08-31 21:33:21.674",
+      "mode": "cli"
+    },
+    {
+      "execution_id": 8,
+      "workflow_id": "SWFwf14Legal00001",
+      "status": "success",
+      "started_at": "2026-08-31 21:35:03.967",
+      "stopped_at": "2026-08-31 21:35:05.297",
+      "mode": "cli"
+    },
+    {
+      "execution_id": 9,
+      "workflow_id": "SWFwf15Digest0001",
+      "status": "success",
+      "started_at": "2026-08-31 21:35:09.467",
+      "stopped_at": "2026-08-31 21:35:10.787",
+      "mode": "cli"
+    },
+    {
+      "execution_id": 10,
+      "workflow_id": "SWFwf15Digest0001",
+      "status": "success",
+      "started_at": "2026-08-31 21:35:56.188",
+      "stopped_at": "2026-08-31 21:35:57.407",
+      "mode": "cli"
+    }
+  ],
+  "execution_count": 10,
+  "success_count": 10
+}
