@@ -6,6 +6,31 @@ This document runs the five prompts from the "I gave my Instagram page to Claude
 
 ---
 
+## Day zero: where the account is on 5 September 2026
+
+A read of the @firstdrophq profile before the month starts, so the week-four comparison is honest.
+
+The account has 125 posts, 379 followers and 141 profile views in the last 30 days, with recent posts at 0 to 3 views. Every post is a static carousel. In 2026 carousels are distributed almost entirely to existing followers, so single-digit views is the expected result and not an algorithm penalty; nothing done to the carousels will change it. Reels are the only format Instagram pushes to non-followers at scale, which is why the avatar video pipeline is the fix rather than a feature.
+
+The visible topics are developer and security stories (LM Studio, Ollama, Codex, "GPT-6 Astra stops 1 in 12 attacks") that the bio's beginner audience has no reason to stop for. The daily niche scan prompt's reject rule exists for exactly this.
+
+The headlines are news wire, not hooks: none of the six visible ones contains "you", a consequence, or a gap between belief and truth. The same stories through the hook engine:
+
+| Current headline | Rewritten hook |
+|---|---|
+| ChatGPT stickers go to your phone | ChatGPT is now inside your text messages. Here's the one thing to try. |
+| GPT-6 Astra stops 1 in 12 attacks | The AI protecting your bank misses 11 out of 12 attacks. |
+| AI memory is broken on purpose | Claude forgets you on purpose, and it's the reason your answers are generic. |
+| Codex … | OpenAI's coding agent just became useful to people who can't code. |
+| LM Studio runs … | You can run ChatGPT on your laptop for free, with no account. Watch. |
+| Ollama runs GPT … | Your old laptop can run a private ChatGPT. Nobody sees what you type. |
+
+Every grid tile uses the same neon card with a company logo as the hero, so the profile reads as a reposted news feed rather than a creator; originality is an explicit Meta ranking signal this year. Once the avatar videos land, the recurring face becomes the brand and the logo cards can stop. The bio ("AI tools. AI news. First.") says what but not who for; "One new AI tool a day, explained for normal people" matches the Daily Drop promise and converts profile visits better.
+
+Expect the first two weeks of Reels to be slow while Instagram samples the new format on an account trained on zero-reach carousels. Week one of the calendar is a measurement week for that reason.
+
+---
+
 ## 0. What the algorithms are actually rewarding right now
 
 Before any content decision, here is the scoreboard the four platforms are keeping in September 2026, pulled from current creator research. The whole plan is reverse-engineered from these numbers.
