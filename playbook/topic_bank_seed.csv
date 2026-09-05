@@ -1,0 +1,55 @@
+angle,topic,note
+USING_IT_WRONG,Typing questions into ChatGPT like a search engine,Give it a role a goal and a format instead
+USING_IT_WRONG,Never telling the AI who it is talking to,Add "I am a complete beginner explain like I am 12"
+USING_IT_WRONG,Accepting the first answer instead of saying "make it better",Iteration is the whole trick
+USING_IT_WRONG,Pasting a huge document and asking "summarise",Ask for the three decisions in it instead
+USING_IT_WRONG,Using one chat for everything so it forgets context,One chat per project
+USING_IT_WRONG,Not using voice mode on your phone,Talking is 3x faster than typing prompts
+USING_IT_WRONG,Trusting AI with facts and dates without checking,Ask it to list what it is unsure about
+USING_IT_WRONG,Asking for "an email" instead of "a two-line email that gets a yes",Constraints make it good
+USING_IT_WRONG,Ignoring the "projects" or "memory" feature,Set it once and stop repeating yourself
+USING_IT_WRONG,Using ChatGPT for research when Perplexity cites sources,Right tool for the job
+USING_IT_WRONG,Writing prompts as one long paragraph,Use three lines: role task format
+USING_IT_WRONG,Never uploading a photo to the AI,Screenshots and photos unlock the best answers
+USING_IT_WRONG,Asking AI to "be creative" with no examples,Paste two examples you like first
+USING_IT_WRONG,Deleting the chat when the answer is wrong,Say "that is wrong because" and keep going
+USING_IT_WRONG,Paying for Plus when the free tier does your task,Check the free limits first
+FREE_STACK,The free three-tab stack: Claude for writing ChatGPT for general Perplexity for research,Reddit's most recommended setup
+FREE_STACK,Claude vs ChatGPT vs Gemini for writing an email,One job three tools twenty seconds
+FREE_STACK,Perplexity replaces Google for anything with a source,Show one search side by side
+FREE_STACK,The free AI that replaces Grammarly,Claude or ChatGPT in a browser extension
+FREE_STACK,Canva AI vs Midjourney for a non-designer,Canva wins for beginners
+FREE_STACK,Free AI meeting notes: Otter vs Google Meet built-in,Built-in is enough for most people
+FREE_STACK,NotebookLM: the free tool nobody uses correctly,Upload PDFs and ask questions
+FREE_STACK,Which AI free tier has the highest daily limit right now,Numbers date fast so re-check weekly
+FREE_STACK,The one AI subscription worth paying for in 2026 and why,Contrarian take
+FREE_STACK,Free AI voice typing on Mac and iPhone,Wispr Flow style dictation
+FREE_STACK,Gemini inside Gmail vs Copilot inside Outlook,For people who live in email
+FREE_STACK,Free AI image tools ranked for a small business owner,Three tools one job
+FREE_STACK,The AI stack for a student that costs nothing,Notes research flashcards
+FREE_STACK,The AI stack for a parent that costs nothing,Meal plans homework help letters to school
+FREE_STACK,Replacing a virtual assistant with three free AI tools,Inbox calendar research
+SIXTY_SECONDS,Take a photo of your fridge and get three dinners,Photo in recipes out
+SIXTY_SECONDS,Turn a voice note into a polished email,Voice mode then "make this an email"
+SIXTY_SECONDS,Summarise a 40-page PDF into one answer,Upload then ask the one question
+SIXTY_SECONDS,Plan your whole week in one prompt,"Plan my week I have these fixed events and these goals"
+SIXTY_SECONDS,Write your CV from a messy job history in one prompt,Paste everything then ask for one page
+SIXTY_SECONDS,Negotiate a bill using an AI-written script,"Write me a script to lower my broadband bill"
+SIXTY_SECONDS,Turn a screenshot of a spreadsheet into a chart,Upload the screenshot ask for insights
+SIXTY_SECONDS,Explain any contract clause in plain English,Paste the clause ask for risks
+SIXTY_SECONDS,Prep for a job interview with AI playing the interviewer,"Interview me for this role ask one question at a time"
+SIXTY_SECONDS,Translate and reply to a foreign-language email,Paste reply in your language ask to translate
+SIXTY_SECONDS,Make a packing list from a trip description,Where when weather activities
+SIXTY_SECONDS,Turn a YouTube video into notes,Paste transcript ask for the five points
+SIXTY_SECONDS,Fix a photo caption in your brand voice,Paste three past captions then the new one
+SIXTY_SECONDS,Get a second opinion on a doctor letter in plain English,Ask what questions to bring to the appointment
+SIXTY_SECONDS,Build a habit tracker in Google Sheets with one prompt,Ask for the formula and the layout
+AI_JUST_DID_WHAT,AI agents that use your computer while you sleep,What it can and cannot touch
+AI_JUST_DID_WHAT,Companies stopped buying software because AI built it,What that means for jobs
+AI_JUST_DID_WHAT,A standard for AI controlling physical devices,Robot vacuum with a brain
+AI_JUST_DID_WHAT,AI with a built-in off switch,Why safety features are now a product
+AI_JUST_DID_WHAT,Your phone assistant that finishes tasks not just answers,Grok Bot Gemini Siri
+AI_JUST_DID_WHAT,AI customer service talking to AI customer service,The first fully automated complaint
+AI_JUST_DID_WHAT,The free model today is smarter than last year's paid one,Why waiting was right
+AI_JUST_DID_WHAT,AI that watches your screen and offers help,Privacy in plain English
+DAILY_DROP,Placeholder: always filled from the news scrape,Never use the bank for slot 1
