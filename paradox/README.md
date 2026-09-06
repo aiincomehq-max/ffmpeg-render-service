@@ -5,6 +5,7 @@ The saved GPT-project brief, executed. Research first, then content, then the fu
 | File | What it is |
 |---|---|
 | `AI_MANAGEMENT_PARADOX.md` | Executive summary, evidence-based trend analysis, verdict on the "millions of AI managers" claim, second-order effects, the 60-day case study, opportunity assessment, positioning recommendation, narrative framing, sources |
+| `LEDGER.md` / `ledger.csv` | The receipts: every number the Google Drive actually contains, with the file each came from, and the two numbers only the Mac can supply |
 | `content_bank.md` | 50 angles, 50 carousel concepts, 50 short-form concepts, 20 hooks, all built on checkable numbers |
 | `reels/` | The first five Reels in the paper-card format on the real numbers, with captions and titles |
 | `funnel/FUNNEL.md` | Lead magnet, product ladder with prices and honest claims, three-message DM sequence, metrics |

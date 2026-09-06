@@ -31,7 +31,7 @@ Prices are starting points for a UK creator selling to a global, mostly US audie
 ## The DM sequence
 
 **Message 1, instant, triggered by the comment.**
-"Here are the real numbers from 60 days, 720 hours and 141 views: [link]. It's one page, it's free, and there's no course on it. If you want the full post-mortem it's on the same page, but the numbers are the point."
+"Here are the real numbers from 140 days, 30 products, 445 workflows and 141 views: [link]. It's one page, it's free, and there's no course on it. If you want the full post-mortem it's on the same page, but the numbers are the point."
 
 **Message 2, three days later, only if they opened the link.**
 "Did you do the ratio? Hours checking ÷ hours saved. Mine's on the page. If yours is over 1, the post-mortem walks through exactly how that happens and how to stop it. If it's under 1, ignore this, you're doing better than I was."

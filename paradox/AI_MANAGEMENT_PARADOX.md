@@ -16,7 +16,7 @@ But "manager" is the wrong word, because the same period shows management being 
 
 That is the paradox, and it is the framing to build on. **AI did not take the work. It took the doing and left you the managing.** Everyone got promoted to manager and nobody got the raise. Cory Doctorow's June 2026 book gives the pessimistic version a name, the "reverse centaur", a human serving as a peripheral to a machine. Microsoft gives the optimistic version a name, the "agent boss". The lived experience of most people sits between the two, and almost nobody is making content from that middle.
 
-The opportunity assessment is that this should be an independent account, not a FirstDropHQ pillar, with first-person lived experience as the engine and a documented 60-day, 720-hour, 141-view case study as the launch story. The recommendation and the reasons are in section 6.
+The opportunity assessment is that this should be an independent account, not a FirstDropHQ pillar, with first-person lived experience as the engine and a documented 140-day, 30-product, 141-view case study as the launch story. The recommendation and the reasons are in section 6.
 
 ---
 
@@ -62,30 +62,26 @@ The brief said no hype and no doom, so here is what cuts against the framing. Fi
 
 ---
 
-## 4. The case study: 60 days as a management team of one
+## 4. The case study: what the Drive says
 
-The brief asked for the author's own experience analysed as a case study. Here is the ledger as it stands, with the numbers already known and placeholders for the ones only the logs can supply.
+The brief asked for the author's own experience analysed as a case study. The first draft of this section worked from a verbal summary: 60 days, 720 hours, 141 views. The Google Drive tells a longer and better-documented story, and the full ledger with file-level sources is in `LEDGER.md`. The short version:
 
 | Measure | Value | Source |
 |---|---|---|
-| Duration | 60 days | Logs |
-| Hours | About 720 (12 a day) | Logs |
-| Tools managed | ChatGPT, Claude chat, Claude Code, n8n 2.11.4 (self-hosted, Hetzner), Google Sheets, Kling 2.5, Blotato, a custom FFmpeg render service | Repo and logs |
-| Workflows built | Hundreds | n8n instance (export exact count from Settings → Workflows) |
-| Nodes built | Thousands | n8n instance (export exact count) |
-| Posts published | 125 | Instagram profile |
-| Followers | 379 | Instagram profile |
-| Profile views, last 30 days | 141 | Instagram professional dashboard |
-| Views on most recent posts | 0 to 3 | Instagram grid |
-| Token and subscription spend | [FILL FROM ANTHROPIC / OPENAI CONSOLES AND CARD STATEMENTS] | Billing |
-| Role at day 1 | Builder | Self-report |
-| Role by day 60 | Coordinator, validator, quality controller, project manager | Self-report |
+| Day zero | 19 April 2026, when two planning documents said: interview 20 businesses, sell one £500 to £1,500 ops build in 30 days, and *"content automation is a saturated, skeptical market"* | Drive documents |
+| What happened instead | First automated content account live within 8 days; 30 named products created in 140 days; zero client projects | Folder timestamps |
+| Scale of the machine | 445 workflows in one n8n instance; a 107-tab and a 163-tab production log; 205 publish-failure events on the flagship alone | Session handoff; production logs |
+| Output across the estate | About 600 published units and about 210,000 views as logged; best single post 3,006; combined followers around 1,300 | Six project sheets |
+| The flagship's last 30 days | 141 profile views, posts at 0 to 3 views | Instagram |
+| The management layer | Every Claude session terminal-recorded (191 in 36 days); a scripted end-of-session ritual demanding "lossless durable state" and "governed shutdown"; hash-verified checkpoints against a "constitution rule library"; chairman approvals; $5 spend ceilings; a control system built to manage the sessions (Project Control Relay) that was declared "a complete failure" and deleted after 21 days | Handovers, checkpoints, PCR spec |
+| API money | Cents to tens of dollars per product, ledgered to four decimal places | Cost ledgers |
+| Hours and subscriptions | Not in the Drive; the terminal recordings and billing consoles hold them | To fill |
 
-Read against the research, this is not an outlier. It is the median experience with the ratios pushed to the edge. The Foxit ratio (hours saved to hours checking) went negative for 42% of workers; here the "output" side of the ledger is 141 views, so the ratio is effectively all checking. The MIT pattern (95% of pilots, no measurable result, because integration rather than capability failed) is exactly what happened: every node executed, nothing reached an audience. The METR perception gap is visible in the fact that 60 days passed before the format problem was diagnosed; the work felt productive because things were being built. And the oversight research's "permanently on call for escalations you cannot audit" is a fair description of running five AI tools, an automation server and a render service alone for 12 hours a day.
+Read against the research, this is not an outlier. It is the median experience with every ratio pushed to the edge, and it contains the paradox in a form nobody else has documented. The June control-system spec is the clearest statement of it anywhere in this research, from any source: *"The bottleneck is not coding, not model capability, not token limits. The bottleneck is project coordination, context management, state management, decision tracking, review workflows, session orchestration."* The response to that diagnosis was to build a management layer for the management layer, with the human as "executive approval layer". It lasted three weeks.
 
-The one thing that makes the case study unusual, and therefore valuable as content, is that it is documented. Sixty days of logs of every keystroke and every piece of generated code is evidence that almost nobody else has, because almost nobody keeps it. The receipts are the story.
+The Foxit ratio (hours saved to hours checking) went negative for 42% of workers; here the checking apparatus is measurable in artefacts: hundreds of tabs of ledgers, gates, audits and approvals wrapped around outputs that reached almost nobody. The MIT pattern (95% of pilots, no measurable result, integration rather than capability) is exactly what the FruitDrama log recorded on 21 June: *"Visuals = solved. Continuity = solved. Rendering = solved. NONE is the bottleneck anymore. STORY QUALITY is the bottleneck."* The METR perception gap is visible in the fact that the day-zero plan correctly predicted the outcome and was not followed. And the oversight literature's "permanently on call for escalations you cannot audit" is a fair description of five sessions a day, each opened by a shell recorder and closed by a governed-shutdown ritual.
 
----
+The one thing that makes the case study unusual, and therefore valuable as content, is that it is documented to a degree that borders on the absurd. The receipts are the story, and the receipts are already written.
 
 ## 5. Opportunity assessment
 
@@ -127,7 +123,7 @@ Supporting lines for the same idea, for hooks and bios:
 - I saved 3.6 hours a week with AI and spent 3 hours 50 checking it. That's the whole story.
 - We were promised a workforce. We got a management job.
 - The machine does the work. You do the worrying.
-- 720 hours. Hundreds of workflows. 141 views. I was the manager of a company that shipped nothing.
+- 140 days. 30 products. 445 workflows. 141 views. I was the manager of a company that shipped nothing.
 
 The last one is the launch hook. It is specific, it is checkable, and it is the sentence the "comment CLAUDE" audience has never been told.
 

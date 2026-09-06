@@ -1,0 +1,51 @@
+measure,value,unit,source,note
+first_ai_content_attempt,2025-07-20,date,Drive folder AIincomeHQ_Hybrid_Video_Starter,
+day_zero_plan,2026-04-19,date,30_day_automation_plan + from_builder_to_business,plan said sell ops builds not content
+days_since_plan,140,days,computed to 2026-09-06,
+project_folders_created,30,count,root folder timestamps Apr-Sep 2026,
+paid_clients,0,count,no client artefact in Drive,
+n8n_workflows,445,count,SESSION_HANDOFF_2026-08-08 (paginated count),
+fdhq_log_tabs,107,count,FDHQ_Production_Log,
+hup_log_tabs,163,count,HUP_Content_Factory,
+fdhq_publish_failed_events,205,count,FDHQ_Production_Log T99,plus 8 failed + 8 partial in T4
+fdhq_change_log_entries,109,count,FDHQ_Production_Log change log,2026-07-18 to 2026-09-05
+fdhq_carousels_authored_jul24_sep4,102,count,FDHQ_Production_Log T6,
+fdhq_carousels_june,50,count,archived FDH_Content_Factory,61 rejected
+fdhq_instagram_posts,125,count,Instagram profile 2026-09-06,
+fdhq_followers,379,count,Instagram profile 2026-09-06,
+fdhq_profile_views_30d,141,count,Instagram professional dashboard 2026-09-06,
+lostbeyond_posts_ranked,111,count,Lostbeyond.x sheet ranking 2026-06-12,
+lostbeyond_views_ranked,55716,views,Lostbeyond.x sheet ranking 2026-06-12,as logged
+lostbeyond_best_post,1300,views,Lostbeyond.x sheet,
+lostbeyond_followers,350,count,PROJECT CONTROL spec 2026-06-03,approx
+astro_posts_ranked,111,count,AstroCosmos ranking 2026-08-19,
+astro_views_ranked,68633,views,AstroCosmos ranking 2026-08-19,as logged
+astro_best_post,1856,views,AstroCosmos sheet,
+astro_followers,130,count,PROJECT CONTROL spec 2026-06-03,approx
+sits_views_snapshots,34521,views,SilenceInTheStorm 3 snapshots 2026-08-16,22372+10333+1816
+sits_best_post,3006,views,SilenceInTheStorm ranking,
+sits_followers,450,count,PROJECT CONTROL spec 2026-06-03,approx
+hup_views_snapshot,16330,views,HUP_Content_Factory 2026-08-16,45 posts
+hup_scripts_written,137,count,HUP_Content_Factory scripts tab,
+hup_competitor_accounts,188,count,HUP accounts tab,
+hup_competitor_posts_analysed,145,count,HUP knowledge tab,265M source views
+hup_video_versions,18,count,HUHQ_PSY_V18_HANDOVER,
+ohchat_published,71,count,OhChat queue tab,164 queued
+fruitdrama_episodes,14,count,SESSION_END_2026-06-21,
+estate_followers_approx,1300,count,sum of above,
+estate_views_as_logged_approx,210000,views,sum of snapshots,not de-duplicated
+estate_best_post,3006,views,SilenceInTheStorm,
+terminal_recordings_may20_jun25,191,count,PCR recall note,36 days
+claude_transcripts_jsonl,170,count,PCR recall note,
+handover_messages_logged,27,count,Claude End of Session Prompt Messages sheet,
+pcr_born,2026-06-04,date,AI Project Control Relay folder,
+pcr_died,2026-06-25,date,End of Session sheet,"confirmed a complete failure"; deleted
+spend_ceiling_per_product_usd,5.00,usd,cost ledgers,
+spend_cap_per_fdhq_cycle_usd,2.00,usd,fdhq_spend.py 2026-09-05,
+warhol_lifetime_spend_usd,0.79,usd,WARHOL_NOW_COST_LEDGER,
+huhq_video_spend_usd,0.87,usd,WILSON_V260 spend ledger,
+hup_cost_ledger_usd,16,usd,HUP cost tab Aug 9-Sep 4,estimate
+fdhq_gate_retry_judge_usd,17.1,usd,FDHQ cost tabs,2.3+0.7+14.1
+ohchat_generation_usd,23.4,usd,OhChat cost tab,303 jobs
+hours_worked,,hours,NOT IN DRIVE,sum terminal-log timestamps on Mac
+subscription_and_token_spend,,gbp,NOT IN DRIVE,billing consoles

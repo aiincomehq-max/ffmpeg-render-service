@@ -8,7 +8,7 @@ Numbers in square brackets come from the logs. Do not post a card with a bracket
 
 | # | File | Hook | Formula | Trigger |
 |---|---|---|---|---|
-| 1 | 01_the_ledger.md | 720 hours. Hundreds of workflows. 141 views. | impossible_number | surprise |
+| 1 | 01_the_ledger.md | 140 days. 30 products. 445 workflows. 141 views. | impossible_number | surprise |
 | 2 | 02_promoted.md | Everyone got promoted to manager. Nobody got the raise. | contradiction | ego |
 | 3 | 03_minus_fourteen.md | I saved 3.6 hours a week with AI and spent 3h50 checking it. | confession | ego |
 | 4 | 04_every_node_ran.md | Every node ran. Nobody watched. | quiet_threat | fear |
