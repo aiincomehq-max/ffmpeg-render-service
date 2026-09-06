@@ -1,0 +1,143 @@
+{
+  "name": "Ledger: Instagram comment to DM",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "instagram-comments",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "a1",
+      "name": "Meta verification (GET)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "webhookId": "ledger-instagram-comments"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.query['hub.verify_token'] === $('Config').first().json.verify_token ? $json.query['hub.challenge'] : 'forbidden' }}",
+        "options": {}
+      },
+      "id": "a2",
+      "name": "Return hub.challenge",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [480, 0]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "instagram-comments",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "b1",
+      "name": "Comment webhook (POST)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 300],
+      "webhookId": "ledger-instagram-comments"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {"id": "c1", "name": "keyword", "value": "LEDGER", "type": "string"},
+            {"id": "c2", "name": "ig_user_id", "value": "REPLACE_WITH_INSTAGRAM_BUSINESS_USER_ID", "type": "string"},
+            {"id": "c3", "name": "verify_token", "value": "REPLACE_WITH_A_LONG_RANDOM_STRING", "type": "string"},
+            {"id": "c4", "name": "ledger_url", "value": "https://firstdrophq.com/ledger", "type": "string"},
+            {"id": "c5", "name": "reply_text", "value": "Here are the real numbers from 60 days, 720 hours and 141 views: {{ $json.ledger_url }} . It's one page, it's free, and there's no course on it. If you want the full post-mortem it's on the same page, but the numbers are the point.", "type": "string"}
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "b2",
+      "name": "Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Flatten Meta's comment webhook into one item per comment.\n// Skips comments made by the account itself and anything without the keyword.\nconst cfg = $('Config').first().json;\nconst body = $('Comment webhook (POST)').first().json.body || {};\nconst out = [];\nfor (const entry of body.entry || []) {\n  for (const change of entry.changes || []) {\n    if (change.field !== 'comments') continue;\n    const v = change.value || {};\n    const text = (v.text || '').trim();\n    const fromId = v.from && v.from.id;\n    const matched = text.toUpperCase().includes(cfg.keyword.toUpperCase());\n    const isSelf = fromId === cfg.ig_user_id;\n    out.push({\n      json: {\n        comment_id: v.id,\n        media_id: v.media && v.media.id,\n        from_id: fromId,\n        from_username: v.from && v.from.username,\n        text,\n        matched: matched && !isSelf,\n        received_at: new Date().toISOString(),\n        ig_user_id: cfg.ig_user_id,\n        reply_text: cfg.reply_text.replace('{{ $json.ledger_url }}', cfg.ledger_url)\n      }\n    });\n  }\n}\nreturn out;"
+      },
+      "id": "b3",
+      "name": "Extract comments",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {"caseSensitive": true, "leftValue": "", "typeValidation": "strict"},
+          "conditions": [
+            {"id": "d1", "leftValue": "={{ $json.matched }}", "rightValue": true, "operator": {"type": "boolean", "operation": "true", "singleValue": true}}
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b4",
+      "name": "Has keyword?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [720, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.instagram.com/v21.0/{{ $json.ig_user_id }}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ recipient: { comment_id: $json.comment_id }, message: { text: $json.reply_text } }) }}",
+        "options": {}
+      },
+      "id": "b5",
+      "name": "Send private reply (DM)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [960, 200],
+      "notes": "Credential: Header Auth, name 'Authorization', value 'Bearer <INSTAGRAM_USER_ACCESS_TOKEN>'. Private replies work once per comment and only within 7 days of the comment."
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {"__rl": true, "mode": "id", "value": "REPLACE_WITH_GOOGLE_SHEET_ID"},
+        "sheetName": {"__rl": true, "mode": "name", "value": "ledger_comments"},
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "b6",
+      "name": "Log to sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [1200, 300]
+    }
+  ],
+  "connections": {
+    "Meta verification (GET)": {"main": [[{"node": "Return hub.challenge", "type": "main", "index": 0}]]},
+    "Comment webhook (POST)": {"main": [[{"node": "Config", "type": "main", "index": 0}]]},
+    "Config": {"main": [[{"node": "Extract comments", "type": "main", "index": 0}]]},
+    "Extract comments": {"main": [[{"node": "Has keyword?", "type": "main", "index": 0}]]},
+    "Has keyword?": {"main": [
+      [{"node": "Send private reply (DM)", "type": "main", "index": 0}],
+      [{"node": "Log to sheet", "type": "main", "index": 0}]
+    ]},
+    "Send private reply (DM)": {"main": [[{"node": "Log to sheet", "type": "main", "index": 0}]]}
+  },
+  "settings": {"executionOrder": "v1"},
+  "pinData": {},
+  "meta": {"instanceId": "ledger"}
+}
