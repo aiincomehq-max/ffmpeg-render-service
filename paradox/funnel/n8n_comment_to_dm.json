@@ -45,10 +45,10 @@
       "parameters": {
         "assignments": {
           "assignments": [
-            {"id": "c1", "name": "keyword", "value": "LEDGER", "type": "string"},
+            {"id": "c1", "name": "keyword", "value": "RECEIPTS", "type": "string"},
             {"id": "c2", "name": "ig_user_id", "value": "REPLACE_WITH_INSTAGRAM_BUSINESS_USER_ID", "type": "string"},
             {"id": "c3", "name": "verify_token", "value": "REPLACE_WITH_A_LONG_RANDOM_STRING", "type": "string"},
-            {"id": "c4", "name": "ledger_url", "value": "https://firstdrophq.com/ledger", "type": "string"},
+            {"id": "c4", "name": "ledger_url", "value": "https://firstdrophq.com/receipts", "type": "string"},
             {"id": "c5", "name": "reply_text", "value": "Here are the real numbers from 140 days, 30 products, 445 workflows and 141 views: {{ $json.ledger_url }} . It's one page, it's free, and there's no course on it. If you want the full post-mortem it's on the same page, but the numbers are the point.", "type": "string"}
           ]
         },

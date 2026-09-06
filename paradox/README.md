@@ -8,6 +8,7 @@ The saved GPT-project brief, executed. Research first, then content, then the fu
 | `LEDGER.md` / `ledger.csv` | The receipts: every number the Google Drive actually contains, with the file each came from, and the two numbers only the Mac can supply |
 | `content_bank.md` | 50 angles, 50 carousel concepts, 50 short-form concepts, 20 hooks, all built on checkable numbers |
 | `reels/` | The first five Reels in the paper-card format on the real numbers, with captions and titles |
+| `receipts_series/` | Receipts vs Claims: the reaction-and-receipt series format, five scripted episodes, the analyser prompt, and the 50-hooks lead magnet |
 | `funnel/FUNNEL.md` | Lead magnet, product ladder with prices and honest claims, three-message DM sequence, metrics |
 | `funnel/n8n_comment_to_dm.json` | Importable n8n workflow: Meta webhook verification, comment intake, keyword match, private reply DM, sheet log |
 
