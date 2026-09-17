@@ -39,23 +39,71 @@ social shops, people shipping volume for clients.
 Not aspiring creators. They are reachable but do not pay, and an audience of
 them cannot be converted into revenue. [Judgement, not measured.]
 
+## What the Drive data actually shows
+
+Read on 2026-09-17: `FDHQ_SOCIAL_DISCOVERY_DEV` and `FDHQ_Production_Log`,
+parsed in full for table structure and row counts. Individual cell contents
+were not read. Other workbooks were not examined.
+
+The production log holds 57 tables and 2,911 rows. It is real infrastructure:
+canonical asset IDs, sha256 provenance, per-request cost reservation, an error
+ledger with retryability, a change log with rollback. Most operators have
+nothing like it.
+
+Ten tables are empty. Every one of them is a performance or collection landing
+table.
+
+| Populated | Rows |
+|---|---|
+| Error ledger | 310 |
+| Event log | 206 |
+| Configured sources | 186 |
+| Config keys | 179 |
+| Cost ledger | 152 |
+| Generated hooks | 133 |
+
+| Empty | Rows |
+|---|---|
+| Post performance snapshots, three tables | 0 |
+| Ranking snapshots, two tables | 0 |
+| Hook performance | 0 |
+| Scrape landing tables, four | 0 |
+
+Every table about making something is full. Every table about whether the
+thing worked is empty. That is the year, in one picture: a factory with no
+feedback loop, which consumes cost and emits artefacts and never learns
+whether any of it landed.
+
+## Correction to an earlier assumption
+
+The scraped competitor dataset was assumed to be the saleable asset. On the
+evidence it is too thin to sell: 71 rows of caption metrics and 81 observation
+rows, not a corpus. It supports a handful of honest posts, not a product.
+
+What is genuinely rare is the operating discipline itself. Cost ledger,
+provenance, error handling, rollback. That, not hook data, is what other
+operators do not have and would pay for.
+
 ## Price ladder
 
 | Tier | Price | What it is |
 |---|---|---|
-| Free | £0 | Findings from the scraped dataset, posted daily |
-| Entry | £49 | The hook data, cleaned and structured |
-| Core | £249 | This render service plus the n8n workflow that drives it |
+| Free | £0 | How the factory was built, what it cost, where it broke |
+| Core | £249 | This render service plus the n8n workflows that drive it |
+
+The 310 logged errors are content. Specific, dated, honest failure writing is
+both the most defensible thing to publish here and the hardest for anyone to
+copy, because they would have to have actually built it.
 
 Pre-sell the core at £99 to the first twenty buyers before it is polished.
 Optimise for the date of the first sale, not its size.
 
-## Positioning
+## The one change that matters most
 
-The differentiated asset is the scraped performance dataset, not the workflow
-library. Workflow packs get copied in a week. A dataset with real outcomes
-attached supports claims that can be checked, which is the opposite of the
-post-hoc storytelling the rest of the niche runs on.
+Populate a performance table. The schema already exists with the right
+columns, so no building is required. Publish something, record what happened
+to it, and the factory has a feedback loop for the first time. Until one of
+those tables has rows, nothing else in this plan can be evaluated.
 
 **Do not resell raw scraped rows.** Redistributing a verbatim platform scrape
 likely breaches terms of service and is the kind of thing that gets a product
