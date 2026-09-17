@@ -82,3 +82,26 @@ anywhere long lived.
 
 Clip and audio URLs are fetched server side with no allowlist, so do not expose
 this endpoint to untrusted callers without adding one.
+
+## Rendering a sheet of hooks
+
+`batch.py` turns a CSV into finished videos. One row is one caption; rows
+sharing an `id` become a single video, so a three caption video is three rows.
+Clip and audio columns are read from the first row of each group, and `clips`
+is a pipe separated list of URLs.
+
+```csv
+id,pre,emphasis,post,start_s,end_s,clips,music_url
+v1,They pulled,3X,more shares than likes,0,2.6,https://x/a.mp4|https://x/b.mp4,https://x/bed.mp3
+v1,,No face. No editor.,,2.6,3.9,,
+v2,This reel cost,$0.00,to make. 100% automated.,,,https://x/c.mp4|https://x/d.mp4,
+```
+
+```
+python batch.py hooks.csv --service http://localhost:8080 --out results.csv
+```
+
+Timing columns may be left blank, in which case captions are laid out
+consecutively using the beat pattern. Rows without clips are skipped with a
+warning rather than failing the run. `results.csv` carries the status and
+finished URL for every row.
