@@ -107,3 +107,78 @@ captions, into the automation niche. Both already match the caption structure
 built into the renderer.
 
 And read the snapshots this time. The loop exists. It has never been closed.
+
+# Why the input pipeline cannot produce a viral output
+
+This is a separate question from the one above, and it has a clean answer.
+Source: the scraped tables and config in `HUP_Content_Factory`.
+
+## The input contains no failures
+
+Config gates, read directly:
+
+| Key | Value |
+|---|---|
+| `bootstrap_vpy_floor` | 50000 |
+| `youtube_min_views` | 50000 |
+| `min_views` | 1000 |
+| `min_engagement_rate` | 0.02 |
+| `top_n_per_run` | 20 |
+
+The observed result in the TikTok scrape: the lowest view count in the entire
+pool is 65,900, and the median is 297,450.
+
+Every post that ever enters the system is already a winner. That makes the
+central question unanswerable by construction. Whatever the winners have in
+common, the flops may have in common too, and there are no flops in the data
+to check against. The pipeline can describe what viral posts look like. It
+cannot identify what made them travel, because it has never seen a post that
+didn't.
+
+This is the same survivorship error that makes hook-analysis accounts
+unfalsifiable. The difference is that this version is industrialised.
+
+## The winners' reach is not transferable
+
+Creators in the TikTok pool hold between 48,300 and 952,000 followers, median
+301,300. A large share of a 297,000-view median is the audience those accounts
+already had.
+
+Copying the structure of such a post transfers the form and none of the
+distribution. An account posting to almost nobody lands at the platform floor
+regardless of how well the structure was cloned, which is exactly what the
+271-view median shows.
+
+## The scoring rewards signals too small to read
+
+| Weight | Value |
+|---|---|
+| `score_weight_views` | 1.0 |
+| `score_weight_likes` | 2.0 |
+| `score_weight_comments` | 3.0 |
+| `score_weight_reposts` | 3.5 |
+| `score_weight_shares` | 4.0 |
+| `score_weight_saves` | 4.0 |
+
+Views are weighted lowest and saves and shares highest. On a 300,000 follower
+account those signals are stable and that weighting is defensible. On an
+account producing 250 to 1,200 views with zero to three saves per post, they
+are noise, and the ranking amplifies noise fourfold over the one metric that
+had range.
+
+## The fix is configuration, not construction
+
+The infrastructure needed to answer the question already exists. What is
+missing is variance in the outcome.
+
+1. Drop the view floors and the top-N cut. Scrape full recent histories from
+   the same tracked creators rather than their best posts.
+2. Compare each creator's own best posts against their own worst. This holds
+   follower count and audience constant, so the difference that remains is
+   attributable to the post rather than the account.
+3. Score by views alone until the account has the volume to make saves and
+   shares stable.
+
+That comparison is a real experiment, it is the first one this system would
+have run, and it produces exactly the kind of checkable finding that is worth
+publishing and selling.
