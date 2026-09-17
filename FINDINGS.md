@@ -46,6 +46,40 @@ about posting time is dead.
 the same vague statement about quiet progress, rewritten. They reliably land
 in the 240 to 260 floor. This is the single clearest defect in the pipeline.
 
+## Why the ranking never showed any of this
+
+The setup scores every metric and combines them into `weighted_score`. That
+composite is the reason a month of data looked like noise.
+
+It barely tracks reach. Rank correlation against views is +0.25. Against saves
+it is +0.76 and against likes +0.75. The composite is mostly measuring likes
+and saves while ignoring how far a post travelled.
+
+The clearest case in the data:
+
+| Views | Likes | Saves | Composite score |
+|---|---|---|---|
+| 944 | 1 | 0 | 1 |
+| 299 | 4 | 3 | 19 |
+
+The composite ranked the 299-view post nineteen times higher than the
+944-view post. Only four of the top ten posts by views appear in the top ten
+by score. Anyone steering content by that number would have been pushed
+towards the weaker posts and away from the stronger ones.
+
+It also cannot rank. There are 20 distinct score values across 45 posts, and
+38 of those posts share a score with another post.
+
+The cause is scale. Views ranged from 240 to 1,258, a fivefold spread with
+real signal in it. Likes ranged from 0 to 14 and shares from 0 to about 2. At
+that volume the engagement counts are noise, and a composite built on them
+inherits the noise while drowning out the one metric that had range.
+
+**At this stage, rank by views alone.** Composites are for when every input
+has enough volume to be stable. Blending five metrics into one number destroys
+the ability to attribute a result to any cause, which is precisely the
+complaint that the results were unexplainable.
+
 ## Two things that need checking
 
 Instagram reports zero views on 43 of 44 posts while still recording likes.
