@@ -74,11 +74,23 @@ thing worked is empty. That is the year, in one picture: a factory with no
 feedback loop, which consumes cost and emits artefacts and never learns
 whether any of it landed.
 
-## Correction to an earlier assumption
+## Corrections
 
-The scraped competitor dataset was assumed to be the saleable asset. On the
-evidence it is too thin to sell: 71 rows of caption metrics and 81 observation
-rows, not a corpus. It supports a handful of honest posts, not a product.
+Two earlier conclusions in this file were drawn from the wrong workbook and
+are wrong. Kept here rather than deleted, because the reasoning error matters.
+
+**"There is no feedback loop" was wrong.** That held for `FDHQ_Production_Log`
+but not for `HUP_Content_Factory`, which holds 139 own-post performance
+snapshots across 134 published posts. The loop exists and ran for a month. It
+was never read: every row is still marked `analysis_status: pending`.
+
+**"The dataset is too thin" was wrong.** Beyond the own-post snapshots there
+are roughly 200 scraped competitor rows with full metrics, 145 analysed
+knowledge rows and 95 tracked creators.
+
+The real problem is neither. See `FINDINGS.md`: the content was published at
+real scale, measured, and did not work, and nobody looked at the measurements.
+The best post reached 1,258 views and 45 TikTok posts produced six shares.
 
 What is genuinely rare is the operating discipline itself. Cost ledger,
 provenance, error handling, rollback. That, not hook data, is what other
@@ -100,10 +112,9 @@ Optimise for the date of the first sale, not its size.
 
 ## The one change that matters most
 
-Populate a performance table. The schema already exists with the right
-columns, so no building is required. Publish something, record what happened
-to it, and the factory has a feedback loop for the first time. Until one of
-those tables has rows, nothing else in this plan can be evaluated.
+Read the performance data that already exists. It is collected, it is
+sufficient, and it has never been analysed. `FINDINGS.md` is the first pass;
+the findings were available a month ago.
 
 **Do not resell raw scraped rows.** Redistributing a verbatim platform scrape
 likely breaches terms of service and is the kind of thing that gets a product
