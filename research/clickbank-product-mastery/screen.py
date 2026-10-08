@@ -28,8 +28,17 @@ import sys
 
 # --- thresholds (FRAMEWORK.md section 2) ------------------------------------
 
-GRAVITY_MIN = 8.0          # below: too few affiliates earning to call it proven
-GRAVITY_MAX = 60.0         # above: the crowded end Product Mastery says to avoid
+# Gravity bands corrected against the Product Mastery guide (p.7 table, p.10).
+# It puts the "sweet spot" at mid-double to low-triple digits, and for cold PAID
+# traffic says higher is better (150+). The original 8-60 band here would have
+# rejected exactly the offers it recommends for paid. Free/warm traffic wants a
+# lower band, because the priority there is brand fit, not day-0 profit.
+GRAVITY_BAND = {
+    "paid": (40.0, 250.0),
+    "free": (10.0, 150.0),
+}
+PAID_PAYOUT_HINT = 100.0   # p.7: cold paid traffic wants $100+/sale. Soft flag,
+                           # not a gate -- the EPC/CPC margin still decides.
 REFUND_MAX = 0.15          # 15% on a 30/90-day basis
 MARGIN_MIN = 1.5           # required expected-EPC to CPC ratio
 USD_PER_GBP = 1.27         # override with --fx
@@ -119,17 +128,21 @@ def normalise(row):
 
 # --- gates ------------------------------------------------------------------
 
-def gate1_proof_of_life(p):
+def gate1_proof_of_life(p, traffic):
+    lo, hi = GRAVITY_BAND[traffic]
     g = p["gravity"]
     if g is None:
         return False, "no gravity reported"
-    if g < GRAVITY_MIN:
-        return False, f"gravity {g:.1f} < {GRAVITY_MIN} (too few affiliates earning)"
-    if g > GRAVITY_MAX:
-        return False, f"gravity {g:.1f} > {GRAVITY_MAX} (saturated end)"
+    if g < lo:
+        return False, f"gravity {g:.1f} < {lo:.0f} (too few affiliates earning)"
+    if g > hi:
+        return False, f"gravity {g:.1f} > {hi:.0f} (saturated end)"
     if not p["commission"]:
         return False, "no commission reported"
-    return True, f"gravity {g:.1f}"
+    note = f"gravity {g:.1f}"
+    if traffic == "paid" and p["commission"] < PAID_PAYOUT_HINT:
+        note += f" | payout ${p['commission']:.0f} under the ${PAID_PAYOUT_HINT:.0f} cold-paid hint"
+    return True, note
 
 
 def gate4_trust(p):
@@ -159,9 +172,9 @@ def gate3_economics(p, cpc_gbp, fx):
     return (margin >= MARGIN_MIN), detail, margin
 
 
-def verdict(p, cpc_gbp, fx):
+def verdict(p, cpc_gbp, fx, traffic):
     reasons = []
-    ok1, d1 = gate1_proof_of_life(p)
+    ok1, d1 = gate1_proof_of_life(p, traffic)
     reasons.append(("G1", ok1, d1))
     if not ok1:
         return "REJECT", reasons, None
@@ -213,7 +226,7 @@ def cmd_screen(args):
 
     scored = []
     for p in rows:
-        v, reasons, margin = verdict(p, cpc, args.fx)
+        v, reasons, margin = verdict(p, cpc, args.fx, args.traffic)
         scored.append((v, margin if margin is not None else -1, p, reasons))
 
     rank = {"WATCH*": 0, "WATCH": 1, "REJECT": 2}
@@ -221,7 +234,8 @@ def cmd_screen(args):
 
     print(f"\nChannel: {args.channel}  planning CPC £{cpc:.2f} "
           f"(band £{lo:.2f}-£{hi:.2f})   FX ${args.fx}/£")
-    print(f"Gates: G1 gravity {GRAVITY_MIN}-{GRAVITY_MAX} | "
+    glo, ghi = GRAVITY_BAND[args.traffic]
+    print(f"Gates: G1 gravity {glo:.0f}-{ghi:.0f} ({args.traffic} traffic) | "
           f"G3 EPC >= {MARGIN_MIN}x CPC | G4 refunds < {REFUND_MAX:.0%}")
     print("G2 (momentum) needs a time series -- see --snapshot. "
           "Nothing is TEST-rated until G2 and G5 are done by hand.\n")
@@ -303,6 +317,8 @@ def main():
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("input", nargs="?", help="marketplace export (CSV or JSON)")
     ap.add_argument("--channel", choices=sorted(CHANNEL_CPC), default="native")
+    ap.add_argument("--traffic", choices=sorted(GRAVITY_BAND), default="paid",
+                    help="selects the gravity band (Product Mastery p.7 table)")
     ap.add_argument("--cpc", type=float, help="planning CPC in GBP (default: channel midpoint)")
     ap.add_argument("--fx", type=float, default=USD_PER_GBP, help="USD per GBP")
     ap.add_argument("--limit", type=int, default=15)
