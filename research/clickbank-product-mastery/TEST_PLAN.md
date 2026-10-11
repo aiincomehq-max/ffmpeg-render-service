@@ -175,3 +175,64 @@ Offer and angles are blocked on a single input, either of:
 Either one, pasted back, returns: one offer, two angles with copy, bridge
 headline and body, and the campaign settings — in a single pass. Nothing else in
 this document changes when the offer arrives.
+
+---
+
+## 8. Offer selected: Tina Aldea | Soulmate Sketch (2026-10-11)
+
+Vendor ID `tinapsc`. CB rank #4, Gravity 61.9, avg $/conv $68.79, CVR 7.26%,
+EPC $4.90. Screens at **15.7x** expected EPC over a £0.25 native CPC, and still
+clears at 4.7x if the published EPC is discounted 70% for cold traffic. Nothing
+else in the 31-offer pull survives that discount with room.
+
+### Corrections to sections 4 and 5 above, from the vendor's affiliate page
+
+- **Tracking parameter is `aff_sub1`, not `tid`.** The vendor states this
+  explicitly: "Please use `aff_sub1`, not `tid`." Section 4 is wrong. Link form:
+  `https://hop.clickbank.net/?affiliate=NICKNAME&vendor=tinapsc&aff_sub1=<code>`
+- **The destination is a quiz page, not a VSL.** "There is no VSL page. Don't
+  look for one. The simple quiz page your link opens is THE page to advertise...
+  we tested it with over $900,000 of our own ad spend." So the bridge page in
+  section 3 should not try to sell. Its only jobs are native compliance, the FTC
+  disclosure, and qualifying the click. Keep it short; the quiz converts.
+- **Direct linking to the cart or order form is banned** and results in a
+  permanent ban. Linking to the hoplink (which opens the quiz) is what they
+  instruct. A bridge page in front of the hoplink is fine.
+
+### Terms that bind the creative
+
+Commission is **90% on the whole funnel** — front end, order bumps, every
+upsell, same rate for every affiliate. It is **rev-share, not CPA**, so the CPA
+refund-immunity noted in FRAMEWORK.md section 6 does **not** apply here.
+
+Prohibited in ads and on the bridge: "guaranteed to find your soulmate", "100%
+accurate", "hand-drawn by Tina personally", "find your true love in 24 hours",
+"scientifically proven", any health/medical/relationship guarantee.
+
+Approved: "for entertainment purposes only", "psychic soulmate sketch",
+"personalized digital sketch", "unique reading experience", "fun and meaningful
+gift idea", "explore your love journey", "30-day money-back guarantee via
+ClickBank".
+
+Also binding: no PPC bidding on brand terms; no "scam"/"fraud" in copy; no
+claiming to be the creator; no spy-tool copying of other affiliates' campaigns.
+FTC disclosure must be clearly visible, never buried in a footer. Enforcement is
+three strikes: warning, commission hold, permanent ban with commissions
+forfeited.
+
+Vendor demographic guidance: all genders, 35+.
+
+### Open items before spend
+
+1. **Return rate is not published** anywhere on the listing or the affiliate
+   page. On a 90% rev-share deal refunds come straight out of the commission, so
+   this is the live risk on this offer, not compliance. Check the marketplace
+   listing for `expectedReturnRate` and its basis.
+2. **Network acceptance is unverified.** Taboola's published prohibited and
+   restricted lists do not appear to name psychics, astrology or tarot (Microsoft
+   Advertising does ban the category, but that is a different network). This
+   resolves itself for free: account creation and campaign review cost nothing,
+   and nothing is charged until delivery starts. Submit and find out.
+3. Creative supplied by the vendor is **email swipes only** — no ad images, no
+   video, no demographic breakdown. Everything for native is written from
+   scratch.
