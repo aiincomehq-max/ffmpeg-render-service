@@ -34,8 +34,11 @@ import sys
 # rejected exactly the offers it recommends for paid. Free/warm traffic wants a
 # lower band, because the priority there is brand fit, not day-0 profit.
 GRAVITY_BAND = {
-    "paid": (40.0, 250.0),
-    "free": (10.0, 150.0),
+    "paid": (100.0, 250.0),   # course lesson "The Numbers": a paid media buyer
+                              # "will want to see a higher gravity score of 100 plus"
+    "free": (10.0, 100.0),    # same lesson: free-traffic affiliates should "avoid
+                              # the affiliate products with the highest gravity
+                              # scores of 100 plus"
 }
 PAID_PAYOUT_HINT = 100.0   # p.7: cold paid traffic wants $100+/sale. Soft flag,
                            # not a gate -- the EPC/CPC margin still decides.
