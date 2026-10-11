@@ -33,12 +33,16 @@ import sys
 # traffic says higher is better (150+). The original 8-60 band here would have
 # rejected exactly the offers it recommends for paid. Free/warm traffic wants a
 # lower band, because the priority there is brand fit, not day-0 profit.
+# CORRECTION (2026-10-11, live marketplace pull): absolute gravity thresholds
+# are unsafe. The whole marketplace tops out at ~146 today, so ClickBank's own
+# "100+ for paid" captures the 3 most-contested offers out of 1,242 -- the exact
+# crowding their guide elsewhere says to avoid. The scale has compressed since
+# the course was recorded (offers at 300+ were cited not long ago). What the
+# advice means is a PERCENTILE, not a number: proven, not top-of-market.
+# Re-derive these from the max gravity in each pull rather than trusting them.
 GRAVITY_BAND = {
-    "paid": (100.0, 250.0),   # course lesson "The Numbers": a paid media buyer
-                              # "will want to see a higher gravity score of 100 plus"
-    "free": (10.0, 100.0),    # same lesson: free-traffic affiliates should "avoid
-                              # the affiliate products with the highest gravity
-                              # scores of 100 plus"
+    "paid": (40.0, 110.0),    # roughly ranks 4-31 of 1,242 in the 2026-10 pull
+    "free": (10.0, 50.0),
 }
 PAID_PAYOUT_HINT = 100.0   # p.7: cold paid traffic wants $100+/sale. Soft flag,
                            # not a gate -- the EPC/CPC margin still decides.
