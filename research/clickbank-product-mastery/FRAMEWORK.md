@@ -274,3 +274,58 @@ the upsell. The FAQ tells you so.
 
 The thing that ends this project's nine-month loop is step 5, not steps 1–4.
 Everything above is only worth writing because it terminates in a test.
+
+---
+
+## 6. What the purchased product actually changed (2026-10-11)
+
+Product Mastery was bought ($27) and fully extracted: the 14-page PDF plus all
+eleven course video transcripts. The advertised "list of current top offers" does
+not exist in it — refund requested separately. What it did deliver:
+
+### Corrections to the gates above
+
+| | before | after | source |
+|---|---|---|---|
+| Gravity, paid/cold | 8–60 | **100–250** | "a paid media buyer will want to see a higher gravity score of 100 plus" (*The Numbers*) |
+| Gravity, free/warm | 8–60 | **10–100** | free-traffic affiliates told to "avoid the affiliate products with the highest gravity scores of 100 plus" (same) |
+| Payout, paid/cold | no floor | **$100+ expected** | "you're gonna want to see products in the triple digits... in order to profitably back out" (same) |
+
+Section 3 above called the $100 payout floor "the most damaging filter we ever
+set." That holds for the band we were screening in, but is wrong as a general
+rule: for cold paid traffic their own guidance restores it. The resolution is
+that payout is still not a gate — EPC vs CPC decides — but at Gravity 100+ on
+cold traffic, offers under $100 rarely clear the margin anyway.
+
+### New, and operationally useful
+
+- **Take CPA over rev-share where offered.** "CPA... eliminates the risk for
+  refunds for you. You get paid a flat fee for every sale that you drive and you
+  get to keep the commissions no matter what happens after the sale." This makes
+  Gate 4's refund threshold irrelevant on a CPA deal, and would have saved AMP
+  Joint 10 from rejection on a 15.4% return rate.
+- **"Requires Approval" offers are an advantage, not friction.** Vendors gate
+  them "to ensure that their products don't hit saturation and they can better
+  control the quality of affiliates promoting them." Direct answer to the
+  beginner-versus-whale problem.
+- **Affiliate support pages publish EPC and conversion rate**, linked under
+  "average payout" on the marketplace listing. Section 2 said this data was hard
+  to get; often it is sitting on the vendor's own page. Their caveat: treat it as
+  optimistic, since it is usually measured on warm or hand-picked traffic.
+- **Those same pages carry demographic data, ad creative, pre-written copy and a
+  hoplink generator offering several sales-page variants.** Free creative raw
+  material, and a second variable to test besides the ad.
+- **Day-0 profitability**: "measuring your earnings per click versus your cost
+  per click for your campaigns in real time." Identical to Gate 3 and the kill
+  rule in TEST_PLAN.md.
+
+### The method that replaces the missing list
+
+"Niching down": take the top 3 offers in each of ClickBank's top 10 niches — 30
+offers — then filter to Gravity 100+ with CPA available. That is a finite,
+self-built shortlist, and it is the closest thing to the product's unfulfilled
+promise. It costs about thirty minutes in the marketplace.
+
+**Not useful for us:** the "past champions" method (offers whose Gravity has
+declined from a peak — contradicts the 100+ paid floor; it is a free-traffic
+play) and the "handshake deal" method (networking and events; long-term).
