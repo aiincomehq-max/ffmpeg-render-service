@@ -277,3 +277,26 @@ Mistake worth not repeating: the first pass set a 16:9 frame but never said the
 *sheet* had to be portrait, so the model drew a landscape sheet and a portrait
 sketch could not be laid on it without stretching the face. Orientation of the
 object has to be stated separately from the frame.
+
+### Where to generate: Higgsfield, not ElevenLabs
+
+**Use `gpt_image_2_5` (variant `flare`) through the Higgsfield MCP.** Preflight
+every call with `get_cost: true` before submitting.
+
+| | ElevenLabs `bytedance-seedream-5-pro` | Higgsfield `gpt_image_2_5` flare |
+|---|---|---|
+| Cost, batch of 4 | 3,272 credits ≈ **$0.60** | **1 credit** (0.25 each) |
+| Native 3:2 | no — 16:9, then crop | **yes**, Taboola's own ratio |
+| Sheet rendered as asked | repeatedly wrong | right first time |
+
+Same prompt, same four variations, and the Higgsfield plates were better. Roughly
+60x the cost for a worse result; several pounds of credit went on it before the
+check was run. **Check the price of a generation route before the first call,
+not after the sixth.**
+
+### Review creative at the size it runs
+
+A 1200x800 native ad renders at roughly 300px wide in feed. Judge every plate in
+a ~320px thumbnail strip before calling it finished. The first scene composites
+looked fine at 1100px and were unreadable at ad size: the drawing was about 15%
+of the frame, the paper was blown to white and the signature was a grey smudge.

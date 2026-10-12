@@ -3,6 +3,7 @@ import numpy as np
 from PIL import Image, ImageFilter
 
 CREAM = np.array([247., 240., 223.])
+CONTRAST = 1.45
 
 
 def clean_sketch(path):
@@ -47,6 +48,9 @@ def make_page(sketch, pw, ph, frac=0.93, left=None, top=0.42):
     lum = s.mean(2)
     paper = s[lum > np.percentile(lum, 88)].mean(0)
     s = np.clip(s * (CREAM / paper), 0, 255)
+    # a pencil drawing photographed on paper is low contrast; at ad-thumbnail
+    # size it dissolves, so deepen everything away from the paper white
+    s = np.clip(CREAM - (CREAM - s) * CONTRAST, 0, 255)
 
     # feather the block into the page over a small border
     fx = max(4, int(sw * 0.05))
@@ -121,7 +125,7 @@ def warp_onto(plate, page, quad, feather=2.0):
         base = np.array([np.median(blur[..., c][inside]) for c in range(3)])
     else:
         base = blur.reshape(-1, 3).mean(0)
-    shade = np.clip(blur / np.maximum(base, 1e-6), 0.72, 1.28)
+    shade = np.clip(blur / np.maximum(base, 1e-6), 0.82, 1.12)
     lit = np.clip(samp * shade, 0, 255)
 
     a = inside.astype(float)
