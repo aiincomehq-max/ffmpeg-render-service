@@ -300,3 +300,24 @@ A 1200x800 native ad renders at roughly 300px wide in feed. Judge every plate in
 a ~320px thumbnail strip before calling it finished. The first scene composites
 looked fine at 1100px and were unreadable at ad size: the drawing was about 15%
 of the frame, the paper was blown to white and the signature was a grey smudge.
+
+### Scene geometry: three constraints, all of them separate
+
+Each of these was broken on its own in a separate round. State all three.
+
+1. **The page must be visible to the camera AND to the person.** A page held up
+   facing the lens shows the person its blank back. Put it flat on a table with
+   the camera above the table plane, or shoot over the shoulder. The reference
+   the platform generated (`69.png`) does the first.
+2. **The page's own orientation, stated apart from the frame.** "16:9 frame"
+   says nothing about the sheet; say A4 portrait, taller than wide, explicitly.
+3. **The page's rotation on the surface, stated in camera terms.** "Long edges
+   running away from the camera" was read loosely and produced a sheet laid at
+   about seventy degrees, so a portrait composited onto it came out on its side.
+   Say: squared up to the camera, top and bottom edges parallel to the top of
+   the photograph, not rotated or turned on the table.
+
+`find_sheet_quad.py` recovers the sheet's four corners from a plate. Side edges
+are fitted as x = a*y + b and top/bottom as y = c*x + d; fitting all four the
+same way makes the near-horizontal edges blow up. Always overlay the fitted quad
+on the plate and look at it before compositing.
