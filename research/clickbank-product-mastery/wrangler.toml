@@ -1,0 +1,15 @@
+# Deploys bridge/ to the EXISTING Worker that serves read.firstdrophq.com.
+#
+# This is NOT the firstdrophq.com site. That is a separate Cloudflare Pages
+# project called "firstdrophq", built from a different repository on the Mac.
+# Deploying this file cannot touch it, and the two must never be crossed.
+#
+#   npx wrangler deploy        (run from this directory)
+#
+# The custom domain read.firstdrophq.com is already bound to this Worker, so a
+# deploy replaces the static assets and nothing else.
+name = "firstdrop-read"
+compatibility_date = "2026-10-12"
+
+[assets]
+directory = "./bridge"
