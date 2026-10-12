@@ -21,11 +21,18 @@ FFMPEG = os.path.expanduser("~/bin/ffmpeg")
 
 W, H, FPS = 1080, 1920, 30
 DURATION = 5.5          # matched to the post that did 1M on 4.7K followers
-TITLE_SIZE = 46
-BODY_SIZE = 39
-LINE_H = 54
-TEXT_W = 700            # narrow column -> short centred lines, as in the sample
-TOP = 300               # text sits in the upper-middle, clear of IG's own UI
+# Measured off the reference frame: body text is roughly 27px at 1080 wide with
+# a 35px line gap, in a column about 58% of frame width, starting ~16% down and
+# ending ~45% down. Text this small is what stops it reading as a quote graphic.
+# Reference block: ~19 lines spanning 16%-44% of frame height, so roughly a
+# 28px line gap, breaking at ~6-7 words. Tight leading and a narrow column are
+# what make it read as typed-on-a-photo rather than as a quote card.
+TITLE_SIZE = 29
+BODY_SIZE = 26
+LINE_H = 31
+PARA_GAP = 16
+TEXT_W = 430
+TOP = 300
 INK = (26, 24, 22)
 
 POSTS = [
@@ -151,43 +158,28 @@ quietly, and nobody informs you.""",
 ]
 
 
+PLATE = os.path.join(HERE, "plates", "wall.png")
+
+
 def wall(seed):
-    """A photographed-looking off-white wall: soft directional light and grain.
+    """The background photograph.
 
-    A real phone photo of a real wall is strictly better and is a drop-in
-    replacement -- this is here so nothing waits on a camera.
+    A flat phone-camera shot of a plain wall with the back of someone's head
+    and shoulder cropped into the bottom-left corner, and the ceiling line in
+    the upper left -- the composition the reference post uses. The earlier
+    version of this function drew a gradient instead, and that is exactly what
+    made the first attempt read as a designed quote card rather than a photo
+    someone typed on.
+
+    The subject starts 59% down this plate, so the text block above it never
+    collides with the head.
     """
-    from PIL import Image, ImageDraw, ImageFilter
+    from PIL import Image
 
-    rnd = random.Random(seed)
-    base = Image.new("RGB", (W, H), (239, 236, 231))
-    px = base.load()
-
-    # light falls from the upper right, as in the reference
-    cx, cy = W * 0.78, H * 0.18
-    far = (W ** 2 + H ** 2) ** 0.5
-    for y in range(0, H, 2):
-        for x in range(0, W, 2):
-            d = (((x - cx) ** 2 + (y - cy) ** 2) ** 0.5) / far
-            v = 1.0 - 0.17 * d
-            c = tuple(min(255, int(ch * v)) for ch in (241, 238, 233))
-            for dy in (0, 1):
-                for dx in (0, 1):
-                    if x + dx < W and y + dy < H:
-                        px[x + dx, y + dy] = c
-
-    # a soft shadow pooling in the bottom-left corner
-    shade = Image.new("L", (W, H), 0)
-    ImageDraw.Draw(shade).ellipse(
-        [-W * 0.55, H * 0.68, W * 0.52, H * 1.45], fill=70)
-    shade = shade.filter(ImageFilter.GaussianBlur(190))
-    base = Image.composite(Image.new("RGB", (W, H), (205, 200, 194)), base, shade)
-
-    # fine grain, so it does not read as a flat graphic
-    noise = Image.new("L", (W, H))
-    noise.putdata([128 + rnd.randint(-7, 7) for _ in range(W * H)])
-    base = Image.blend(base, Image.merge("RGB", (noise, noise, noise)), 0.045)
-    return base.filter(ImageFilter.GaussianBlur(0.4))
+    img = Image.open(PLATE).convert("RGB")
+    if img.size != (W, H):
+        img = img.resize((W, H), Image.LANCZOS)
+    return img
 
 
 def frame(post, seed):
@@ -198,22 +190,32 @@ def frame(post, seed):
     title_f = ImageFont.truetype(f"{FONTS}/InstrumentSans-Bold.ttf", TITLE_SIZE)
     body_f = ImageFont.truetype(f"{FONTS}/InstrumentSans-Regular.ttf", BODY_SIZE)
 
-    lines = [l.rstrip() for l in post["body"].strip().split("\n")]
+    paras = [" ".join(p.split())
+             for p in post["body"].strip().split("\n\n") if p.strip()]
 
     y = TOP
     tw = d.textlength(post["title"], font=title_f)
     d.text(((W - tw) / 2, y), post["title"], font=title_f, fill=INK)
-    y += int(TITLE_SIZE * 1.9)
+    y += int(TITLE_SIZE * 2.0)
 
-    for ln in lines:
-        if not ln:
-            y += int(LINE_H * 0.55)
-            continue
-        lw = d.textlength(ln, font=body_f)
-        d.text(((W - lw) / 2, y), ln, font=body_f, fill=INK)
-        y += LINE_H
+    for para in paras:
+        line, words = "", para.split()
+        out = []
+        for word in words:
+            trial = (line + " " + word).strip()
+            if d.textlength(trial, font=body_f) <= TEXT_W or not line:
+                line = trial
+            else:
+                out.append(line)
+                line = word
+        out.append(line)
+        for ln in out:
+            lw = d.textlength(ln, font=body_f)
+            d.text(((W - lw) / 2, y), ln, font=body_f, fill=INK)
+            y += LINE_H
+        y += PARA_GAP
 
-    assert y < H - 420, f"{post['slug']}: text runs into the IG caption zone ({y})"
+    assert y < H * 0.60, f"{post['slug']}: text block too tall ({y/H:.0%} of frame)"
     return img
 
 

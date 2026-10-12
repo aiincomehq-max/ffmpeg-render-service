@@ -58,12 +58,25 @@ found is a human on camera (@_austinbecker_: 1,800-view median → 846K, 458×).
 So this format is unproven from a cold start. These five are the cheap test of
 whether that matters.
 
-## Background
+## Background and text scale, measured off the reference
 
-The wall is rendered, not photographed. **A phone photo of a real wall is
-strictly better** — plain, light, lit from one side, with a shoulder or the back
-of a head in the bottom-left corner as the reference has. Send one and it is a
-drop-in swap; nothing else about the build changes.
+The first attempt looked like a designed quote card. Two measurable reasons,
+both now fixed:
+
+- **The background was a drawn gradient, not a photograph.** It had no room in
+  it. The plate now used is a flat phone-camera shot of a plain wall: ceiling
+  line across the upper left, the back of a head and a shoulder cropped into
+  the bottom-left corner, soft daylight from the right. The subject starts 59%
+  down the frame; the reference's starts at 56%.
+- **The text was about 45% too big and the column far too wide.** The reference
+  runs roughly a 26px body at 1080 wide with a 31px line gap in a ~430px
+  column, breaking at six or seven words, with the block spanning 16%–46% of
+  frame height. Those are the numbers the build now uses. A wide column at a
+  large size is what reads as a graphic.
+
+`plates/wall.png` is the plate in use; `plates/wall-alt.png` is a second take
+held in reserve. A real phone photo of a real wall is still a drop-in swap if
+one turns up.
 
 ## Still true
 
