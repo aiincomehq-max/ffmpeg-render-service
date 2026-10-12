@@ -71,7 +71,8 @@ pre-written for them — a name — which is the lowest-friction comment there i
 > People assume the mind offers up who they want. It usually offers up who is
 > unfinished.
 >
-> There is a difference, and you already know which one yours was.
+> There is a difference, and you already know which one yours was. Most people
+> type it before they have decided whether to.
 
 **Visual:** hands folding the scrap in half, then in half again, then placing it
 under a cup. Static camera throughout. Never show the writing.
