@@ -338,3 +338,25 @@ hand's width from their torso, hands resting either side of it, the way a person
 actually puts down a page they are reading. A sheet off to one side of the table
 reads as a prop nobody is holding. State this in the prompt; "on the table in the
 lower left of the frame" puts it a foot away from them.
+
+### Why the scene plates are generated whole, drawing included
+
+Six rounds went into generating a blank sheet and warping the real vendor sketch
+into it. Every round the geometry was wrong somewhere: page facing the lens so the
+subject saw its back, page landscape, page rotated seventy degrees on the table,
+page sitting off to one side instead of in front of the chest.
+
+The platform's own tool had none of those faults, and the reason is not that its
+prompt was better. It generated the scene and the drawing in ONE PASS, so the
+model drew a face already in perspective. There is no quad to get wrong. Pinning
+a fixed, real drawing into a measured quad is the hard version of the problem, and
+it was self-imposed.
+
+So the scene plates now generate the drawing too. The trade:
+
+- The drawing is representative of the product, not a sample of it. The ad does
+  not claim "this is your sketch"; the landing page does the selling.
+- **The AI-content box must be ticked** for both scene plates.
+- No signature is ever generated on these. "Tina Aldea" belongs only on the real
+  sketches in `MALE_1200x800.jpg` and `FEMALE_1200x800.jpg`, which stay unticked
+  because they are photographs of real drawings.
