@@ -321,3 +321,14 @@ Each of these was broken on its own in a separate round. State all three.
 are fitted as x = a*y + b and top/bottom as y = c*x + d; fitting all four the
 same way makes the near-horizontal edges blow up. Always overlay the fitted quad
 on the plate and look at it before compositing.
+
+**Page orientation on the table is the person's, not the viewer's.** The sheet is
+rotated so its top points away from the person reading it, which is how a page
+actually lies when someone reads it. Pass the quad to `composite_sketch.py` as
+`BR;BL;TL;TR` to turn the texture through 180 degrees.
+
+Note the geometry this forces: if the subject faces the camera, the camera is
+opposite them, so a page oriented to them reads upside down to the viewer. There
+is no framing where a flat page on a table faces the subject AND reads upright to
+a camera in front of them. To have both, the page has to be propped or tilted up
+towards the subject with the camera raised and off to their side.
