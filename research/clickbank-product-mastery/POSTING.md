@@ -58,25 +58,25 @@ found is a human on camera (@_austinbecker_: 1,800-view median → 846K, 458×).
 So this format is unproven from a cold start. These five are the cheap test of
 whether that matters.
 
-## Background and text scale, measured off the reference
+## Background and text scale
 
-The first attempt looked like a designed quote card. Two measurable reasons,
-both now fixed:
+The first cut read as a designed quote card; the second was legible only on a
+desktop. Where it landed:
 
-- **The background was a drawn gradient, not a photograph.** It had no room in
-  it. The plate now used is a flat phone-camera shot of a plain wall: ceiling
-  line across the upper left, the back of a head and a shoulder cropped into
-  the bottom-left corner, soft daylight from the right. The subject starts 59%
-  down the frame; the reference's starts at 56%.
-- **The text was about 45% too big and the column far too wide.** The reference
-  runs roughly a 26px body at 1080 wide with a 31px line gap in a ~430px
-  column, breaking at six or seven words, with the block spanning 16%–46% of
-  frame height. Those are the numbers the build now uses. A wide column at a
-  large size is what reads as a graphic.
-
-`plates/wall.png` is the plate in use; `plates/wall-alt.png` is a second take
-held in reserve. A real phone photo of a real wall is still a drop-in swap if
-one turns up.
+- **The background is a photograph, not a drawn gradient.** `plates/wall.png`:
+  plain wall, ceiling line upper left, the back of a head and a shoulder
+  cropped into the bottom-left corner. The subject starts 59% down the frame.
+  `plates/wall-alt.png` is a second take in reserve, and a real phone photo is
+  still a drop-in swap.
+- **Body size is auto-fitted, not fixed.** The build takes the largest size off
+  a ladder that still clears the subject's head, then uses one size for all
+  five so the set is consistent on a grid. Currently **40px** at 1080 wide,
+  with the block spanning 13%–57% of frame height.
+- **Word count is the lever on size.** Measuring the reference off a
+  low-resolution screenshot produced 26px, which was unreadable on a phone.
+  Cutting each post from ~110 words to ~75 bought 40px instead. If the type
+  ever needs to be bigger, shorten the copy -- do not move the text down into
+  the subject.
 
 ## Still true
 

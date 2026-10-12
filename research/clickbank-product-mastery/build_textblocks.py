@@ -24,15 +24,14 @@ DURATION = 5.5          # matched to the post that did 1M on 4.7K followers
 # Measured off the reference frame: body text is roughly 27px at 1080 wide with
 # a 35px line gap, in a column about 58% of frame width, starting ~16% down and
 # ending ~45% down. Text this small is what stops it reading as a quote graphic.
-# Reference block: ~19 lines spanning 16%-44% of frame height, so roughly a
-# 28px line gap, breaking at ~6-7 words. Tight leading and a narrow column are
-# what make it read as typed-on-a-photo rather than as a quote card.
-TITLE_SIZE = 29
-BODY_SIZE = 26
-LINE_H = 31
-PARA_GAP = 16
-TEXT_W = 430
-TOP = 300
+# Size is auto-fitted rather than fixed. Measuring the reference off a
+# low-resolution screenshot produced a number that was too small to read on a
+# phone, so the rule is now: take the largest size that still clears the
+# subject's head, and let the frame decide.
+SIZE_LADDER = [46, 44, 42, 40, 38, 36, 34, 32, 30]   # tried largest first
+COL_RATIO = 17.0        # column width as a multiple of body size -> ~7-8 words
+SUBJECT_TOP = 0.575     # the plate's head starts at 59%; stay above it
+TOP = 250
 INK = (26, 24, 22)
 
 POSTS = [
@@ -40,93 +39,75 @@ POSTS = [
         "slug": "1-gone-quiet",
         "title": "Soulmate Connection",
         "body": """There is someone who stopped replying
-the way they used to. You have read
-it as losing interest. It is not that.
+the way they used to. You read it as
+losing interest. It is not that.
 
-He is aware of how much he feels, and
-he has decided that wanting it this
-badly makes him careless. So he has
-gone quiet to feel in control of
-something. He is not with anyone else.
-He checks. He drafts things he does
-not send.
+He decided that wanting it this badly
+makes him careless, so he went quiet to
+feel in control of something. He is not
+with anyone else. He checks. He drafts
+things he does not send.
 
-You know this is true because you have
-done exactly the same thing and called
-it dignity.
+You know this because you have done it,
+and called it dignity.
 
 Something in the next two weeks forces
-it. A message at the wrong hour, or you
-see him somewhere you did not expect.
-He will not be able to pretend.""",
+it.""",
     },
     {
         "slug": "2-keeps-coming-back",
         "title": "The One Who Keeps Returning",
         "body": """He has left and come back more than
-once, and you have stopped telling
-your friends about it.
+once, and you have stopped telling your
+friends.
 
 He does not come back because he is
 bored. He comes back because every
 attempt to replace you is a comparison,
 and he keeps losing it.
 
-But he has never once been the person
-who stayed, in any part of his life,
-and he does not believe he can start
-with you. He is waiting to be told he
-is already enough as he is. Nobody has
-ever told him that.
+But he has never been the one who
+stayed, in any part of his life, and he
+does not believe he can start now.
 
 The next time he reaches out it will
 not be an apology. It will be a small,
-pointless question. That is what it
-looks like when he is frightened.""",
+pointless question.""",
     },
     {
         "slug": "3-what-hes-not-saying",
         "title": "What He Is Not Saying",
         "body": """You are reading his silence as
-indifference, and you are wrong
-about it.
+indifference. You are wrong about it.
 
-He is an overthinker. He rehearses
-conversations with you that he never
-has. There is an entire version of this
-he has never said out loud, because
-saying it makes it real, and real
-things can be lost.
+He rehearses conversations with you
+that he never has. There is a version
+of this he has never said out loud,
+because saying it makes it real, and
+real things can be lost.
 
-You are more alike than either of you
-has admitted. You both go quiet and
-call it being reasonable.
+You both go quiet and call it being
+reasonable.
 
 One of you has to stop first. It will
-not be him this week. It will be you,
-and you will do it badly, at a stupid
-hour, and it will work anyway.""",
+not be him this week.""",
     },
     {
         "slug": "4-not-met-yet",
         "title": "Someone You Have Not Met",
-        "body": """This one is not about anybody from
-your past.
+        "body": """This is not about anybody from your
+past.
 
 There is a face your mind cannot build.
-You have tried. You get a height, a
-shape, a feeling in your chest, and no
-face -- because your mind cannot
-construct one it has never seen.
-
-That is not a failure of imagination.
-It is the only honest thing about it.
+You get a height, a shape, a feeling in
+your chest, and no face, because your
+mind cannot construct one it has never
+seen.
 
 You are being prepared for someone, and
-the preparation does not look like
-progress. It looks like losing interest
-in things that used to hold you. People
-you wanted a year ago. A job that fits.
+it does not look like progress. It
+looks like losing interest in things
+that used to hold you.
 
 You are not falling apart. You are
 being cleared out.""",
@@ -134,26 +115,20 @@ being cleared out.""",
     {
         "slug": "5-her",
         "title": "She Has Stopped Asking",
-        "body": """She was the one making it easy. You
-let her. Now she has stopped, and you
-are reading it as her cooling off.
+        "body": """She was the one making it easy. You let
+her. Now she has stopped, and you are
+reading it as her cooling off.
 
 It is not that. She has spent months
 being the only one who starts things,
-and she has made a decision she has
-not announced.
+and she has made a decision she has not
+announced.
 
 She is not angry. Angry would be
-easier. She is tired in a way that
-does not argue.
-
-There is a specific thing she has been
-waiting for you to notice without being
-told, and you have walked past it more
-than once.
+easier.
 
 You get a short window. It closes
-quietly, and nobody informs you.""",
+quietly, and nobody tells you.""",
     },
 ]
 
@@ -182,47 +157,72 @@ def wall(seed):
     return img
 
 
-def frame(post, seed):
-    from PIL import Image, ImageDraw, ImageFont
+def _lay_out(d, post, size):
+    """Line-break the post at one body size. Returns the lines and the height."""
+    from PIL import ImageFont
 
-    img = wall(seed)
-    d = ImageDraw.Draw(img)
-    title_f = ImageFont.truetype(f"{FONTS}/InstrumentSans-Bold.ttf", TITLE_SIZE)
-    body_f = ImageFont.truetype(f"{FONTS}/InstrumentSans-Regular.ttf", BODY_SIZE)
+    title_f = ImageFont.truetype(f"{FONTS}/InstrumentSans-Bold.ttf",
+                                 int(size * 1.15))
+    body_f = ImageFont.truetype(f"{FONTS}/InstrumentSans-Regular.ttf", size)
+    col = size * COL_RATIO
+    line_h = int(size * 1.26)
+    para_gap = int(size * 0.72)
 
-    paras = [" ".join(p.split())
-             for p in post["body"].strip().split("\n\n") if p.strip()]
-
-    y = TOP
-    tw = d.textlength(post["title"], font=title_f)
-    d.text(((W - tw) / 2, y), post["title"], font=title_f, fill=INK)
-    y += int(TITLE_SIZE * 2.0)
-
-    for para in paras:
-        line, words = "", para.split()
-        out = []
-        for word in words:
+    rows = [(post["title"], title_f, int(size * 1.15 * 1.8))]
+    for para in (" ".join(p.split())
+                 for p in post["body"].strip().split("\n\n") if p.strip()):
+        line = ""
+        for word in para.split():
             trial = (line + " " + word).strip()
-            if d.textlength(trial, font=body_f) <= TEXT_W or not line:
+            if d.textlength(trial, font=body_f) <= col or not line:
                 line = trial
             else:
-                out.append(line)
+                rows.append((line, body_f, line_h))
                 line = word
-        out.append(line)
-        for ln in out:
-            lw = d.textlength(ln, font=body_f)
-            d.text(((W - lw) / 2, y), ln, font=body_f, fill=INK)
-            y += LINE_H
-        y += PARA_GAP
+        rows.append((line, body_f, line_h))
+        rows.append((None, None, para_gap))
 
-    assert y < H * 0.60, f"{post['slug']}: text block too tall ({y/H:.0%} of frame)"
+    return rows, sum(h for _, _, h in rows)
+
+
+def fit_size(posts):
+    """One body size for the whole set: the largest that fits every post.
+
+    Per-post sizing looked inconsistent across an account's grid, so the
+    longest post decides and the rest match it.
+    """
+    from PIL import Image, ImageDraw
+
+    d = ImageDraw.Draw(Image.new("RGB", (W, H)))
+    budget = H * SUBJECT_TOP - TOP
+    for size in SIZE_LADDER:
+        if all(_lay_out(d, post, size)[1] <= budget for post in posts):
+            return size
+    raise RuntimeError("no size fits every post -- shorten the longest one")
+
+
+def frame(post, size):
+    from PIL import ImageDraw
+
+    img = wall(0)
+    d = ImageDraw.Draw(img)
+    rows, _ = _lay_out(d, post, size)
+
+    y = TOP
+    for text, font, h in rows:
+        if text is not None:
+            tw = d.textlength(text, font=font)
+            d.text(((W - tw) / 2, y), text, font=font, fill=INK)
+        y += h
+
+    print(f"  {post['slug']:22s} block {TOP/H:.0%}-{y/H:.0%}")
     return img
 
 
-def build(post, seed):
+def build(post, size):
     os.makedirs(OUT, exist_ok=True)
     still = os.path.join(OUT, f"{post['slug']}.png")
-    frame(post, seed).save(still)
+    frame(post, size).save(still)
 
     out = os.path.join(OUT, f"{post['slug']}.mp4")
     # a silent audio track rather than none -- some players mishandle a bare
@@ -243,5 +243,7 @@ def build(post, seed):
 
 
 if __name__ == "__main__":
-    for i, post in enumerate(POSTS):
-        build(post, seed=i * 17 + 3)
+    size = fit_size(POSTS)
+    print(f"body size for the whole set: {size}px")
+    for post in POSTS:
+        build(post, size)
