@@ -78,10 +78,12 @@ The first cut read as a designed quote card; the second was legible only on a
 desktop. Where it landed:
 
 - **The background is a photograph, not a drawn gradient.** `plates/wall.png`:
-  plain wall, ceiling line upper left, the back of a head and a shoulder
-  cropped into the bottom-left corner. The subject starts 59% down the frame.
-  `plates/wall-alt.png` is a second take in reserve, and a real phone photo is
-  still a drop-in swap.
+  plain wall, ceiling corner in the upper left, the back of a head and a
+  shoulder cropped into the bottom-left corner. The ceiling runs to 15% of the
+  frame and the subject starts at 66%, so text sits in the clear band between.
+  The original plate's ceiling ran to 35%, which left only 22% for text and is
+  what clipped the title. `plates/wall-alt.png` is a ceiling-free take in
+  reserve; a real phone photo is still a drop-in swap.
 - **Body size is auto-fitted, not fixed.** The build takes the largest size off
   a ladder that still clears the subject's head, then uses one size for all
   five so the set is consistent on a grid. Currently **40px** at 1080 wide,

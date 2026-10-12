@@ -30,8 +30,8 @@ DURATION = 5.5          # matched to the post that did 1M on 4.7K followers
 # subject's head, and let the frame decide.
 SIZE_LADDER = [46, 44, 42, 40, 38, 36, 34, 32, 30]   # tried largest first
 COL_RATIO = 17.0        # column width as a multiple of body size -> ~7-8 words
-SUBJECT_TOP = 0.70      # this plate is clear wall down to 73%
-TOP = 230
+SUBJECT_TOP = 0.64      # this plate's subject starts at 66%
+TOP = 310               # clears the ceiling line, which runs to 15%
 INK = (26, 24, 22)
 
 POSTS = [
@@ -138,10 +138,11 @@ def wall(seed):
     made the first attempt read as a designed quote card rather than a photo
     someone typed on.
 
-    The first plate had a ceiling line running down to 35% of the frame, which
-    left only a 22% band for text and clipped the title. This one is framed with
-    no ceiling at all: clear wall from the top edge down to 73%, where the
-    subject starts.
+    The original plate's ceiling line ran down to 35% of the frame, leaving only
+    a 22% band for text, which is what clipped the title. This one keeps the
+    ceiling -- it is in the reference too, and it stops the frame reading as a
+    blank backdrop -- but confined to the top 15%, with clear wall from there
+    down to 66% where the subject starts. Text sits in between.
     """
     from PIL import Image
 
