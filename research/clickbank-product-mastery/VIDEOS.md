@@ -195,3 +195,28 @@ views and two, and it is the one to make more of.
 
 Delay the Taboola test. The £160 is the experiment; this is a free ticket running
 alongside it.
+
+---
+
+## Asset log
+
+**Voiceovers** — ElevenLabs `eleven_v4`, voice `CH8NA3Iu30hBBcNIzv9I` (Marilyn,
+calm British). Flow `5QckTqgpqOYUCmnk2kFM`. Two takes each, all free on the Ultra
+plan. Files in `vo/`. Script 2 re-rendered with a landing line: use the `v2`
+files, 25.0s, not the 20.7s originals.
+
+**Prop stills** — Higgsfield `gpt_image_2_5`, 9:16, 752×1344, 0.25 credits each.
+
+| # | prop | job id |
+|---|---|---|
+| 1 | blank paper + pencil | `122db5f5-b78e-4596-a05b-53a8b2b4c93a` |
+| 2 | folded scrap + cup | `2cf332cd-a8ce-40f1-8d3f-246a9b1c59fd` |
+| 3 | two mugs of tea | `5e2b4b0a-a965-428d-8579-03d4dc36a090` |
+| 4 | four coins | `9b78ac42-d1f4-4f78-8e97-aaf9c88c6c84` |
+| 5 | half-packed suitcase | `5ac4d3d4-cca9-46da-b552-ad4d05763bf6` |
+
+**Not verified by me.** This container's egress policy blocks the Higgsfield CDN,
+so the stills were generated but never viewed here. They need checking by eye
+before assembly — particularly that image 4 contains exactly four coins, that the
+writing in image 2 is genuinely hidden, and that nothing carries stray text
+despite the NO TEXT instruction.
