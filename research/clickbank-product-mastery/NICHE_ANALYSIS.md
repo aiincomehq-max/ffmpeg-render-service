@@ -45,9 +45,12 @@ Two creators, one premise, both enormous. It works because the viewer physically
 gets up, looks at their own hand, and then comments what they found. It converts
 watching into doing, and doing into commenting.
 
-**4. Production value is irrelevant.**
+**4. Production value is irrelevant, but a human is not.** *(corrected 2026-10-12
+ — see "The error in pattern 4" below.)*
 Almost every entry is logged as "within an hour", static camera, low visual
-change. Several are a single still image with text. Nobody is winning on craft.
+change. Nobody is winning on craft. But "static camera" means the camera does
+not move while **a person sits in front of it talking**. It does not mean a
+still image.
 
 **5. Explicit engagement instructions, crudely stated.**
 "Click here to activate this blessing." "Save this to lock it in." "Comment to
@@ -85,3 +88,54 @@ What they keep:
 - The five-different-formats structure, so the test identifies a shape and not
   just a topic.
 - The kill rule: five videos, none clearing 10,000 views, stop.
+
+
+---
+
+## The error in pattern 4 (found 2026-10-12, after five videos were built wrong)
+
+I read two metadata fields wrong and built the five videos in `VIDEOS.md` to a
+format that does not appear anywhere in this data.
+
+- `visual_changes: Low (static camera)` — I read as "static image". It means the
+  camera is locked off while a person performs in front of it.
+- `style: Faceless text-on-screen` — I read as "no human present". On the one
+  in-niche post carrying that label, a person is still partially in frame.
+
+I never watched a single one of these videos. `vidiq_watch_shortform_content`
+was available the whole time. **Do not log a format claim in this file again
+without having watched the post.**
+
+### Second pull, run deliberately biased toward faceless formats
+
+Query: *"no person on camera — text on screen, objects, hands only, voiceover
+over b-roll"*, format embedding, 100K+ views. Seven of the eight Instagram
+results have a person on camera anyway.
+
+| format | in this niche? | needs a human? | evidence |
+|---|---|---|---|
+| Talking head holding a real prop | yes, dominant | **yes, face** | @floralspirittarot 1.2M on 7.3K followers (276×); @_austinbecker_ 846K on 4.7K (458×); @rashitarot, @luna_starseed, @kiki.kennedy |
+| Hands-only with a real prop, locked-off phone | yes | **hands, no face** | @juliannfrostt 1.3M — hook is a close-up of hands pouring pink salt; @iivymooon 923K (206×) — hook is hands pouring powder on a car floor |
+| Static background + long cold-read text block + a recognisable song, **no voiceover** | yes, one case | no | @chinglung._.p — 1M views on 4.7K followers, 10.5× median, *Fast Car* by Tracy Chapman |
+| Ambient b-roll + one line of text + trending song, 6–10s | **no** — relationship quotes, different niche | no | @thingsineversaid94 724K; @vanessadarling777_ 1.1M |
+
+### What this kills
+
+The five videos in `build/`. A 26–33 second AI-generated still with a calm
+voiceover and two text cards matches nothing in either pull. The one faceless
+in-niche winner has **no voiceover at all** — it is read, not listened to, and
+the song does the emotional work.
+
+### What it leaves
+
+1. **Hands-only with real objects, filmed on a phone.** Matches the second row
+   above, which includes two of the biggest numbers in the sample. Requires
+   someone to physically film; requires no face. The existing voiceovers can sit
+   over it. Cheapest real option.
+2. **The text-block format.** Fully buildable with no filming and no camera, and
+   it has a 1M-view data point on a 4.7K-follower account. Drop the voiceovers,
+   drop the hook/end cards, write a long cold-read text block, use a recognisable
+   song from Instagram's in-app library.
+3. **AI talking head / avatar.** Structurally matches the dominant format without
+   filming. **No evidence either way** — no AI-avatar account appears anywhere in
+   either pull. Untested, and logged here as untested rather than recommended.
