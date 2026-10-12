@@ -210,3 +210,43 @@ purchase was made.
 
 **Attribution confirmed in the live URL:**
 `aff-tinaaldea.com/offer?name=Andrew&tid=...&hopId=...&aff_sub1=a1`
+
+## Ad creative, final (2026-10-12)
+
+**Images:** `ads/FEMALE_1200x800.jpg` and `ads/MALE_1200x800.jpg` — two of the
+vendor's own sample sketches, taken from the offer page, cropped away from the
+paired customer photos, red arrows removed, no rotation. Her signature is left
+intact because the work is hers.
+
+These are photographs of real drawings, so Realize's **"AI content" box should
+be unticked** for them.
+
+**Headlines**
+- `Why You Can't Picture Your Soulmate's Face` (42)
+- `No Photo. Four Questions. Then a Face.` (38)
+
+**Description:** `A personalized digital soulmate sketch, based on a psychic
+reading. No photo needed. For entertainment purposes only.`
+
+Brand `First Drop`, CTA `Learn More`. Two images x two headlines = the four
+variations Realize requires.
+
+### Concepts tried and rejected, with the reason
+
+- **Window photographs** (woman with a phone, no sketch). Generic lifestyle
+  stock — could advertise broadband. Removing the product to avoid rendering it
+  badly threw away the hook.
+- **Envelope reveal** (portrait emerging from an envelope). Killed on a factual
+  mismatch, not aesthetics: **the sketch is delivered digitally.** The vendor's
+  page says "delivered digitally to download and keep" and the quiz ends in an
+  email opt-in. An envelope implies something arrives in the post, which is the
+  kind of mismatch that drives refunds — and refunds come out of a 90%
+  rev-share.
+- **Kitchen-table scene** (woman looking at a sheet of paper). Same mismatch.
+- **Generated sketches in the vendor's style.** Usable only unsigned; signing
+  one "Tina Aldea" would fabricate her work. Also better than her actual
+  samples, which over-promises and raises refunds.
+
+**If a round two is funded,** the honest version of the discovery scene is the
+sketch on a phone screen, since that is how it is actually received — generate
+the scene with a blank screen and composite the real sketch onto it.
