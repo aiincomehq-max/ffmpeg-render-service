@@ -167,3 +167,14 @@ Soulmate in 24 hours and tell you when and where you'll meet", which sits close
 to the claims their affiliate terms forbid affiliates from making. Their page,
 their risk. The bridge pages are deliberately more conservative, and the bridge
 is what the ad network reviews.
+
+**Analytics confirmed (2026-10-12).** Cloudflare Web Analytics is registered for
+read.firstdrophq.com in JS-snippet mode and recorded **3 page views across 1
+visit** — root, /a/ and /b/ in a single session, which is exactly the test that
+was run. Page load 385ms, Core Web Vitals all green. Landed clicks are now
+measurable on our side, so the kill rule's "qualified click" is enforceable.
+
+Every pre-spend step is complete: pages live on a real domain with a valid
+certificate, hoplinks verified carrying the nickname and per-angle sub-ids,
+saturation checked, analytics recording per-path. The only remaining step is
+opening the Taboola account and submitting for review, which is also free.
