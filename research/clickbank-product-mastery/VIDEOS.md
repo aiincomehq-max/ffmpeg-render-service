@@ -220,3 +220,49 @@ so the stills were generated but never viewed here. They need checking by eye
 before assembly — particularly that image 4 contains exactly four coins, that the
 writing in image 2 is genuinely hidden, and that nothing carries stray text
 despite the NO TEXT instruction.
+
+---
+
+## Assembly (2026-10-12)
+
+`build_videos.py` builds all five; pass a slug to rebuild one. Output in
+`build/`, 1080×1920, 30fps, H.264 high / AAC 192k, faststart.
+
+| file | length | hook card | end card from |
+|---|---|---|---|
+| `1-face-test.mp4` | 32.3s | 0.4–4.2s | 27.7s |
+| `2-first-name.mp4` | 26.4s | 0.4–4.2s | 21.8s |
+| `3-if-this-is-you.mp4` | 31.8s | 0.4–4.2s | 27.2s |
+| `4-count-them.mp4` | 32.6s | 0.4–5.9s | 28.6s |
+| `5-stop-waiting.mp4` | 31.8s | 0.4–4.2s | 27.2s |
+
+How each is built:
+
+- One approved still, upscaled to 2160×3840, then a **linear 5.5% push in** across
+  the whole clip via `zoompan`. Linear rather than the incremental form, which
+  jitters on a single image.
+- Text cards are transparent PNGs rendered with Pillow (InstrumentSans-Bold,
+  white on 52%-black rounded pills), overlaid with 0.35s alpha fades. Everything
+  sits inside a 108px gutter, and the end card sits at y≈1310 — above the zone
+  Instagram and TikTok cover with their own UI.
+- **Video 4's four list cards are timed off `silencedetect`** run on the actual
+  voiceover, not estimated: items land at 6.35s, 11.89s, 16.63s and 21.17s,
+  which are the gaps after "One.", "Two.", "Three." and "Four."
+- 1.4s of padded silence after the last word so the end card is readable before
+  the loop restarts.
+
+### Known gaps, deliberately not fixed
+
+- **No prop motion.** Scripts 1, 2 and 5 call for a small action (the pencil
+  setting down a line, the scrap being folded, a shoe dropped in). These are
+  stills, so none of it happens. The outlier analysis says still-image-plus-text
+  posts win in this niche, so this is not worth a video-generation spend before
+  there is a single view of evidence.
+- Video 1 is 32 seconds of a blank page. That is the script's premise, but it is
+  the most likely of the five to lose retention. If it underperforms and the
+  others do not, the still is the suspect, not the script.
+- Image 3's two mugs are both full and only the near one steams; the script asked
+  for one cold and untouched. The voiceover never refers to the mugs, so it does
+  not read as an error.
+
+**Nothing is posted.** These are files on disk awaiting a decision.
