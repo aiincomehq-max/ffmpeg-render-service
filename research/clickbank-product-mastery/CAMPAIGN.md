@@ -7,10 +7,15 @@ $68.72 avg initial commission. Channel: **Taboola**, native, cold.
 
 1. Replace `YOURNICKNAME` in both bridge pages with your ClickBank nickname.
    Two places: `bridge/a/index.html` and `bridge/b/index.html`.
-2. Deploy `bridge/` to Cloudflare Pages on **firstdrophq.com** — not
-   humanupgradehq.com. The health-branded domain doesn't fit a psychic offer,
-   and firstdrophq.com is already on Cloudflare with working SSL.
-   Pages go live at `firstdrophq.com/a/` and `/b/`.
+2. Deploy `bridge/` to Cloudflare Pages on a **subdomain**:
+   **`read.firstdrophq.com`**. Not humanupgradehq.com (health branding, wrong
+   vertical) and not the firstdrophq.com root, which is a live site selling
+   digital products — a psychic advertorial sitting inside it is incoherent to
+   a reviewer, and the logo would lead somewhere unrelated. A subdomain leaves
+   the main site untouched while inheriting the domain's age, which native
+   reviewers weigh more kindly than a domain registered yesterday. The pages
+   brand as "First Drop", so the subdomain reads as an editorial section.
+   Pages go live at `read.firstdrophq.com/a/` and `/b/`.
 3. Verify tracking at zero cost: open `/a/`, click through, confirm the hop
    appears in ClickBank Analytics under `aff_sub1=a1`. Repeat for `b1`. If a hop
    doesn't register, do not launch — the kill rule is unenforceable without it.
