@@ -250,3 +250,30 @@ variations Realize requires.
 **If a round two is funded,** the honest version of the discovery scene is the
 sketch on a phone screen, since that is how it is actually received — generate
 the scene with a blank screen and composite the real sketch onto it.
+
+## Ad images, final (2026-10-12)
+
+Four files in `research/clickbank-product-mastery/ads/`. All four carry a
+**real Tina Aldea sketch** lifted from the vendor's own offer-page PDF — no
+generated artwork is presented as the product.
+
+| File | What it is | AI-content box in Realize |
+|---|---|---|
+| `SCENE_WOMAN_1200x800.jpg` | Woman on a sofa looking at the printed **male** sketch | **tick** — the room and the woman are generated |
+| `SCENE_MAN_1200x800.jpg` | Man at a kitchen table looking at the printed **female** sketch | **tick** — the room and the man are generated |
+| `MALE_1200x800.jpg` | The male sketch alone on cream paper | leave **unticked** — a photograph of a real drawing |
+| `FEMALE_1200x800.jpg` | The female sketch alone on cream paper | leave **unticked** — a photograph of a real drawing |
+
+Each scene shows the opposite sex to the person holding it, because that is
+what the product delivers: you are shown your soulmate, not yourself.
+
+Build method (`composite_sketch.py`): generate the scene with a deliberately
+**blank** A4 **portrait** sheet, read the sheet's four corners off a coordinate
+grid, then inverse-map the real sketch into that quad. Only the low-frequency
+lighting of the plate is carried across, so a hard shadow edge does not land on
+the drawn face and read as dirt on the print.
+
+Mistake worth not repeating: the first pass set a 16:9 frame but never said the
+*sheet* had to be portrait, so the model drew a landscape sheet and a portrait
+sketch could not be laid on it without stretching the face. Orientation of the
+object has to be stated separately from the frame.
