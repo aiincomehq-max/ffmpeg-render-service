@@ -37,7 +37,7 @@ not.
 ## After any deploy
 
 1. Open `https://read.firstdrophq.com/a/`, click the CTA.
-2. Confirm it passes through `/go/a/` and lands on the ClickBank quiz.
+2. Confirm it lands on the ClickBank offer page.
 3. Confirm the hop appears in ClickBank Analytics under `aff_sub1=a1`.
 4. Repeat for `/b/` and `b1`.
 
