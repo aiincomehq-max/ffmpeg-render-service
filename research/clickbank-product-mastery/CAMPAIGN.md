@@ -332,3 +332,9 @@ opposite them, so a page oriented to them reads upside down to the viewer. There
 is no framing where a flat page on a table faces the subject AND reads upright to
 a camera in front of them. To have both, the page has to be propped or tilted up
 towards the subject with the camera raised and off to their side.
+
+**Placement: the sheet goes in front of the subject's chest.** Its near edge a
+hand's width from their torso, hands resting either side of it, the way a person
+actually puts down a page they are reading. A sheet off to one side of the table
+reads as a prop nobody is holding. State this in the prompt; "on the table in the
+lower left of the frame" puts it a foot away from them.
