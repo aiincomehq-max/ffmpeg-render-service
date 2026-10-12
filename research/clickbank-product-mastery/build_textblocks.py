@@ -30,105 +30,97 @@ DURATION = 5.5          # matched to the post that did 1M on 4.7K followers
 # subject's head, and let the frame decide.
 SIZE_LADDER = [46, 44, 42, 40, 38, 36, 34, 32, 30]   # tried largest first
 COL_RATIO = 17.0        # column width as a multiple of body size -> ~7-8 words
-SUBJECT_TOP = 0.575     # the plate's head starts at 59%; stay above it
-TOP = 250
+SUBJECT_TOP = 0.70      # this plate is clear wall down to 73%
+TOP = 230
 INK = (26, 24, 22)
 
 POSTS = [
     {
-        "slug": "1-gone-quiet",
-        "title": "Soulmate Connection",
-        "body": """There is someone who stopped replying
-the way they used to. You read it as
-losing interest. It is not that.
+        "slug": "1-cannot-build",
+        "title": "The Face You Cannot Build",
+        "body": """Close your eyes and picture your
+mother. Every line of it is there.
 
-He decided that wanting it this badly
-makes him careless, so he went quiet to
-feel in control of something. He is not
-with anyone else. He checks. He drafts
-things he does not send.
+Now picture someone you have not met
+yet.
 
-You know this because you have done it,
-and called it dignity.
+You get a height. A shape. A feeling in
+your chest. You do not get a face.
 
-Something in the next two weeks forces
-it.""",
+Your mind holds thousands of faces and
+cannot build one it has never seen.
+
+Which is strange, because you are
+certain you would know them.""",
     },
     {
-        "slug": "2-keeps-coming-back",
-        "title": "The One Who Keeps Returning",
-        "body": """He has left and come back more than
-once, and you have stopped telling your
-friends.
+        "slug": "2-recognise",
+        "title": "You Will Recognise Them",
+        "body": """You will not meet them and slowly
+decide.
 
-He does not come back because he is
-bored. He comes back because every
-attempt to replace you is a comparison,
-and he keeps losing it.
+You will recognise them in about four
+seconds, before you have their name,
+and then spend weeks arguing yourself
+out of it.
 
-But he has never been the one who
-stayed, in any part of his life, and he
-does not believe he can start now.
+It happens around the eyes. People
+always say the eyes.
 
-The next time he reaches out it will
-not be an apology. It will be a small,
-pointless question.""",
+You will not be able to explain it
+without sounding ridiculous, so you
+will not try.""",
     },
     {
-        "slug": "3-what-hes-not-saying",
-        "title": "What He Is Not Saying",
-        "body": """You are reading his silence as
-indifference. You are wrong about it.
+        "slug": "3-almost-them",
+        "title": "Almost Them",
+        "body": """It has happened in a supermarket, or
+on a train. A stranger, for half a
+second, is someone.
 
-He rehearses conversations with you
-that he never has. There is a version
-of this he has never said out loud,
-because saying it makes it real, and
-real things can be lost.
+Then they turn, and they are not.
 
-You both go quiet and call it being
-reasonable.
+That is not loneliness. That is your
+mind running a comparison against a
+face it has never been shown.
 
-One of you has to stop first. It will
-not be him this week.""",
+It keeps running it. That is why
+strangers keep almost working.""",
     },
     {
-        "slug": "4-not-met-yet",
-        "title": "Someone You Have Not Met",
-        "body": """This is not about anybody from your
-past.
+        "slug": "4-already-know",
+        "title": "What You Already Know",
+        "body": """You do not know their face. You know
+other things.
 
-There is a face your mind cannot build.
-You get a height, a shape, a feeling in
-your chest, and no face, because your
-mind cannot construct one it has never
-seen.
+Something about their hands. A sense
+that they are taller than you expect.
+That they are late to things.
 
-You are being prepared for someone, and
-it does not look like progress. It
-looks like losing interest in things
-that used to hold you.
+That the first thing they ever say to
+you will be unremarkable, and you will
+remember it for the rest of your life.
+
+None of that is a face. All of it is a
+description.""",
+    },
+    {
+        "slug": "5-nothing-happening",
+        "title": "Why Nothing Is Happening",
+        "body": """Nothing is happening, and it is
+exhausting.
+
+You have lost interest in people you
+wanted a year ago. Plans have stopped
+appealing. You are not sad. You are
+idling.
+
+This is what the time before looks like
+from the inside. It does not feel like
+preparation. It feels like nothing.
 
 You are not falling apart. You are
 being cleared out.""",
-    },
-    {
-        "slug": "5-her",
-        "title": "She Has Stopped Asking",
-        "body": """She was the one making it easy. You let
-her. Now she has stopped, and you are
-reading it as her cooling off.
-
-It is not that. She has spent months
-being the only one who starts things,
-and she has made a decision she has not
-announced.
-
-She is not angry. Angry would be
-easier.
-
-You get a short window. It closes
-quietly, and nobody tells you.""",
     },
 ]
 
@@ -146,8 +138,10 @@ def wall(seed):
     made the first attempt read as a designed quote card rather than a photo
     someone typed on.
 
-    The subject starts 59% down this plate, so the text block above it never
-    collides with the head.
+    The first plate had a ceiling line running down to 35% of the frame, which
+    left only a 22% band for text and clipped the title. This one is framed with
+    no ceiling at all: clear wall from the top edge down to 73%, where the
+    subject starts.
     """
     from PIL import Image
 

@@ -3,13 +3,27 @@
 Five silent ~5.5s verticals in `build-text/`. Built to the spec taken off the
 one faceless in-niche outlier, @chinglung._.p — 1M views on 4,700 followers.
 
-| file | angle | words |
-|---|---|---|
-| `1-gone-quiet.mp4` | he withdrew; it is fear, not indifference | 115 |
-| `2-keeps-coming-back.mp4` | the one who leaves and returns | 118 |
-| `3-what-hes-not-saying.mp4` | the overthinker; you are alike | 103 |
-| `4-not-met-yet.mp4` | nobody from your past — the face you cannot build | 106 |
-| `5-her.mp4` | gender-flipped, aimed at male viewers | 103 |
+| file | what it is about |
+|---|---|
+| `1-cannot-build.mp4` | you can picture your mother's face and not theirs |
+| `2-recognise.mp4` | you will recognise them in four seconds, around the eyes |
+| `3-almost-them.mp4` | the stranger who is them for half a second |
+| `4-already-know.mp4` | the things you know about them that are not a face |
+| `5-nothing-happening.mp4` | the flat, idling period before |
+
+## Why these five and not the first set
+
+The first set were cold reads about **someone who already exists** -- he went
+quiet, he keeps coming back, she stopped asking. That is generic relationship
+tarot. It would build an audience of people ruminating about an ex.
+
+Soulmate Sketch sells **a drawing of the face of someone you have not met.**
+So every post now runs on that one premise: you do not have their face, you
+have everything except their face, and you would know it instantly if you saw
+it. That leaves the viewer wanting exactly the thing the offer provides, which
+is what makes the link worth adding later.
+
+Nothing in them mentions the product, names it, or links to it.
 
 ## The one step that is not optional
 
