@@ -1,158 +1,196 @@
-# dreamreach.x — first five videos
+# dreamreach.x — first five videos (v2)
 
-**No links, no product, no affiliate mention.** These build an audience in the
-territory the offer sits in. The link comes later, once something lands, for the
-reasons in the account-reputation note below.
+Rewritten against `NICHE_ANALYSIS.md`. The first version was third-person,
+atmospheric and propless; the outlier data says that gets ignored here.
 
-## What these are engineered for
+**Still no links, no product, no affiliate mention.** The account is new. These
+build an audience in the offer's territory; the link comes once something lands.
 
-Not views. **Comments.**
+## The rules these follow, from the data
 
-The measured problem on the existing accounts is not reach — 51,537 views across
-the top 25 posts in five weeks — it is that nobody responds. 598 likes (1.16%),
-55 shares, 67 saves and **five comments**. Content that gets served and scrolled
-past doesn't compound, because comment velocity is what pushes a post into wider
-distribution.
+1. **Second person.** Hand the viewer something about themselves.
+2. **A concrete object on screen in the first second** — something that doesn't
+   make sense yet. Not mood, not an empty room.
+3. **Check-yourself mechanic on two of the five.** It was the strongest format in
+   the whole sample: the same premise ran at 408× and 900× median for two
+   unrelated creators, because the viewer physically does something and then
+   reports back.
+4. **A blunt engagement instruction at the end.** Not a literary question.
+5. **Static camera, one hour of effort.** Nobody in the sample is winning on
+   craft. Several winners are a still image with text.
+6. **Caption opens "For entertainment purposes only."** A 1.4M-view post in the
+   sample does exactly this, so it costs nothing and it is the disclaimer the
+   vendor will require later anyway.
 
-So every script below ends on a question that is easy, personal and
-answerable in three words. That is the whole design.
-
-## Format
-
-Vertical 9:16, 25–35 seconds, roughly 60–80 words of voiceover. Slow visuals —
-one idea per shot, no fast cutting. Calm female voice, unhurried, close-mic.
-Post one a day for five days.
-
-Hashtags: keep to 3–4, specific not generic. `#soulmate` `#dreams`
-`#manifestation` plus one that matches the individual video.
+Vertical 9:16. Calm, unhurried voice, close-mic. Post one a day for five days.
 
 ---
 
-## 1. The face you can't picture
+## 1. The face test  ·  check-yourself  ·  ~30s
 
-*Tests: the core curiosity gap. This is the same idea as bridge page A, so if it
-lands organically it's evidence the paid angle has legs.*
+*The strongest of the five. It is a real cognitive experience — anyone who tries
+it gets the same result — so it is honest, it is directly the offer's premise,
+and it makes the viewer do something.*
+
+**Prop:** a blank sheet of paper and a pencil, lying on a table. Nothing else.
 
 **VO**
-> You can picture your front door. The hallway of your first school. The face of
-> someone you sat next to twenty years ago.
+> Do this with me. It takes four seconds.
 >
-> Now picture the person you haven't met yet.
+> Close your eyes and picture your mother's face. There it is. Every line of it.
 >
-> Nothing. Or almost nothing — a shape, a feeling, a height. Never a face.
+> Now picture someone you have never met.
 >
-> It's strange that a mind which stores thousands of faces can't assemble one it
-> hasn't seen.
+> You got a shape. A height. A feeling in your chest. You did not get a face.
+>
+> Your mind holds thousands of faces and cannot build one it has not seen. Which
+> is strange, because you are completely certain you would know them.
 
-**Visual:** slow push on an empty chair by a window. Then a pencil outline of a
-face, unfinished, on paper. Hold.
+**Visual:** static top-down on the paper and pencil. At "you did not get a face",
+the pencil is picked up and sets down one unfinished line. Hold on the blank page.
 
-**End card:** *What's the one detail you can picture?*
+**End instruction:** *Comment what you got. Shape, height, feeling — whatever came.*
+
+**Caption:** For entertainment purposes only. Try it before you scroll. #soulmate #manifestation #dreams
 
 ---
 
-## 2. Five things people say happened first
+## 2. The first name  ·  check-yourself  ·  ~25s
 
-*Tests: list format. Lists get saves, and saves are a strong distribution signal.*
+*Second check-yourself, because the format earned two slots. The comment is
+pre-written for them — a name — which is the lowest-friction comment there is.*
+
+**Prop:** a folded scrap of paper being written on, the writing hidden from camera.
 
 **VO**
-> Five things people say happened in the weeks before they met someone.
+> A name just came into your head.
 >
-> One. The same name, three times, from three different people.
+> Not the one you would have chosen. The one that arrived before you had a say in
+> it. That is the one.
 >
-> Two. A sudden, pointless urge to be somewhere they never go.
+> People assume the mind offers up who they want. It usually offers up who is
+> unfinished.
 >
-> Three. Dreaming of a room they'd never been in.
->
-> Four. Losing interest in someone they'd wanted for a year.
->
-> Five. A feeling of being early. For what, they couldn't say.
+> There is a difference, and you already know which one yours was.
 
-**Visual:** five quick static frames, one per item, each held 4 seconds. Text on
-screen matching the VO. No motion.
+**Visual:** hands folding the scrap in half, then in half again, then placing it
+under a cup. Static camera throughout. Never show the writing.
 
-**End card:** *Which one's happened to you?*
+**End instruction:** *Comment the first letter. Just the letter.*
+
+**Caption:** For entertainment purposes only. #soulmate #intuition #manifestation
 
 ---
 
-## 3. The thing people say about faces in dreams
+## 3. If this is you  ·  diagnostic  ·  ~35s
 
-*Tests: a folklore claim. Note the framing — this is presented as something
-people say, not as science, because the underlying claim is not established.*
+*The cold-read format that dominates the sample, written as "if this is you"
+rather than as a claim to know. Same mechanic, honest framing.*
+
+**Prop:** two mugs of tea on a table. One steaming. One cold and untouched.
 
 **VO**
-> There's a thing people repeat about dreams: that you can't invent a face. That
-> every stranger you've ever dreamt about is someone you passed once and forgot.
+> If this is you, you will know in about ten seconds.
 >
-> Nobody has really proven that. But it's stuck around, and you can see why.
+> There is someone you have stopped mentioning to your friends. Not because it
+> ended. Because explaining it out loud makes it sound smaller than it is.
 >
-> It means the face you keep almost seeing might not be imagination at all. It
-> might be memory, waiting for context.
+> You check. You do not message. You have a whole conversation with them that
+> they will never hear.
+>
+> And the part nobody says out loud: some of it, you prefer like this. It cannot
+> disappoint you while it stays in your head.
 
-**Visual:** a crowded street, slowed to half speed, faces passing. Then one face
-holds a beat too long and is gone.
+**Visual:** static wide of the two mugs. One slow push in on the cold one. That
+is the entire video.
 
-**End card:** *Ever dreamt a face you didn't recognise?*
+**End instruction:** *If that landed, say "landed" and nothing else.*
+
+**Caption:** For entertainment purposes only. #situationship #soulmate #manifestation
 
 ---
 
-## 4. 3am
+## 4. Count them  ·  list with a built-in comment  ·  ~30s
 
-*Tests: pure feeling, no information. The shortest script. If this outperforms the
-others, the audience wants mood, not content.*
+*The list format, but the engagement is structural — the comment is a number, so
+there is nothing to compose.*
+
+**Prop:** four coins being set down one at a time on a dark surface.
 
 **VO**
-> It never happens during the day.
+> Four things people report in the weeks before they meet someone. Count how many
+> are you.
 >
-> It happens at three in the morning, when you're not doing anything, and the
-> thought arrives fully formed: there's someone out there I would recognise
-> instantly.
+> One. The same name, from three different people, inside a week.
 >
-> And then it's morning and you've got things to do.
+> Two. A pointless urge to be somewhere you never go.
+>
+> Three. Losing interest in someone you wanted for a year.
+>
+> Four. A feeling of being early. For what, you could not say.
+>
+> Most people get one. Two is common. Three is not.
 
-**Visual:** a dark ceiling. A phone screen face-down, glowing faintly. Curtains.
-Nothing moves much.
+**Visual:** one coin placed per item, four static beats. Text on screen matching
+each line. No movement between.
 
-**End card:** *3am or just me?*
+**End instruction:** *Comment your number. Nothing else, just the number.*
+
+**Caption:** For entertainment purposes only. #soulmate #signs #manifestation
 
 ---
 
-## 5. What people get wrong about this
+## 5. Stop waiting to be ready  ·  contrarian  ·  ~30s
 
-*Tests: the mild contrarian take. Disagreement drives comments harder than
-agreement — this one is the most likely to actually get replies.*
+*Disagreement pulls replies harder than agreement. This is the one most likely to
+get an actual argument in the comments, which is the point.*
+
+**Prop:** a half-packed suitcase by a door, lid open, obviously abandoned.
 
 **VO**
-> Most of what gets said about meeting the right person is advice about becoming
-> ready. Work on yourself. Raise your standards. Be the person they're looking
-> for.
+> Everything you have been told about this is about becoming ready. Work on
+> yourself. Raise your standards. Become the person they would be looking for.
 >
-> Fine. But nobody becomes ready. People meet each other mid-mess, half-finished,
-> at the wrong time.
+> Nobody becomes ready.
 >
-> Waiting until you're ready isn't preparation. It's just waiting.
+> People meet each other mid-mess. Half-finished. At the worst possible time,
+> with the wrong job and the wrong flat and three things unresolved.
+>
+> Waiting until you are ready is not preparation. It is just waiting, with better
+> branding.
 
-**Visual:** a half-packed suitcase. A made bed with one side undisturbed. Keep it
-unglamorous.
+**Visual:** static on the suitcase. One shoe gets dropped in near the end. Keep it
+unglamorous — no soft lighting, no styling.
 
-**End card:** *Agree or not?*
+**End instruction:** *Tell me I am wrong in the comments.*
+
+**Caption:** For entertainment purposes only. #soulmate #datingadvice #manifestation
 
 ---
 
 ## Kill rule
 
-Five videos over five days on `dreamreach.x`. **If none clears 10,000 views,
-stop.** More volume will not fix a format that isn't landing, and the existing
-accounts already demonstrate what posting into silence looks like.
+Five videos, five days, on `dreamreach.x`. **If none clears 10,000 views, stop.**
 
-If one does clear it: add the bio link then — by that point the account has both
-an audience and the platform permission, and nothing has been spent proving it.
-Instagram allows bio links with no follower minimum; TikTok personal accounts
-need about 1,000 followers unless you switch to Business, which costs access to
-the trending audio library.
+The sample shows a 702-follower account doing 762,900 views and a 2,600-follower
+account doing 769,400 at 593× its own median — so a new account is not the
+obstacle. If five posts built to the winning pattern all stay flat, the problem
+is something these scripts cannot fix, and more of them will not help.
+
+If one clears it: add the bio link then. Instagram allows it at any follower
+count; TikTok needs ~1,000 followers or a Business account.
+
+## Secondary signal worth watching
+
+Comments, not views. The existing accounts already prove that views without
+replies go nowhere — 51,537 views, five comments. Every script above ends by
+asking for a one-word or one-character comment, because that is the cheapest
+possible action and comment velocity is what compounds reach.
+
+If a video does 3,000 views and 40 comments, that is a better result than 12,000
+views and two, and it is the one to make more of.
 
 ## What this must not do
 
-Delay the paid test. This runs alongside Taboola, not instead of it. Organic here
-is a free lottery ticket with a low strike rate; the £160 is the actual
-experiment.
+Delay the Taboola test. The £160 is the experiment; this is a free ticket running
+alongside it.
