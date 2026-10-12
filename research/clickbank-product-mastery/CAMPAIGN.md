@@ -143,3 +143,27 @@ elsewhere the same blog files soulmate sketch under warm-traffic offers.
 **Ignore the conflicting payout figures** on third-party listing sites ($1.13
 EPC, $0.20 EPC, $25 CPA). Those describe the competing offers, not this one. The
 live marketplace pull is the only figure to trust.
+
+## Deployment state (2026-10-12)
+
+Live at **read.firstdrophq.com** — Cloudflare Worker `firstdrop-read`, static
+assets, custom domain on the firstdrophq.com zone, valid certificate. The
+firstdrophq.com root is a separate project and was not touched.
+
+Tracking verified end to end by clicking each bridge CTA once. Both hops
+resolved with the nickname and sub-id intact and distinct ClickBank hopIds:
+
+```
+/a/ -> aff-tinaaldea.com/?hopId=80368622-...&hop=digitdog&aff_sub1=a1
+/b/ -> aff-tinaaldea.com/?hopId=5f16f738-...&hop=digitdog&aff_sub1=b1
+```
+
+Still to do before spend: confirm both hops appear in ClickBank → Reporting →
+Analytics (the kill rule depends on that reporting working, not just on the
+redirect carrying the parameters), then open the Taboola account.
+
+Noted in passing: the vendor's own sales page says "I will draw your Destined
+Soulmate in 24 hours and tell you when and where you'll meet", which sits close
+to the claims their affiliate terms forbid affiliates from making. Their page,
+their risk. The bridge pages are deliberately more conservative, and the bridge
+is what the ad network reviews.
