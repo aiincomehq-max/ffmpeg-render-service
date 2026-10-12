@@ -178,3 +178,35 @@ Every pre-spend step is complete: pages live on a real domain with a valid
 certificate, hoplinks verified carrying the nickname and per-angle sub-ids,
 saturation checked, analytics recording per-path. The only remaining step is
 opening the Taboola account and submitting for review, which is also free.
+
+## Funnel, verified by walking it (2026-10-12)
+
+Previously inferred from the vendor's affiliate page. Now observed directly.
+
+**The quiz is five steps, four of them questions.**
+
+| step | asked |
+|---|---|
+| 1 | Who are you interested in? (men / women / both) |
+| 2 | When were you born? (day, month, year) |
+| 3 | What is your ethnic background? |
+| 4 | What is your name? |
+| 5 | Confirm, 18+, and consent to email — "Begin to draw my soulmate" |
+
+- **"Four questions" is accurate** and may be used in ad copy. It was written as
+  an inference and withheld from the first ad set until this check.
+- **"No photo needed" is accurate.** No image is requested at any step.
+- **Step 5 is an email opt-in, not a purchase.** The sketch is delivered by
+  email, so the quiz is a lead capture and the $37 offer page comes after the
+  address is given. The published 7.26% CVR is measured hop-to-sale and so
+  already includes this step — the breakeven arithmetic does not change. But
+  the bridge must not imply anything instant, and the resulting mailing list
+  belongs to the vendor, not to us.
+
+**Offer page, same walk:** base advertised at "starting at Just $37", anchored
+against a struck-through $147, with three bonuses stacked to a claimed $262 of
+value. $37 is an advertised starting price, not a verified checkout total — no
+purchase was made.
+
+**Attribution confirmed in the live URL:**
+`aff-tinaaldea.com/offer?name=Andrew&tid=...&hopId=...&aff_sub1=a1`
