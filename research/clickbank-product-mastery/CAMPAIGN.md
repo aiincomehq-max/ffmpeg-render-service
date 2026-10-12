@@ -105,3 +105,41 @@ footer.
 
 Enforcement is three strikes: warning, commission hold, permanent ban with
 commissions forfeited.
+
+## Gate 5 — saturation check (done 2026-10-12)
+
+**Category saturation: high.** ClickBank carries several near-identical
+competing offers — "Soulmate Sketch" (Master Wang / Cosmic Media LLC),
+"Soulmate Sketch 2.0 [Feb 2026]", "Naked Soulmate Sketch — crushing it on
+TikTok", plus off-platform operators (Soulmate Story, Soulgaze Drawing,
+auralyapp). Expect competition on the obvious angles and upward pressure on
+CPCs. Read the other way: Tina Aldea's offer sits at rank #4 with a $4.90 EPC
+*inside* that crowded category, which is a point in its favour rather than
+against — it is winning where many are trying.
+
+**Category reputation: poor, and this matters for angle choice.** Trustpilot
+carries complaints about $1.99 soulmate-sketch trials followed by $39.99
+charges, and about subscriptions people struggled to cancel. Those complaints
+name other operators (soulgazedrawing.com, auralyapp.com), not Tina Aldea — and
+the distinction is real: her offer averages $68.79 with $0.07 of future
+commission, i.e. a one-time sale, not a trial-to-subscription trap. But anyone
+who googles "soulmate sketch review" lands in that mess.
+
+Consequence: **do not run a review or comparison angle.** It sends readers
+straight to the category's complaint footprint. The two angles written here —
+feeling-first and mechanism-first — are editorial and don't invite that search.
+That was the right call by accident; keep it deliberate.
+
+This also partially rehabilitates the old `CUSTOMER_QUALITY=NEGATIVE` verdict
+from the original pipeline. It was reached by a process we later found broken,
+but the underlying signal about the category was not baseless.
+
+**Channel support, first-party:** ClickBank's own blog says native networks such
+as NewsBreak and Taboola work for cold spirituality traffic, cost less than
+Facebook and YouTube and are less saturated, at the cost of smaller audiences
+and more testing needed. That supports the channel pick. Note one inconsistency:
+elsewhere the same blog files soulmate sketch under warm-traffic offers.
+
+**Ignore the conflicting payout figures** on third-party listing sites ($1.13
+EPC, $0.20 EPC, $25 CPA). Those describe the competing offers, not this one. The
+live marketplace pull is the only figure to trust.
