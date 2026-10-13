@@ -1,0 +1,4 @@
+
+# deploy package, rebuild with make_deploy_zip.sh
+firstdrop-read-deploy/
+firstdrop-read-deploy.zip
