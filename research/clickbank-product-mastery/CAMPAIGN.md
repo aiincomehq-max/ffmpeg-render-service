@@ -360,3 +360,10 @@ So the scene plates now generate the drawing too. The trade:
 - No signature is ever generated on these. "Tina Aldea" belongs only on the real
   sketches in `MALE_1200x800.jpg` and `FEMALE_1200x800.jpg`, which stay unticked
   because they are photographs of real drawings.
+
+**Scale and angle: wide, not tight.** The platform's own creative is a wide
+reportage frame - camera well back, the subject side-on and off-centre at about a
+third of the frame height, the whole kitchen in shot, a laptop and mug on the
+table. A tight symmetrical portrait with the subject centred and both hands flat
+either side of the page reads as stock photography. Match the reference's
+distance and asymmetry, not just its subject matter.
