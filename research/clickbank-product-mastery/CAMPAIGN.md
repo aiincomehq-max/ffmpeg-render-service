@@ -398,3 +398,34 @@ than headline 1/2's conditional question. The description carries the
 entertainment-purposes disclaimer, which is what the network looks for on this
 category. If creative review rejects it, the drop-in replacement that keeps the
 mechanism without the assertion is `A Psychic Sketch, From Four Questions` (36).
+
+## Tracking installed (2026-10-13)
+
+Taboola account ID **2125039**. Base pixel in the `<head>` of both bridge pages,
+plus a click handler on the CTA firing a second event:
+
+```js
+window._tfa.push({notify: 'event', name: 'offer_click', id: 2125039});
+```
+
+Conversion rule in Realize step 5 should be built on the event name
+**`offer_click`**, category Lead or Other.
+
+**What this measures, and what it does not.** `offer_click` is the outbound
+click to ClickBank, not a sale. The sale happens on the vendor's domain, which
+we cannot instrument, and ClickBank's own postback is a server-to-server POST
+that a browser pixel cannot receive. So the funnel reads:
+
+| Stage | Measured by |
+|---|---|
+| Impression, click, CTR, CPC | Realize |
+| Landed on the bridge | Cloudflare Web Analytics + `page_view` |
+| Clicked through to the offer | `offer_click` |
+| **Sale** | **ClickBank Analytics only, by `aff_sub1`** |
+
+Reconciling spend against revenue stays a manual join between Realize and
+ClickBank on the `a1` / `b1` sub-ids. Nothing automates it at this budget.
+
+Taboola cannot optimise on `offer_click` either: Maximize Conversions needs 50
+conversions in 7 consecutive days and this campaign will not produce them. The
+rule exists so the data is recorded, not so the algorithm acts on it.
