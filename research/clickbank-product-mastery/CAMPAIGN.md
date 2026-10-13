@@ -474,3 +474,35 @@ pixel is instrumentation for the next test, not a lever for this one.
 No sales at £40 of spend is **not** evidence the offer fails - roughly 130 clicks
 cannot measure a conversion rate. What £40 does measure honestly: CTR, CPC, and
 whether the creative clears review.
+
+### Pixel live (2026-10-13)
+
+Deployed from the Mac by a local Claude Code session, because the cloud session's
+egress proxy denies `api.cloudflare.com` and holds no Cloudflare token. GitHub was
+not used at any point - the account is suspended pending reinstatement request
+#4825729 - so the pages were patched from `bridge-digitdog.zip` and a hand-written
+`wrangler.toml`.
+
+Worker `firstdrop-read` **updated, not created**. Cloudflare account
+`aiincomehq@gmail.com` (9c9c556860c8ff4079dba34164d1bd78). Previous version
+`12053079-1dc1-41df-9c8d-aa7facb68c01`, new version
+`013b84b9-b7e1-4046-a077-da7ea0260147`. Roll back with
+`npx wrangler rollback 12053079-1dc1-41df-9c8d-aa7facb68c01`.
+
+Verified independently from the cloud session against the live domain: both pages
+200, `tb_tfa_script` present inside `<head>`, `page_view` and `offer_click` each
+present once, pixel id `2125039`, Cloudflare beacon intact, hoplinks unchanged
+with `aff_sub1=a1` and `b1`.
+
+Two notes for next time:
+
+- `offer_click` appears **once** per page. An earlier checklist in this session
+  said to expect two; that was a misread of a multi-pattern grep, and the local
+  session was right to refuse the deploy over it.
+- Preview URLs are now enabled on the Worker because `wrangler.toml` does not set
+  them. The bridge is `noindex`, so the exposure is small, but add
+  `preview_urls = false` on the next deploy.
+
+The Mac has no clone of this repository while GitHub is blocked. The deployable
+copy there is `~/Downloads/bridge-digitdog-taboola.zip` plus the four
+`wrangler.toml` lines, which must be kept together to redeploy.
