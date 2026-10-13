@@ -10,6 +10,9 @@
 # deploy replaces the static assets and nothing else.
 name = "firstdrop-read"
 compatibility_date = "2026-10-12"
+# Top level, NOT under [assets] - wrangler warns "Unexpected fields found in
+# assets field" there and silently ignores it, leaving preview URLs enabled.
+preview_urls = false
 
 [assets]
 directory = "./bridge"
