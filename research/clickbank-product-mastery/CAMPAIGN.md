@@ -512,7 +512,7 @@ copy there is `~/Downloads/bridge-digitdog-taboola.zip` plus the four
 | Item | State |
 |---|---|
 | Campaign | 50647792, approved, Pending Start Date |
-| Schedule | 14 - 17 October |
+| Schedule | **15 - 18 October** (moved back a day on 13 Oct so the Taboola support reply lands before spend; end date pushed with it to keep four days and ~£40/day pacing rather than three days at ~£53/day) |
 | Budget | **Lifetime £160** (the budget type is a radio: Daily OR Monthly OR Lifetime, so selecting Lifetime replaced the earlier £10/day - there is no daily figure left to raise) |
 | Pace Ahead | Disabled - even pacing, no 20% front-load |
 | Targeting | United States, 24/7, Web + App |
