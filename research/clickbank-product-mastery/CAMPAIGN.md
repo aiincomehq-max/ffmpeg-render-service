@@ -429,3 +429,43 @@ ClickBank on the `a1` / `b1` sub-ids. Nothing automates it at this budget.
 Taboola cannot optimise on `offer_click` either: Maximize Conversions needs 50
 conversions in 7 consecutive days and this campaign will not produce them. The
 rule exists so the data is recorded, not so the algorithm acts on it.
+
+## Launch state (2026-10-13, payment added)
+
+Campaign **New Mobile Campaign 20261012**, Taboola account **2125039**, under
+`andrew@firstdrophq.com` (magic-link login, no password exists; a second empty
+account may exist under `aiincomehq@gmail.com` from a stray Google sign-in).
+
+| Setting | Value |
+|---|---|
+| Schedule | 14/10 - 17/10 |
+| Daily budget | £10 **(deliberately low)** |
+| Lifetime spending limit | **not set** - Realize does not expose it before go-live |
+| Targeting | United States |
+| Landing page | `read.firstdrophq.com/a/` |
+| Conversion rule | Lead / EVENT / `offer_click` |
+| Payment | added - content review started, up to 48h |
+
+Maximum exposure as it stands is **£40**. That is the whole point of leaving the
+daily at £10: Realize would not let the hard ceiling be set before approval, so
+the daily budget is doing that job until it can be.
+
+### When the campaign goes live, in this order
+
+1. Set **Spending Limit = 160, lifetime** in the campaign's own settings.
+2. Only then raise the daily budget to £40.
+3. Redeploy the bridge Worker so the pixel is live, and verify:
+   `curl -s https://read.firstdrophq.com/a/ | grep -c tb_tfa_script` returns 1.
+
+Reversing 1 and 2 leaves the campaign uncapped at the higher daily rate.
+
+### Reading the result
+
+`offer_click` counts outbound clicks, not sales. Sales are read only in
+ClickBank Analytics filtered on `aff_sub1=a1`. At this budget Taboola cannot
+optimise on conversions either way (it needs 50 in 7 consecutive days), so the
+pixel is instrumentation for the next test, not a lever for this one.
+
+No sales at £40 of spend is **not** evidence the offer fails - roughly 130 clicks
+cannot measure a conversion rate. What £40 does measure honestly: CTR, CPC, and
+whether the creative clears review.
