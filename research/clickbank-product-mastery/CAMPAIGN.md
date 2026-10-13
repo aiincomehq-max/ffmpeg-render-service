@@ -367,3 +367,34 @@ third of the frame height, the whole kitchen in shot, a laptop and mug on the
 table. A tight symmetrical portrait with the subject centred and both hands flat
 either side of the page reads as stock photography. Match the reference's
 distance and asymmetry, not just its subject matter.
+
+## Final ad set, as entered (2026-10-13)
+
+Images: `ads/SCENE_WOMAN_1200x800.jpg` (woman with the male sketch) and
+`ads/SCENE_MAN_1200x800.jpg` (man with the female sketch). Both carry a genuine
+Tina Aldea drawing on the page; the room and the person are generated, so the
+**AI content box is ticked** on both.
+
+| Ad | Image | Headline | Chars |
+|---|---|---|---|
+| 1 | Woman | What Could Your Soulmate Look Like? | 35 |
+| 2 | Man | What Could Your Soulmate Look Like? | 35 |
+| 3 | Woman | Get a Psychic Sketch of Your Soulmate | 37 |
+| 4 | Man | Get a Psychic Sketch of Your Soulmate | 37 |
+
+Description, all four: `A personalized digital soulmate sketch, based on a
+psychic reading. No photo needed. For entertainment purposes only.`
+
+Brand `First Drop`. CTA `Learn More`. All four to
+`https://read.firstdrophq.com/a/`.
+
+`/b/` stays deployed and verified but is not in this campaign: Taboola's own
+performance guidance is one destination URL per campaign, and at this budget a
+two-page split produces no readable answer. It is the next test, not a
+half-finished one.
+
+Headline 3/4 asserts the sketch is of your soulmate, which is a stronger claim
+than headline 1/2's conditional question. The description carries the
+entertainment-purposes disclaimer, which is what the network looks for on this
+category. If creative review rejects it, the drop-in replacement that keeps the
+mechanism without the assertion is `A Psychic Sketch, From Four Questions` (36).
