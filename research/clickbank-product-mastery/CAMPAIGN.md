@@ -446,9 +446,14 @@ account may exist under `aiincomehq@gmail.com` from a stray Google sign-in).
 | Conversion rule | Lead / EVENT / `offer_click` |
 | Payment | added - content review started, up to 48h |
 
-Maximum exposure as it stands is **£40**. That is the whole point of leaving the
-daily at £10: Realize would not let the hard ceiling be set before approval, so
-the daily budget is doing that job until it can be.
+**Correction (2026-10-13).** An earlier note in this file called £40 the maximum
+exposure. That was wrong. Taboola can overdeliver against a daily budget, and the
+day boundary follows the account timezone, not the advertiser's. Four days at £10
+is therefore roughly £40-£50, not a hard £40.
+
+The lifetime Spending Limit is a **mandatory launch control, not a nicety**. The
+low daily budget narrows the exposure while Realize withholds the ceiling before
+go-live; it does not replace it.
 
 ### When the campaign goes live, in this order
 
