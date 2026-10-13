@@ -506,3 +506,47 @@ Two notes for next time:
 The Mac has no clone of this repository while GitHub is blocked. The deployable
 copy there is `~/Downloads/bridge-digitdog-taboola.zip` plus the four
 `wrangler.toml` lines, which must be kept together to redeploy.
+
+## Final launch state (2026-10-13)
+
+| Item | State |
+|---|---|
+| Campaign | 50647792, approved, Pending Start Date |
+| Schedule | 14 - 17 October |
+| Budget | **Lifetime £160** (the budget type is a radio: Daily OR Monthly OR Lifetime, so selecting Lifetime replaced the earlier £10/day - there is no daily figure left to raise) |
+| Pace Ahead | Disabled - even pacing, no 20% front-load |
+| Targeting | United States, 24/7, Web + App |
+| Objective | Engagement. Bidding: **Maximize Conversions** |
+| Ads | 4 live: 2 images x 2 headlines, AI-content ticked |
+| Landing page | `read.firstdrophq.com/a/` for all four |
+| Pixel | Live and **receiving** - verified by curl and by `offer_click` appearing in Active Events |
+| Conversion rule | **Not created.** Realize's category dropdown returns an empty list, and the field is required. Support ticket raised 13 Oct. |
+| Billing | Charged at every £100 of spend, or 1 November |
+
+### The one unresolved risk
+
+Bidding is Maximize Conversions while **no conversion is defined on the
+account**, because of the dropdown fault. [Guessing] how Taboola handles that:
+it may deliver normally, underdeliver, or bid erratically. The support ticket
+asks them directly, and the answer should arrive around launch.
+
+**The tell is spend.** If Realize has spent near £0 after a full day of running,
+that is this problem showing up, and the fix is to switch the campaign to a
+fixed CPC bid. If it spends normally, the concern was unfounded - leave it.
+
+Do not pre-emptively change the bid strategy on a guess the night before launch.
+That was proposed in session and withdrawn: changing a live approved campaign to
+route around a cosmetic reporting field is the wrong trade.
+
+### What to read, and what it can and cannot tell you
+
+1. **Realize**: spend, clicks, CTR, CPC. Set the date range to 13-20 October;
+   "Last 7 Days" resolves to the week *before* today and shows zeroes.
+2. **ClickBank > Analytics**, filtered `aff_sub1=a1`: hops and sales. This is the
+   only place a sale appears.
+3. **Tracking > Active Events**: `offer_click` running total, available whether or
+   not the conversion rule ever gets created.
+
+At roughly 130 clicks, **no sales is not evidence the offer fails** - that volume
+cannot measure a conversion rate. CTR and CPC are the only numbers this budget
+measures honestly, and they decide whether more money is worth releasing.
