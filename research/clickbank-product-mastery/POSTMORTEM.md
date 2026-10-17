@@ -4,19 +4,29 @@ Account: Taboola/Realize 2125039 (andrew@firstdrophq.com)
 Campaign: 50647792, "Soulmate Sketch | US | bridge-a | Oct15 | £160"
 Offer: ClickBank vendor `tinapsc`, affiliate `digitdog`, `aff_sub1=a1`
 Ran: 16 October 2026. Paused and ended the same day.
-Spend: approximately £28.
+Spend: £33.
 
 ## Result
 
 | Metric | Value |
 |---|---|
-| Realize spend | ~£28 |
-| Realize clicks | 135+ |
+| Realize spend | **£33** |
+| Realize impressions | **78,900** |
+| Realize clicks | **321** |
+| Realize CTR | **0.41%** |
+| Realize CPC | **£0.103** |
 | ClickBank total hops | 89 |
 | ClickBank unique hops | 83 |
+| **Clicks that reached the offer** | **28%** |
+| **Cost per visitor delivered** | **£0.40** |
 | Initial Order Form Impressions | **0** |
 | Initial Sales | **0** |
 | Gross earnings | **£0** |
+
+Figures from Realize's own 24-hour performance email of 17 October. Earlier
+working numbers in this session (135 clicks, ~£28) were read mid-run from a
+report whose date range excluded part of the spend. They understated both the
+click count and the size of the delivery gap.
 
 Two failures, one on each side of the link.
 
@@ -63,11 +73,23 @@ cheapest available clicks, which in Taboola's inventory means app and arcade
 placements where clicks are largely accidental.
 
 The symptom shows in the gap between what was billed and what arrived:
-135+ clicks charged, 83 unique arrivals recorded at the destination.
-Roughly 40% of billed clicks never reached the page they were paying for.
+**321 clicks charged, 89 hops recorded at the destination. 72% of billed
+clicks never reached the page they were paying for.** At £33 spend, roughly
+£24 bought clicks that went nowhere.
 
-[Likely, not proven] This inference fits the numbers but cannot be
-demonstrated without placement-level data.
+A CTR of 0.41% across 78,900 impressions is weak for native placement and is
+consistent with delivery into low-intent inventory.
+
+[Likely, not proven] The causal link to the bid strategy fits the numbers but
+cannot be demonstrated without placement-level data. The size of the gap,
+however, is measured, not inferred.
+
+**Taboola flagged this themselves, twice, and it was dismissed.** The Realize
+dashboard carried a "Missing Conversion Setup" alert, and an automated account
+health check emailed on 17 October said: "define at least one conversion goal
+using our codeless conversions tool. This is a critical step that will allow
+our algorithm to optimize your campaign." Both were read in session as generic
+upsell prompts. They were not. They named the live defect.
 
 ## What this does and does not justify
 
@@ -116,8 +138,8 @@ session and withdrawn as over-reaction. It was not an over-reaction.
 
 ## Money
 
-- Spent: ~£28
-- Remaining of the £160: ~£132, unspent and still available
-- Taboola will bill the ~£28 on 1 November, or sooner at a £100 threshold
+- Spent: £33
+- Remaining of the £160: £127, unspent and still available
+- Taboola will bill the £33 on 1 November, or sooner at a £100 threshold
   that will now not be reached
 - Refund request filed against Case #01250920
