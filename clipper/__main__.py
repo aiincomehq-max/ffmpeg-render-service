@@ -198,7 +198,13 @@ def cmd_auto(a) -> None:
     src_cfg = CH.get("sources", {})
     done, new_ids = seen(), set()
     if src_cfg.get("youtube_streams"):
-        for st in scout.latest_streams(src_cfg["youtube_streams"], a.streams):
+        # YouTube only shows "Most replayed" on a stream some weeks after it airs, so the newest streams
+        # usually have no heatmap. Look further back and clip the newest unseen streams that HAVE one;
+        # too-new streams stay unseen and are picked up on a later day.
+        used = 0
+        for st in scout.latest_streams(src_cfg["youtube_streams"], a.lookback):
+            if used >= a.streams:
+                break
             if st["id"] in done:
                 continue
             print(f"stream: {st['title'][:70]}")
@@ -206,6 +212,7 @@ def cmd_auto(a) -> None:
             if not peaks:
                 print("  no 'Most replayed' data yet (too new?) -> skipping for now")
                 continue
+            used += 1
             for s0, s1, v in peaks:
                 sec = f"{scout.fmt(s0)}-{scout.fmt(s1)}"
                 print(f"  peak {sec} (replay score {v})")
@@ -390,7 +397,8 @@ def main() -> None:
     au = sub.add_parser("auto", help="scout + clip + render + review page (run daily)")
     au.add_argument("--count", type=int, default=4)
     au.add_argument("--min-virality", type=int, default=7)
-    au.add_argument("--streams", type=int, default=2, help="YouTube: newest N streams to check")
+    au.add_argument("--streams", type=int, default=2, help="YouTube: clip the newest N streams that have 'Most replayed' data")
+    au.add_argument("--lookback", type=int, default=12, help="YouTube: how many recent streams to search for those")
     au.add_argument("--peaks", type=int, default=8, help="YouTube: 'Most replayed' peaks per stream")
     au.add_argument("--clips", type=int, default=10, help="Twitch: top N clips per streamer")
     au.add_argument("--range", default="7d", choices=["24hr", "7d", "30d"])

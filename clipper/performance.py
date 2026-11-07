@@ -30,7 +30,7 @@ def _now() -> dt.datetime:
 def fetch_stats(url: str) -> dict | None:
     """views/likes/comments for a public YouTube/TikTok/Instagram URL via yt-dlp."""
     try:
-        out = subprocess.run(["yt-dlp", "-J", "--no-warnings", "--skip-download", url],
+        out = subprocess.run(["yt-dlp", "--ignore-config", "-J", "--no-warnings", "--skip-download", url],
                              capture_output=True, text=True, timeout=120, check=True).stdout
         j = json.loads(out)
         return {"views": j.get("view_count") or 0, "likes": j.get("like_count") or 0,

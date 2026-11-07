@@ -16,7 +16,7 @@ def _section_tag(section: str | None) -> str:
 
 
 def info(url: str) -> dict:
-    out = subprocess.run(["yt-dlp", "-J", "--no-warnings", url], capture_output=True, text=True, check=True).stdout
+    out = subprocess.run(["yt-dlp", "--ignore-config", "-J", "--no-warnings", url], capture_output=True, text=True, check=True).stdout
     j = json.loads(out)
     return {"id": j["id"], "title": j.get("title", ""), "upload_date": j.get("upload_date", ""),
             "duration": j.get("duration"), "channel": j.get("channel", ""), "url": url}
@@ -31,7 +31,7 @@ def download(url: str, section: str | None = None, meta: dict | None = None) -> 
     meta["vod_key"] = out.stem
     if out.exists():
         return out, meta
-    cmd = ["yt-dlp", "--no-warnings", "-f", "bv*[height<=1080][ext=mp4]+ba[ext=m4a]/bv*[height<=1080]+ba/b[height<=1080]/b",
+    cmd = ["yt-dlp", "--ignore-config", "--no-warnings", "-f", "bv*[height<=1080][ext=mp4]+ba[ext=m4a]/bv*[height<=1080]+ba/b[height<=1080]/b",
            "--merge-output-format", "mp4", "-o", str(out), url]
     if section:
         cmd[1:1] = ["--download-sections", f"*{section}", "--force-keyframes-at-cuts"]

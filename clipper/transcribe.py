@@ -14,8 +14,21 @@ CACHE = ROOT / "data" / "transcripts"
 def extract_audio(video: Path) -> Path:
     wav = video.with_suffix(".16k.wav")
     if not wav.exists():
-        subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(video), "-vn", "-ac", "1", "-ar", "16000", str(wav)], check=True)
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(video), "-vn", "-ac", "1", "-ar", "16000", "-c:a", "pcm_s16le", str(wav)], check=True)
     return wav
+
+
+def load_wav(wav: Path):
+    """16 kHz mono 16-bit WAV -> float32 array in [-1, 1]. We decode it ourselves because faster-whisper's
+    own decoder (PyAV) breaks on new PyAV releases (`open() got an unexpected keyword 'metadata_errors'`)."""
+    import wave
+
+    import numpy as np
+
+    with wave.open(str(wav), "rb") as f:
+        assert f.getframerate() == 16000 and f.getnchannels() == 1 and f.getsampwidth() == 2, "expected 16k mono s16"
+        pcm = np.frombuffer(f.readframes(f.getnframes()), dtype="<i2")
+    return pcm.astype(np.float32) / 32768.0
 
 
 def transcribe(video: Path, key: str, model_name: str | None = None) -> dict:
@@ -29,7 +42,7 @@ def transcribe(video: Path, key: str, model_name: str | None = None) -> dict:
     model_name = model_name or os.environ.get("CLIPPER_WHISPER", "small.en")
     model = WhisperModel(model_name, device="auto", compute_type="int8")
     wav = extract_audio(video)
-    segs, _ = model.transcribe(str(wav), word_timestamps=True, vad_filter=True, language="en")
+    segs, _ = model.transcribe(load_wav(wav), word_timestamps=True, vad_filter=True, language="en")
     out = {"segments": [], "words": []}
     for s in segs:
         out["segments"].append({"s": round(s.start, 2), "e": round(s.end, 2), "text": s.text.strip()})

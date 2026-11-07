@@ -210,6 +210,52 @@ class TestLearningLoop(unittest.TestCase):
         self.assertIn("YOUR CHANNEL'S OWN RESULTS", moments._system(self.ch))
 
 
+class TestLiveServiceFixes(unittest.TestCase):
+    def test_ytdlp_ignores_user_config(self):
+        # a user's ~/.config/yt-dlp/config (e.g. an unquoted --output with spaces) must not break us
+        import subprocess as sp
+        from unittest import mock
+        seen = []
+
+        def fake_run(cmd, **kw):
+            seen.append(cmd)
+            return sp.CompletedProcess(cmd, 0, stdout='{"id": "x", "entries": []}', stderr="")
+        with mock.patch("subprocess.run", fake_run):
+            scout.latest_streams("https://www.youtube.com/@x/streams")
+            scout.stream_peaks("https://www.youtube.com/watch?v=x")
+            from clipper import ingest
+            ingest.info("https://www.youtube.com/watch?v=x")
+        self.assertTrue(seen and all(c[0] == "yt-dlp" and "--ignore-config" in c for c in seen))
+
+    def test_load_wav_without_pyav(self):
+        import tempfile
+        import wave
+        import numpy as np
+        from clipper.transcribe import load_wav
+        with tempfile.TemporaryDirectory() as d:
+            f = Path(d, "a.wav")
+            with wave.open(str(f), "wb") as w:
+                w.setnchannels(1), w.setsampwidth(2), w.setframerate(16000)
+                w.writeframes(np.array([0, 16384, -32768], dtype="<i2").tobytes())
+            a = load_wav(f)
+        self.assertEqual(a.dtype, np.float32)
+        self.assertEqual(a.tolist(), [0.0, 0.5, -1.0])
+
+
+class TestFFmpegPath(unittest.TestCase):
+    def test_prefers_full_build(self):
+        import tempfile
+        from clipper import prefer_full_ffmpeg
+        with tempfile.TemporaryDirectory() as d:
+            Path(d, "ffmpeg").write_text("")
+            env = {"PATH": "/usr/bin"}
+            self.assertEqual(prefer_full_ffmpeg((d,), env), d)
+            self.assertTrue(env["PATH"].startswith(d + os.pathsep))
+            prefer_full_ffmpeg((d,), env)
+            self.assertEqual(env["PATH"].count(d), 1)
+            self.assertIsNone(prefer_full_ffmpeg(("/nonexistent",), {"PATH": "/usr/bin"}))
+
+
 @unittest.skipUnless(os.environ.get("RUN_RENDER") == "1", "set RUN_RENDER=1 for the slow render test")
 class TestRender(unittest.TestCase):
     def test_render_end_to_end(self):

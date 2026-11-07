@@ -17,7 +17,7 @@ PAD_BEFORE, PAD_AFTER = 45, 20
 
 
 def _ytdlp_json(url: str, flat: bool = False) -> dict:
-    cmd = ["yt-dlp", "-J", "--no-warnings"] + (["--flat-playlist"] if flat else []) + [url]
+    cmd = ["yt-dlp", "--ignore-config", "-J", "--no-warnings"] + (["--flat-playlist"] if flat else []) + [url]
     return json.loads(subprocess.run(cmd, capture_output=True, text=True, check=True).stdout)
 
 
