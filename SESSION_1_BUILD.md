@@ -19,6 +19,7 @@
 | `vision.py` | Visual QA gate: Claude checks 8 frames per moment, drops ones that are boring to watch, fixes payoff timing | ⚠️ untested (no API key), fails open |
 | wholesome format | `type: wholesome` moments get soft emotional music, gold captions, ❤️‍🩹, no flash/thud (deagzzz style, the biggest category) | ✅ |
 | `tools/setup_mac.sh` / `tools/schedule.sh` | One-command setup (.env for the key) · daily launchd autopilot + macOS notification | ⚠️ syntax-checked only (needs a Mac) |
+| auto-posting | `review` = approve page on localhost:8765: pick/edit title, tick YouTube/TikTok/Instagram, Approve → uploaded + scheduled via Blotato into the next free slot (`post_times` in channels.json, default 12:30/17:30/21:00) | ✅ dry-run end to end; ⚠️ live Blotato API untested (docs/API host blocked in cloud session; verify endpoint paths in `clipper/blotato.py` against help.blotato.com/api on first real post) |
 | review page | `out/<channel>/<date>/review.html`: watch every Short + its 3 titles, post the best | ✅ |
 | `assets/` | Montserrat Black (OFL), Twemoji PNGs (CC-BY), SFX + placeholder phonk loops (generated from scratch, royalty-free) | ✅ |
 
@@ -57,7 +58,8 @@ Once created, put the real handle into `channels.json` (replace `@CHANGE_ME_...`
 ```bash
 python -m clipper --channel speed auto     # newest streams → "Most replayed" peaks → moments → visual QA → 4 Shorts → review.html
 python -m clipper --channel kai auto       # top Twitch clips this week → same
-# open out/<channel>/<date>/review.html, post the best 2–4, done.
+python -m clipper --channel speed review     # approve page → Approve = scheduled on YouTube/TikTok/IG via Blotato
+# (with tools/schedule.sh the approve page opens by itself after the daily run)
 ```
 
 Manual mode (a specific stream/section) is still there:
@@ -80,8 +82,9 @@ python -m clipper --channel speed comp        # "Speed cant X" comp (Kai: "Kai c
    - payoff timing (`payoff_t` accuracy). If it's often late or early, add a vision check: send 6 frames around payoff_t to Claude to confirm.
    - crop: face tracking is on (`CLIPPER_TRACK=0` disables). Check it follows Speed; tune `DEADZONE`/`EASE` in `track.py`.
    - caption size and position, tag wording, music level.
-4. [ ] Upload the 3 best manually in YouTube Studio (title from posts.json, description already includes the credit).
-5. [ ] Commit fixes to `claude/tender-goodall-hg7yeu`.
+4. [ ] Connect the new YouTube (+ TikTok/IG) account in Blotato, run `python -m clipper --channel speed accounts`, put the ids into channels.json → blotato.
+5. [ ] First real post: approve ONE Short with "Post now" to YouTube only, and check it appears correctly. If the Blotato call fails, fix the endpoint paths/body in `clipper/blotato.py` using help.blotato.com/api. Until BLOTATO_API_KEY is set everything is a dry run (logged to data/<channel>/dryrun_posts.jsonl).
+6. [ ] Commit fixes to `claude/tender-goodall-hg7yeu`.
 
 ## Next sessions (not session 1)
 `escalation_levels` / `timeline_progression` / `wholesome_fan` presets (style in `styles/speed_v2.json`) · auto-watch Speed's channel for new streams (cron/launchd + `yt-dlp --dateafter`) · auto-upload (YouTube Data API or Blotato) · analytics feedback into the selection prompt.

@@ -19,7 +19,17 @@
     ],
     "sources": {
       "youtube_streams": "https://www.youtube.com/@IShowSpeed/streams"
-    }
+    },
+    "blotato": {
+      "youtube": "",
+      "tiktok": "",
+      "instagram": ""
+    },
+    "post_times": [
+      "12:30",
+      "17:30",
+      "21:00"
+    ]
   },
   "kai": {
     "streamer": "Kai Cenat",
@@ -42,7 +52,17 @@
       "twitch_clips": [
         "kaicenat"
       ]
-    }
+    },
+    "blotato": {
+      "youtube": "",
+      "tiktok": "",
+      "instagram": ""
+    },
+    "post_times": [
+      "12:30",
+      "17:30",
+      "21:00"
+    ]
   },
   "core": {
     "streamer": "Lacy, StableRonaldo and the Core boys",
@@ -65,6 +85,16 @@
         "lacy",
         "stableronaldo"
       ]
-    }
+    },
+    "blotato": {
+      "youtube": "",
+      "tiktok": "",
+      "instagram": ""
+    },
+    "post_times": [
+      "12:30",
+      "17:30",
+      "21:00"
+    ]
   }
 }

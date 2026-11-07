@@ -25,7 +25,7 @@ cat > "$PLIST" <<EOF
   <key>Label</key><string>$LABEL</string>
   <key>ProgramArguments</key><array>
     <string>/bin/bash</string><string>-lc</string>
-    <string>cd "$REPO" &amp;&amp; source .venv/bin/activate &amp;&amp; git pull -q || true; python -m clipper --channel $CH auto</string>
+    <string>cd "$REPO" &amp;&amp; source .venv/bin/activate &amp;&amp; git pull -q || true; python -m clipper --channel $CH auto --serve</string>
   </array>
   <key>StartCalendarInterval</key><dict><key>Hour</key><integer>$HOUR</integer><key>Minute</key><integer>$MIN</integer></dict>
   <key>StandardOutPath</key><string>$REPO/data/$CH/auto.log</string>

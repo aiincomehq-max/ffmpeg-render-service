@@ -28,6 +28,11 @@ if ! grep -q '^ANTHROPIC_API_KEY=' .env; then
   [ -n "$KEY" ] && echo "ANTHROPIC_API_KEY=$KEY" >> .env
 fi
 
+if ! grep -q '^BLOTATO_API_KEY=' .env; then
+  read -rsp "Blotato API key for auto-posting (Blotato > Settings > API; Enter to skip = dry run): " BKEY; echo
+  [ -n "$BKEY" ] && echo "BLOTATO_API_KEY=$BKEY" >> .env
+fi
+
 read -rp "Channel key to set up [speed]: " CHKEY; CHKEY=${CHKEY:-speed}
 read -rp "Its YouTube @handle (Enter to skip): " HANDLE
 if [ -n "$HANDLE" ]; then
@@ -54,5 +59,7 @@ cat <<EOF
 
 Setup done.
   Daily run:      source .venv/bin/activate && python -m clipper --channel $CHKEY auto
-  Autopilot:      bash tools/schedule.sh $CHKEY 11:00     (runs every day at 11:00, notifies you)
+  Approve+post:   python -m clipper --channel $CHKEY review   (http://localhost:8765)
+  Blotato ids:    python -m clipper --channel $CHKEY accounts (copy ids into channels.json → blotato)
+  Autopilot:      bash tools/schedule.sh $CHKEY 11:00     (runs daily, notifies you, approve page stays up 12h)
 EOF

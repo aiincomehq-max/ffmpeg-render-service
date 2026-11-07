@@ -1,6 +1,7 @@
 """CLI.
 
   python -m clipper --channel speed auto          # DAILY: scout new streams/clips, clip, render, review.html
+  python -m clipper --channel speed review        # approve + schedule posts (YouTube/TikTok/IG via Blotato)
   python -m clipper --channel speed run <vod_url> [--section 01:00:00-01:45:00] [--count 3]
   python -m clipper --channel kai   comp [--skill reflexes]
   python -m clipper --channel core  skills
@@ -199,7 +200,10 @@ def cmd_auto(a) -> None:
     library.mark_used([m["_id"] for m in best])
     review = write_review(d)
     print(f"REVIEW: open {review}")
-    notify(f"{len(best)} {CH['key']} Shorts ready to review")
+    notify(f"{len(best)} {CH['key']} Shorts ready: open localhost:8765 to approve")
+    if a.serve and best:
+        from .review_server import serve
+        serve(CH, d, 8765, open_browser=True, timeout_h=12)
 
 
 def cmd_run(a) -> None:
@@ -245,6 +249,26 @@ def cmd_comp(a) -> None:
                    "description": f"{CH['credit']}\n{CH['hashtags']}"})
     library.mark_used([fails[0]["_id"]] + [w["_id"] for w in wins[:5]])
     print("->", out)
+
+
+def cmd_review(a) -> None:
+    from .review_server import latest_day, serve
+    base = OUT / CH["key"]
+    day = base / a.date if a.date else latest_day(base)
+    if not day or not (day / "posts.json").exists():
+        print(f"Nothing to review in {base}. Run: python -m clipper --channel {CH['key']} auto")
+        return
+    serve(CH, day, a.port, open_browser=not a.no_browser, timeout_h=a.hours)
+
+
+def cmd_accounts(a) -> None:
+    from . import blotato
+    if blotato.dry_run():
+        print("Set BLOTATO_API_KEY in .env first (Blotato > Settings > API).")
+        return
+    for acc in blotato.accounts():
+        print(json.dumps(acc, ensure_ascii=False))
+    print(f"\nCopy the ids for this channel's YouTube / TikTok / Instagram into channels.json → {CH['key']} → blotato.")
 
 
 def cmd_skills(a) -> None:
@@ -307,6 +331,13 @@ def main() -> None:
     au.add_argument("--peaks", type=int, default=8, help="YouTube: 'Most replayed' peaks per stream")
     au.add_argument("--clips", type=int, default=10, help="Twitch: top N clips per streamer")
     au.add_argument("--range", default="7d", choices=["24hr", "7d", "30d"])
+    au.add_argument("--serve", action="store_true", help="after rendering, keep the approve page up for 12h")
+    rv = sub.add_parser("review", help="approve-and-post page on http://localhost:8765")
+    rv.add_argument("--date", help="YYYY-MM-DD (default: latest)")
+    rv.add_argument("--port", type=int, default=8765)
+    rv.add_argument("--hours", type=float, default=0, help="auto-stop after N hours (0 = until Ctrl+C)")
+    rv.add_argument("--no-browser", action="store_true")
+    sub.add_parser("accounts", help="list Blotato accounts (to fill channels.json → blotato)")
     sub.add_parser("skills")
     sub.add_parser("demo")
     load_env()
@@ -316,7 +347,7 @@ def main() -> None:
     library.CHANNEL = a.channel
     if a.cmd == "demo":
         library.CHANNEL = CH["key"] = "demo"
-    {"run": cmd_run, "auto": cmd_auto, "comp": cmd_comp, "skills": cmd_skills, "demo": cmd_demo}[a.cmd](a)
+    {"run": cmd_run, "auto": cmd_auto, "review": cmd_review, "accounts": cmd_accounts, "comp": cmd_comp, "skills": cmd_skills, "demo": cmd_demo}[a.cmd](a)
 
 
 if __name__ == "__main__":
