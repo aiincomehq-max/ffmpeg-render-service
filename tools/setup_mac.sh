@@ -62,4 +62,5 @@ Setup done.
   Approve+post:   python -m clipper --channel $CHKEY review   (http://localhost:8765)
   Blotato ids:    python -m clipper --channel $CHKEY accounts (copy ids into channels.json → blotato)
   Autopilot:      bash tools/schedule.sh $CHKEY 10:00     (runs daily, notifies you, approve page stays up 12h)
+  Twitch channels also: bash tools/schedule.sh kai 01:00 night   (1am: auto-posts the strongest fresh Short)
 EOF

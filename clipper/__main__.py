@@ -161,6 +161,32 @@ def mark_seen(ids: set) -> None:
     f.write_text(json.dumps(sorted(seen() | ids)))
 
 
+def autopost(d: Path, rendered: list, n: int, min_virality: int) -> int:
+    """Night mode: post the strongest N immediately (no human awake). Only very strong moments
+    that also passed the visual check qualify; everything else waits for morning approval."""
+    from . import publish
+    posts = {p["file"]: p for p in json.loads((d / "posts.json").read_text())}
+    platforms = [p for p, acc in CH.get("blotato", {}).items() if acc] or ["youtube"]
+    ranked = sorted(rendered, key=lambda r: (r[0].get("virality", 0), r[0].get("visual_score") or 0), reverse=True)
+    done = 0
+    for m, out in ranked:
+        if done >= n:
+            break
+        vs = m.get("visual_score")
+        if m.get("virality", 0) < min_virality or (vs is not None and vs < 7):
+            continue
+        post = posts.get(out.name)
+        if not post or not post.get("titles"):
+            continue
+        try:
+            res = publish.approve(CH, d, post, post["titles"][0], platforms, when="now")
+            print(f"  AUTO-POSTED {out.name} → {res['platforms']}{' (dry run)' if res.get('dry_run') else ''}")
+            done += 1
+        except Exception as e:
+            print(f"  autopost failed for {out.name}: {e}")
+    return done
+
+
 def cmd_auto(a) -> None:
     """Daily one-liner: scout new streams/clips for this channel, find moments, render the best, write review.html."""
     from . import scout
@@ -195,12 +221,18 @@ def cmd_auto(a) -> None:
     best = vision_filter(library.top(None, a.count * 2, a.min_virality), a.count)
     d = day_dir()
     print(f"rendering {len(best)} Shorts...")
+    rendered = []
     for m in best:
-        print("  ->", render_single(m, a.handle, d))
+        out = render_single(m, a.handle, d)
+        print("  ->", out)
+        rendered.append((m, out))
     library.mark_used([m["_id"] for m in best])
     review = write_review(d)
     print(f"REVIEW: open {review}")
-    notify(f"{len(best)} {CH['key']} Shorts ready: open localhost:8765 to approve")
+    posted = autopost(d, rendered, a.autopost, a.autopost_min) if a.autopost else 0
+    waiting = len(best) - posted
+    msg = f"{CH['key']}: {posted} posted automatically, " if posted else f"{CH['key']}: "
+    notify(msg + f"{waiting} Shorts waiting for approval (localhost:8765)")
     if a.serve and best:
         from .review_server import serve
         serve(CH, d, 8765, open_browser=True, timeout_h=12)
@@ -332,6 +364,8 @@ def main() -> None:
     au.add_argument("--clips", type=int, default=10, help="Twitch: top N clips per streamer")
     au.add_argument("--range", default="7d", choices=["24hr", "7d", "30d"])
     au.add_argument("--serve", action="store_true", help="after rendering, keep the approve page up for 12h")
+    au.add_argument("--autopost", type=int, default=0, help="night mode: post the best N immediately, no approval")
+    au.add_argument("--autopost-min", type=int, default=8, help="minimum virality score to auto-post")
     rv = sub.add_parser("review", help="approve-and-post page on http://localhost:8765")
     rv.add_argument("--date", help="YYYY-MM-DD (default: latest)")
     rv.add_argument("--port", type=int, default=8765)

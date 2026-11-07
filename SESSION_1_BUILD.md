@@ -28,7 +28,10 @@
 git clone https://github.com/aiincomehq-max/ffmpeg-render-service && cd ffmpeg-render-service   # or cd into your existing copy
 git checkout claude/tender-goodall-hg7yeu && git pull
 bash tools/setup_mac.sh        # installs everything, asks for API key + channel handle, runs the demo
-bash tools/schedule.sh speed 10:00   # optional autopilot (Mac local time; 10:00 UK = done before the 14:00 UTC first slot): runs daily, pops a notification when Shorts are ready
+bash tools/schedule.sh speed 10:00          # autopilot DAY run (Mac local time; done before the 14:00 UTC first slot)
+# later, for the Twitch channels: day run + 1am NIGHT run (auto-posts the single strongest fresh Short, rest wait for approval)
+bash tools/schedule.sh kai 10:00 && bash tools/schedule.sh kai 01:00 night
+bash tools/schedule.sh core 10:00 && bash tools/schedule.sh core 01:00 night: runs daily, pops a notification when Shorts are ready
 ```
 
 ## Channels (one streamer each, so viewers who subscribe for that person keep getting that person)

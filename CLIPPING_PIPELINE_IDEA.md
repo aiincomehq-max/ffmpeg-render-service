@@ -242,5 +242,5 @@ Source: upload timestamps of 300 top Shorts (top 50 each from Nexxo, deagzzz, Ir
 | **Freshness beats the clock** | core_fx uploads at 00–04 UTC (right after US evening streams end) had the highest median views (484k, 3 of 8 over 1M), versus 90k for 12–16 UTC. Being first with a moment matters more than the hour (small sample). |
 
 **Applied:** posting slots default to **14:00 / 16:45 / 19:00 UTC** (`post_times_utc` in channels.json); the autopilot runs at 10:00 so approvals happen before the first slot.
-**For Kai/Core (Twitch clips, which appear within hours):** consider a 2nd daily run around 01:00 UTC with "Post now" to be first after the stream.
+**For Kai/Core (Twitch clips, which appear within hours): BUILT.** `tools/schedule.sh kai 01:00 night` adds a 1am run: it takes the last 24h of top clips, renders 3, and **auto-posts the single strongest at once** (only if it scores 8+/10 virality and passes the visual check). The rest wait for morning approval.
 **Caveat:** this is when *winners* were posted, not proof that the hour caused the views. Shorts keep getting pushed for days, so consistency and freshness matter more than the exact minute.
