@@ -158,6 +158,18 @@ def ff_escape_path(p: Path) -> str:
     return str(p).replace("\\", "\\\\").replace(":", "\\:").replace("'", "\\'")
 
 
+def emoji_x(base: str, t: float, y: int, size: int = 400) -> int:
+    """Keep emoji pops off the streamer's face (e.g. lying on a bench at the payoff). Best-effort."""
+    if os.environ.get("CLIPPER_TRACK", "1") != "1":
+        return W // 2
+    try:
+        from .track import clear_x, face_boxes_at
+        boxes = face_boxes_at(base, t) + face_boxes_at(base, t + 0.5)
+        return int(clear_x(boxes, y, size, W))
+    except Exception:
+        return W // 2
+
+
 def finalize(base: Path, edl: dict, style: dict, ass_path: Path, out: Path) -> None:
     duration = probe_duration(str(base))
     inputs = ["-i", str(base)]
@@ -182,11 +194,12 @@ def finalize(base: Path, edl: dict, style: dict, ass_path: Path, out: Path) -> N
         inputs += ["-loop", "1", "-t", f"{duration:.3f}", "-i", str(png)]
         t0, t1 = imp["t"], min(duration, imp["t"] + imp.get("emoji_dur", 0.9))
         y = int(H * imp.get("emoji_y_pct", 62) / 100)
+        cx = emoji_x(str(base), t0, y)
         graph.append(f"[{idx}:v]split=2[e{k}a][e{k}b]")
         graph.append(f"[e{k}a]scale=400:400[e{k}big]")
         graph.append(f"[e{k}b]scale=320:320[e{k}sm]")
-        graph.append(f"[{last_v}][e{k}big]overlay=x=(W-w)/2:y={y}-h/2:enable='between(t,{t0:.3f},{t0 + 0.09:.3f})'[v{k}a]")
-        graph.append(f"[v{k}a][e{k}sm]overlay=x=(W-w)/2:y={y}-h/2:enable='between(t,{t0 + 0.09:.3f},{t1:.3f})'[v{k}]")
+        graph.append(f"[{last_v}][e{k}big]overlay=x={cx}-w/2:y={y}-h/2:enable='between(t,{t0:.3f},{t0 + 0.09:.3f})'[v{k}a]")
+        graph.append(f"[v{k}a][e{k}sm]overlay=x={cx}-w/2:y={y}-h/2:enable='between(t,{t0 + 0.09:.3f},{t1:.3f})'[v{k}]")
         last_v = f"v{k}"
         idx += 1
 

@@ -241,6 +241,28 @@ class TestLiveServiceFixes(unittest.TestCase):
         self.assertEqual(a.dtype, np.float32)
         self.assertEqual(a.tolist(), [0.0, 0.5, -1.0])
 
+    def test_captions_never_overlap(self):
+        # last word of a group is held >=0.25s; it must not run into the next group (seen as "TYOU THANK YOUK")
+        import re
+        ws = [{"w": "thank", "s": 1.0, "e": 1.1}, {"w": "you.", "s": 1.12, "e": 1.15},
+              {"w": "thank", "s": 1.2, "e": 1.3}, {"w": "you", "s": 1.3, "e": 1.4}]
+        ev = A.caption_events(ws, STYLE, "#00FF00", 60)
+
+        def sec(x):
+            h, m, s = x.split(":")
+            return int(h) * 3600 + int(m) * 60 + float(s)
+        spans = [tuple(sec(x) for x in re.match(r"Dialogue: \d+,([^,]+),([^,]+),", e).groups()) for e in ev]
+        for (a0, a1), (b0, b1) in zip(spans, spans[1:]):
+            self.assertLessEqual(a1, b0 + 1e-9)
+            self.assertLess(a0, a1)
+
+    def test_emoji_moves_off_face(self):
+        face = [(440, 1300, 200, 220)]            # face in the lower third, centre
+        self.assertEqual(track.clear_x([], 1420, 400, 1080), 540)
+        x = track.clear_x(face, 1420, 400, 1080)
+        self.assertNotEqual(x, 540)
+        self.assertFalse(x - 200 < 640 and 440 < x + 200)   # no horizontal overlap with the face box
+
 
 class TestFFmpegPath(unittest.TestCase):
     def test_prefers_full_build(self):

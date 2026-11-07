@@ -46,6 +46,36 @@ def _faces(frame: np.ndarray) -> list[tuple[float, float, float]]:
     return out
 
 
+def face_boxes_at(src: str, t: float) -> list[tuple[float, float, float, float]]:
+    """Face boxes (x, y, w, h) in the source frame's pixels at time t. Empty if none/unreadable."""
+    cap = cv2.VideoCapture(src)
+    try:
+        cap.set(cv2.CAP_PROP_POS_MSEC, max(0.0, t) * 1000)
+        ok, frame = cap.read()
+    finally:
+        cap.release()
+    if not ok:
+        return []
+    h, w = frame.shape[:2]
+    k = DET_W / w
+    small = cv2.resize(frame, (DET_W, int(h * k)))
+    _, faces = _detector(small.shape[1], small.shape[0]).detect(small)
+    return [(f[0] / k, f[1] / k, f[2] / k, f[3] / k) for f in (faces if faces is not None else [])]
+
+
+def clear_x(boxes, cy: float, size: float, frame_w: float) -> float:
+    """x-centre for a size*size overlay at height cy that doesn't cover a face: centre if free,
+    otherwise the side away from the face (centre if that still overlaps)."""
+    def hits(cx):
+        return any(cx - size / 2 < x + bw and x < cx + size / 2 and cy - size / 2 < y + bh and y < cy + size / 2
+                   for x, y, bw, bh in boxes)
+    if not hits(frame_w / 2):
+        return frame_w / 2
+    fx = sum(x + bw / 2 for x, _, bw, _ in boxes) / len(boxes)
+    side = frame_w * 0.8 if fx < frame_w / 2 else frame_w * 0.2
+    return side if not hits(side) else frame_w / 2
+
+
 def centers(src: str, start: float, end: float) -> list[tuple[float, float | None]]:
     """Sample the source between start/end; return [(t_rel, face_cx_norm or None)]."""
     cap = cv2.VideoCapture(src)

@@ -70,10 +70,10 @@ def group_words(words: list[dict], max_words: int = 3, max_gap: float = 0.45) ->
 
 def caption_events(words: list[dict], style: dict, active_hex: str, y_pct: float) -> list[str]:
     """Word-by-word highlight: each word gets its own event showing the group with the active word coloured."""
-    ev = []
     y = int(H * y_pct / 100)
     act = ass_color(active_hex)
-    for grp in group_words(words):
+    raw = []
+    for grp in group_words(sorted(words, key=lambda w: w["s"])):
         for i, w in enumerate(grp):
             start = w["s"]
             end = grp[i + 1]["s"] if i + 1 < len(grp) else max(w["e"], w["s"] + 0.25)
@@ -82,8 +82,12 @@ def caption_events(words: list[dict], style: dict, active_hex: str, y_pct: float
                 txt = clean(ww["w"]).upper().strip(",.")
                 parts.append(f"{{\\c{act}}}{txt}{{\\r}}" if j == i else txt)
             anim = pop(112) if i == 0 else ""
-            ev.append(f"Dialogue: 1,{ts(start)},{ts(end)},Caption,,0,0,0,,{{\\pos({W // 2},{y}){anim}}}" + " ".join(parts))
-    return ev
+            raw.append([start, end, f"{{\\pos({W // 2},{y}){anim}}}" + " ".join(parts)])
+    # Captions share one position: two live at once draw on top of each other ("TYOU THANK YOUK").
+    # End every event no later than the next one starts.
+    for k in range(len(raw) - 1):
+        raw[k][1] = min(raw[k][1], raw[k + 1][0])
+    return [f"Dialogue: 1,{ts(s0)},{ts(s1)},Caption,,0,0,0,,{txt}" for s0, s1, txt in raw if ts(s1) > ts(s0)]
 
 
 def text_event(text: str, start: float, end: float, style_name: str, y_pct: float, hex_color: str | None = None, animate: bool = True, layer: int = 2) -> str:
