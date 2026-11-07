@@ -1,5 +1,6 @@
 """CLI.
 
+  python -m clipper --channel speed auto          # DAILY: scout new streams/clips, clip, render, review.html
   python -m clipper --channel speed run <vod_url> [--section 01:00:00-01:45:00] [--count 3]
   python -m clipper --channel kai   comp [--skill reflexes]
   python -m clipper --channel core  skills
@@ -59,6 +60,27 @@ def write_post(d: Path, entry: dict) -> None:
     f.write_text(json.dumps(posts, indent=2, ensure_ascii=False))
 
 
+def vision_filter(cands: list[dict], want: int) -> list[dict]:
+    """Visual QA: drop moments that are boring to watch, fix payoff timing. CLIPPER_VISION=0 to skip."""
+    if os.environ.get("CLIPPER_VISION", "1") != "1":
+        return cands[:want]
+    from .vision import check
+    kept = []
+    for m in cands:
+        r = check(m, CH)
+        print(f"  vision: {'KEEP' if r['keep'] else 'DROP'} ({r.get('visual_score')}) {r['reason'][:90]}")
+        if r["keep"]:
+            if r.get("payoff_t") is not None:
+                m["payoff_t"] = r["payoff_t"]
+            m["visual_score"] = r.get("visual_score")
+            kept.append(m)
+        else:
+            library.mark_used([m["_id"]])  # don't offer it again
+        if len(kept) >= want:
+            break
+    return kept
+
+
 def render_single(m: dict, handle: str, d: Path) -> Path:
     style = load()
     edl = E.single_moment(m, style, handle, pick_music())
@@ -66,31 +88,115 @@ def render_single(m: dict, handle: str, d: Path) -> Path:
     out = render(edl, style, d / name)
     write_post(d, {"file": out.name, "format": "single_moment", "titles": m.get("titles", []),
                    "description": f"{m.get('hook_tag', '').title()}\n\n{CH['credit']}\n{CH['hashtags']}",
-                   "virality": m.get("virality"), "why": m.get("why")})
+                   "virality": m.get("virality"), "why": m.get("why"), "source": m.get("source", "")})
     return out
+
+
+def write_review(d: Path) -> Path:
+    """Simple approval page: every rendered Short with its titles, score and why."""
+    import html
+    f = d / "posts.json"
+    posts = json.loads(f.read_text()) if f.exists() else []
+    cards = []
+    for p in posts:
+        titles = "".join(f"<li>{html.escape(t)}</li>" for t in p.get("titles", []))
+        cards.append(f"""<div class=c><video src="{html.escape(p['file'])}" controls preload=metadata></video>
+<div class=m><b>{html.escape(p.get('format', ''))}</b> · score {p.get('virality', '-')}<br><small>{html.escape(p.get('why') or '')}</small>
+<ol>{titles}</ol><small>{html.escape(p.get('source', ''))}</small></div></div>""")
+    page = f"""<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>Review {CH.get('key')} {d.name}</title>
+<style>body{{font-family:system-ui;background:#111;color:#eee;margin:16px}}.g{{display:flex;flex-wrap:wrap;gap:16px}}
+.c{{width:300px;background:#1c1c1c;border-radius:10px;overflow:hidden}}video{{width:300px;aspect-ratio:9/16;background:#000}}
+.m{{padding:10px;font-size:14px}}ol{{padding-left:18px}}</style>
+<h2>{CH.get('key')} · {d.name} · {len(posts)} Shorts. Post the best, delete the rest.</h2><div class=g>{''.join(cards)}</div>"""
+    out = d / "review.html"
+    out.write_text(page, encoding="utf-8")
+    return out
+
+
+def process_file(src: Path, meta: dict, hint: str = "") -> list[dict]:
+    from .moments import find_moments
+    from .transcribe import transcribe
+    tr = transcribe(src, meta["vod_key"])
+    ctx = f"{meta.get('title', '')} ({meta.get('upload_date', '')}){' | ' + hint if hint else ''}"
+    ms = find_moments(tr, ctx, CH)
+    for m in ms:
+        m["source"] = f"{meta.get('url', '')} {meta.get('section') or ''}".strip()
+    library.add(meta["vod_key"], src, ms)
+    return ms
+
+
+def seen_path() -> Path:
+    return ROOT / "data" / CH["key"] / "seen.json"
+
+
+def seen() -> set:
+    f = seen_path()
+    return set(json.loads(f.read_text())) if f.exists() else set()
+
+
+def mark_seen(ids: set) -> None:
+    f = seen_path()
+    f.parent.mkdir(parents=True, exist_ok=True)
+    f.write_text(json.dumps(sorted(seen() | ids)))
+
+
+def cmd_auto(a) -> None:
+    """Daily one-liner: scout new streams/clips for this channel, find moments, render the best, write review.html."""
+    from . import scout
+    from .ingest import download
+    ensure_assets()
+    src_cfg = CH.get("sources", {})
+    done, new_ids = seen(), set()
+    if src_cfg.get("youtube_streams"):
+        for st in scout.latest_streams(src_cfg["youtube_streams"], a.streams):
+            if st["id"] in done:
+                continue
+            print(f"stream: {st['title'][:70]}")
+            meta, peaks = scout.stream_peaks(st["url"], a.peaks)
+            if not peaks:
+                print("  no 'Most replayed' data yet (too new?) -> skipping for now")
+                continue
+            for s0, s1, v in peaks:
+                sec = f"{scout.fmt(s0)}-{scout.fmt(s1)}"
+                print(f"  peak {sec} (replay score {v})")
+                f, m = download(st["url"], sec, meta)
+                process_file(f, m, hint=f"this window is a 'Most replayed' peak (score {v}) - the best moment is inside it")
+            new_ids.add(st["id"])
+    for login in src_cfg.get("twitch_clips", []):
+        for clip in scout.twitch_top_clips(login, a.clips, a.range):
+            if clip["id"] in done:
+                continue
+            print(f"clip: {clip['title'][:60]} ({clip['views']} views)")
+            f, m = download(clip["url"])
+            process_file(f, m, hint=f"fan-made Twitch clip with {clip['views']} views - a proven moment; tighten it to the payoff")
+            new_ids.add(clip["id"])
+    mark_seen(new_ids)
+    best = vision_filter(library.top(None, a.count * 2, a.min_virality), a.count)
+    d = day_dir()
+    print(f"rendering {len(best)} Shorts...")
+    for m in best:
+        print("  ->", render_single(m, a.handle, d))
+    library.mark_used([m["_id"] for m in best])
+    print(f"REVIEW: open {write_review(d)}")
 
 
 def cmd_run(a) -> None:
     from .ingest import download
-    from .moments import find_moments
-    from .transcribe import transcribe
 
     ensure_assets()
     print("1/4 downloading...")
     src, meta = download(a.url, a.section)
-    print("2/4 transcribing...")
-    tr = transcribe(src, meta["vod_key"])
-    print(f"3/4 finding moments ({len(tr['segments'])} segments)...")
-    ms = find_moments(tr, f"{meta['title']} ({meta['upload_date']})", CH)
-    library.add(meta["vod_key"], src, ms)
+    print("2-3/4 transcribing + finding moments...")
+    ms = process_file(src, meta)
     print(f"   {len(ms)} moments stored; virality: {sorted([m['virality'] for m in ms], reverse=True)}")
-    best = library.top(meta["vod_key"], a.count, a.min_virality)
+    best = vision_filter(library.top(meta["vod_key"], a.count * 2, a.min_virality), a.count)
     print(f"4/4 rendering {len(best)} Shorts...")
     d = day_dir()
     for m in best:
         print("   ->", render_single(m, a.handle, d))
     library.mark_used([m["_id"] for m in best])
-    print(f"done: {d}/  (titles in posts.json)")
+    print(f"REVIEW: open {write_review(d)}")
 
 
 def cmd_comp(a) -> None:
@@ -158,6 +264,7 @@ def cmd_demo(a) -> None:
         print("single ->", render_single(m, a.handle, d))
     a.skill = "reflexes"
     cmd_comp(a)
+    print("REVIEW:", write_review(d))
 
 
 def main() -> None:
@@ -172,6 +279,13 @@ def main() -> None:
     r.add_argument("--min-virality", type=int, default=7)
     c = sub.add_parser("comp")
     c.add_argument("--skill")
+    au = sub.add_parser("auto", help="scout + clip + render + review page (run daily)")
+    au.add_argument("--count", type=int, default=4)
+    au.add_argument("--min-virality", type=int, default=7)
+    au.add_argument("--streams", type=int, default=2, help="YouTube: newest N streams to check")
+    au.add_argument("--peaks", type=int, default=8, help="YouTube: 'Most replayed' peaks per stream")
+    au.add_argument("--clips", type=int, default=10, help="Twitch: top N clips per streamer")
+    au.add_argument("--range", default="7d", choices=["24hr", "7d", "30d"])
     sub.add_parser("skills")
     sub.add_parser("demo")
     a = ap.parse_args()
@@ -180,7 +294,7 @@ def main() -> None:
     library.CHANNEL = a.channel
     if a.cmd == "demo":
         library.CHANNEL = CH["key"] = "demo"
-    {"run": cmd_run, "comp": cmd_comp, "skills": cmd_skills, "demo": cmd_demo}[a.cmd](a)
+    {"run": cmd_run, "auto": cmd_auto, "comp": cmd_comp, "skills": cmd_skills, "demo": cmd_demo}[a.cmd](a)
 
 
 if __name__ == "__main__":

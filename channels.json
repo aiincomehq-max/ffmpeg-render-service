@@ -7,7 +7,19 @@
     "title_tag": "#ishowspeed",
     "credit": "Credit: iShowSpeed (youtube.com/@IShowSpeed). Fan edit, not affiliated.",
     "where_they_stream": "YouTube (youtube.com/@IShowSpeed/streams)",
-    "people": ["Kai Cenat", "Ronaldo", "MrBeast", "KSI", "Slipz", "Trevor", "Rudy", "Jamal"]
+    "people": [
+      "Kai Cenat",
+      "Ronaldo",
+      "MrBeast",
+      "KSI",
+      "Slipz",
+      "Trevor",
+      "Rudy",
+      "Jamal"
+    ],
+    "sources": {
+      "youtube_streams": "https://www.youtube.com/@IShowSpeed/streams"
+    }
   },
   "kai": {
     "streamer": "Kai Cenat",
@@ -17,7 +29,20 @@
     "title_tag": "#kaicenat",
     "credit": "Credit: Kai Cenat (twitch.tv/kaicenat). Fan edit, not affiliated.",
     "where_they_stream": "Twitch (twitch.tv/kaicenat/videos)",
-    "people": ["Rakai", "Ray", "Fanum", "Duke Dennis", "Agent", "Tota", "iShowSpeed"]
+    "people": [
+      "Rakai",
+      "Ray",
+      "Fanum",
+      "Duke Dennis",
+      "Agent",
+      "Tota",
+      "iShowSpeed"
+    ],
+    "sources": {
+      "twitch_clips": [
+        "kaicenat"
+      ]
+    }
   },
   "core": {
     "streamer": "Lacy, StableRonaldo and the Core boys",
@@ -27,6 +52,19 @@
     "title_tag": "",
     "credit": "Credit: Lacy, StableRonaldo & friends (twitch.tv / kick.com). Fan edit, not affiliated.",
     "where_they_stream": "Twitch / Kick (twitch.tv/lacy, twitch.tv/stableronaldo)",
-    "people": ["Lacy", "Ron", "Jason", "Marlon", "Silky", "Adapt"]
+    "people": [
+      "Lacy",
+      "Ron",
+      "Jason",
+      "Marlon",
+      "Silky",
+      "Adapt"
+    ],
+    "sources": {
+      "twitch_clips": [
+        "lacy",
+        "stableronaldo"
+      ]
+    }
   }
 }

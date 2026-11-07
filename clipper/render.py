@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import shutil
 import subprocess
 from pathlib import Path
@@ -64,17 +65,54 @@ def piece_duration(p: dict) -> float:
     return (p["end"] - p["start"]) / p.get("speed", 1.0)
 
 
+def probe_dims(path: str) -> tuple[int, int]:
+    out = run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height", "-of", "csv=p=0", path])
+    w, h = out.strip().split(",")[:2]
+    return int(w), int(h)
+
+
+def _interp(kf: list[tuple[float, int]], hz: float = 15) -> list[tuple[float, int]]:
+    if len(kf) < 2:
+        return kf
+    out = []
+    for (t0, x0), (t1, x1) in zip(kf, kf[1:]):
+        n = max(1, int((t1 - t0) * hz))
+        for i in range(n):
+            out.append((t0 + (t1 - t0) * i / n, int(round(x0 + (x1 - x0) * i / n))))
+    out.append(kf[-1])
+    return out
+
+
 def render_piece(p: dict, out: Path) -> None:
     speed = p.get("speed", 1.0)
     zoom = max(p.get("zoom", 1.0), 1.06 if p.get("shake") else 1.0)
     src_dur = p["end"] - p["start"]
     shake = "+14*sin(t*55)" if p.get("shake") else ""
     shake_y = "+10*cos(t*47)" if p.get("shake") else ""
+    kf = None
+    if p.get("track", True) and os.environ.get("CLIPPER_TRACK", "1") == "1":
+        try:
+            from .track import crop_keyframes
+            sw, sh = probe_dims(p["src"])
+            kf = crop_keyframes(p["src"], p["start"], p["end"], sw, sh, W, H, zoom, speed)
+        except Exception as e:  # tracking is best-effort; never block a render
+            print(f"  (tracking skipped: {e})")
+            kf = None
+    if kf:
+        if p.get("shake"):
+            mid = kf[len(kf) // 2][1]
+            xexpr, cmd = f"{mid}{shake}", ""
+        else:
+            cmdfile = out.with_suffix(".cmd")
+            cmdfile.write_text("".join(f"{t:.3f} crop@c x {x};\n" for t, x in _interp(kf)))
+            xexpr, cmd = str(kf[0][1]), f"sendcmd=f='{ff_escape_path(cmdfile)}',"
+        crop = f"{cmd}crop@c={W}:{H}:x='{xexpr}':y='(in_h-{H})/2{shake_y}'"
+    else:
+        crop = f"crop={W}:{H}:x='(in_w-{W})/2{shake}':y='(in_h-{H})/2{shake_y}'"
     vf = (
         f"setpts=(PTS-STARTPTS)/{speed},"
         f"scale=w={int(W * zoom)}:h={int(H * zoom)}:force_original_aspect_ratio=increase,"
-        f"crop={W}:{H}:x='(in_w-{W})/2{shake}':y='(in_h-{H})/2{shake_y}',"
-        f"setsar=1,fps={FPS},format=yuv420p"
+        f"{crop},setsar=1,fps={FPS},format=yuv420p"
     )
     cmd = ["ffmpeg", "-y", "-ss", f"{p['start']:.3f}", "-t", f"{src_dur:.3f}", "-i", p["src"]]
     if has_audio(p["src"]):

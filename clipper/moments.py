@@ -35,6 +35,16 @@ Rules:
   "No way he [did X] at the end 😳 {tag}" | "[Name] [verb] [specific detail] 😭💀" |
   "{streamer_first} [kind act] ❤️‍🩹❤️‍🩹" | "The ENDING is crazy 💀🔥" | "Bro [did X] 🤯 {tag}"
 - virality: 1-10, be harsh; only 7+ is worth posting.
+
+REAL top-performing titles from the leading channels (views), so match this voice, length and emoji use:
+338M "iShowSpeed Finally Fought Back in 2026 💪🔥" | 287M "He even got it cleaned, mad respect ❤️‍🩹 ❤️‍🩹"
+238M "Old Speed Would Not Hesitate 💀🤣 #ishowspeed #speed #edit" | 232M "We made the right person famous 💖💖"
+210M "The ENDING is crazy 💀🔥" | 208M "IShowSpeed free KFC code 😂❤️" | 193M "iShowSpeed Never Forgets His True Fans ❤️‍🩹❤️‍🩹"
+149M "Bro got ragebaited at the end 😂😂" | 134M "Bro pulled it off exactly like the real one 😳 #ishowspeed"
+108M "Speed has slow reflexes 💀🐌🔥" | 94M "Rakai Accidentally Woke Up Rayquan 😭💀 #shorts"
+54M "Bro humbled an Olympic pro🤯 #ishowspeed #edit" | 12M "Lacy Got Hit With A $12,000 Restaurant Bill 😭💸"
+Patterns: under ~60 characters; 1-2 emojis repeated at the end (😭💀 ❤️‍🩹❤️‍🩹 😳 🤯 💀🔥); a curiosity gap ("at the end",
+"the ENDING", "did NOT see that coming"); specific numbers and money; "Bro ..." voice; name the famous person when one is in it.
 - Use only timestamps that exist in the transcript window. Return an empty list if nothing is good."""
 
 

@@ -14,6 +14,10 @@
 | `ingest.py` | yt-dlp download, optional `--section` | ⚠️ untested (YouTube blocked in the cloud session) |
 | `transcribe.py` | faster-whisper word timestamps, cached | ⚠️ untested (model download blocked) |
 | `moments.py` | Claude API (`claude-opus-5-5`, structured JSON output, server-side refusal fallback) → ranked moments + 3 titles each | ⚠️ untested (no API key in the cloud session) |
+| `track.py` | Face-tracked 9:16 crop (YuNet): follows the streamer like a camera operator, centre-crop fallback | ✅ on a moving-face test |
+| `scout.py` | WHERE to clip: YouTube "Most replayed" heatmap peaks (Speed) + most-viewed Twitch clips (Kai, Core) | ✅ peak logic; ⚠️ live fetch untested |
+| `vision.py` | Visual QA gate: Claude checks 8 frames per moment, drops ones that are boring to watch, fixes payoff timing | ⚠️ untested (no API key), fails open |
+| review page | `out/<channel>/<date>/review.html`: watch every Short + its 3 titles, post the best | ✅ |
 | `assets/` | Montserrat Black (OFL), Twemoji PNGs (CC-BY), SFX + placeholder phonk loops (generated from scratch, royalty-free) | ✅ |
 
 ## Mac setup (~10 min)
@@ -50,7 +54,14 @@ Once created, put the real handle into `channels.json` (replace `@CHANGE_ME_...`
 - Audience: **"No, it's not made for kids"**.
 - Description: "Daily {streamer} fan edits 🔥 Not affiliated with or impersonating {streamer}. All credit to the original creator."
 
-## Go live
+## Go live: THE DAILY COMMAND
+```bash
+python -m clipper --channel speed auto     # newest streams → "Most replayed" peaks → moments → visual QA → 4 Shorts → review.html
+python -m clipper --channel kai auto       # top Twitch clips this week → same
+# open out/<channel>/<date>/review.html, post the best 2–4, done.
+```
+
+Manual mode (a specific stream/section) is still there:
 ```bash
 # Grab a 45-min chunk of a recent Speed stream (much faster than a full 4h VOD)
 # ONE STREAMER PER CHANNEL. --channel picks which (speed / kai / core, see channels.json)
@@ -65,16 +76,16 @@ python -m clipper --channel speed comp        # "Speed cant X" comp (Kai: "Kai c
 
 ## Session 1 checklist for Claude Code
 1. [ ] Run setup, then `python -m clipper demo`. It must pass.
-2. [ ] Run `run` on a real Speed stream section. Fix any ingest/transcribe/moments errors (these 3 modules are untested).
+2. [ ] Run `--channel speed auto` (then `run` on one stream if auto has issues). Fix any scout/ingest/transcribe/moments/vision errors (untested against live services).
 3. [ ] Watch every output and tune:
    - payoff timing (`payoff_t` accuracy). If it's often late or early, add a vision check: send 6 frames around payoff_t to Claude to confirm.
-   - crop: centre crop cuts Speed off when he's off-centre. Next upgrade: face-tracked crop (mediapipe/opencv) in `render_piece`.
+   - crop: face tracking is on (`CLIPPER_TRACK=0` disables). Check it follows Speed; tune `DEADZONE`/`EASE` in `track.py`.
    - caption size and position, tag wording, music level.
 4. [ ] Upload the 3 best manually in YouTube Studio (title from posts.json, description already includes the credit).
 5. [ ] Commit fixes to `claude/tender-goodall-hg7yeu`.
 
 ## Next sessions (not session 1)
-Face-tracked crop · `escalation_levels` / `timeline_progression` / `wholesome_fan` presets (style in `styles/speed_v2.json`) · auto-watch Speed's channel for new streams (cron/launchd + `yt-dlp --dateafter`) · auto-upload (YouTube Data API or Blotato) · analytics feedback into the selection prompt.
+`escalation_levels` / `timeline_progression` / `wholesome_fan` presets (style in `styles/speed_v2.json`) · auto-watch Speed's channel for new streams (cron/launchd + `yt-dlp --dateafter`) · auto-upload (YouTube Data API or Blotato) · analytics feedback into the selection prompt.
 
 ## Knobs
-`CLIPPER_MODEL` (default `claude-opus-5-5`) · `CLIPPER_WHISPER` (default `small.en`; `medium.en` = better, slower) · `CLIPPER_FALLBACKS=0` to turn off the server-side refusal fallback · drop licensed tracks into `assets/music/` (non-placeholder files are preferred automatically).
+`CLIPPER_MODEL` (default `claude-opus-5-5`) · `CLIPPER_WHISPER` (default `small.en`; `medium.en` = better, slower) · `CLIPPER_VISION=0` skips the visual QA · `CLIPPER_TRACK=0` = plain centre crop · `CLIPPER_FALLBACKS=0` to turn off the server-side refusal fallback · drop licensed tracks into `assets/music/` (non-placeholder files are preferred automatically).
