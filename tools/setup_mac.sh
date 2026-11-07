@@ -12,7 +12,7 @@ if ! command -v brew >/dev/null; then
 fi
 
 echo "==> Installing ffmpeg-full + Python 3.12 (Homebrew)"
-brew install ffmpeg-full python@3.12 >/dev/null   # ffmpeg-full = libass (captions); plain ffmpeg 9.x lacks it
+brew install ffmpeg-full python@3.12 deno >/dev/null   # ffmpeg-full = libass (captions); plain ffmpeg 9.x lacks it
 PY="$(brew --prefix python@3.12)/bin/python3.12"
 
 echo "==> Python environment"

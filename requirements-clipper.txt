@@ -1,5 +1,5 @@
 anthropic>=2.6
 faster-whisper>=1.1
-yt-dlp>=2026.10.26
+yt-dlp[default]>=2026.10.26   # [default] = yt-dlp-ejs, solves YouTube JS challenges (needs deno: brew install deno)
 numpy>=1.26
 opencv-python-headless>=4.8
