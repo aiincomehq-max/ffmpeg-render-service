@@ -209,3 +209,21 @@ Build order in the terminal: (1) `POST /clip` EDL renderer with the speed_v1 sty
 - **Content ID / copyright:** these are another creator's streams. Check whether Speed runs a paid clipping programme and apply. Otherwise the channel runs on the fair-use / heavy-edit approach every competitor uses, and it can still be claimed or struck.
 - **Music:** phonk tracks will trigger Content ID claims. Use licensed or royalty-free phonk-style beds.
 - **Reused-content rules:** fully automated output that all looks the same is exactly what YouTube demonetizes. Vary the formats and tags, and keep the edit density high.
+
+### 8.6 Style v2: the same scrape run on the 4 benchmark accounts (`styles/speed_v2.json`, supersedes v1)
+Top Shorts scraped for deagzzzshorts, Ironaldox, wklerClips and Drayzshorts, plus a frame-level analysis of each one's #1 Short. Combined with the 3 Nexxo analyses, that's **7 videos totalling ~1B views**.
+
+**Common to all 7 (locked globally):** 9:16 full-frame crop · ALL-CAPS heavy font, yellow/white + black stroke · `*ACTION TAGS*` · phonk bed with the drop on the first impact · bass thud + flash + 1.15x punch-in on impacts · emoji pop at the payoff · translucent `@handle` bottom-centre · no voiceover · hard cut at the end.
+
+**5 formats (each one a preset):**
+| Format | Source | Length | Automation |
+|---|---|---|---|
+| `subversion_comp`: "Speed cant X" → 6 clips proving the opposite, "ARE YOU SURE?" at clip 3, 0.35x slow-mo + 💀 on each impact, **no captions** | Drayzshorts (108M, daily series) | 20–22s | **Easiest**: no transcript, just tagged action moments |
+| `escalation_levels`: LVL 1/2/3, *PASSED* tags, freeze frame + aura at the end | Nexxo 108M, wkler 54M | 40–52s | High |
+| `timeline_progression`: "SPEED IN WWE (2024) → (2025) → (2026)" | deagzzz **338M** | 50–58s | Medium (needs a moment library over time) |
+| `single_moment`: hook tag → *WAIT FOR IT* → payoff, word-highlight captions, freeze + vine boom | Ironaldox 238M | 15–35s | High |
+| `wholesome_fan`: kindness/fan moments, emotional music, ❤️‍🩹 | deagzzz top 10 (190–290M) | 40–60s | High |
+
+**Launch mix:** 3 Shorts/day = 1 subversion_comp (daily series) + 1 fresh single_moment from the last stream + 1 rotating high-ceiling format.
+
+**Implication for the build:** the pipeline needs a **moment library**, not just per-VOD clipping. Every detected moment from every VOD gets stored with tags (skill shown, success/fail, emotion, people, date). `subversion_comp` and `timeline_progression` are then just queries against that library.

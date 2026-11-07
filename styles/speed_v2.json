@@ -1,0 +1,96 @@
+{
+  "name": "speed_v2",
+  "supersedes": "speed_v1",
+  "derived_from": "vidIQ analysis of 7 top iShowSpeed edit Shorts, 2026-11-07: Nexxo Recaps x3 (134M/108M/63M), deagzzzshorts (338M), Ironaldox (238M), Drayzshorts (108M), wklerClips (54M)",
+
+  "global": {
+    "canvas": { "width": 1080, "height": 1920, "fps": 30, "crop": "full_frame_subject_tracked", "split_screen": "rare_only_reaction_split" },
+    "end": "hard_cut_on_payoff_no_outro",
+    "voiceover": false,
+    "text_font": "Montserrat Black",
+    "text_case": "upper",
+    "text_stroke": { "px": 6, "color": "#000000" },
+    "text_shadow": true,
+    "palette": { "yellow": "#FFD700", "white": "#FFFFFF", "red": "#FF2A2A", "green": "#00FF44", "cyan": "#33D1FF" },
+    "action_tag": { "format": "*{TEXT}*", "default_color": "yellow", "y_pct": 50, "examples": ["*WAIT FOR IT*", "*PASSED*", "*FAILS*", "*EXCITED*", "*INSTANT REPLAY*"] },
+    "impact_kit": {
+      "flash": { "duration_frames": 2, "colors": { "success": "green", "fail": "red", "transition": "white" } },
+      "punch_in": { "scale": 1.15, "duration_s": 0.4 },
+      "shake": { "on": ["fail", "impact"], "duration_s": 0.5 },
+      "slow_mo": { "factor": 0.35, "on": "key_impact" },
+      "freeze_frame": { "on": "final_payoff", "duration_s": 1.5, "optional_overlay": "aura_energy" }
+    },
+    "audio": {
+      "keep_source_speech": true,
+      "source_gain_db": 0,
+      "music": { "genre": "brazilian phonk / cowbell phonk", "intro": "high_pass_muffled", "drop": "first_key_impact", "bed_gain_db": -16, "duck_under_speech_db": -8 },
+      "sfx": { "impact": "bass_thud", "transition": "whoosh_riser", "success": "ding_plus_bass", "fail": "heavy_thud", "comedic_end": "vine_boom" },
+      "music_licensing": "royalty_free_or_licensed_only"
+    },
+    "emoji_pop": { "position": "center_or_lower_third", "animation": "pop_scale_1.3_to_1.0", "on": ["each_impact", "payoff"], "set": ["💀", "🤯", "😭", "😂", "🥶", "❤️‍🩹"] },
+    "watermark": { "text": "@{HANDLE}", "y_pct": 86, "color": "#FFFFFF", "opacity": 0.45, "persistent": true }
+  },
+
+  "formats": {
+    "subversion_comp": {
+      "source": "Drayzshorts, 20-22s each, posted daily 16:45 UTC, 4M-108M views",
+      "automation": "highest: no captions, no transcript needed",
+      "duration_s": [20, 22],
+      "clips": { "count": 6, "each_s": [2, 5], "order": "clip1 = fail/slow example that supports the ironic claim; clips 2-6 = Speed excelling at it" },
+      "captions": "none",
+      "header": { "text": "\"SPEED {IRONIC_CLAIM}\"", "color": "yellow", "y_pct": 8, "show": "clips 1-2" },
+      "subversion_tag": { "text": "ARE YOU SURE?", "color": "white", "y_pct": 8, "show": "start of clip 3, 1.7s" },
+      "per_clip": "1.0x until impact -> 0.35x slow-mo + 1.15x punch-in on the impact, synced to a bass hit",
+      "music": "muffled phonk for clips 1-2, drop at clip 3, bass hit on each later impact",
+      "emoji": "💀 or 🤯💀 pop in the lower third on each slow-mo impact",
+      "transitions": "hard cuts only",
+      "title_template": "Speed {cant|has no|isnt} {skill} 💀{topic_emoji}🔥",
+      "skills_backlog": ["reflexes","strength","agility","balance","aura","stamina","speed","jump high","dance","fight","accuracy","flexibility","endurance","gymnastics","react fast","score goals","handle animals","get good gifts"]
+    },
+    "escalation_levels": {
+      "source": "Nexxo (108M) + wklerClips (54M)",
+      "duration_s": [40, 52],
+      "structure": "optional hook (2s) -> optional 'others fail' reference -> LVL 1 -> LVL 2 -> LVL 3 / IMPOSSIBLE, payoff on the final level",
+      "header": { "text": "LVL {N} | CHALLENGE LEVEL: {EASY|NORMAL|HARD|IMPOSSIBLE}", "y_pct": 10, "glow": true, "colors": ["green", "yellow", "cyan", "red"] },
+      "status_tags": ["*PASSED*:green", "*FAILS*:red", "*WAIT FOR IT*:yellow", "*GETTING READY*:green"],
+      "success": "green flash + punch-in + ding",
+      "ending": "freeze frame + aura overlay + 'AURA: 999+' cyan tag, hard stop",
+      "captions": "word_highlight on speech only"
+    },
+    "timeline_progression": {
+      "source": "deagzzzshorts (338M, the biggest Short in the dataset)",
+      "duration_s": [50, 58],
+      "structure": "3 segments: 'ISHOWSPEED IN {X} ({YEAR1})' -> ({YEAR2}) -> ({YEAR3}), the last one is the comeback/payoff",
+      "header": { "y_pct": 40, "show_s": 2, "color": "yellow" },
+      "transitions": "white flash + whip blur between segments, riser before each",
+      "extras": ["speed-ramped 3x instant replay of the main impact", "red arrow on a key detail"],
+      "ending": "cut on the final impact with *BRO'S UNSTOPPABLE NOW*-style tag"
+    },
+    "single_moment": {
+      "source": "Ironaldox (238M), Nexxo (63M)",
+      "duration_s": [15, 35],
+      "structure": "hook tag 0-2s -> setup -> build (*WAIT FOR IT*) -> payoff",
+      "captions": { "mode": "word_highlight", "words": [1, 4], "base": "white", "active": "green_or_yellow", "speaker_labels": "(NAME) in gold" },
+      "callouts": "red arrow with white border on a key object",
+      "ending": "red flash + shake on the climax, then slow zoom + desaturate + freeze + vine boom + 😂"
+    },
+    "wholesome_fan": {
+      "source": "deagzzzshorts top-10 (192M-287M): fan/dad/kindness moments",
+      "duration_s": [40, 60],
+      "structure": "setup -> kind act -> emotional reaction",
+      "music": "emotional slowed track instead of phonk",
+      "emoji": "❤️‍🩹 / 💖 at payoff",
+      "title_template": "iShowSpeed {kind act} ❤️‍🩹❤️‍🩹",
+      "note": "style details inferred from titles, not watched"
+    }
+  },
+
+  "launch_mix": {
+    "per_day": 3,
+    "slots": [
+      { "format": "subversion_comp", "reason": "fully automatable, proven daily series" },
+      { "format": "single_moment", "reason": "fresh stream moment within 24h" },
+      { "format": "escalation_levels|timeline_progression|wholesome_fan", "reason": "rotate the high-ceiling formats" }
+    ]
+  }
+}
