@@ -35,6 +35,21 @@ python -m clipper demo                        # offline sanity check → out/<da
 | `core` | Lacy, StableRonaldo + Core boys | Twitch / Kick | 3rd (once 1–2 are running) |
 Add more by copying an entry in `channels.json`. Each channel has its own moment library (`data/<key>/`) and output folder (`out/<key>/`).
 
+### Channel names (brand names, never the streamer's name: avoids impersonation takedowns, like the winners Nexxo Recaps / deagzzzshorts / Drayzshorts)
+Try them in order. If a handle is taken, double a letter (`@blitzzrecaps`) or add `hq` (`@blitzrecapshq`). Grab the same handle on TikTok and Instagram.
+Once created, put the real handle into `channels.json` (replace `@CHANGE_ME_...`); it becomes the watermark.
+
+| Channel | Theme | Names to try (@handle) |
+|---|---|---|
+| `speed`: create NOW | fast / speed | **Blitz Recaps** (@blitzrecaps) · Dash Recaps (@dashrecaps) · Turbo Clipz (@turboclipz) · Zippo Edits (@zippoedits) · Velo Recaps (@velorecaps) · Brixo Shorts (@brixoshorts) |
+| `kai`: create once Speed posts daily | loud / chaos / hype | **Hype Recaps** (@hyperecaps) · Chaos Clipz (@chaosclipz) · Rumble Edits (@rumbleedits) · Loudr Shorts (@loudrshorts) |
+| `core`: create third | friend group / squad | **Crew Cuts** (@crewcutsclips) · Squad Recaps (@squadrecaps) · Lobby Clipz (@lobbyclipz) · Gang Edits (@gangedits) |
+
+**Setup for every channel:**
+- Profile picture: a simple logo, never the streamer's face.
+- Audience: **"No, it's not made for kids"**.
+- Description: "Daily {streamer} fan edits 🔥 Not affiliated with or impersonating {streamer}. All credit to the original creator."
+
 ## Go live
 ```bash
 # Grab a 45-min chunk of a recent Speed stream (much faster than a full 4h VOD)
