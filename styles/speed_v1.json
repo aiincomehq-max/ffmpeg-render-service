@@ -1,0 +1,59 @@
+{
+  "name": "speed_v1",
+  "derived_from": "Top 3 Nexxo Recaps Shorts (134M, 108M, 63M views), vidIQ analysis 2026-11-07",
+  "canvas": { "width": 1080, "height": 1920, "fps": 30, "layout": "full_frame_crop", "allow_split_50_50": true },
+  "duration": { "target_s": [40, 58], "end": "hard_cut_on_payoff", "end_fade_s": 0 },
+  "pacing": { "avg_shot_s": [2.5, 5.0], "remove_pauses_over_s": 0.4 },
+  "captions": {
+    "mode": "phrase_with_word_highlight",
+    "words_per_line": [1, 4],
+    "font": "Montserrat ExtraBold",
+    "case": "upper",
+    "base_color": "#FFFFFF",
+    "highlight_colors": ["#FFE600", "#FF2A2A"],
+    "outline_px": 6, "outline_color": "#000000", "shadow": true,
+    "size_pct_height": 4.5,
+    "y_pct": 55
+  },
+  "action_tags": {
+    "description": "Narrator-style context tags in asterisks, e.g. *SPEED FREAKS OUT*",
+    "format": "*{TEXT}*", "color": "#FFE600", "case": "upper",
+    "hook_tag_at_0s": true, "hook_duration_s": 2.0
+  },
+  "level_headers": {
+    "enabled_for_format": "escalation",
+    "text": "CHALLENGE LEVEL: {LEVEL}",
+    "levels": [["EASY", "#3DDC5A"], ["NORMAL", "#FFB000"], ["HARD", "#33D1FF"], ["IMPOSSIBLE", "#FF2A2A"]],
+    "y_pct": 10, "animation": "pop_in"
+  },
+  "effects": {
+    "flash_transition": { "colors": ["#FF0000", "#FFFFFF", "#00FF66"], "duration_s": 0.15, "on": ["segment_change", "beat_drop"] },
+    "punch_in_zoom": { "scale": [1.15, 1.35], "duration_s": [0.3, 1.5], "on": ["reaction", "key_moment"] },
+    "camera_shake": { "on": ["panic", "impact"], "duration_s": 1.0 },
+    "slow_mo_replay": { "factor": 0.5, "on": ["payoff_optional"] }
+  },
+  "graphics": {
+    "callouts": ["red_arrow", "red_circle"],
+    "payoff_emoji": { "choices": ["☠️", "🥶", "😂", "😭", "😳"], "position": "center", "animation": "pulse_pop", "at": "payoff" }
+  },
+  "audio": {
+    "keep_source": true,
+    "source_gain_db": 0,
+    "music": { "genre": "slowed phonk / brazilian funk", "bed_gain_db": -18, "drop_at": "payoff_or_midpoint", "post_drop_gain_db": -6 },
+    "sfx": { "bass_boom": "impact/landing", "whoosh": "transition", "riser": "before_drop" },
+    "voiceover": false
+  },
+  "branding": { "watermark": "@{HANDLE}", "y_pct": 88, "color": "#FFFFFF", "opacity": 0.6, "persistent": true },
+  "formats": {
+    "escalation": "3-4 attempts of the same challenge, ordered easy->impossible, level headers, payoff on final attempt",
+    "single_moment": "setup -> build -> payoff, action tags narrate, music drop on payoff",
+    "reaction_split": "50/50 split: reactor face top, event bottom, then full-frame for payoff"
+  },
+  "title_templates": [
+    "No way he {did_x} at the end 😳 #ishowspeed",
+    "Speed didn't even dare to try the last one 💀 #ishowspeed",
+    "The {thing} at the end is UNBELIEVABLE ❤️‍🩹 #ishowspeed",
+    "Bro pulled it off exactly like the real one 😳 #ishowspeed",
+    "What if this {thing} is actually {danger} ☠️ #ishowspeed"
+  ]
+}

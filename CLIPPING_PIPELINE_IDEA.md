@@ -160,3 +160,52 @@ So the edit layer is what lets the channel monetize, not decoration. A raw cut +
 ### 7.5 Next research (cheap, when credits reset 11 Nov)
 - Pull one niche's top Shorts across 5–10 competing clip channels (vidIQ `channel_videos`, 5 credits each) to measure how saturated that niche is
 - Check which large streamers currently run paid clipping programmes
+
+---
+
+## 8. DECISIONS (locked 7 Nov 2026)
+
+### 8.1 Niche: **iShowSpeed** (one creator only)
+Why, from the scraped data:
+- **Biggest demand ceiling.** Speed-only edit channels: deagzzzshorts 6.9M subs / 14.8M avg views; Ironaldox 3.4M / 6.1M; Nexxo Recaps 1.07M / 13.4M (**653M Shorts views in 30 days**); wklerClips 972k / 3.8M; Drayzshorts 720k / 2.8M.
+- **Still open to new entrants.** Nexxo started Jan 2026 → 1M; JoeShortz Oct 2025 → 170k; wklerClips +9% subs/30d; Frayzz +11%/30d. Every Speed clipper in the sample is pulling 5M+ views/month.
+- **Easy to automate.** Speed streams IRL almost daily on YouTube, so VODs are easy to ingest. His content is visual, works across languages and has clear payoff moments.
+- Backup / second channel: Kai Cenat + AMP (OnShortz, KaiNFriends 703k / 4.2M avg).
+
+### 8.2 Benchmark accounts (Nexxo + 4 most similar, vidIQ similar-channels)
+| Channel | Subs | Avg views | Total views | 30d subs growth |
+|---|---|---|---|---|
+| Nexxo Recaps | 1.07M | 13.4M | 2.0B | +44% |
+| deagzzzshorts | 6.91M | 14.8M | 14.6B | +2.1% |
+| Ironaldox | 3.37M | 6.1M | 3.9B | +1.8% |
+| wklerClips | 972k | 3.8M | 723M | +9.1% |
+| Drayzshorts | 720k | 2.8M | 981M | +4.2% |
+
+### 8.3 Editing style: `styles/speed_v1.json`
+Copied from Nexxo's 3 biggest Shorts (134M / 108M / 63M). Every element is something the pipeline can automate:
+- 9:16 full-frame crop (a 50/50 split for reaction moments), **40–58s**, **hard cut on the payoff** so it loops
+- Jump cuts that remove pauses; average shot 2.5–5s
+- **ALL-CAPS bold captions**, white with yellow/red active-word highlight, black stroke, centred around 55% height
+- **`*ACTION TAG*` narration** in yellow asterisk text (e.g. `*SPEED FREAKS OUT*`), with a hook tag at 0–2s
+- **Red/white/green 0.15s flash transitions** on cuts and beat drops; **punch-in zooms** (1.15–1.35x) on reactions; camera shake on impacts; optional slow-mo on the payoff
+- Red arrow / red circle callouts; **one emoji pops up at the payoff** (☠️ 🥶 😂 😭 😳)
+- Source audio kept; **slowed phonk** bed that drops hard at the payoff; bass-boom SFX on impacts, whoosh on transitions; **no voiceover**
+- Persistent `@handle` watermark at 88% height
+- Three formats: **escalation** ("CHALLENGE LEVEL: EASY → IMPOSSIBLE" headers, 108M views), **single moment**, **reaction split**
+
+Not automated in v1: movie-comparison inserts (the Karate Kid video). They need third-party film footage, which is a Content ID risk.
+
+### 8.4 Pipeline (fully automated, one human approve step optional)
+```
+Speed VOD (YouTube) ─► yt-dlp ─► transcribe (word timestamps)
+  ─► Claude: find moments + choose format + write EDL JSON
+       {segments, action_tags, zoom_points, flash_points, levels, callouts, payoff_t, emoji, titles[3]}
+  ─► render service: apply styles/speed_v1.json to EDL ─► final.mp4
+  ─► (optional approve) ─► Blotato schedule to YouTube Shorts (+ TikTok/IG)
+```
+Build order in the terminal: (1) `POST /clip` EDL renderer with the speed_v1 style, (2) moment-finder + EDL prompt, (3) VOD watcher + auto-publish.
+
+### 8.5 Risks to manage (don't skip)
+- **Content ID / copyright:** these are another creator's streams. Check whether Speed runs a paid clipping programme and apply. Otherwise the channel runs on the fair-use / heavy-edit approach every competitor uses, and it can still be claimed or struck.
+- **Music:** phonk tracks will trigger Content ID claims. Use licensed or royalty-free phonk-style beds.
+- **Reused-content rules:** fully automated output that all looks the same is exactly what YouTube demonetizes. Vary the formats and tags, and keep the edit density high.
