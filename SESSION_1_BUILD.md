@@ -19,7 +19,7 @@
 | `vision.py` | Visual QA gate: Claude checks 8 frames per moment, drops ones that are boring to watch, fixes payoff timing | ⚠️ untested (no API key), fails open |
 | wholesome format | `type: wholesome` moments get soft emotional music, gold captions, ❤️‍🩹, no flash/thud (deagzzz style, the biggest category) | ✅ |
 | `tools/setup_mac.sh` / `tools/schedule.sh` | One-command setup (.env for the key) · daily launchd autopilot + macOS notification | ⚠️ syntax-checked only (needs a Mac) |
-| auto-posting | `review` = approve page on localhost:8765: pick/edit title, tick YouTube/TikTok/Instagram, Approve → uploaded + scheduled via Blotato into the next free slot (`post_times` in channels.json, default 12:30/17:30/21:00) | ✅ dry-run end to end; ⚠️ live Blotato API untested (docs/API host blocked in cloud session; verify endpoint paths in `clipper/blotato.py` against help.blotato.com/api on first real post) |
+| auto-posting | `review` = approve page on localhost:8765: pick/edit title, tick YouTube/TikTok/Instagram, Approve → uploaded + scheduled via Blotato into the next free slot (`post_times_utc` in channels.json, default 14:00/16:45/19:00 UTC from the winners' upload-time analysis) | ✅ dry-run end to end; ⚠️ live Blotato API untested (docs/API host blocked in cloud session; verify endpoint paths in `clipper/blotato.py` against help.blotato.com/api on first real post) |
 | review page | `out/<channel>/<date>/review.html`: watch every Short + its 3 titles, post the best | ✅ |
 | `assets/` | Montserrat Black (OFL), Twemoji PNGs (CC-BY), SFX + placeholder phonk loops (generated from scratch, royalty-free) | ✅ |
 
@@ -28,7 +28,7 @@
 git clone https://github.com/aiincomehq-max/ffmpeg-render-service && cd ffmpeg-render-service   # or cd into your existing copy
 git checkout claude/tender-goodall-hg7yeu && git pull
 bash tools/setup_mac.sh        # installs everything, asks for API key + channel handle, runs the demo
-bash tools/schedule.sh speed 11:00   # optional autopilot: runs daily, pops a notification when Shorts are ready
+bash tools/schedule.sh speed 10:00   # optional autopilot (Mac local time; 10:00 UK = done before the 14:00 UTC first slot): runs daily, pops a notification when Shorts are ready
 ```
 
 ## Channels (one streamer each, so viewers who subscribe for that person keep getting that person)

@@ -61,5 +61,5 @@ Setup done.
   Daily run:      source .venv/bin/activate && python -m clipper --channel $CHKEY auto
   Approve+post:   python -m clipper --channel $CHKEY review   (http://localhost:8765)
   Blotato ids:    python -m clipper --channel $CHKEY accounts (copy ids into channels.json → blotato)
-  Autopilot:      bash tools/schedule.sh $CHKEY 11:00     (runs daily, notifies you, approve page stays up 12h)
+  Autopilot:      bash tools/schedule.sh $CHKEY 10:00     (runs daily, notifies you, approve page stays up 12h)
 EOF

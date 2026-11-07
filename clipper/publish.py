@@ -1,6 +1,6 @@
 """Approve -> schedule -> post (YouTube Shorts, TikTok, Instagram Reels) via Blotato.
 
-Slots come from channels.json `post_times` (local time). Each approved Short takes the next free
+Slots come from channels.json `post_times` (UTC, so they don't depend on where the Mac is). Each approved Short takes the next free
 slot, so approving 4 at once spreads them across the day instead of dumping them together.
 """
 from __future__ import annotations
@@ -30,15 +30,15 @@ def save_state(ch: dict, st: dict) -> None:
 
 
 def next_slot(ch: dict, st: dict, now: dt.datetime | None = None) -> dt.datetime:
-    """Next post_times slot (local) that's >=15 min away and not already used."""
-    now = now or dt.datetime.now().astimezone()
+    """Next post_times slot (UTC) that's >=15 min away and not already used."""
+    now = now or dt.datetime.now(dt.timezone.utc)
     used = {v.get("slot") for v in st.values() if v.get("slot")}
-    times = ch.get("post_times") or ["12:30", "17:30", "21:00"]
+    times = ch.get("post_times_utc") or ["14:00", "16:45", "19:00"]
     for day in range(0, 30):
         d = (now + dt.timedelta(days=day)).date()
         for hm in times:
             h, m = map(int, hm.split(":"))
-            slot = dt.datetime(d.year, d.month, d.day, h, m, tzinfo=now.tzinfo)
+            slot = dt.datetime(d.year, d.month, d.day, h, m, tzinfo=dt.timezone.utc)
             if slot >= now + dt.timedelta(minutes=15) and slot.isoformat() not in used:
                 return slot
     raise RuntimeError("no free slot in 30 days")

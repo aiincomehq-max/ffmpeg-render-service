@@ -227,3 +227,20 @@ Top Shorts scraped for deagzzzshorts, Ironaldox, wklerClips and Drayzshorts, plu
 **Launch mix:** 3 Shorts/day = 1 subversion_comp (daily series) + 1 fresh single_moment from the last stream + 1 rotating high-ceiling format.
 
 **Implication for the build:** the pipeline needs a **moment library**, not just per-VOD clipping. Every detected moment from every VOD gets stored with tags (skill shown, success/fail, emotion, people, date). `subversion_comp` and `timeline_progression` are then just queries against that library.
+
+---
+
+## 9. When the winners post (upload-time analysis, 7 Nov 2026)
+Source: upload timestamps of 300 top Shorts (top 50 each from Nexxo, deagzzz, Ironaldox, wklerClips, Drayzshorts, OnShortz), plus core_fx's last 42 uploads with their views. Script: `research/post_times.py`.
+
+| Finding | Detail |
+|---|---|
+| **Prime window: 14:00–19:00 UTC** | 170 of 300 winners (57%) went up then. Peak hour 16:00 UTC. In winter that's 2–7pm UK / 9am–2pm US East: US morning + Europe after school. |
+| **Dead zone: 03:00–08:00 UTC** | Only 4 of 300 winners were posted then. |
+| Per channel | Nexxo posts earliest (median 12:21 UTC, most 09–15). wkler 15:21. **Drayz posts at exactly 16:45 UTC every day.** deagzzz 17:07, Ironaldox 18:09 (some late-night US posts). |
+| **Day of week doesn't matter** | Mon 47, Tue 45, Wed 38, Thu 38, Fri 45, Sat 50, Sun 37 → post every day. |
+| **Freshness beats the clock** | core_fx uploads at 00–04 UTC (right after US evening streams end) had the highest median views (484k, 3 of 8 over 1M), versus 90k for 12–16 UTC. Being first with a moment matters more than the hour (small sample). |
+
+**Applied:** posting slots default to **14:00 / 16:45 / 19:00 UTC** (`post_times_utc` in channels.json); the autopilot runs at 10:00 so approvals happen before the first slot.
+**For Kai/Core (Twitch clips, which appear within hours):** consider a 2nd daily run around 01:00 UTC with "Post now" to be first after the stream.
+**Caveat:** this is when *winners* were posted, not proof that the hour caused the views. Shorts keep getting pushed for days, so consistency and freshness matter more than the exact minute.
