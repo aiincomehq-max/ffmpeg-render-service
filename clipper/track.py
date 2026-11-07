@@ -17,6 +17,10 @@ DEADZONE = 0.06      # fraction of source width the face may drift before the cr
 EASE = 0.5           # per-sample easing toward target (0..1)
 
 _det = None
+try:
+    cv2.utils.logging.setLogLevel(cv2.utils.logging.LOG_LEVEL_ERROR)
+except Exception:
+    pass
 
 
 def _detector(w: int, h: int):

@@ -118,16 +118,21 @@ def single_moment(m: dict, style: dict, handle: str, music: str | None) -> dict:
             impacts.append({"t": round(o, 3), "flash": "red", "sfx": "bass_thud", "emoji": None})
     drop = pay_out if pay_out is not None else duration * 0.35
     drop = min(drop, duration * 0.45)
+    wholesome = m.get("type") == "wholesome"
+    if wholesome:
+        # deagzzz-style: no hard flash/thud, soft heart pop, emotional bed from the start, no comedic end sfx
+        impacts = [dict(i, flash=None, sfx=None, emoji=i.get("emoji") and "❤️‍🩹") for i in impacts]
+        drop = 0.0
     return {
-        "format": "single_moment",
+        "format": "wholesome_fan" if wholesome else "single_moment",
         "pieces": tl.pieces,
         "words": words,
-        "caption_active": "#00FF44",
         "texts": texts,
         "impacts": impacts,
         "music": {"file": music, "drop_t": round(drop, 3)} if music else None,
         "handle": handle,
-        "end_sfx": {"t": max(0.0, duration - 1.2), "sfx": "vine_boom"} if m.get("comedic") else None,
+        "end_sfx": {"t": max(0.0, duration - 1.2), "sfx": "vine_boom"} if m.get("comedic") and not wholesome else None,
+        "caption_active": "#FFD700" if wholesome else "#00FF44",
     }
 
 

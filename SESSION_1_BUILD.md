@@ -17,18 +17,17 @@
 | `track.py` | Face-tracked 9:16 crop (YuNet): follows the streamer like a camera operator, centre-crop fallback | ✅ on a moving-face test |
 | `scout.py` | WHERE to clip: YouTube "Most replayed" heatmap peaks (Speed) + most-viewed Twitch clips (Kai, Core) | ✅ peak logic; ⚠️ live fetch untested |
 | `vision.py` | Visual QA gate: Claude checks 8 frames per moment, drops ones that are boring to watch, fixes payoff timing | ⚠️ untested (no API key), fails open |
+| wholesome format | `type: wholesome` moments get soft emotional music, gold captions, ❤️‍🩹, no flash/thud (deagzzz style, the biggest category) | ✅ |
+| `tools/setup_mac.sh` / `tools/schedule.sh` | One-command setup (.env for the key) · daily launchd autopilot + macOS notification | ⚠️ syntax-checked only (needs a Mac) |
 | review page | `out/<channel>/<date>/review.html`: watch every Short + its 3 titles, post the best | ✅ |
 | `assets/` | Montserrat Black (OFL), Twemoji PNGs (CC-BY), SFX + placeholder phonk loops (generated from scratch, royalty-free) | ✅ |
 
-## Mac setup (~10 min)
+## Mac setup (~5 min, one command)
 ```bash
-brew install ffmpeg yt-dlp python@3.12
-cd ffmpeg-render-service && git checkout claude/tender-goodall-hg7yeu && git pull
-python3.12 -m venv .venv && source .venv/bin/activate
-pip install -r requirements-clipper.txt
-export ANTHROPIC_API_KEY=sk-ant-...          # console.anthropic.com
-# put your real channel handles into channels.json (replace the @CHANGE_ME_... values)
-python -m clipper demo                        # offline sanity check → out/<date>/
+git clone https://github.com/aiincomehq-max/ffmpeg-render-service && cd ffmpeg-render-service   # or cd into your existing copy
+git checkout claude/tender-goodall-hg7yeu && git pull
+bash tools/setup_mac.sh        # installs everything, asks for API key + channel handle, runs the demo
+bash tools/schedule.sh speed 11:00   # optional autopilot: runs daily, pops a notification when Shorts are ready
 ```
 
 ## Channels (one streamer each, so viewers who subscribe for that person keep getting that person)
@@ -88,4 +87,4 @@ python -m clipper --channel speed comp        # "Speed cant X" comp (Kai: "Kai c
 `escalation_levels` / `timeline_progression` / `wholesome_fan` presets (style in `styles/speed_v2.json`) · auto-watch Speed's channel for new streams (cron/launchd + `yt-dlp --dateafter`) · auto-upload (YouTube Data API or Blotato) · analytics feedback into the selection prompt.
 
 ## Knobs
-`CLIPPER_MODEL` (default `claude-opus-5-5`) · `CLIPPER_WHISPER` (default `small.en`; `medium.en` = better, slower) · `CLIPPER_VISION=0` skips the visual QA · `CLIPPER_TRACK=0` = plain centre crop · `CLIPPER_FALLBACKS=0` to turn off the server-side refusal fallback · drop licensed tracks into `assets/music/` (non-placeholder files are preferred automatically).
+`CLIPPER_MODEL` (default `claude-opus-5-5`) · `CLIPPER_WHISPER` (default `small.en`; `medium.en` = better, slower) · `CLIPPER_VISION=0` skips the visual QA · `CLIPPER_TRACK=0` = plain centre crop · `CLIPPER_FALLBACKS=0` to turn off the server-side refusal fallback · drop licensed tracks into `assets/music/phonk/` and `assets/music/emotional/` (your files are preferred over the placeholders automatically).

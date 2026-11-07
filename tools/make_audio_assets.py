@@ -132,6 +132,40 @@ def phonk_loop(bpm=130, bars=16, seed=0) -> np.ndarray:
     return out[:total]
 
 
+def emotional_loop(bpm=72, seed=0) -> np.ndarray:
+    """Original soft piano-pad loop (Am-F-C-G) for wholesome/emotional Shorts."""
+    beat = 60 / bpm
+    chords = [[57, 60, 64], [53, 57, 60], [48, 52, 55], [55, 59, 62]]  # MIDI: Am F C G
+    bar = beat * 4
+    total = int(SR * bar * 2 * len(chords) * 2)
+    out = np.zeros(total + SR * 3)
+
+    def hz(n):
+        return 440 * 2 ** ((n - 69) / 12)
+
+    def place(sig, sec, gain=1.0):
+        i = int(sec * SR)
+        out[i:i + len(sig)] += sig[: max(0, len(out) - i)] * gain
+
+    pos = 0.0
+    for rep in range(2):
+        for ch in chords:
+            dur = bar * 2
+            tt = t(dur + 1.5)
+            att = np.clip(tt / 1.2, 0, 1)
+            rel = np.clip((dur + 1.5 - tt) / 1.5, 0, 1)
+            pad = sum(np.sin(2 * np.pi * hz(n) * tt) + 0.5 * np.sin(2 * np.pi * hz(n) * 1.003 * tt) for n in ch)
+            place(pad * att * rel, pos, 0.18)
+            place(np.sin(2 * np.pi * hz(ch[0] - 24) * tt) * att * rel, pos, 0.25)  # bass
+            for k in range(8):  # gentle piano arpeggio
+                n = ch[k % 3] + (12 if k >= 3 else 0)
+                pt = t(1.6)
+                pl = (np.sin(2 * np.pi * hz(n) * pt) + 0.3 * np.sin(4 * np.pi * hz(n) * pt)) * np.exp(-pt * 3)
+                place(pl, pos + k * beat, 0.22)
+            pos += dur
+    return out[:total]
+
+
 def main() -> None:
     sfx = ROOT / "sfx"
     write(sfx / "bass_thud.wav", bass_thud())
@@ -139,8 +173,9 @@ def main() -> None:
     write(sfx / "whoosh.wav", whoosh())
     write(sfx / "riser.wav", riser())
     write(sfx / "ding.wav", ding())
-    write(ROOT / "music" / "placeholder_phonk_130.wav", phonk_loop(130, 16, 0))
-    write(ROOT / "music" / "placeholder_phonk_140.wav", phonk_loop(140, 16, 7))
+    write(ROOT / "music" / "phonk" / "placeholder_phonk_130.wav", phonk_loop(130, 16, 0))
+    write(ROOT / "music" / "phonk" / "placeholder_phonk_140.wav", phonk_loop(140, 16, 7))
+    write(ROOT / "music" / "emotional" / "placeholder_emotional_72.wav", emotional_loop(72))
     print("ok")
 
 

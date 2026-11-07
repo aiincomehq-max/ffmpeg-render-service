@@ -29,15 +29,33 @@ OUT = ROOT / "out"
 CH: dict = {}
 
 
-def pick_music() -> str | None:
-    tracks = [p for p in (ASSETS / "music").glob("*") if p.suffix.lower() in {".wav", ".mp3", ".m4a"}]
+def load_env() -> None:
+    """Read KEY=VALUE lines from .env (created by tools/setup_mac.sh) without overriding the shell."""
+    f = ROOT / ".env"
+    if f.exists():
+        for line in f.read_text().splitlines():
+            if "=" in line and not line.lstrip().startswith("#"):
+                k, v = line.split("=", 1)
+                os.environ.setdefault(k.strip(), v.strip().strip('"'))
+
+
+def notify(msg: str) -> None:
+    """macOS notification (no-op elsewhere)."""
+    if sys.platform == "darwin":
+        import subprocess
+        subprocess.run(["osascript", "-e", f'display notification "{msg}" with title "Clipper"'], check=False)
+
+
+def pick_music(kind: str = "phonk") -> str | None:
+    """assets/music/<kind>/: your own licensed tracks are preferred over the placeholder loops."""
+    tracks = [p for p in (ASSETS / "music" / kind).glob("*") if p.suffix.lower() in {".wav", ".mp3", ".m4a"}]
     real = [p for p in tracks if not p.name.startswith("placeholder")]
     pool = real or tracks
     return str(random.choice(pool)) if pool else None
 
 
 def ensure_assets() -> None:
-    if not (ASSETS / "sfx" / "bass_thud.wav").exists() or not list((ASSETS / "music").glob("*")):
+    if not (ASSETS / "sfx" / "bass_thud.wav").exists() or not list((ASSETS / "music" / "emotional").glob("*")):
         sys.path.insert(0, str(ROOT / "tools"))
         import make_audio_assets
         make_audio_assets.main()
@@ -83,10 +101,11 @@ def vision_filter(cands: list[dict], want: int) -> list[dict]:
 
 def render_single(m: dict, handle: str, d: Path) -> Path:
     style = load()
-    edl = E.single_moment(m, style, handle, pick_music())
+    wholesome = m.get("type") == "wholesome"
+    edl = E.single_moment(m, style, handle, pick_music("emotional" if wholesome else "phonk"))
     name = f"{dt.datetime.now():%H%M%S}_{slug(m.get('hook_tag', 'moment'))}.mp4"
     out = render(edl, style, d / name)
-    write_post(d, {"file": out.name, "format": "single_moment", "titles": m.get("titles", []),
+    write_post(d, {"file": out.name, "format": edl["format"], "titles": m.get("titles", []),
                    "description": f"{m.get('hook_tag', '').title()}\n\n{CH['credit']}\n{CH['hashtags']}",
                    "virality": m.get("virality"), "why": m.get("why"), "source": m.get("source", "")})
     return out
@@ -178,7 +197,9 @@ def cmd_auto(a) -> None:
     for m in best:
         print("  ->", render_single(m, a.handle, d))
     library.mark_used([m["_id"] for m in best])
-    print(f"REVIEW: open {write_review(d)}")
+    review = write_review(d)
+    print(f"REVIEW: open {review}")
+    notify(f"{len(best)} {CH['key']} Shorts ready to review")
 
 
 def cmd_run(a) -> None:
@@ -288,6 +309,7 @@ def main() -> None:
     au.add_argument("--range", default="7d", choices=["24hr", "7d", "30d"])
     sub.add_parser("skills")
     sub.add_parser("demo")
+    load_env()
     a = ap.parse_args()
     CH.update(channels.get(a.channel))
     a.handle = a.handle or CH["handle"]

@@ -4,6 +4,6 @@ __pycache__/
 data/
 out/
 *.work/
-assets/music/*.wav
+assets/music/**/*.wav
 assets/sfx/*.wav
 .env
