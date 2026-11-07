@@ -20,6 +20,8 @@
 | wholesome format | `type: wholesome` moments get soft emotional music, gold captions, ❤️‍🩹, no flash/thud (deagzzz style, the biggest category) | ✅ |
 | `tools/setup_mac.sh` / `tools/schedule.sh` | One-command setup (.env for the key) · daily launchd autopilot + macOS notification | ⚠️ syntax-checked only (needs a Mac) |
 | auto-posting | `review` = approve page on localhost:8765: pick/edit title, tick YouTube/TikTok/Instagram, Approve → uploaded + scheduled via Blotato into the next free slot (`post_times_utc` in channels.json, default 14:00/16:45/19:00 UTC from the winners' upload-time analysis) | ✅ dry-run end to end; ⚠️ live Blotato API untested (docs/API host blocked in cloud session; verify endpoint paths in `clipper/blotato.py` against help.blotato.com/api on first real post) |
+| `performance.py` | Learning loop: 48h + 7d after posting, reads views (yt-dlp, via the live URL from Blotato), writes `data/<channel>/learnings.md` (top/flop Shorts, best types/formats/lengths, virality-score calibration), which is automatically added to Claude's moment-picking instructions. `python -m clipper --channel speed stats` | ✅ simulated end to end |
+| `tests/test_clipper.py` | 15 fast checks (edit logic, scheduling, scouting, tracking, prompts, learning loop) + optional real render: `python -m unittest discover -s tests` | ✅ all pass |
 | review page | `out/<channel>/<date>/review.html`: watch every Short + its 3 titles, post the best | ✅ |
 | `assets/` | Montserrat Black (OFL), Twemoji PNGs (CC-BY), SFX + placeholder phonk loops (generated from scratch, royalty-free) | ✅ |
 
@@ -79,7 +81,7 @@ python -m clipper --channel speed comp        # "Speed cant X" comp (Kai: "Kai c
 ```
 
 ## Session 1 checklist for Claude Code
-1. [ ] Run setup, then `python -m clipper demo`. It must pass.
+1. [ ] Run setup, then `python -m clipper demo` and `python -m unittest discover -s tests`. Both must pass.
 2. [ ] Run `--channel speed auto` (then `run` on one stream if auto has issues). Fix any scout/ingest/transcribe/moments/vision errors (untested against live services).
 3. [ ] Watch every output and tune:
    - payoff timing (`payoff_t` accuracy). If it's often late or early, add a vision check: send 6 frames around payoff_t to Claude to confirm.

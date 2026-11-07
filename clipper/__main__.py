@@ -108,7 +108,9 @@ def render_single(m: dict, handle: str, d: Path) -> Path:
     out = render(edl, style, d / name)
     write_post(d, {"file": out.name, "format": edl["format"], "titles": m.get("titles", []),
                    "description": f"{m.get('hook_tag', '').title()}\n\n{CH['credit']}\n{CH['hashtags']}",
-                   "virality": m.get("virality"), "why": m.get("why"), "source": m.get("source", "")})
+                   "virality": m.get("virality"), "why": m.get("why"), "source": m.get("source", ""),
+                   "type": m.get("type"), "hook_tag": m.get("hook_tag"), "people": m.get("people", []),
+                   "duration": round(sum((p["end"] - p["start"]) / p.get("speed", 1) for p in edl["pieces"]), 1)})
     return out
 
 
@@ -192,6 +194,7 @@ def cmd_auto(a) -> None:
     from . import scout
     from .ingest import download
     ensure_assets()
+    learn_from_results()
     src_cfg = CH.get("sources", {})
     done, new_ids = seen(), set()
     if src_cfg.get("youtube_streams"):
@@ -278,7 +281,8 @@ def cmd_comp(a) -> None:
     d = day_dir()
     out = render(edl, style, d / f"{dt.datetime.now():%H%M%S}_comp-{slug(skill)}.mp4")
     write_post(d, {"file": out.name, "format": "subversion_comp", "titles": [edl["title"]],
-                   "description": f"{CH['credit']}\n{CH['hashtags']}"})
+                   "description": f"{CH['credit']}\n{CH['hashtags']}", "type": "skill", "hook_tag": claim,
+                   "duration": round(sum((p["end"] - p["start"]) / p.get("speed", 1) for p in edl["pieces"]), 1)})
     library.mark_used([fails[0]["_id"]] + [w["_id"] for w in wins[:5]])
     print("->", out)
 
@@ -301,6 +305,33 @@ def cmd_accounts(a) -> None:
     for acc in blotato.accounts():
         print(json.dumps(acc, ensure_ascii=False))
     print(f"\nCopy the ids for this channel's YouTube / TikTok / Instagram into channels.json → {CH['key']} → blotato.")
+
+
+def learn_from_results() -> None:
+    """Measure posted Shorts (48h / 7d) and refresh learnings.md that steers moment picking."""
+    from . import performance
+    try:
+        n = performance.collect(CH)
+        txt = performance.write_learnings(CH)
+        if n or txt:
+            print(f"learning: {n} new measurements; {'learnings updated' if txt else 'not enough data yet'}")
+    except Exception as e:  # never block the daily run
+        print(f"learning skipped: {e}")
+
+
+def cmd_stats(a) -> None:
+    from . import performance, publish
+    learn_from_results()
+    st = publish.load_state(CH)
+    rows = []
+    for k, e in st.items():
+        if e.get("status") in ("posted", "scheduled"):
+            v = {p: (s.get("168h") or s.get("48h") or {}).get("views") for p, s in e.get("stats", {}).items()}
+            rows.append((e.get("utc", "")[:16], e.get("title", "")[:50], v))
+    for when, title, v in sorted(rows):
+        print(f"{when}  {title:50s}  " + "  ".join(f"{p}:{n:,}" for p, n in v.items() if n is not None))
+    txt = performance.load_learnings(CH)
+    print("\n" + (txt or f"Need {performance.MIN_FOR_LEARNINGS}+ measured Shorts (48h after posting) before learnings kick in."))
 
 
 def cmd_skills(a) -> None:
@@ -372,6 +403,7 @@ def main() -> None:
     rv.add_argument("--hours", type=float, default=0, help="auto-stop after N hours (0 = until Ctrl+C)")
     rv.add_argument("--no-browser", action="store_true")
     sub.add_parser("accounts", help="list Blotato accounts (to fill channels.json → blotato)")
+    sub.add_parser("stats", help="views of posted Shorts + what the channel has learned")
     sub.add_parser("skills")
     sub.add_parser("demo")
     load_env()
@@ -381,7 +413,7 @@ def main() -> None:
     library.CHANNEL = a.channel
     if a.cmd == "demo":
         library.CHANNEL = CH["key"] = "demo"
-    {"run": cmd_run, "auto": cmd_auto, "review": cmd_review, "accounts": cmd_accounts, "comp": cmd_comp, "skills": cmd_skills, "demo": cmd_demo}[a.cmd](a)
+    {"run": cmd_run, "auto": cmd_auto, "review": cmd_review, "accounts": cmd_accounts, "stats": cmd_stats, "comp": cmd_comp, "skills": cmd_skills, "demo": cmd_demo}[a.cmd](a)
 
 
 if __name__ == "__main__":

@@ -94,9 +94,12 @@ def _fmt(segs: list[dict]) -> str:
 
 
 def _system(ch: dict) -> str:
-    return SYSTEM.format(streamer=ch["streamer"], short=ch["short"], SHORT=ch["short"].upper(),
+    base = SYSTEM.format(streamer=ch["streamer"], short=ch["short"], SHORT=ch["short"].upper(),
                          people=", ".join(ch.get("people", [])), tag=ch.get("title_tag", ""),
                          streamer_first=ch["streamer"].split(",")[0])
+    from .performance import load_learnings
+    own = load_learnings(ch) if ch.get("key") else ""
+    return base + ("\n\n" + own if own else "")
 
 
 def _call(client: anthropic.Anthropic, text: str, skills: list[str], context: str, ch: dict) -> list[dict]:

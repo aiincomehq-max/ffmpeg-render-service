@@ -4,3 +4,4 @@
 - Strategy, data and decisions: CLIPPING_PIPELINE_IDEA.md (sections 7–8). LOCKED: one streamer per YouTube channel (channels.json: speed → kai → core) and the style in `styles/speed_v2.json`. Don't re-debate them.
 - `app.py` is the legacy FastAPI render endpoint. Leave it unless needed.
 - The owner wants speed: build, test on real footage, ship. Ask only when blocked.
+- Before every commit: `python -m unittest discover -s tests` must pass (add a test when you fix a bug).

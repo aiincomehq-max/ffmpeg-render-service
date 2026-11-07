@@ -72,7 +72,9 @@ def approve(ch: dict, day_dir: Path, post: dict, title: str, platforms: list[str
         except Exception as e:  # one platform failing shouldn't lose the others
             results[p] = f"ERROR: {e}"
     entry = {"status": "scheduled" if iso else "posted", "slot": slot.isoformat() if slot else None,
-             "utc": iso, "title": title, "platforms": results, "dry_run": blotato.dry_run()}
+             "utc": iso or dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+             "title": title, "platforms": results, "dry_run": blotato.dry_run(),
+             "meta": {k: post.get(k) for k in ("format", "type", "virality", "why", "hook_tag", "people", "duration", "titles")}}
     st[key] = entry
     save_state(ch, st)
     if log:

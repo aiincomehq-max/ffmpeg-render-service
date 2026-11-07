@@ -40,14 +40,17 @@ def heatmap_sections(heatmap: list[dict], duration: float, n: int = PEAKS_PER_ST
         return []
     pts = sorted(heatmap, key=lambda h: h["start_time"])
     vals = [h["value"] for h in pts]
-    # local maxima, ignore the first 2% (stream intros always spike)
+    # real spikes only: local maximum, rising above at least one neighbour, and in the top quarter of the
+    # stream's replay values. Ignore the first 2% (stream intros always spike).
+    body = sorted(v for h, v in zip(pts, vals) if h["start_time"] >= duration * 0.02) or sorted(vals)
+    p75 = body[int(0.75 * (len(body) - 1))]
     cands = []
     for i, h in enumerate(pts):
         if h["start_time"] < duration * 0.02:
             continue
         left = vals[i - 1] if i > 0 else -1
         right = vals[i + 1] if i + 1 < len(vals) else -1
-        if vals[i] >= left and vals[i] >= right:
+        if vals[i] >= left and vals[i] >= right and vals[i] > min(left, right) and vals[i] > p75:
             cands.append(h)
     cands.sort(key=lambda h: -h["value"])
     chosen: list[dict] = []
