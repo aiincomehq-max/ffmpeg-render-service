@@ -7,12 +7,17 @@ from pathlib import Path
 
 from . import ROOT
 
-DB = ROOT / "data" / "moments.db"
+CHANNEL = "speed"  # set by the CLI (--channel); each channel gets its own library
+
+
+def db_path() -> Path:
+    return ROOT / "data" / CHANNEL / "moments.db"
 
 
 def conn() -> sqlite3.Connection:
-    DB.parent.mkdir(parents=True, exist_ok=True)
-    c = sqlite3.connect(DB)
+    db = db_path()
+    db.parent.mkdir(parents=True, exist_ok=True)
+    c = sqlite3.connect(db)
     c.execute("""CREATE TABLE IF NOT EXISTS moments (
         id INTEGER PRIMARY KEY, vod_key TEXT, src TEXT, start REAL, "end" REAL, type TEXT, skill TEXT,
         outcome TEXT, virality INTEGER, used INTEGER DEFAULT 0, data TEXT,

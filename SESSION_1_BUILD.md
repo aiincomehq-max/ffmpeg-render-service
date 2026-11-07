@@ -23,19 +23,29 @@ cd ffmpeg-render-service && git checkout claude/tender-goodall-hg7yeu && git pul
 python3.12 -m venv .venv && source .venv/bin/activate
 pip install -r requirements-clipper.txt
 export ANTHROPIC_API_KEY=sk-ant-...          # console.anthropic.com
-export CLIPPER_HANDLE=@YourNewChannelHandle
+# put your real channel handles into channels.json (replace the @CHANGE_ME_... values)
 python -m clipper demo                        # offline sanity check → out/<date>/
 ```
+
+## Channels (one streamer each, so viewers who subscribe for that person keep getting that person)
+| key | Streamer | Streams on | Launch order |
+|---|---|---|---|
+| `speed` | iShowSpeed | YouTube | 1st |
+| `kai` | Kai Cenat + crew | Twitch | 2nd |
+| `core` | Lacy, StableRonaldo + Core boys | Twitch / Kick | 3rd (once 1–2 are running) |
+Add more by copying an entry in `channels.json`. Each channel has its own moment library (`data/<key>/`) and output folder (`out/<key>/`).
 
 ## Go live
 ```bash
 # Grab a 45-min chunk of a recent Speed stream (much faster than a full 4h VOD)
-python -m clipper run "https://www.youtube.com/watch?v=<SPEED_STREAM_ID>" --section 00:30:00-01:15:00 --count 3
-# → out/<date>/*.mp4 + posts.json (3 title options each). Watch them, then upload the best.
+# ONE STREAMER PER CHANNEL. --channel picks which (speed / kai / core, see channels.json)
+python -m clipper --channel speed run "https://www.youtube.com/watch?v=<SPEED_STREAM_ID>" --section 00:30:00-01:15:00 --count 3
+python -m clipper --channel kai   run "https://www.twitch.tv/videos/<KAI_VOD_ID>"         --section 01:00:00-01:45:00 --count 3
+# → out/<channel>/<date>/*.mp4 + posts.json (3 title options each). Watch them, upload the best to THAT channel.
 
-# After 2–3 streams are in the library:
-python -m clipper skills                      # what the library has per skill
-python -m clipper comp                        # "Speed cant X" comp when 1 fail + 5 successes exist
+# After 2–3 streams per channel are in its library:
+python -m clipper --channel speed skills      # what the library has per skill
+python -m clipper --channel speed comp        # "Speed cant X" comp (Kai: "Kai cant X")
 ```
 
 ## Session 1 checklist for Claude Code

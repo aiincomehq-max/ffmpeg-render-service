@@ -132,8 +132,8 @@ def single_moment(m: dict, style: dict, handle: str, music: str | None) -> dict:
 
 
 def subversion_comp(claim: str, fail: dict, successes: list[dict], style: dict, handle: str, music: str | None,
-                    seed: int | None = None) -> dict:
-    """Drayzshorts format: 'SPEED CANT X' -> clip1 (supports claim) -> 'ARE YOU SURE?' -> 5 clips proving the opposite."""
+                    seed: int | None = None, name: str = "Speed") -> dict:
+    """Drayzshorts format: '{NAME} CANT X' -> clip1 (supports claim) -> 'ARE YOU SURE?' -> 5 clips proving the opposite."""
     rng = random.Random(seed)
     tl = Timeline()
     # clip 1: the "evidence" for the ironic claim, ~3s around its impact
@@ -151,7 +151,7 @@ def subversion_comp(claim: str, fail: dict, successes: list[dict], style: dict, 
     duration = tl.out_t
     clip3 = clip_starts[1] if len(clip_starts) > 1 else clip_starts[0]
     texts = [
-        {"text": f'"SPEED {claim.upper()}"', "start": 0.0, "end": round(clip3, 3), "kind": "header", "color": "yellow", "y_pct": 8},
+        {"text": f'"{name.upper()} {claim.upper()}"', "start": 0.0, "end": round(clip3, 3), "kind": "header", "color": "yellow", "y_pct": 8},
         {"text": "ARE YOU SURE?", "start": round(clip3, 3), "end": round(min(duration, clip3 + 1.7), 3), "kind": "header", "color": "white", "y_pct": 8},
     ]
     emojis = ["💀", "🤯"]
@@ -167,5 +167,5 @@ def subversion_comp(claim: str, fail: dict, successes: list[dict], style: dict, 
         "music": {"file": music, "drop_t": round(clip3, 3)} if music else None,
         "handle": handle,
         "end_sfx": None,
-        "title": f"Speed {claim.lower()} 💀{successes[0].get('topic_emoji', '')}🔥".replace("  ", " "),
+        "title": f"{name} {claim.lower()} 💀{successes[0].get('topic_emoji', '')}🔥".replace("  ", " "),
     }

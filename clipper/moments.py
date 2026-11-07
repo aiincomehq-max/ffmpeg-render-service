@@ -13,27 +13,27 @@ WINDOW_S = 8 * 60
 OVERLAP_S = 60
 EMOJIS = ["💀", "🤯", "😭", "😂", "🥶", "❤️‍🩹", "💖", "🔥", "😳"]
 
-SYSTEM = """You are the clip editor for a YouTube Shorts channel that posts iShowSpeed livestream edits.
+SYSTEM = """You are the clip editor for a YouTube Shorts channel that posts {streamer} livestream edits.
 You read a timestamped transcript window and pick the moments that would go viral as 15-58 second Shorts.
 
-What wins on the top Speed edit channels (deagzzzshorts, Nexxo Recaps, Ironaldox, wklerClips, Drayzshorts):
+What wins on the top streamer-edit channels (deagzzzshorts, Nexxo Recaps, Ironaldox, OnShortz, core_fx, Drayzshorts):
 - a clear payoff near the END (a reveal, reaction, success/fail, punchline) the viewer waits for
 - wholesome fan / family / kindness moments (the biggest category, 190M-338M views)
-- Speed attempting a physical skill or challenge (backflips, races, strength, reflexes) - success or fail
-- celebrity/athlete interactions (Ronaldo, MrBeast, Kai Cenat, KSI, athletes)
+- {short} attempting a physical skill or challenge (backflips, races, strength, reflexes) - success or fail
+- interactions with famous people, athletes, or the regular crew ({people})
 - scares, chaos, ragebait, chat moments, money/numbers
 
 Rules:
 - start: a second or two before the setup; end: right after the payoff (hard cut). Length 15-58s.
 - payoff_t: the exact second the payoff happens (reaction peak / punchline / landing).
 - impact_ts: other strong beats (landings, scares, hits) inside the moment; can be empty.
-- hook_tag: 2-6 word narrator caption shown at 0-2s, ALL CAPS, e.g. "SPEED MEETS HIS BIGGEST FAN".
-- action_tags: 0-3 narrator tags in the middle, e.g. "WAIT FOR IT", "SPEED FREAKS OUT", "PASSED", "FAILS".
-- skill: pick from the given skill list when Speed attempts a physical/reflex/skill thing, else "none".
+- hook_tag: 2-6 word narrator caption shown at 0-2s, ALL CAPS, e.g. "{SHORT} MEETS HIS BIGGEST FAN".
+- action_tags: 0-3 narrator tags in the middle, e.g. "WAIT FOR IT", "{SHORT} FREAKS OUT", "PASSED", "FAILS".
+- skill: pick from the given skill list when {short} attempts a physical/reflex/skill thing, else "none".
 - outcome: "success" or "fail" for skill attempts, else "na".
 - titles: 3 options using these formulas:
-  "No way he [did X] at the end 😳 #ishowspeed" | "[Name] [verb] [specific detail] 😭💀" |
-  "iShowSpeed [kind act] ❤️‍🩹❤️‍🩹" | "The ENDING is crazy 💀🔥" | "Bro [did X] 🤯 #ishowspeed #edit"
+  "No way he [did X] at the end 😳 {tag}" | "[Name] [verb] [specific detail] 😭💀" |
+  "{streamer_first} [kind act] ❤️‍🩹❤️‍🩹" | "The ENDING is crazy 💀🔥" | "Bro [did X] 🤯 {tag}"
 - virality: 1-10, be harsh; only 7+ is worth posting.
 - Use only timestamps that exist in the transcript window. Return an empty list if nothing is good."""
 
@@ -83,11 +83,17 @@ def _fmt(segs: list[dict]) -> str:
     return "\n".join(f"[{s['s']:.1f}-{s['e']:.1f}] {s['text']}" for s in segs)
 
 
-def _call(client: anthropic.Anthropic, text: str, skills: list[str], context: str) -> list[dict]:
+def _system(ch: dict) -> str:
+    return SYSTEM.format(streamer=ch["streamer"], short=ch["short"], SHORT=ch["short"].upper(),
+                         people=", ".join(ch.get("people", [])), tag=ch.get("title_tag", ""),
+                         streamer_first=ch["streamer"].split(",")[0])
+
+
+def _call(client: anthropic.Anthropic, text: str, skills: list[str], context: str, ch: dict) -> list[dict]:
     kwargs = dict(
         model=MODEL,
         max_tokens=16000,
-        system=SYSTEM,
+        system=_system(ch),
         messages=[{"role": "user", "content": f"Stream: {context}\nSkill list: {', '.join(skills)}\n\nTranscript window (seconds):\n{text}"}],
         output_config={"format": {"type": "json_schema", "schema": _schema(skills)}},
     )
@@ -114,14 +120,14 @@ def _dedupe(ms: list[dict]) -> list[dict]:
     return sorted(kept, key=lambda m: m["start"])
 
 
-def find_moments(transcript: dict, context: str) -> list[dict]:
+def find_moments(transcript: dict, context: str, ch: dict) -> list[dict]:
     skills = load()["formats"]["subversion_comp"]["skills_backlog"]
     client = anthropic.Anthropic()
     found = []
     wins = _windows(transcript["segments"])
     for i, w in enumerate(wins, 1):
         print(f"  moments: window {i}/{len(wins)}", flush=True)
-        for m in _call(client, _fmt(w), skills, context):
+        for m in _call(client, _fmt(w), skills, context, ch):
             if 8 <= m["end"] - m["start"] <= 70 and m["start"] <= m["payoff_t"] <= m["end"]:
                 found.append(m)
     found = _dedupe(found)
