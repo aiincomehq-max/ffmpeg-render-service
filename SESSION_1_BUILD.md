@@ -1,62 +1,55 @@
-# Session 1 build brief: Speed clipping pipeline MVP
+# Session 1: go live (most of the build is ALREADY DONE)
 
-> Paste into Claude Code on the Mac: **"Read SESSION_1_BUILD.md and execute it end to end. Don't stop to ask unless blocked."**
-> Background: `CLIPPING_PIPELINE_IDEA.md` (sections 7–8), style: `styles/speed_v2.json`.
+> Paste into Claude Code on the Mac: **"Read SESSION_1_BUILD.md and get the clipper running on a real Speed VOD. Fix whatever breaks."**
 
-## Goal for this ONE session
-By the end of the session: **one command turns a Speed stream VOD URL into finished, styled 9:16 Shorts plus titles**, and the first Shorts are uploaded.
+## What already exists (built and tested in the phone session, 7 Nov 2026)
+`clipper/` is a Python CLI. One command does all of this: VOD URL → download → transcribe → Claude finds moments → moment library → styled Shorts + titles.
 
-```
-python -m clipper run "<speed VOD url>" --formats single_moment,subversion_comp --count 3
-→ out/<date>/*.mp4 + out/<date>/posts.json (title, description, hashtags per clip)
-```
+| Module | Does | Tested? |
+|---|---|---|
+| `render.py` | EDL → 1080x1920 Short: crop, speed ramps/slow-mo, punch-in, shake, flashes, ASS captions with word highlight, `*TAGS*`, headers, emoji pops, watermark, phonk bed (muffled until the drop, ducked under speech), SFX, loudness −14 LUFS | ✅ on synthetic footage |
+| `edl.py` | Format presets `single_moment` (cuts silences, payoff punch-in, hook tag) and `subversion_comp` (Drayz "Speed cant X" format, 20–22s) | ✅ |
+| `library.py` | SQLite moment library (skill / outcome / virality / used) | ✅ |
+| `__main__.py` | CLI: `run`, `comp`, `skills`, `demo` | ✅ (`demo`) |
+| `ingest.py` | yt-dlp download, optional `--section` | ⚠️ untested (YouTube blocked in the cloud session) |
+| `transcribe.py` | faster-whisper word timestamps, cached | ⚠️ untested (model download blocked) |
+| `moments.py` | Claude API (`claude-opus-5-5`, structured JSON output, server-side refusal fallback) → ranked moments + 3 titles each | ⚠️ untested (no API key in the cloud session) |
+| `assets/` | Montserrat Black (OFL), Twemoji PNGs (CC-BY), SFX + placeholder phonk loops (generated from scratch, royalty-free) | ✅ |
 
-## Scope: in (session 1)
-1. **CLI tool on the Mac.** It runs locally: no server, no deploy. `app.py` (FastAPI) stays as is and is out of scope.
-2. **Ingest:** `yt-dlp` downloads the VOD (or a time range of it) in ≤1080p.
-3. **Transcribe:** word timestamps with `faster-whisper` locally (model `small.en`; use `medium.en` if quality is poor). Cache the result to disk.
-4. **Moment finder:** send the transcript chunks to the Claude API and get back JSON moments `{start, end, type, people, emotion, skill, success, payoff_t, hook_tag, action_tags[], emoji, titles[3]}`. Use the title formulas from section 7.2/8 of the idea doc and the `formats` in `speed_v2.json`.
-5. **Moment library:** SQLite `moments.db` stores every moment with its tags and source, so later formats can query across VODs.
-6. **Renderer** (ffmpeg, driven by `speed_v2.json`). Build these in this order:
-   - `single_moment`: crop 9:16 (centre crop is fine for v1), cut pauses >0.4s, ASS captions (ALL CAPS, white with green/yellow active word, black stroke, y=50%), `*ACTION TAGS*`, hook tag 0–2s, 1.15x punch-in + white flash + bass thud at `payoff_t`, emoji pop at the payoff, phonk bed at −16dB with the drop at the first impact, watermark, hard cut.
-   - `subversion_comp`: query the library for 6 moments sharing one `skill` (1 fail + 5 successes), header "SPEED {CLAIM}" at y=8% for clips 1–2, "ARE YOU SURE?" at clip 3, 0.35x slow-mo + punch-in + 💀 pop on each impact, hard cuts, no captions, 20–22s total.
-7. **Output:** mp4s + `posts.json`. Then **upload**: either manually to YouTube Studio for session 1, or through Blotato if its MCP/API is connected in the terminal.
-
-## Scope: out (later sessions; don't start these)
-Face-tracked crop, the `escalation_levels` / `timeline_progression` / `wholesome_fan` renderers, an auto VOD watcher, auto-scheduling, analytics loop.
-
-## Acceptance test (the session is done only when this passes)
-- [ ] `python -m clipper run <real Speed VOD url> --count 3` produces **3 single_moment Shorts**, each 15–58s, 1080x1920, with audio and readable captions
-- [ ] After 2–3 VODs are in the library, `python -m clipper comp --skill <x>` produces **1 subversion_comp** of 20–22s
-- [ ] Each Short has 3 title options in `posts.json`
-- [ ] Watch every output once yourself before uploading, then upload the 3 best
-
-## Prerequisites (do these before starting; ~15 min)
-- [ ] `brew install ffmpeg yt-dlp python@3.12`
-- [ ] `ANTHROPIC_API_KEY` exported in the shell (console.anthropic.com)
-- [ ] Font: **Montserrat Black**, from Google Fonts, installed on the Mac
-- [ ] `assets/music/`: 3–5 **royalty-free/licensed** phonk tracks (no copyrighted phonk, because Content ID will claim it)
-- [ ] `assets/sfx/`: bass_thud, whoosh, ding, vine_boom (royalty-free packs)
-- [ ] `assets/emoji/`: PNGs for 💀 🤯 😭 😂 🥶 ❤️‍🩹 (e.g. Twemoji, CC-BY), since ffmpeg can't render colour emoji fonts reliably
-- [ ] A new YouTube channel created, with handle chosen (used for the watermark)
-- [ ] 1–3 recent iShowSpeed stream VOD URLs ready
-
-## Suggested repo layout
-```
-clipper/
-  __main__.py      # CLI: run, comp, render
-  ingest.py        # yt-dlp
-  transcribe.py    # faster-whisper → words.json
-  moments.py       # Claude API → moments JSON, SQLite library
-  edl.py           # moment(s) + style preset → edit decision list
-  render.py        # EDL → ffmpeg filtergraph (ASS captions, zoompan, overlays, amix)
-  ass.py           # caption/tag/header .ass generator
-styles/speed_v2.json
-assets/{music,sfx,emoji,fonts}/
-out/
+## Mac setup (~10 min)
+```bash
+brew install ffmpeg yt-dlp python@3.12
+cd ffmpeg-render-service && git checkout claude/tender-goodall-hg7yeu && git pull
+python3.12 -m venv .venv && source .venv/bin/activate
+pip install -r requirements-clipper.txt
+export ANTHROPIC_API_KEY=sk-ant-...          # console.anthropic.com
+export CLIPPER_HANDLE=@YourNewChannelHandle
+python -m clipper demo                        # offline sanity check → out/<date>/
 ```
 
-## Hard rules
-- Style values come only from `styles/speed_v2.json`; don't hard-code them
-- Test each stage on a 5-minute slice of the VOD before running the full VOD
-- No copyrighted music. Keep source audio.
+## Go live
+```bash
+# Grab a 45-min chunk of a recent Speed stream (much faster than a full 4h VOD)
+python -m clipper run "https://www.youtube.com/watch?v=<SPEED_STREAM_ID>" --section 00:30:00-01:15:00 --count 3
+# → out/<date>/*.mp4 + posts.json (3 title options each). Watch them, then upload the best.
+
+# After 2–3 streams are in the library:
+python -m clipper skills                      # what the library has per skill
+python -m clipper comp                        # "Speed cant X" comp when 1 fail + 5 successes exist
+```
+
+## Session 1 checklist for Claude Code
+1. [ ] Run setup, then `python -m clipper demo`. It must pass.
+2. [ ] Run `run` on a real Speed stream section. Fix any ingest/transcribe/moments errors (these 3 modules are untested).
+3. [ ] Watch every output and tune:
+   - payoff timing (`payoff_t` accuracy). If it's often late or early, add a vision check: send 6 frames around payoff_t to Claude to confirm.
+   - crop: centre crop cuts Speed off when he's off-centre. Next upgrade: face-tracked crop (mediapipe/opencv) in `render_piece`.
+   - caption size and position, tag wording, music level.
+4. [ ] Upload the 3 best manually in YouTube Studio (title from posts.json, description already includes the credit).
+5. [ ] Commit fixes to `claude/tender-goodall-hg7yeu`.
+
+## Next sessions (not session 1)
+Face-tracked crop · `escalation_levels` / `timeline_progression` / `wholesome_fan` presets (style in `styles/speed_v2.json`) · auto-watch Speed's channel for new streams (cron/launchd + `yt-dlp --dateafter`) · auto-upload (YouTube Data API or Blotato) · analytics feedback into the selection prompt.
+
+## Knobs
+`CLIPPER_MODEL` (default `claude-opus-5-5`) · `CLIPPER_WHISPER` (default `small.en`; `medium.en` = better, slower) · `CLIPPER_FALLBACKS=0` to turn off the server-side refusal fallback · drop licensed tracks into `assets/music/` (non-placeholder files are preferred automatically).
