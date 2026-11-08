@@ -27,7 +27,14 @@ Rules:
 - start: a second or two before the setup; end: right after the payoff (hard cut). Length 15-58s.
 - payoff_t: the exact second the payoff happens (reaction peak / punchline / landing).
 - impact_ts: other strong beats (landings, scares, hits) inside the moment; can be empty.
-- hook_tag: 2-6 word narrator caption shown at 0-2s, ALL CAPS, e.g. "{SHORT} MEETS HIS BIGGEST FAN".
+- hook_tag: the BIG headline on the first frame (0-2.5s) - it decides whether people swipe. ALL CAPS, 3-6 words,
+  max 32 characters, letters/numbers/basic punctuation only (NO emoji). Use one of the two proven patterns:
+  (a) open loop that makes them wait, WITHOUT revealing the payoff: "WAIT FOR HIS FIRST CUSTOMER",
+      "NO WAY HE DID THIS AT THE END", "THE ENDING IS CRAZY", "HE DID NOT SEE THIS COMING";
+  (b) name + verb + specific detail (numbers/money/famous people win): "{SHORT} BENCHED 225 COLD",
+      "JAMAL ORDERED 12 BUCKETS", "KEVIN HART COOKED {SHORT}".
+  NEVER a flat description of the scene ("{SHORT} WORKS THE DRIVE-THRU", "{SHORT} MEETS A FAN") and never give
+  away the surprise. Must be true to what happens in the clip.
 - action_tags: 0-3 narrator tags in the middle, e.g. "WAIT FOR IT", "{SHORT} FREAKS OUT", "PASSED", "FAILS".
 - skill: pick from the given skill list when {short} attempts a physical/reflex/skill thing, else "none".
 - outcome: "success" or "fail" for skill attempts, else "na".

@@ -225,6 +225,9 @@ class TestLiveServiceFixes(unittest.TestCase):
             scout.stream_peaks("https://www.youtube.com/watch?v=x")
             from clipper import ingest
             ingest.info("https://www.youtube.com/watch?v=x")
+            import tempfile
+            with mock.patch.object(ingest, "VODS", Path(tempfile.mkdtemp())):
+                ingest.download_audio("https://www.youtube.com/watch?v=x", {"id": "x"})
         self.assertTrue(seen and all(c[0] == "yt-dlp" and "--ignore-config" in c for c in seen))
 
     def test_load_wav_without_pyav(self):
@@ -278,7 +281,57 @@ class TestFacebook(unittest.TestCase):
             blotato.create_post("facebook", "31275", "t", "u", "title", None, [])
 
 
+class TestTwoBatches(unittest.TestCase):
+    """Fresh (Claude-estimated, new streams) and heatmap ('Most replayed', weeks later) must coexist."""
+
+    def setUp(self):
+        import tempfile
+        from clipper import __main__ as M, library
+        self.M, self.library = M, library
+        self.tmp = Path(tempfile.mkdtemp())
+        self._root, self._chan = M.ROOT, library.CHANNEL
+        M.ROOT = self.tmp
+        library.CHANNEL = f"_test_{uuid.uuid4().hex[:6]}"
+        M.CH.clear(); M.CH.update({"key": library.CHANNEL})
+
+    def tearDown(self):
+        shutil.rmtree(self.library.db_path().parent, ignore_errors=True)
+        shutil.rmtree(self.tmp, ignore_errors=True)
+        self.M.ROOT, self.library.CHANNEL = self._root, self._chan
+
+    def test_seen_sets_are_separate(self):
+        self.M.mark_seen({"vid1"}, "fresh")
+        self.assertIn("vid1", self.M.seen("fresh"))
+        self.assertNotIn("vid1", self.M.seen("heatmap"))   # its proven batch must still happen later
+
+    def test_same_moment_not_added_twice_and_kind_filter(self):
+        m = {"start": 30.0, "end": 60.0, "payoff_t": 50.0, "type": "funny", "skill": "none", "outcome": "na",
+             "virality": 8, "source_kind": "fresh", "video_id": "vid1", "abs_start": 1230.0}
+        self.library.add("vid1_a", Path("a.mp4"), [m])
+        self.assertTrue(self.library.exists_near("vid1", 1233.0))        # same moment seen via another section
+        self.assertFalse(self.library.exists_near("vid1", 1300.0))
+        self.assertFalse(self.library.exists_near("vid2", 1230.0))
+        h = dict(m, start=5.0, source_kind="heatmap", abs_start=4000.0)
+        self.library.add("vid1_b", Path("b.mp4"), [h])
+        self.assertEqual([x["source_kind"] for x in self.library.top(None, 5, 7, kind="fresh")], ["fresh"])
+        self.assertEqual([x["source_kind"] for x in self.library.top(None, 5, 7, kind="heatmap")], ["heatmap"])
+
+    def test_fresh_windows_pad_and_merge(self):
+        ms = [{"start": 100, "end": 130, "virality": 9}, {"start": 150, "end": 170, "virality": 8},
+              {"start": 900, "end": 930, "virality": 7}, {"start": 2000, "end": 2030, "virality": 3}]
+        w = self.M.fresh_windows(ms, 3000, 3)
+        self.assertEqual(w, [(55.0, 190.0), (855.0, 950.0)])   # first two overlap once padded -> merged
+
+    def test_batch_label(self):
+        self.assertIn("FRESH", publish.batch_label({"source_kind": "fresh"}))
+        self.assertIn("PROVEN", publish.batch_label({"source_kind": "heatmap"}))
+
+
 class TestHook(unittest.TestCase):
+    def test_hook_text_plain_and_short(self):
+        self.assertEqual(E.hook_text("*wait for his first customer* 😭💀"), "WAIT FOR HIS FIRST CUSTOMER")
+        self.assertLessEqual(len(E.hook_text("NO WAY HE DID THIS AT THE END OF THE STREAM TODAY")), 34)
+
     def test_opening_hook_is_big_and_first(self):
         from clipper import ass
         self.assertIn("Style: Hook,", ass.header(STYLE))

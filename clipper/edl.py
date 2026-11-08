@@ -12,6 +12,7 @@ Moment shape (source-video seconds):
 from __future__ import annotations
 
 import random
+import re
 
 KEEP_GAP = 0.40      # remove silences longer than this
 PAD = 0.12           # keep this much around speech when cutting
@@ -68,6 +69,15 @@ class Timeline:
         return None
 
 
+def hook_text(tag: str, max_chars: int = 34) -> str:
+    """Frame-1 hook: the font has no emoji glyphs and 120px fits ~2 lines, so keep plain text, cut at a word."""
+    t = re.sub(r"[^A-Za-z0-9 '!?$%&.,#:-]", "", tag).replace("*", "").strip().upper()
+    t = re.sub(r"\s+", " ", t)
+    if len(t) > max_chars:
+        t = t[:max_chars].rsplit(" ", 1)[0]
+    return t
+
+
 def single_moment(m: dict, style: dict, handle: str, music: str | None) -> dict:
     tl = Timeline()
     payoff = m.get("payoff_t")
@@ -103,7 +113,7 @@ def single_moment(m: dict, style: dict, handle: str, music: str | None) -> dict:
 
     texts = []
     if m.get("hook_tag"):
-        texts.append({"text": m["hook_tag"].strip("* "), "start": 0.0, "end": HOOK_S, "kind": "hook", "color": "yellow", "y_pct": 24})
+        texts.append({"text": hook_text(m["hook_tag"]), "start": 0.0, "end": HOOK_S, "kind": "hook", "color": "yellow", "y_pct": 24})
     for tag in m.get("action_tags", []):
         t = tl.to_out(tag["t"])
         if t is not None and t > HOOK_S:

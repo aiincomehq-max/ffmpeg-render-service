@@ -14,6 +14,11 @@ from . import ROOT, blotato
 PLATFORMS = ["youtube", "tiktok", "instagram", "facebook"]
 
 
+def batch_label(p: dict) -> str:
+    """Review-page label for which batch a Short came from."""
+    return {"fresh": "🆕 FRESH (estimated)", "heatmap": "🔥 PROVEN (most replayed)"}.get(p.get("source_kind"), "MANUAL")
+
+
 def state_path(ch: dict) -> Path:
     return ROOT / "data" / ch["key"] / "posted.json"
 

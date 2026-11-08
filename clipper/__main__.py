@@ -109,6 +109,7 @@ def render_single(m: dict, handle: str, d: Path) -> Path:
     write_post(d, {"file": out.name, "format": edl["format"], "titles": m.get("titles", []),
                    "description": f"{CH['credit']}\n{CH['hashtags']}",  # (title-casing the hook turned KFC into "Kfc")
                    "virality": m.get("virality"), "why": m.get("why"), "source": m.get("source", ""),
+                   "source_kind": m.get("source_kind", "heatmap"),
                    "type": m.get("type"), "hook_tag": m.get("hook_tag"), "people": m.get("people", []),
                    "duration": round(sum((p["end"] - p["start"]) / p.get("speed", 1) for p in edl["pieces"]), 1)})
     return out
@@ -117,13 +118,15 @@ def render_single(m: dict, handle: str, d: Path) -> Path:
 def write_review(d: Path) -> Path:
     """Simple approval page: every rendered Short with its titles, score and why."""
     import html
+
+    from . import publish
     f = d / "posts.json"
     posts = json.loads(f.read_text()) if f.exists() else []
     cards = []
     for p in posts:
         titles = "".join(f"<li>{html.escape(t)}</li>" for t in p.get("titles", []))
         cards.append(f"""<div class=c><video src="{html.escape(p['file'])}" controls preload=metadata></video>
-<div class=m><b>{html.escape(p.get('format', ''))}</b> · score {p.get('virality', '-')}<br><small>{html.escape(p.get('why') or '')}</small>
+<div class=m><b>{publish.batch_label(p)}</b> · {html.escape(p.get('format', ''))} · score {p.get('virality', '-')}<br><small>{html.escape(p.get('why') or '')}</small>
 <ol>{titles}</ol><small>{html.escape(p.get('source', ''))}</small></div></div>""")
     page = f"""<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
 <title>Review {CH.get('key')} {d.name}</title>
@@ -136,31 +139,81 @@ def write_review(d: Path) -> Path:
     return out
 
 
-def process_file(src: Path, meta: dict, hint: str = "") -> list[dict]:
+def process_file(src: Path, meta: dict, hint: str = "", kind: str = "manual", offset: float = 0.0) -> list[dict]:
+    """kind: 'fresh' | 'heatmap' | 'manual'. offset = where src starts inside the original stream (sections)."""
     from .moments import find_moments
     from .transcribe import transcribe
     tr = transcribe(src, meta["vod_key"])
     ctx = f"{meta.get('title', '')} ({meta.get('upload_date', '')}){' | ' + hint if hint else ''}"
-    ms = find_moments(tr, ctx, CH)
-    for m in ms:
+    kept = []
+    for m in find_moments(tr, ctx, CH):
         m["source"] = f"{meta.get('url', '')} {meta.get('section') or ''}".strip()
-    library.add(meta["vod_key"], src, ms)
-    return ms
+        m["source_kind"], m["video_id"] = kind, meta.get("id")
+        m["abs_start"] = round(offset + m["start"], 1)
+        if m["video_id"] and library.exists_near(m["video_id"], m["abs_start"]):
+            print(f"  (already in library: {m.get('hook_tag')})")
+            continue
+        kept.append(m)
+    library.add(meta["vod_key"], src, kept)
+    return kept
 
 
-def seen_path() -> Path:
-    return ROOT / "data" / CH["key"] / "seen.json"
+def seen_path(mode: str = "heatmap") -> Path:
+    # separate per batch: a stream scanned FRESH today must still get its 'Most replayed' batch weeks later
+    return ROOT / "data" / CH["key"] / ("seen.json" if mode == "heatmap" else f"seen_{mode}.json")
 
 
-def seen() -> set:
-    f = seen_path()
+def seen(mode: str = "heatmap") -> set:
+    f = seen_path(mode)
     return set(json.loads(f.read_text())) if f.exists() else set()
 
 
-def mark_seen(ids: set) -> None:
-    f = seen_path()
+def mark_seen(ids: set, mode: str = "heatmap") -> None:
+    f = seen_path(mode)
     f.parent.mkdir(parents=True, exist_ok=True)
-    f.write_text(json.dumps(sorted(seen() | ids)))
+    f.write_text(json.dumps(sorted(seen(mode) | ids)))
+
+
+def fresh_windows(ms: list[dict], duration: float, n: int) -> list[tuple[float, float]]:
+    """Top-n coarse moments -> padded sections (merged when they overlap), in time order."""
+    from .scout import PAD_AFTER, PAD_BEFORE
+    best = sorted(ms, key=lambda m: -m["virality"])[:n]
+    wins = sorted((max(0.0, m["start"] - PAD_BEFORE), min(duration or 1e9, m["end"] + PAD_AFTER)) for m in best)
+    out: list[list[float]] = []
+    for a0, a1 in wins:
+        if out and a0 <= out[-1][1]:
+            out[-1][1] = max(out[-1][1], a1)
+        else:
+            out.append([a0, a1])
+    return [(round(a, 1), round(b, 1)) for a, b in out]
+
+
+def scan_fresh(st: dict, a) -> bool:
+    """FRESH batch: Claude estimates the viral moments of a brand-new stream (no 'Most replayed' yet).
+    Audio-only download + fast transcript to find candidates, then only those sections go through the
+    normal download -> transcribe -> moments path. Returns False if the stream is too old/unsuitable."""
+    from . import scout
+    from .ingest import download, download_audio, info
+    from .moments import find_moments
+    from .transcribe import transcribe
+    meta = info(st["url"])
+    age = (dt.date.today() - dt.datetime.strptime(meta["upload_date"], "%Y%m%d").date()).days if meta.get("upload_date") else 99
+    if age > a.fresh_days:
+        return False
+    print(f"  fresh scan ({age}d old, {int((meta.get('duration') or 0) / 60)} min): audio + {os.environ.get('CLIPPER_SCAN_WHISPER', 'base.en')} transcript")
+    audio = download_audio(st["url"], meta)
+    tr = transcribe(audio, f"{meta['id']}_scan", os.environ.get("CLIPPER_SCAN_WHISPER", "base.en"), words=False)
+    tr.setdefault("words", [])
+    coarse = find_moments(tr, f"{meta['title']} ({meta.get('upload_date', '')}) | coarse scan of the whole stream", CH)
+    for f in (audio, audio.with_suffix(".16k.wav")):
+        f.unlink(missing_ok=True)  # the full-stream audio is only needed for the scan
+    for s0, s1 in fresh_windows(coarse, meta.get("duration") or 0, a.fresh_windows):
+        sec = f"{scout.fmt(s0)}-{scout.fmt(s1)}"
+        print(f"  window {sec}")
+        f, m = download(st["url"], sec, meta)
+        process_file(f, m, kind="fresh", offset=s0,
+                     hint="Claude-estimated viral window from a FRESH stream (no audience data yet) - the best moment should be inside it")
+    return True
 
 
 def autopost(d: Path, rendered: list, n: int, min_virality: int) -> int:
@@ -190,45 +243,72 @@ def autopost(d: Path, rendered: list, n: int, min_virality: int) -> int:
 
 
 def cmd_auto(a) -> None:
-    """Daily one-liner: scout new streams/clips for this channel, find moments, render the best, write review.html."""
+    """Daily one-liner. Two batches per channel:
+    - fresh:   newest streams (< --fresh-days old), moments estimated by Claude from the transcript -> post NOW
+    - heatmap: older streams with YouTube 'Most replayed' data (proven peaks) -> banked for later posts
+    Rendering takes fresh moments first and fills up with heatmap ones (--mode heatmap = heatmap only)."""
     from . import scout
     from .ingest import download
     ensure_assets()
     learn_from_results()
     src_cfg = CH.get("sources", {})
-    done, new_ids = seen(), set()
+    modes = ["fresh", "heatmap"] if a.mode == "both" else [a.mode]
     if src_cfg.get("youtube_streams"):
-        # YouTube only shows "Most replayed" on a stream some weeks after it airs, so the newest streams
-        # usually have no heatmap. Look further back and clip the newest unseen streams that HAVE one;
-        # too-new streams stay unseen and are picked up on a later day.
-        used = 0
-        for st in scout.latest_streams(src_cfg["youtube_streams"], a.lookback):
-            if used >= a.streams:
-                break
-            if st["id"] in done:
-                continue
-            print(f"stream: {st['title'][:70]}")
-            meta, peaks = scout.stream_peaks(st["url"], a.peaks)
-            if not peaks:
-                print("  no 'Most replayed' data yet (too new?) -> skipping for now")
-                continue
-            used += 1
-            for s0, s1, v in peaks:
-                sec = f"{scout.fmt(s0)}-{scout.fmt(s1)}"
-                print(f"  peak {sec} (replay score {v})")
-                f, m = download(st["url"], sec, meta)
-                process_file(f, m, hint=f"this window is a 'Most replayed' peak (score {v}) - the best moment is inside it")
-            new_ids.add(st["id"])
+        streams = scout.latest_streams(src_cfg["youtube_streams"], a.lookback)
+        if "fresh" in modes:
+            done, used, new_ids = seen("fresh"), 0, set()
+            for st in streams:
+                if used >= a.streams:
+                    break
+                if st["id"] in done:
+                    continue
+                print(f"stream (fresh): {st['title'][:70]}")
+                if scan_fresh(st, a):
+                    used += 1
+                    new_ids.add(st["id"])
+                else:
+                    break  # newest first: once one is too old, the rest are too
+            mark_seen(new_ids, "fresh")
+        if "heatmap" in modes:
+            # YouTube only shows "Most replayed" some weeks after a stream airs: look further back and clip the
+            # newest unseen streams that HAVE it; too-new streams stay unseen and are picked up on a later day.
+            done, used, new_ids = seen("heatmap"), 0, set()
+            for st in streams:
+                if used >= a.streams:
+                    break
+                if st["id"] in done:
+                    continue
+                print(f"stream (most replayed): {st['title'][:70]}")
+                meta, peaks = scout.stream_peaks(st["url"], a.peaks)
+                if not peaks:
+                    print("  no 'Most replayed' data yet (too new?) -> skipping for now")
+                    continue
+                used += 1
+                for s0, s1, v in peaks:
+                    sec = f"{scout.fmt(s0)}-{scout.fmt(s1)}"
+                    print(f"  peak {sec} (replay score {v})")
+                    f, m = download(st["url"], sec, meta)
+                    process_file(f, m, kind="heatmap", offset=s0,
+                                 hint=f"this window is a 'Most replayed' peak (score {v}) - the best moment is inside it")
+                new_ids.add(st["id"])
+            mark_seen(new_ids, "heatmap")
+    new_ids = set()
+    done = seen("heatmap")
     for login in src_cfg.get("twitch_clips", []):
         for clip in scout.twitch_top_clips(login, a.clips, a.range):
             if clip["id"] in done:
                 continue
             print(f"clip: {clip['title'][:60]} ({clip['views']} views)")
             f, m = download(clip["url"])
-            process_file(f, m, hint=f"fan-made Twitch clip with {clip['views']} views - a proven moment; tighten it to the payoff")
+            process_file(f, m, kind="heatmap",
+                         hint=f"fan-made Twitch clip with {clip['views']} views - a proven moment; tighten it to the payoff")
             new_ids.add(clip["id"])
-    mark_seen(new_ids)
-    best = vision_filter(library.top(None, a.count * 2, a.min_virality), a.count)
+    mark_seen(new_ids, "heatmap")
+    # fresh first (recency is the lever), heatmap fills the rest; leftover heatmap moments wait for later posts
+    pool = [] if a.mode == "heatmap" else library.top(None, a.count * 2, a.min_virality, kind="fresh")
+    if a.mode != "fresh":
+        pool += [m for m in library.top(None, a.count * 2, a.min_virality) if m.get("source_kind", "heatmap") != "fresh"]
+    best = vision_filter(pool, a.count)
     d = day_dir()
     print(f"rendering {len(best)} Shorts...")
     rendered = []
@@ -397,7 +477,11 @@ def main() -> None:
     au = sub.add_parser("auto", help="scout + clip + render + review page (run daily)")
     au.add_argument("--count", type=int, default=4)
     au.add_argument("--min-virality", type=int, default=7)
-    au.add_argument("--streams", type=int, default=2, help="YouTube: clip the newest N streams that have 'Most replayed' data")
+    au.add_argument("--mode", default="both", choices=["both", "fresh", "heatmap"],
+                    help="fresh = Claude-estimated moments from new streams; heatmap = 'Most replayed' peaks (later posts)")
+    au.add_argument("--fresh-days", type=int, default=3, help="fresh: only streams newer than this")
+    au.add_argument("--fresh-windows", type=int, default=6, help="fresh: candidate sections to download per stream")
+    au.add_argument("--streams", type=int, default=2, help="YouTube: streams per batch (fresh / heatmap)")
     au.add_argument("--lookback", type=int, default=12, help="YouTube: how many recent streams to search for those")
     au.add_argument("--peaks", type=int, default=8, help="YouTube: 'Most replayed' peaks per stream")
     au.add_argument("--clips", type=int, default=10, help="Twitch: top N clips per streamer")

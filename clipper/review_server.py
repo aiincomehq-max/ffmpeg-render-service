@@ -53,7 +53,7 @@ def render_page(ch: dict, day: Path) -> str:
             badge = f'<span class=badge>{s["status"]}{when}{" (dry run)" if s.get("dry_run") else ""}</span>'
         cards.append(f"""<div class="c{' done' if s else ''}" id=c{i}>
 <video src="/media/{html.escape(p['file'])}" controls preload=metadata playsinline></video><div class=m>
-<b>{html.escape(p.get('format', ''))}</b> · score {p.get('virality', '-')} {badge}<br><small>{html.escape(p.get('why') or '')}</small>
+<b>{publish.batch_label(p)}</b> · <b>{html.escape(p.get('format', ''))}</b> · score {p.get('virality', '-')} {badge}<br><small>{html.escape(p.get('why') or '')}</small>
 <div style=margin-top:8px>{radios}<label><input type=radio name=t{i} value=__custom> custom:</label>
 <input type=text id=custom{i} placeholder="your own title"></div>
 <div class=plat style=margin-top:6px>{plats}</div>

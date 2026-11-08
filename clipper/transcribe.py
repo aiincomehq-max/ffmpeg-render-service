@@ -31,7 +31,7 @@ def load_wav(wav: Path):
     return pcm.astype(np.float32) / 32768.0
 
 
-def transcribe(video: Path, key: str, model_name: str | None = None) -> dict:
+def transcribe(video: Path, key: str, model_name: str | None = None, words: bool = True) -> dict:
     """Returns {"segments": [{"s","e","text"}], "words": [{"w","s","e"}]} in source seconds."""
     CACHE.mkdir(parents=True, exist_ok=True)
     cache = CACHE / f"{key}.json"
@@ -42,7 +42,7 @@ def transcribe(video: Path, key: str, model_name: str | None = None) -> dict:
     model_name = model_name or os.environ.get("CLIPPER_WHISPER", "small.en")
     model = WhisperModel(model_name, device="auto", compute_type="int8")
     wav = extract_audio(video)
-    segs, _ = model.transcribe(load_wav(wav), word_timestamps=True, vad_filter=True, language="en")
+    segs, _ = model.transcribe(load_wav(wav), word_timestamps=words, vad_filter=True, language="en")
     out = {"segments": [], "words": []}
     for s in segs:
         out["segments"].append({"s": round(s.start, 2), "e": round(s.end, 2), "text": s.text.strip()})

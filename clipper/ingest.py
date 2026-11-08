@@ -37,3 +37,13 @@ def download(url: str, section: str | None = None, meta: dict | None = None) -> 
         cmd[1:1] = ["--download-sections", f"*{section}", "--force-keyframes-at-cuts"]
     subprocess.run(cmd, check=True)
     return out, meta
+
+
+def download_audio(url: str, meta: dict) -> Path:
+    """Audio only (~175MB for a 3h stream vs ~7GB of 1080p video): used to SCAN a fresh stream for moments."""
+    VODS.mkdir(parents=True, exist_ok=True)
+    out = VODS / f"{meta['id']}_audio.m4a"
+    if not out.exists():
+        subprocess.run(["yt-dlp", "--ignore-config", "--no-warnings", "-f", "ba[ext=m4a]/ba", "-o", str(out), url],
+                       check=True)
+    return out

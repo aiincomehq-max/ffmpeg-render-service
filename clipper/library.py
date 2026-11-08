@@ -45,9 +45,16 @@ def _rows(sql: str, args=()) -> list[dict]:
         return out
 
 
-def top(vod_key: str | None = None, n: int = 3, min_virality: int = 7) -> list[dict]:
+KIND = "COALESCE(json_extract(data, '$.source_kind'), 'heatmap')"
+
+
+def top(vod_key: str | None = None, n: int = 3, min_virality: int = 7, kind: str | None = None) -> list[dict]:
+    """kind: 'fresh' (Claude-estimated from a new stream) | 'heatmap' (YouTube 'Most replayed') | None = any."""
     q = "SELECT id, used, data FROM moments WHERE virality >= ? AND used = 0"
     args: list = [min_virality]
+    if kind:
+        q += f" AND {KIND} = ?"
+        args.append(kind)
     if vod_key:
         q += " AND vod_key = ?"
         args.append(vod_key)
@@ -68,3 +75,11 @@ def skill_counts() -> list[tuple[str, int, int]]:
 def mark_used(ids: list[int]) -> None:
     with conn() as c:
         c.executemany("UPDATE moments SET used = used + 1 WHERE id = ?", [(i,) for i in ids])
+
+
+def exists_near(video_id: str, abs_start: float, tol: float = 5.0) -> bool:
+    """Same real moment already in the library (from the other batch, or an overlapping section)?"""
+    with conn() as c:
+        return c.execute("""SELECT 1 FROM moments WHERE json_extract(data, '$.video_id') = ?
+                            AND ABS(json_extract(data, '$.abs_start') - ?) <= ? LIMIT 1""",
+                         (video_id, abs_start, tol)).fetchone() is not None
