@@ -79,6 +79,9 @@ def write_post(d: Path, entry: dict) -> None:
     f.write_text(json.dumps(posts, indent=2, ensure_ascii=False))
 
 
+MIN_VISUAL = 6  # 8 Nov: a 5/10 'KEEP' was 43 s of a still anime image with Speed tiny in the corner
+
+
 def vision_filter(cands: list[dict], want: int) -> list[dict]:
     """Visual QA: drop moments that are boring to watch, fix payoff timing. CLIPPER_VISION=0 to skip."""
     if os.environ.get("CLIPPER_VISION", "1") != "1":
@@ -87,6 +90,8 @@ def vision_filter(cands: list[dict], want: int) -> list[dict]:
     kept = []
     for m in cands:
         r = check(m, CH)
+        if r["keep"] and r.get("visual_score") is not None and r["visual_score"] < MIN_VISUAL:
+            r["keep"] = False
         print(f"  vision: {'KEEP' if r['keep'] else 'DROP'} ({r.get('visual_score')}) {r['reason'][:90]}")
         if r["keep"]:
             if r.get("payoff_t") is not None:
@@ -172,6 +177,27 @@ def mark_seen(ids: set, mode: str = "heatmap") -> None:
     f = seen_path(mode)
     f.parent.mkdir(parents=True, exist_ok=True)
     f.write_text(json.dumps(sorted(seen(mode) | ids)))
+
+
+SAME_SCENE_S = 600  # moments this close in the same stream are the same scene (e.g. one KFC shift)
+
+
+def diversify(pool: list[dict], used: list[tuple[str, float]], per_stream: int = 2) -> list[dict]:
+    """Drop moments from a scene already posted (or already picked this run), cap picks per stream,
+    and skip moments made before the current hook rules (no source_kind)."""
+    out: list[dict] = []
+    taken: list[tuple[str, float]] = []
+    for m in pool:
+        if not m.get("source_kind"):
+            continue
+        sid, t = library.stream_pos(m.get("_vod", ""), m["start"])
+        if any(p[0] == sid and abs(p[1] - t) < SAME_SCENE_S for p in used + taken):
+            continue
+        if sum(1 for p in taken if p[0] == sid) >= per_stream:
+            continue
+        out.append(m)
+        taken.append((sid, t))
+    return out
 
 
 def fresh_windows(ms: list[dict], duration: float, n: int) -> list[tuple[float, float]]:
@@ -305,9 +331,10 @@ def cmd_auto(a) -> None:
             new_ids.add(clip["id"])
     mark_seen(new_ids, "heatmap")
     # fresh first (recency is the lever), heatmap fills the rest; leftover heatmap moments wait for later posts
-    pool = [] if a.mode == "heatmap" else library.top(None, a.count * 2, a.min_virality, kind="fresh")
+    pool = [] if a.mode == "heatmap" else library.top(None, a.count * 5, a.min_virality, kind="fresh")
     if a.mode != "fresh":
-        pool += [m for m in library.top(None, a.count * 2, a.min_virality) if m.get("source_kind", "heatmap") != "fresh"]
+        pool += [m for m in library.top(None, a.count * 5, a.min_virality) if m.get("source_kind", "heatmap") != "fresh"]
+    pool = diversify(pool, library.used_positions())
     best = vision_filter(pool, a.count)
     d = day_dir()
     print(f"rendering {len(best)} Shorts...")

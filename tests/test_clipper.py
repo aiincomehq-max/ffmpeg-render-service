@@ -267,6 +267,45 @@ class TestLiveServiceFixes(unittest.TestCase):
         self.assertFalse(x - 200 < 640 and 440 < x + 200)   # no horizontal overlap with the face box
 
 
+class TestVisionFloor(unittest.TestCase):
+    def test_low_visual_score_is_dropped_even_if_kept(self):
+        from clipper import __main__ as M, vision
+        old_check, old_mark, env = vision.check, M.library.mark_used, os.environ.get("CLIPPER_VISION")
+        scores = {1: 5, 2: 8, 3: None}
+        vision.check = lambda m, ch: {"keep": True, "payoff_t": None, "visual_score": scores[m["_id"]], "reason": "x"}
+        M.library.mark_used = lambda ids: None
+        os.environ["CLIPPER_VISION"] = "1"
+        try:
+            kept = M.vision_filter([{"_id": 1}, {"_id": 2}, {"_id": 3}], 3)
+            self.assertEqual([m["_id"] for m in kept], [2, 3])
+            self.assertIn("small corner facecam", open(vision.__file__).read())
+        finally:
+            vision.check, M.library.mark_used = old_check, old_mark
+            if env is None: os.environ.pop("CLIPPER_VISION", None)
+            else: os.environ["CLIPPER_VISION"] = env
+
+
+class TestDiversify(unittest.TestCase):
+    """8 Nov: a run picked 4 KFC moments from the scene already posted, plus a twin of a booked Short."""
+
+    def test_stream_pos(self):
+        from clipper import library
+        self.assertEqual(library.stream_pos("o1_FvfJD8fg_021519021814", 10), ("o1_FvfJD8fg", 2 * 3600 + 15 * 60 + 19 + 10))
+        self.assertEqual(library.stream_pos("manualkey", 5), ("manualkey", 5.0))
+
+    def test_same_scene_and_cap_and_legacy_dropped(self):
+        from clipper import __main__ as M
+        mk = lambda vod, start, kind="fresh": {"_vod": vod, "start": start, "source_kind": kind}
+        used = [("A", 2 * 3600 + 11 * 60)]                       # posted: stream A at 2:11:00
+        pool = [mk("A_021519021814", 0),                           # 2:15:19 -> same scene as posted
+                mk("A_030000030300", 0), mk("A_040000040300", 0), mk("A_050000050300", 0),  # 3 more of A -> cap 2
+                mk("B_010000010300", 30), mk("B_010000010300", 90),  # 60 s apart -> same scene, keep first
+                {"_vod": "C_000000000300", "start": 0}]              # legacy (no source_kind) -> dropped
+        out = M.diversify(pool, used)
+        got = [(m["_vod"], m["start"]) for m in out]
+        self.assertEqual(got, [("A_030000030300", 0), ("A_040000040300", 0), ("B_010000010300", 30)])
+
+
 class TestExactSlot(unittest.TestCase):
     def test_approve_at_exact_utc_time(self):
         import tempfile

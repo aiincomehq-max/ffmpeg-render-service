@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sqlite3
 from pathlib import Path
 
@@ -38,9 +39,9 @@ def add(vod_key: str, src: Path, moments: list[dict]) -> None:
 def _rows(sql: str, args=()) -> list[dict]:
     with conn() as c:
         out = []
-        for row_id, used, data in c.execute(sql, args).fetchall():
+        for row_id, used, vod_key, data in c.execute(sql, args).fetchall():
             m = json.loads(data)
-            m["_id"], m["_used"] = row_id, used
+            m["_id"], m["_used"], m["_vod"] = row_id, used, vod_key
             out.append(m)
         return out
 
@@ -50,7 +51,7 @@ KIND = "COALESCE(json_extract(data, '$.source_kind'), 'heatmap')"
 
 def top(vod_key: str | None = None, n: int = 3, min_virality: int = 7, kind: str | None = None) -> list[dict]:
     """kind: 'fresh' (Claude-estimated from a new stream) | 'heatmap' (YouTube 'Most replayed') | None = any."""
-    q = "SELECT id, used, data FROM moments WHERE virality >= ? AND used = 0"
+    q = "SELECT id, used, vod_key, data FROM moments WHERE virality >= ? AND used = 0"
     args: list = [min_virality]
     if kind:
         q += f" AND {KIND} = ?"
@@ -62,7 +63,7 @@ def top(vod_key: str | None = None, n: int = 3, min_virality: int = 7, kind: str
 
 
 def by_skill(skill: str, outcome: str) -> list[dict]:
-    return _rows("SELECT id, used, data FROM moments WHERE skill = ? AND outcome = ? ORDER BY used ASC, virality DESC",
+    return _rows("SELECT id, used, vod_key, data FROM moments WHERE skill = ? AND outcome = ? ORDER BY used ASC, virality DESC",
                  (skill, outcome))
 
 
@@ -83,3 +84,15 @@ def exists_near(video_id: str, abs_start: float, tol: float = 5.0) -> bool:
         return c.execute("""SELECT 1 FROM moments WHERE json_extract(data, '$.video_id') = ?
                             AND ABS(json_extract(data, '$.abs_start') - ?) <= ? LIMIT 1""",
                          (video_id, abs_start, tol)).fetchone() is not None
+
+
+def stream_pos(vod_key: str, start: float) -> tuple[str, float]:
+    """(stream id, seconds into the whole stream). Section files are keyed <id>_<HHMMSS start><HHMMSS end>."""
+    m = re.match(r"(.+)_(\d{2})(\d{2})(\d{2})\d{6}$", vod_key or "")
+    if not m:
+        return vod_key, float(start)
+    return m.group(1), int(m.group(2)) * 3600 + int(m.group(3)) * 60 + int(m.group(4)) + float(start)
+
+
+def used_positions() -> list[tuple[str, float]]:
+    return [stream_pos(m["_vod"], m["start"]) for m in _rows("SELECT id, used, vod_key, data FROM moments WHERE used = 1")]

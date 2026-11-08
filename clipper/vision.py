@@ -61,7 +61,8 @@ def check(m: dict, ch: dict, client: anthropic.Anthropic | None = None) -> dict:
             f"Planned hook: {m.get('hook_tag')}. Why it was picked: {m.get('why')}.\n"
             f"Transcript-estimated payoff is frame {j}.\n"
             "keep=false if the moment would be boring to WATCH: streamer not visible in most frames, static/black/"
-            "loading/menu screens, or the payoff happens off-camera. payoff_frame = the frame where the payoff is "
+            "loading/menu screens, the payoff happens off-camera, or the streamer is only a small corner facecam over a "
+            "still image / game / screen-share (the 9:16 crop will lose them). payoff_frame = the frame where the payoff is "
             "most visible. visual_score 1-10 for how watchable it is on a phone.")})
         kwargs = dict(model=MODEL, max_tokens=4000, messages=[{"role": "user", "content": content}],
                       output_config={"format": {"type": "json_schema", "schema": SCHEMA}})
