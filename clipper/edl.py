@@ -198,3 +198,44 @@ def subversion_comp(claim: str, fail: dict, successes: list[dict], style: dict, 
         "end_sfx": None,
         "title": f"{name} {claim.lower()} 💀{successes[0].get('topic_emoji', '')}🔥".replace("  ", " "),
     }
+
+
+RANK_PRE, RANK_POST = 5.0, 2.5  # seconds kept before/after each moment's payoff (~7.5 s a clip, 5 clips ≈ 40 s)
+
+
+def ranking_comp(ms: list[dict], game: str, handle: str, music: str | None) -> dict:
+    """'Ranking the funniest {game} moments' (the format breaking out on tiny channels, Nov 2026 vidIQ):
+    5 clips counted down #5 -> #1, strongest last, a white flash + thud on each payoff."""
+    ms = ms[:5]
+    tl = Timeline()
+    words, texts, impacts = [], [], []
+    for rank, m in zip(range(len(ms), 0, -1), ms):
+        pay = m.get("payoff_t") or (m["start"] + m["end"]) / 2
+        a, b = max(m["start"], pay - RANK_PRE), min(m["end"], pay + RANK_POST)
+        o0 = tl.out_t
+        tl.add(m["src"], a, b)
+        o1 = tl.out_t
+        texts.append({"text": f"#{rank}", "start": round(o0, 3), "end": round(o1, 3), "kind": "hook", "color": "yellow", "y_pct": 22})
+        if m.get("hook_tag"):
+            texts.append({"text": hook_text(m["hook_tag"], 30), "start": round(o0, 3), "end": round(min(o1, o0 + 2.5), 3),
+                          "kind": "tag", "color": "white", "y_pct": 32})
+        if not m.get("burned_captions"):
+            for w in m.get("words", []):
+                if a <= w["s"] < b:
+                    words.append({"w": w["w"], "s": round(o0 + w["s"] - a, 3), "e": round(o0 + min(w["e"], b) - a, 3)})
+        impacts.append({"t": round(o0 + pay - a, 3), "flash": "white", "sfx": "bass_thud", "emoji": m.get("emoji") or "💀",
+                        "emoji_y_pct": 74, "emoji_dur": 1.2})
+    title = f"RANKING THE FUNNIEST {game.upper()} MOMENTS"
+    texts.insert(0, {"text": title, "start": 0.0, "end": round(tl.out_t, 3), "kind": "header", "color": "white", "y_pct": 8})
+    return {
+        "format": "ranking_comp",
+        "pieces": tl.pieces,
+        "words": words,
+        "texts": texts,
+        "impacts": impacts,
+        "music": {"file": music, "drop_t": 0.0} if music else None,
+        "handle": handle,
+        "end_sfx": None,
+        "caption_active": "#00FF44",
+        "title": f"Ranking the funniest {game} moments 😭💀",
+    }

@@ -124,6 +124,25 @@ def render_single(m: dict, handle: str, d: Path) -> Path:
     return out
 
 
+RANK_N = 5
+
+
+def render_ranking(group: list[dict], handle: str, d: Path) -> Path:
+    """group sorted weakest -> strongest; the strongest plays last as #1."""
+    style = load()
+    game = CH.get("short", "gaming")
+    edl = E.ranking_comp(group, game, handle, pick_music("phonk"))
+    out = render(edl, style, d / f"{dt.datetime.now():%H%M%S}_ranking-{slug(game)}.mp4")
+    write_post(d, {"file": out.name, "format": "ranking_comp",
+                   "titles": [edl["title"], f"Top 5 {game} moments that made me cry laughing 💀", f"{game} players will understand 😭"],
+                   "description": f"{CH['credit']}\n{CH['hashtags']}", "virality": max(m.get("virality", 0) for m in group),
+                   "why": " | ".join(f"#{5 - i} {m.get('hook_tag', '')}" for i, m in enumerate(group)),
+                   "source": " ".join(m.get("source", "") for m in group), "source_kind": "heatmap", "type": "ranking",
+                   "hook_tag": edl["title"], "people": [],
+                   "duration": round(sum((p["end"] - p["start"]) / p.get("speed", 1) for p in edl["pieces"]), 1)})
+    return out
+
+
 def write_review(d: Path) -> Path:
     """Simple approval page: every rendered Short with its titles, score and why."""
     import html
@@ -343,16 +362,29 @@ def cmd_auto(a) -> None:
     if a.mode != "fresh":
         pool += [m for m in library.top(None, a.count * 5, a.min_virality) if m.get("source_kind", "heatmap") != "fresh"]
     pool = diversify(pool, library.used_positions())
-    pool = [m for m in pool if E.kept_len(m) >= E.MIN_LEN]  # too short once silences are cut
-    best = vision_filter(pool, a.count)
     d = day_dir()
-    print(f"rendering {len(best)} Shorts...")
     rendered = []
-    for m in best:
-        out = render_single(m, a.handle, d)
-        print("  ->", out)
-        rendered.append((m, out))
-    library.mark_used([m["_id"] for m in best])
+    if CH.get("format") == "ranking":
+        # countdown comps: each clip only needs one strong payoff, so the bar is one lower and no minimum length
+        rpool = diversify(library.top(None, a.count * RANK_N * 4, a.min_virality - 1), library.used_positions())
+        best = vision_filter(rpool, a.count * RANK_N)
+        print(f"rendering {len(best) // RANK_N} ranking comps from {len(best)} clips...")
+        for i in range(len(best) // RANK_N):
+            group = sorted(best[i * RANK_N:(i + 1) * RANK_N], key=lambda m: (m.get("virality", 0), m.get("visual_score") or 0))
+            out = render_ranking(group, a.handle, d)
+            print("  ->", out)
+            rendered.append((group[-1], out))
+            library.mark_used([m["_id"] for m in group])
+        best = [m for m, _ in rendered]
+    else:
+        pool = [m for m in pool if E.kept_len(m) >= E.MIN_LEN]  # too short once silences are cut
+        best = vision_filter(pool, a.count)
+        print(f"rendering {len(best)} Shorts...")
+        for m in best:
+            out = render_single(m, a.handle, d)
+            print("  ->", out)
+            rendered.append((m, out))
+        library.mark_used([m["_id"] for m in best])
     review = write_review(d)
     print(f"REVIEW: open {review}")
     posted = autopost(d, rendered, a.autopost, a.autopost_min) if a.autopost else 0

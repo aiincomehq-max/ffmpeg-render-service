@@ -112,66 +112,6 @@
     ],
     "status": "retired 8 Nov: split into one-streamer channels (stable = StableRonaldo); not used"
   },
-  "jason": {
-    "streamer": "JasonTheWeen",
-    "short": "Jason",
-    "handle": "GOOFYCLIPZ",
-    "hashtags": "#jasontheween #streamer #shorts",
-    "title_tag": "#jasontheween",
-    "credit": "Credit: JasonTheWeen (twitch.tv/jasontheween). Fan edit, not affiliated.",
-    "where_they_stream": "Twitch (twitch.tv/jasontheween)",
-    "people": [],
-    "sources": {
-      "twitch_clips": [
-        "jasontheween"
-      ]
-    },
-    "platforms": [
-      "youtube"
-    ],
-    "accounts": {
-      "youtube": ""
-    },
-    "blotato": {
-      "youtube": ""
-    },
-    "post_times_utc": [
-      "14:00",
-      "16:45",
-      "19:00"
-    ],
-    "status": "waiting: channel not created (YouTube ID check)"
-  },
-  "agent": {
-    "streamer": "Agent 00",
-    "short": "Agent",
-    "handle": "STEALTHCLIPZ",
-    "hashtags": "#agent00 #streamer #shorts",
-    "title_tag": "#agent00",
-    "credit": "Credit: Agent 00 (twitch.tv/agent00). Fan edit, not affiliated.",
-    "where_they_stream": "Twitch (twitch.tv/agent00)",
-    "people": [],
-    "sources": {
-      "twitch_clips": [
-        "agent00"
-      ]
-    },
-    "platforms": [
-      "youtube"
-    ],
-    "accounts": {
-      "youtube": ""
-    },
-    "blotato": {
-      "youtube": ""
-    },
-    "post_times_utc": [
-      "14:00",
-      "16:45",
-      "19:00"
-    ],
-    "status": "waiting: channel not created (YouTube ID check)"
-  },
   "peanut": {
     "streamer": "TheBurntPeanut",
     "short": "Peanut",
@@ -184,36 +124,6 @@
     "sources": {
       "twitch_clips": [
         "theburntpeanut"
-      ]
-    },
-    "platforms": [
-      "youtube"
-    ],
-    "accounts": {
-      "youtube": ""
-    },
-    "blotato": {
-      "youtube": ""
-    },
-    "post_times_utc": [
-      "14:00",
-      "16:45",
-      "19:00"
-    ],
-    "status": "waiting: channel not created (YouTube ID check)"
-  },
-  "stable": {
-    "streamer": "StableRonaldo",
-    "short": "Ronaldo",
-    "handle": "HYPERCLIPZ",
-    "hashtags": "#stableronaldo #fortnite #shorts",
-    "title_tag": "#stableronaldo",
-    "credit": "Credit: StableRonaldo (twitch.tv/stableronaldo). Fan edit, not affiliated.",
-    "where_they_stream": "Twitch (twitch.tv/stableronaldo)",
-    "people": [],
-    "sources": {
-      "twitch_clips": [
-        "stableronaldo"
       ]
     },
     "platforms": [
@@ -361,5 +271,101 @@
     ],
     "status": "waiting: channel not created (YouTube ID check)",
     "gameplay_ok": true
+  },
+  "minecraft": {
+    "streamer": "Minecraft streamers",
+    "short": "Minecraft",
+    "handle": "GOOFYCLIPZ",
+    "hashtags": "#minecraft #gaming #shorts",
+    "title_tag": "#minecraft",
+    "credit": "Credit: the original Twitch streamers (named in each Short). Fan edit, not affiliated.",
+    "where_they_stream": "Twitch (Minecraft category)",
+    "people": [],
+    "sources": {
+      "twitch_game_clips": [
+        "Minecraft"
+      ]
+    },
+    "platforms": [
+      "youtube"
+    ],
+    "accounts": {
+      "youtube": ""
+    },
+    "blotato": {
+      "youtube": ""
+    },
+    "post_times_utc": [
+      "14:00",
+      "16:45",
+      "19:00"
+    ],
+    "status": "waiting: channel not created (YouTube ID check)",
+    "gameplay_ok": true,
+    "format": "ranking"
+  },
+  "arcraiders": {
+    "streamer": "ARC Raiders streamers",
+    "short": "ARC Raiders",
+    "handle": "STEALTHCLIPZ",
+    "hashtags": "#arcraiders #gaming #shorts",
+    "title_tag": "#arcraiders",
+    "credit": "Credit: the original Twitch streamers (named in each Short). Fan edit, not affiliated.",
+    "where_they_stream": "Twitch (ARC Raiders category)",
+    "people": [],
+    "sources": {
+      "twitch_game_clips": [
+        "ARC Raiders"
+      ]
+    },
+    "platforms": [
+      "youtube"
+    ],
+    "accounts": {
+      "youtube": ""
+    },
+    "blotato": {
+      "youtube": ""
+    },
+    "post_times_utc": [
+      "14:00",
+      "16:45",
+      "19:00"
+    ],
+    "status": "waiting: channel not created (YouTube ID check)",
+    "gameplay_ok": true,
+    "format": "ranking"
+  },
+  "cs2": {
+    "streamer": "CS2 streamers",
+    "short": "CS2",
+    "handle": "HYPERCLIPZ",
+    "hashtags": "#cs2 #counterstrike #gaming #shorts",
+    "title_tag": "#cs2",
+    "credit": "Credit: the original Twitch streamers (named in each Short). Fan edit, not affiliated.",
+    "where_they_stream": "Twitch (Counter-Strike category)",
+    "people": [],
+    "sources": {
+      "twitch_game_clips": [
+        "Counter-Strike"
+      ]
+    },
+    "platforms": [
+      "youtube"
+    ],
+    "accounts": {
+      "youtube": ""
+    },
+    "blotato": {
+      "youtube": ""
+    },
+    "post_times_utc": [
+      "14:00",
+      "16:45",
+      "19:00"
+    ],
+    "status": "waiting: channel not created (YouTube ID check)",
+    "gameplay_ok": true,
+    "format": "ranking"
   }
 }
