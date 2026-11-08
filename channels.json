@@ -142,66 +142,6 @@
     ],
     "status": "waiting: channel not created (YouTube ID check)"
   },
-  "jynxzi": {
-    "streamer": "Jynxzi",
-    "short": "Jynxzi",
-    "handle": "RAGECLIPZ",
-    "hashtags": "#jynxzi #streamer #shorts",
-    "title_tag": "#jynxzi",
-    "credit": "Credit: Jynxzi (twitch.tv/jynxzi). Fan edit, not affiliated.",
-    "where_they_stream": "Twitch (twitch.tv/jynxzi)",
-    "people": [],
-    "sources": {
-      "twitch_clips": [
-        "jynxzi"
-      ]
-    },
-    "platforms": [
-      "youtube"
-    ],
-    "accounts": {
-      "youtube": ""
-    },
-    "blotato": {
-      "youtube": ""
-    },
-    "post_times_utc": [
-      "14:00",
-      "16:45",
-      "19:00"
-    ],
-    "status": "waiting: channel not created (YouTube ID check)"
-  },
-  "caseoh": {
-    "streamer": "CaseOh",
-    "short": "CaseOh",
-    "handle": "COZYCLIPZ",
-    "hashtags": "#caseoh #streamer #shorts",
-    "title_tag": "#caseoh",
-    "credit": "Credit: CaseOh (twitch.tv/caseoh_). Fan edit, not affiliated.",
-    "where_they_stream": "Twitch (twitch.tv/caseoh_)",
-    "people": [],
-    "sources": {
-      "twitch_clips": [
-        "caseoh_"
-      ]
-    },
-    "platforms": [
-      "youtube"
-    ],
-    "accounts": {
-      "youtube": ""
-    },
-    "blotato": {
-      "youtube": ""
-    },
-    "post_times_utc": [
-      "14:00",
-      "16:45",
-      "19:00"
-    ],
-    "status": "waiting: channel not created (YouTube ID check)"
-  },
   "fanum": {
     "streamer": "Fanum",
     "short": "Fanum",
@@ -351,5 +291,73 @@
       "19:00"
     ],
     "status": "waiting: channel not created (YouTube ID check)"
+  },
+  "caylus": {
+    "streamer": "Caylus",
+    "short": "Caylus",
+    "handle": "COZYCLIPZ",
+    "hashtags": "#caylus #roblox #shorts",
+    "title_tag": "#roblox",
+    "credit": "Credit: Caylus (youtube.com/@CaylusBlox). Fan edit, not affiliated.",
+    "where_they_stream": "YouTube (youtube.com/@CaylusBlox)",
+    "people": [
+      "Caylus",
+      "Bacon",
+      "KreekCraft"
+    ],
+    "sources": {
+      "youtube_streams": "https://www.youtube.com/@CaylusBlox/streams"
+    },
+    "platforms": [
+      "youtube"
+    ],
+    "accounts": {
+      "youtube": ""
+    },
+    "blotato": {
+      "youtube": ""
+    },
+    "post_times_utc": [
+      "14:00",
+      "16:45",
+      "19:00"
+    ],
+    "status": "waiting: channel not created (YouTube ID check)",
+    "gameplay_ok": true
+  },
+  "kreek": {
+    "streamer": "KreekCraft",
+    "short": "Kreek",
+    "handle": "RAGECLIPZ",
+    "hashtags": "#kreekcraft #roblox #shorts",
+    "title_tag": "#roblox",
+    "credit": "Credit: KreekCraft (youtube.com/@KreekCraft, twitch.tv/kreekcraft). Fan edit, not affiliated.",
+    "where_they_stream": "YouTube + Twitch",
+    "people": [
+      "KreekCraft",
+      "Caylus"
+    ],
+    "sources": {
+      "youtube_streams": "https://www.youtube.com/@KreekCraft/streams",
+      "twitch_clips": [
+        "kreekcraft"
+      ]
+    },
+    "platforms": [
+      "youtube"
+    ],
+    "accounts": {
+      "youtube": ""
+    },
+    "blotato": {
+      "youtube": ""
+    },
+    "post_times_utc": [
+      "14:00",
+      "16:45",
+      "19:00"
+    ],
+    "status": "waiting: channel not created (YouTube ID check)",
+    "gameplay_ok": true
   }
 }

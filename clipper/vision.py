@@ -43,6 +43,15 @@ def _frames(src: str, times: list[float]) -> list[bytes]:
     return out
 
 
+STREAMER_RULE = ("keep=false if the moment would be boring to WATCH: streamer not visible in most frames, static/black/"
+                 "loading/menu screens, the payoff happens off-camera, or the streamer is only a small corner facecam over a "
+                 "still image / game / screen-share (the 9:16 crop will lose them). ")
+# game channels (Roblox etc.): the GAME is the show, a facecam is optional
+GAMEPLAY_RULE = ("keep=false if the moment would be boring to WATCH: static/black/loading/menu screens, nothing happening "
+                 "on screen, or the payoff happens off-screen. Gameplay with no facecam is FINE if the action in the "
+                 "centre of the frame shows the payoff (the 9:16 crop keeps the centre). ")
+
+
 def check(m: dict, ch: dict, client: anthropic.Anthropic | None = None) -> dict:
     """Returns {"keep", "payoff_t", "visual_score", "reason"}. Fails open (keep) on any error."""
     try:
@@ -61,9 +70,8 @@ def check(m: dict, ch: dict, client: anthropic.Anthropic | None = None) -> dict:
             f"These are {N_FRAMES} frames from a candidate {ch['streamer']} Short (cropped to 9:16 later).\n"
             f"Planned hook: {m.get('hook_tag')}. Why it was picked: {m.get('why')}.\n"
             f"Transcript-estimated payoff is frame {j}.\n"
-            "keep=false if the moment would be boring to WATCH: streamer not visible in most frames, static/black/"
-            "loading/menu screens, the payoff happens off-camera, or the streamer is only a small corner facecam over a "
-            "still image / game / screen-share (the 9:16 crop will lose them). payoff_frame = the frame where the payoff is "
+            + (GAMEPLAY_RULE if ch.get("gameplay_ok") else STREAMER_RULE) +
+            "payoff_frame = the frame where the payoff is "
             "most visible. visual_score 1-10 for how watchable it is on a phone. burned_captions=true if the footage "
             "already shows its own subtitles of the speech (stream caption overlay or a previous edit's captions).")})
         kwargs = dict(model=MODEL, max_tokens=4000, messages=[{"role": "user", "content": content}],
