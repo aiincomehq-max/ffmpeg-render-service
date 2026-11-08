@@ -2,7 +2,7 @@
   "speed": {
     "streamer": "iShowSpeed",
     "short": "Speed",
-    "handle": "@CHANGE_ME_speed",
+    "handle": "TURBOCLIPZ",
     "hashtags": "#ishowspeed #speed #shorts",
     "title_tag": "#ishowspeed",
     "credit": "Credit: iShowSpeed (youtube.com/@IShowSpeed). Fan edit, not affiliated.",
@@ -21,15 +21,20 @@
       "youtube_streams": "https://www.youtube.com/@IShowSpeed/streams"
     },
     "blotato": {
-      "youtube": "",
-      "tiktok": "",
-      "instagram": ""
+      "youtube": "56718",
+      "tiktok": "67954",
+      "instagram": "84452"
     },
     "post_times_utc": [
       "14:00",
       "16:45",
       "19:00"
-    ]
+    ],
+    "accounts": {
+      "youtube": "@Turboclipz-k3f",
+      "instagram": "@turboclipz.x",
+      "tiktok": "@turboclipz94"
+    }
   },
   "kai": {
     "streamer": "Kai Cenat",
