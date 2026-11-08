@@ -267,6 +267,13 @@ class TestLiveServiceFixes(unittest.TestCase):
         self.assertFalse(x - 200 < 640 and 440 < x + 200)   # no horizontal overlap with the face box
 
 
+class TestChannelPlatforms(unittest.TestCase):
+    def test_youtube_only_channel(self):
+        self.assertEqual(publish.platforms({"platforms": ["youtube"]}), ["youtube"])
+        self.assertEqual(publish.platforms({}), publish.PLATFORMS)
+        self.assertEqual(channels.get("kai")["platforms"], ["youtube"])
+
+
 class TestSpendLog(unittest.TestCase):
     def test_log_usage_prices_opus(self):
         import clipper, types

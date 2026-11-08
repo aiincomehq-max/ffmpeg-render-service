@@ -46,7 +46,7 @@ def render_page(ch: dict, day: Path) -> str:
             for j, t in enumerate(titles))
         plats = "".join(
             f'<label><input type=checkbox name=p{i} value={pl} {"checked" if ids.get(pl) or blotato.dry_run() else "disabled"}> '
-            f'{pl}{"" if ids.get(pl) else " <small>(no account id)</small>"}</label>' for pl in publish.PLATFORMS)
+            f'{pl}{"" if ids.get(pl) else " <small>(no account id)</small>"}</label>' for pl in publish.platforms(ch))
         badge = ""
         if s:
             when = f" {s['slot'][5:16].replace('T', ' ')}" if s.get("slot") else ""

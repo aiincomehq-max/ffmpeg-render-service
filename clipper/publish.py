@@ -14,6 +14,11 @@ from . import ROOT, blotato
 PLATFORMS = ["youtube", "tiktok", "instagram", "facebook"]
 
 
+def platforms(ch: dict) -> list[str]:
+    """Platforms this channel posts to: channels.json 'platforms', else all."""
+    return [p for p in ch.get("platforms", PLATFORMS) if p in PLATFORMS]
+
+
 def batch_label(p: dict) -> str:
     """Review-page label for which batch a Short came from."""
     return {"fresh": "🆕 FRESH (estimated)", "heatmap": "🔥 PROVEN (most replayed)"}.get(p.get("source_kind"), "MANUAL")

@@ -44,7 +44,7 @@
   "kai": {
     "streamer": "Kai Cenat",
     "short": "Kai",
-    "handle": "@CHANGE_ME_kai",
+    "handle": "ROWDYCLIPZ",
     "hashtags": "#kaicenat #amp #shorts",
     "title_tag": "#kaicenat",
     "credit": "Credit: Kai Cenat (twitch.tv/kaicenat). Fan edit, not affiliated.",
@@ -64,15 +64,19 @@
       ]
     },
     "blotato": {
-      "youtube": "",
-      "tiktok": "",
-      "instagram": ""
+      "youtube": ""
     },
     "post_times_utc": [
       "14:00",
       "16:45",
       "19:00"
-    ]
+    ],
+    "platforms": [
+      "youtube"
+    ],
+    "accounts": {
+      "youtube": "@rowdyclipz"
+    }
   },
   "core": {
     "streamer": "Lacy, StableRonaldo and the Core boys",
