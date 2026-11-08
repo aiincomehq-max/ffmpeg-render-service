@@ -305,6 +305,21 @@ class TestVisionFloor(unittest.TestCase):
             else: os.environ["CLIPPER_VISION"] = env
 
 
+class TestLibraryUpdate(unittest.TestCase):
+    def test_vision_fields_persist(self):
+        from clipper import library
+        old = library.CHANNEL; library.CHANNEL = f"_test_{uuid.uuid4().hex[:6]}"
+        try:
+            library.add("v_000000000100", Path("x.mp4"), [{"start": 1.0, "end": 9.0, "type": "funny", "skill": "none",
+                                                          "outcome": "none", "virality": 8, "payoff_t": 5.0}])
+            rid = library.top(n=1)[0]["_id"]
+            library.update(rid, payoff_t=6.5, burned_captions=True)
+            m = library.top(n=1)[0]
+            self.assertEqual((m["payoff_t"], m["burned_captions"]), (6.5, True))
+        finally:
+            shutil.rmtree(library.db_path().parent, ignore_errors=True); library.CHANNEL = old
+
+
 class TestDiversify(unittest.TestCase):
     """8 Nov: a run picked 4 KFC moments from the scene already posted, plus a twin of a booked Short."""
 

@@ -96,3 +96,13 @@ def stream_pos(vod_key: str, start: float) -> tuple[str, float]:
 
 def used_positions() -> list[tuple[str, float]]:
     return [stream_pos(m["_vod"], m["start"]) for m in _rows("SELECT id, used, vod_key, data FROM moments WHERE used = 1")]
+
+
+def update(row_id: int, **fields) -> None:
+    """Merge fields into a stored moment (e.g. the vision pass's payoff_t / burned_captions) so re-renders keep them."""
+    with conn() as c:
+        row = c.execute("SELECT data FROM moments WHERE id = ?", (row_id,)).fetchone()
+        if row:
+            m = json.loads(row[0])
+            m.update(fields)
+            c.execute("UPDATE moments SET data = ? WHERE id = ?", (json.dumps(m, ensure_ascii=False), row_id))
