@@ -57,7 +57,7 @@ def caption(platform: str, title: str, post: dict, ch: dict) -> str:
 
 
 def approve(ch: dict, day_dir: Path, post: dict, title: str, platforms: list[str], when: str = "slot") -> dict:
-    """when: 'slot' (next free slot) or 'now'."""
+    """when: 'slot' (next free slot), 'now', or an exact UTC time like '2026-11-09T14:00:00Z'."""
     st = load_state(ch)
     key = f"{day_dir.name}/{post['file']}"
     if st.get(key, {}).get("status") in ("scheduled", "posted"):
@@ -66,7 +66,14 @@ def approve(ch: dict, day_dir: Path, post: dict, title: str, platforms: list[str
     missing = [p for p in platforms if not ids.get(p)]
     if missing and not blotato.dry_run():
         raise ValueError(f"No Blotato account id for {missing} in channels.json → blotato. Run: python -m clipper accounts")
-    slot = None if when == "now" else next_slot(ch, st)
+    if when == "now":
+        slot = None
+    elif when == "slot":
+        slot = next_slot(ch, st)
+    else:
+        slot = dt.datetime.fromisoformat(when.replace("Z", "+00:00")).astimezone(dt.timezone.utc)
+        if slot < dt.datetime.now(dt.timezone.utc) + dt.timedelta(minutes=15):
+            raise ValueError(f"{when} is less than 15 min away")
     iso = slot.astimezone(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ") if slot else None
     log: list = []
     media_url = blotato.upload(day_dir / post["file"], log)

@@ -267,6 +267,25 @@ class TestLiveServiceFixes(unittest.TestCase):
         self.assertFalse(x - 200 < 640 and 440 < x + 200)   # no horizontal overlap with the face box
 
 
+class TestExactSlot(unittest.TestCase):
+    def test_approve_at_exact_utc_time(self):
+        import tempfile
+        tmp = Path(tempfile.mkdtemp()); old = publish.ROOT; env = os.environ.get("CLIPPER_DRY_RUN")
+        os.environ["CLIPPER_DRY_RUN"] = "1"; publish.ROOT = tmp
+        try:
+            ch = {"key": "x", "credit": "c", "hashtags": "#h"}
+            when = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(days=2)).replace(hour=14, minute=0, second=0, microsecond=0)
+            iso = when.strftime("%Y-%m-%dT%H:%M:%SZ")
+            e = publish.approve(ch, tmp, {"file": "a.mp4"}, "t", ["youtube"], when=iso)
+            self.assertEqual(e["status"], "scheduled"); self.assertEqual(e["utc"], iso)
+            with self.assertRaises(ValueError):
+                publish.approve(ch, tmp, {"file": "b.mp4"}, "t", ["youtube"], when="2020-01-01T14:00:00Z")
+        finally:
+            publish.ROOT = old; shutil.rmtree(tmp, ignore_errors=True)
+            if env is None: os.environ.pop("CLIPPER_DRY_RUN", None)
+            else: os.environ["CLIPPER_DRY_RUN"] = env
+
+
 class TestFacebook(unittest.TestCase):
     def test_facebook_post_carries_page_id(self):
         from clipper import blotato
