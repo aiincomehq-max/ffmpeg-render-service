@@ -205,7 +205,21 @@ def finalize(base: Path, edl: dict, style: dict, ass_path: Path, out: Path) -> N
 
     # Audio: source + music (muffled before drop, ducked under speech) + sfx
     a_labels = ["src"]
-    graph.append("[0:a]aformat=sample_rates=44100:channel_layouts=stereo,asplit=2[src][sc]")
+    vo = [v for v in edl.get("voice") or [] if Path(v["file"]).exists() and v["t"] < duration]
+    if vo:
+        # our commentary on top: the clip's own audio ducks under it (sidechain), VO a touch hot so it reads on a phone
+        graph.append("[0:a]aformat=sample_rates=44100:channel_layouts=stereo,asplit=2[src0][sc]")
+        for k, v in enumerate(vo):
+            inputs += ["-i", v["file"]]
+            ms = max(0, int(v["t"] * 1000))
+            graph.append(f"[{idx}:a]aformat=sample_rates=44100:channel_layouts=stereo,adelay={ms}|{ms},volume=1.6[vo{k}]")
+            idx += 1
+        graph.append("".join(f"[vo{k}]" for k in range(len(vo))) +
+                     f"amix=inputs={len(vo)}:normalize=0:duration=longest,apad,atrim=0:{duration:.3f},asplit=2[vo][vosc]")
+        graph.append("[src0][vosc]sidechaincompress=threshold=0.02:ratio=8:attack=10:release=250[src]")
+        a_labels.append("vo")
+    else:
+        graph.append("[0:a]aformat=sample_rates=44100:channel_layouts=stereo,asplit=2[src][sc]")
     mus = edl.get("music")
     if mus and Path(mus["file"]).exists():
         g = style["global"]["audio"]["music"]

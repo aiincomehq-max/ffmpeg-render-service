@@ -157,6 +157,7 @@ def single_moment(m: dict, style: dict, handle: str, music: str | None) -> dict:
         "handle": handle,
         "end_sfx": {"t": max(0.0, duration - 1.2), "sfx": "vine_boom"} if m.get("comedic") and not wholesome else None,
         "caption_active": "#FFD700" if wholesome else "#00FF44",
+        "vo_slots": [0.3] + ([round(pay_out + 0.8, 3)] if pay_out is not None and pay_out + 2.5 < duration else []),
     }
 
 
@@ -208,13 +209,14 @@ def ranking_comp(ms: list[dict], game: str, handle: str, music: str | None) -> d
     5 clips counted down #5 -> #1, strongest last, a white flash + thud on each payoff."""
     ms = ms[:5]
     tl = Timeline()
-    words, texts, impacts = [], [], []
+    words, texts, impacts, slots = [], [], [], []
     for rank, m in zip(range(len(ms), 0, -1), ms):
         pay = m.get("payoff_t") or (m["start"] + m["end"]) / 2
         a, b = max(m["start"], pay - RANK_PRE), min(m["end"], pay + RANK_POST)
         o0 = tl.out_t
         tl.add(m["src"], a, b)
         o1 = tl.out_t
+        slots.append(round(o0 + 0.1, 3))
         texts.append({"text": f"#{rank}", "start": round(o0, 3), "end": round(o1, 3), "kind": "hook", "color": "yellow", "y_pct": 22})
         if m.get("hook_tag"):
             texts.append({"text": hook_text(m["hook_tag"], 30), "start": round(o0, 3), "end": round(min(o1, o0 + 2.5), 3),
@@ -238,4 +240,5 @@ def ranking_comp(ms: list[dict], game: str, handle: str, music: str | None) -> d
         "end_sfx": None,
         "caption_active": "#00FF44",
         "title": f"Ranking the funniest {game} moments 😭💀",
+        "vo_slots": slots,
     }

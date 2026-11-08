@@ -109,10 +109,26 @@ def vision_filter(cands: list[dict], want: int) -> list[dict]:
     return kept
 
 
+def add_voice(edl: dict, lines_fn) -> None:
+    """Our commentary (reused-content rule). Fails open: a Short without VO beats no Short."""
+    from . import voice
+    if not voice.enabled() or not edl.get("vo_slots"):
+        return
+    try:
+        lines = lines_fn()[:len(edl["vo_slots"])]
+        spoken = voice.speak(lines)
+        edl["voice"] = [{"t": t, "file": f, "text": l} for t, (f, _), l in zip(edl["vo_slots"], spoken, lines)]
+        print("  voice:", " / ".join(lines))
+    except Exception as e:
+        print(f"  voice skipped ({type(e).__name__}: {str(e)[:80]})")
+
+
 def render_single(m: dict, handle: str, d: Path) -> Path:
     style = load()
     wholesome = m.get("type") == "wholesome"
     edl = E.single_moment(m, style, handle, pick_music("emotional" if wholesome else "phonk"))
+    from . import voice
+    add_voice(edl, lambda: voice.single_lines(m, CH["key"]))
     name = f"{dt.datetime.now():%H%M%S}_{slug(m.get('hook_tag', 'moment'))}.mp4"
     out = render(edl, style, d / name)
     write_post(d, {"file": out.name, "format": edl["format"], "titles": m.get("titles", []),
@@ -132,6 +148,8 @@ def render_ranking(group: list[dict], handle: str, d: Path) -> Path:
     style = load()
     game = CH.get("short", "gaming")
     edl = E.ranking_comp(group, game, handle, pick_music("phonk"))
+    from . import voice
+    add_voice(edl, lambda: voice.ranking_lines(group, game, CH["key"]))
     out = render(edl, style, d / f"{dt.datetime.now():%H%M%S}_ranking-{slug(game)}.mp4")
     write_post(d, {"file": out.name, "format": "ranking_comp",
                    "titles": [edl["title"], f"Top 5 {game} moments that made me cry laughing 💀", f"{game} players will understand 😭"],
