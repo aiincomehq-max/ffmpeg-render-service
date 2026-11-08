@@ -70,6 +70,8 @@ def check(m: dict, ch: dict, client: anthropic.Anthropic | None = None) -> dict:
             resp = client.beta.messages.create(betas=["server-side-fallback-2026-07-01"], fallbacks="default", **kwargs)
         else:
             resp = client.messages.create(**kwargs)
+        from . import library, log_usage
+        log_usage(resp, "vision", library.CHANNEL)
         if resp.stop_reason == "refusal":
             return {"keep": True, "payoff_t": m["payoff_t"], "visual_score": None, "reason": "vision refused"}
         r = json.loads(next(b.text for b in resp.content if b.type == "text"))

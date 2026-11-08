@@ -267,6 +267,19 @@ class TestLiveServiceFixes(unittest.TestCase):
         self.assertFalse(x - 200 < 640 and 440 < x + 200)   # no horizontal overlap with the face box
 
 
+class TestSpendLog(unittest.TestCase):
+    def test_log_usage_prices_opus(self):
+        import clipper, types
+        ch = f"_test_{uuid.uuid4().hex[:6]}"
+        resp = types.SimpleNamespace(model="claude-opus-5-5", usage=types.SimpleNamespace(
+            input_tokens=1_000_000, output_tokens=100_000, cache_creation_input_tokens=0, cache_read_input_tokens=0))
+        try:
+            self.assertAlmostEqual(clipper.log_usage(resp, "t", ch), 4.0 + 2.0)
+            self.assertTrue((Path(clipper.__file__).parent.parent / "data" / ch / "api_usage.jsonl").exists())
+        finally:
+            shutil.rmtree(Path(clipper.__file__).parent.parent / "data" / ch, ignore_errors=True)
+
+
 class TestVisionFloor(unittest.TestCase):
     def test_low_visual_score_is_dropped_even_if_kept(self):
         from clipper import __main__ as M, vision

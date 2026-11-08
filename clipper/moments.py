@@ -124,6 +124,8 @@ def _call(client: anthropic.Anthropic, text: str, skills: list[str], context: st
         resp = client.beta.messages.create(betas=["server-side-fallback-2026-07-01"], fallbacks="default", **kwargs)
     else:
         resp = client.messages.create(**kwargs)
+    from . import library, log_usage
+    log_usage(resp, "moments", library.CHANNEL)
     if resp.stop_reason == "refusal":
         return []
     txt = next((b.text for b in resp.content if b.type == "text"), "")
