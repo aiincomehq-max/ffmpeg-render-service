@@ -329,16 +329,19 @@ def cmd_auto(a) -> None:
             if clip["id"] in done:
                 continue
             print(f"clip: {clip['title'][:60]} ({clip['views']} views)")
-            f, m = download(clip["url"])
-            process_file(f, m, kind="heatmap",
-                         hint=f"fan-made Twitch clip with {clip['views']} views - a proven moment; tighten it to the payoff")
-            new_ids.add(clip["id"])
-    mark_seen(new_ids, "heatmap")
+            try:
+                f, m = download(clip["url"])
+                process_file(f, m, kind="heatmap",
+                             hint=f"fan-made Twitch clip with {clip['views']} views - a proven moment; tighten it to the payoff")
+            except Exception as e:  # one bad clip (e.g. whisper alignment crash on near-silent audio) must not kill the run
+                print(f"\n  skipped clip ({type(e).__name__}: {str(e)[:80]})")
+            mark_seen({clip["id"]}, "heatmap")  # per clip, so a crash later never re-pays for clips already done
     # fresh first (recency is the lever), heatmap fills the rest; leftover heatmap moments wait for later posts
     pool = [] if a.mode == "heatmap" else library.top(None, a.count * 5, a.min_virality, kind="fresh")
     if a.mode != "fresh":
         pool += [m for m in library.top(None, a.count * 5, a.min_virality) if m.get("source_kind", "heatmap") != "fresh"]
     pool = diversify(pool, library.used_positions())
+    pool = [m for m in pool if E.kept_len(m) >= E.MIN_LEN]  # too short once silences are cut
     best = vision_filter(pool, a.count)
     d = day_dir()
     print(f"rendering {len(best)} Shorts...")

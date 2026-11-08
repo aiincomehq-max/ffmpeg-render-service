@@ -486,5 +486,16 @@ class TestRender(unittest.TestCase):
         shutil.rmtree(work, ignore_errors=True)
 
 
+class TestShortGuards(unittest.TestCase):
+    def test_hook_never_ends_on_dangling_word(self):
+        from clipper.edl import hook_text
+        self.assertEqual(hook_text("Emily sang XXXTentacion at a wedding"), "EMILY SANG XXXTENTACION")
+
+    def test_kept_len_counts_speech_only(self):
+        from clipper.edl import kept_len, MIN_LEN
+        m = {"start": 0, "end": 30, "words": [{"w": "hi", "s": 0.5, "e": 1.0}, {"w": "yo", "s": 2.0, "e": 2.5}]}
+        self.assertLess(kept_len(m), MIN_LEN)
+
+
 if __name__ == "__main__":
     unittest.main()

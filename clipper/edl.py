@@ -18,6 +18,7 @@ KEEP_GAP = 0.40      # remove silences longer than this
 PAD = 0.12           # keep this much around speech when cutting
 PROTECT = 1.5        # never cut within +-PROTECT of payoff / impacts
 MAX_LEN = 58.0
+MIN_LEN = 12.0  # an 8 s Short (Jason 8 Nov) is over before the hook lands
 HOOK_S = 2.5        # big opening hook text on screen 0..HOOK_S
 
 
@@ -75,7 +76,18 @@ def hook_text(tag: str, max_chars: int = 34) -> str:
     t = re.sub(r"\s+", " ", t)
     if len(t) > max_chars:
         t = t[:max_chars].rsplit(" ", 1)[0]
+        # never end on a dangling word ("...XXXTENTACION AT A")
+        while t.split(" ")[-1] in DANGLING and " " in t:
+            t = t.rsplit(" ", 1)[0]
     return t
+
+
+DANGLING = {"A", "AN", "THE", "AT", "TO", "OF", "IN", "ON", "FOR", "AND", "WITH", "HIS", "HER", "MY", "BY", "FROM", "IS", "WAS", "BUT", "OR"}
+
+
+def kept_len(m: dict) -> float:
+    """Seconds of the moment left after silence cuts (before MAX_LEN trim)."""
+    return sum(b - a for a, b in _speech_ranges(m))
 
 
 def single_moment(m: dict, style: dict, handle: str, music: str | None) -> dict:
