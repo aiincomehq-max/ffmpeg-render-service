@@ -109,7 +109,8 @@
       "14:00",
       "16:45",
       "19:00"
-    ]
+    ],
+    "status": "retired 8 Nov: split into one-streamer channels (stable = StableRonaldo); not used"
   },
   "jason": {
     "streamer": "JasonTheWeen",
@@ -200,36 +201,6 @@
       "19:00"
     ],
     "status": "waiting: channel not created (YouTube ID check)"
-  },
-  "duke": {
-    "streamer": "Duke Dennis",
-    "short": "Duke",
-    "handle": "DRIPCLIPZ",
-    "hashtags": "#dukedennis #streamer #shorts",
-    "title_tag": "#dukedennis",
-    "credit": "Credit: Duke Dennis (twitch.tv/dukedennis). Fan edit, not affiliated.",
-    "where_they_stream": "Twitch (twitch.tv/dukedennis)",
-    "people": [],
-    "sources": {
-      "twitch_clips": [
-        "dukedennis"
-      ]
-    },
-    "platforms": [
-      "youtube"
-    ],
-    "accounts": {
-      "youtube": ""
-    },
-    "blotato": {
-      "youtube": ""
-    },
-    "post_times_utc": [
-      "14:00",
-      "16:45",
-      "19:00"
-    ],
-    "status": "waiting: no Twitch clips found for twitch.tv/dukedennis in 30d — confirm where he streams before launch"
   },
   "fanum": {
     "streamer": "Fanum",
@@ -333,6 +304,36 @@
     "sources": {
       "twitch_clips": [
         "plaqueboymax"
+      ]
+    },
+    "platforms": [
+      "youtube"
+    ],
+    "accounts": {
+      "youtube": ""
+    },
+    "blotato": {
+      "youtube": ""
+    },
+    "post_times_utc": [
+      "14:00",
+      "16:45",
+      "19:00"
+    ],
+    "status": "waiting: channel not created (YouTube ID check)"
+  },
+  "stable": {
+    "streamer": "StableRonaldo",
+    "short": "Ronaldo",
+    "handle": "HYPERCLIPZ",
+    "hashtags": "#stableronaldo #fortnite #shorts",
+    "title_tag": "#stableronaldo",
+    "credit": "Credit: StableRonaldo (twitch.tv/stableronaldo). Fan edit, not affiliated.",
+    "where_they_stream": "Twitch (twitch.tv/stableronaldo)",
+    "people": [],
+    "sources": {
+      "twitch_clips": [
+        "stableronaldo"
       ]
     },
     "platforms": [
