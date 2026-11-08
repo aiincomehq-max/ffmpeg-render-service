@@ -429,6 +429,15 @@ class TestHook(unittest.TestCase):
         # no action tag fights the hook on screen
         self.assertTrue(all(t["start"] >= hook[0]["end"] for t in edl["texts"] if t["kind"] != "hook"))
 
+    def test_burned_captions_skip_ours_and_tags_drop_emoji(self):
+        m = {"start": 10.0, "end": 30.0, "payoff_t": 25.0, "impact_ts": [25.0], "hook_tag": "KAI ASKED HIS NAME",
+             "words": words(10.0, 30.0), "action_tags": [{"t": 20.0, "text": "HE WENT OFF 🤬"}],
+             "src": "x.mp4", "type": "funny"}
+        self.assertTrue(E.single_moment(m, STYLE, "R", None)["words"])
+        edl = E.single_moment(dict(m, burned_captions=True), STYLE, "R", None)
+        self.assertEqual(edl["words"], [])
+        self.assertIn("*HE WENT OFF*", [t["text"] for t in edl["texts"]])
+
 
 class TestFFmpegPath(unittest.TestCase):
     def test_prefers_full_build(self):

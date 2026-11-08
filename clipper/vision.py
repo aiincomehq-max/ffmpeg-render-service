@@ -25,8 +25,9 @@ SCHEMA = {
         "payoff_frame": {"type": "integer"},
         "visual_score": {"type": "integer"},
         "reason": {"type": "string"},
+        "burned_captions": {"type": "boolean"},
     },
-    "required": ["keep", "payoff_frame", "visual_score", "reason"],
+    "required": ["keep", "payoff_frame", "visual_score", "reason", "burned_captions"],
     "additionalProperties": False,
 }
 
@@ -63,7 +64,8 @@ def check(m: dict, ch: dict, client: anthropic.Anthropic | None = None) -> dict:
             "keep=false if the moment would be boring to WATCH: streamer not visible in most frames, static/black/"
             "loading/menu screens, the payoff happens off-camera, or the streamer is only a small corner facecam over a "
             "still image / game / screen-share (the 9:16 crop will lose them). payoff_frame = the frame where the payoff is "
-            "most visible. visual_score 1-10 for how watchable it is on a phone.")})
+            "most visible. visual_score 1-10 for how watchable it is on a phone. burned_captions=true if the footage "
+            "already shows its own subtitles of the speech (stream caption overlay or a previous edit's captions).")})
         kwargs = dict(model=MODEL, max_tokens=4000, messages=[{"role": "user", "content": content}],
                       output_config={"format": {"type": "json_schema", "schema": SCHEMA}})
         if os.environ.get("CLIPPER_FALLBACKS", "1") == "1":
@@ -76,6 +78,7 @@ def check(m: dict, ch: dict, client: anthropic.Anthropic | None = None) -> dict:
             return {"keep": True, "payoff_t": m["payoff_t"], "visual_score": None, "reason": "vision refused"}
         r = json.loads(next(b.text for b in resp.content if b.type == "text"))
         pf = max(0, min(N_FRAMES - 1, r["payoff_frame"]))
-        return {"keep": r["keep"], "payoff_t": times[pf], "visual_score": r["visual_score"], "reason": r["reason"]}
+        return {"keep": r["keep"], "payoff_t": times[pf], "visual_score": r["visual_score"], "reason": r["reason"],
+                "burned_captions": bool(r.get("burned_captions"))}
     except Exception as e:  # never block the pipeline on QA
         return {"keep": True, "payoff_t": m.get("payoff_t"), "visual_score": None, "reason": f"vision check skipped: {e}"}

@@ -97,6 +97,7 @@ def vision_filter(cands: list[dict], want: int) -> list[dict]:
             if r.get("payoff_t") is not None:
                 m["payoff_t"] = r["payoff_t"]
             m["visual_score"] = r.get("visual_score")
+            m["burned_captions"] = bool(r.get("burned_captions"))
             kept.append(m)
         else:
             library.mark_used([m["_id"]])  # don't offer it again

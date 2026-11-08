@@ -106,7 +106,8 @@ def single_moment(m: dict, style: dict, handle: str, music: str | None) -> dict:
     duration = min(tl.out_t, MAX_LEN)
 
     words = []
-    for w in m.get("words", []):
+    # 8 Nov: Kai's stream has its own captions burned in; a second caption track on top is unreadable
+    for w in ([] if m.get("burned_captions") else m.get("words", [])):
         s, e = tl.to_out(w["s"]), tl.to_out(w["e"])
         if s is not None and s < duration:
             words.append({"w": w["w"], "s": round(s, 3), "e": round(e if e is not None else s + 0.2, 3)})
@@ -117,7 +118,7 @@ def single_moment(m: dict, style: dict, handle: str, music: str | None) -> dict:
     for tag in m.get("action_tags", []):
         t = tl.to_out(tag["t"])
         if t is not None and t > HOOK_S:
-            texts.append({"text": f"*{tag['text'].strip('*')}*", "start": round(t, 3), "end": round(min(duration, t + 1.6), 3), "kind": "tag", "color": "yellow", "y_pct": 36})
+            texts.append({"text": f"*{hook_text(tag['text'], 40)}*", "start": round(t, 3), "end": round(min(duration, t + 1.6), 3), "kind": "tag", "color": "yellow", "y_pct": 36})
 
     impacts = []
     pay_out = tl.to_out(payoff) if payoff is not None else None
