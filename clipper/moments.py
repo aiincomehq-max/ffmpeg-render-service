@@ -33,8 +33,11 @@ Rules:
       "NO WAY HE DID THIS AT THE END", "THE ENDING IS CRAZY", "HE DID NOT SEE THIS COMING";
   (b) name + verb + specific detail (numbers/money/famous people win): "{SHORT} BENCHED 225 COLD",
       "JAMAL ORDERED 12 BUCKETS", "KEVIN HART COOKED {SHORT}".
-  NEVER a flat description of the scene ("{SHORT} WORKS THE DRIVE-THRU", "{SHORT} MEETS A FAN") and never give
-  away the surprise. Must be true to what happens in the clip.
+  It MUST contain one concrete detail - a number, money, a place, a famous name or a specific act - like the
+  winners' titles do ("$12,000 RESTAURANT BILL"). Setting up the situation is fine; just don't state the final reaction.
+  BANNED: empty teasers with no detail ("WAIT FOR HIS REACTION", "WAIT FOR WHAT HE SAID", "WATCH TILL THE END") and
+  flat scene descriptions ("{SHORT} WORKS THE DRIVE-THRU", "{SHORT} MEETS A FAN"). Must be true to the clip.
+  Good: "A KID ASKED {SHORT} ONE QUESTION", "{SHORT} JUST GAVE A FAN $10,000", "DELE ALLI DESTROYED HIS CONTROLLER".
 - action_tags: 0-3 narrator tags in the middle, e.g. "WAIT FOR IT", "{SHORT} FREAKS OUT", "PASSED", "FAILS".
 - skill: pick from the given skill list when {short} attempts a physical/reflex/skill thing, else "none".
 - outcome: "success" or "fail" for skill attempts, else "na".

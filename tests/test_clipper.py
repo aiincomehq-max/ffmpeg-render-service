@@ -328,6 +328,11 @@ class TestTwoBatches(unittest.TestCase):
 
 
 class TestHook(unittest.TestCase):
+    def test_prompt_bans_empty_teasers(self):
+        from clipper.moments import SYSTEM
+        self.assertIn("concrete detail", SYSTEM)
+        self.assertIn("WAIT FOR HIS REACTION", SYSTEM.split("BANNED")[1])
+
     def test_hook_text_plain_and_short(self):
         self.assertEqual(E.hook_text("*wait for his first customer* 😭💀"), "WAIT FOR HIS FIRST CUSTOMER")
         self.assertLessEqual(len(E.hook_text("NO WAY HE DID THIS AT THE END OF THE STREAM TODAY")), 34)
