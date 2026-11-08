@@ -110,5 +110,245 @@
       "16:45",
       "19:00"
     ]
+  },
+  "jason": {
+    "streamer": "JasonTheWeen",
+    "short": "Jason",
+    "handle": "GOOFYCLIPZ",
+    "hashtags": "#jasontheween #streamer #shorts",
+    "title_tag": "#jasontheween",
+    "credit": "Credit: JasonTheWeen (twitch.tv/jasontheween). Fan edit, not affiliated.",
+    "where_they_stream": "Twitch (twitch.tv/jasontheween)",
+    "people": [],
+    "sources": {
+      "twitch_clips": [
+        "jasontheween"
+      ]
+    },
+    "platforms": [
+      "youtube"
+    ],
+    "accounts": {
+      "youtube": ""
+    },
+    "blotato": {
+      "youtube": ""
+    },
+    "post_times_utc": [
+      "14:00",
+      "16:45",
+      "19:00"
+    ],
+    "status": "waiting: channel not created (YouTube ID check)"
+  },
+  "jynxzi": {
+    "streamer": "Jynxzi",
+    "short": "Jynxzi",
+    "handle": "RAGECLIPZ",
+    "hashtags": "#jynxzi #streamer #shorts",
+    "title_tag": "#jynxzi",
+    "credit": "Credit: Jynxzi (twitch.tv/jynxzi). Fan edit, not affiliated.",
+    "where_they_stream": "Twitch (twitch.tv/jynxzi)",
+    "people": [],
+    "sources": {
+      "twitch_clips": [
+        "jynxzi"
+      ]
+    },
+    "platforms": [
+      "youtube"
+    ],
+    "accounts": {
+      "youtube": ""
+    },
+    "blotato": {
+      "youtube": ""
+    },
+    "post_times_utc": [
+      "14:00",
+      "16:45",
+      "19:00"
+    ],
+    "status": "waiting: channel not created (YouTube ID check)"
+  },
+  "caseoh": {
+    "streamer": "CaseOh",
+    "short": "CaseOh",
+    "handle": "COZYCLIPZ",
+    "hashtags": "#caseoh #streamer #shorts",
+    "title_tag": "#caseoh",
+    "credit": "Credit: CaseOh (twitch.tv/caseoh_). Fan edit, not affiliated.",
+    "where_they_stream": "Twitch (twitch.tv/caseoh_)",
+    "people": [],
+    "sources": {
+      "twitch_clips": [
+        "caseoh_"
+      ]
+    },
+    "platforms": [
+      "youtube"
+    ],
+    "accounts": {
+      "youtube": ""
+    },
+    "blotato": {
+      "youtube": ""
+    },
+    "post_times_utc": [
+      "14:00",
+      "16:45",
+      "19:00"
+    ],
+    "status": "waiting: channel not created (YouTube ID check)"
+  },
+  "duke": {
+    "streamer": "Duke Dennis",
+    "short": "Duke",
+    "handle": "DRIPCLIPZ",
+    "hashtags": "#dukedennis #streamer #shorts",
+    "title_tag": "#dukedennis",
+    "credit": "Credit: Duke Dennis (twitch.tv/dukedennis). Fan edit, not affiliated.",
+    "where_they_stream": "Twitch (twitch.tv/dukedennis)",
+    "people": [],
+    "sources": {
+      "twitch_clips": [
+        "dukedennis"
+      ]
+    },
+    "platforms": [
+      "youtube"
+    ],
+    "accounts": {
+      "youtube": ""
+    },
+    "blotato": {
+      "youtube": ""
+    },
+    "post_times_utc": [
+      "14:00",
+      "16:45",
+      "19:00"
+    ],
+    "status": "waiting: no Twitch clips found for twitch.tv/dukedennis in 30d — confirm where he streams before launch"
+  },
+  "fanum": {
+    "streamer": "Fanum",
+    "short": "Fanum",
+    "handle": "SNACKCLIPZ",
+    "hashtags": "#fanum #streamer #shorts",
+    "title_tag": "#fanum",
+    "credit": "Credit: Fanum (twitch.tv/fanum). Fan edit, not affiliated.",
+    "where_they_stream": "Twitch (twitch.tv/fanum)",
+    "people": [],
+    "sources": {
+      "twitch_clips": [
+        "fanum"
+      ]
+    },
+    "platforms": [
+      "youtube"
+    ],
+    "accounts": {
+      "youtube": ""
+    },
+    "blotato": {
+      "youtube": ""
+    },
+    "post_times_utc": [
+      "14:00",
+      "16:45",
+      "19:00"
+    ],
+    "status": "waiting: channel not created (YouTube ID check)"
+  },
+  "agent": {
+    "streamer": "Agent 00",
+    "short": "Agent",
+    "handle": "STEALTHCLIPZ",
+    "hashtags": "#agent00 #streamer #shorts",
+    "title_tag": "#agent00",
+    "credit": "Credit: Agent 00 (twitch.tv/agent00). Fan edit, not affiliated.",
+    "where_they_stream": "Twitch (twitch.tv/agent00)",
+    "people": [],
+    "sources": {
+      "twitch_clips": [
+        "agent00"
+      ]
+    },
+    "platforms": [
+      "youtube"
+    ],
+    "accounts": {
+      "youtube": ""
+    },
+    "blotato": {
+      "youtube": ""
+    },
+    "post_times_utc": [
+      "14:00",
+      "16:45",
+      "19:00"
+    ],
+    "status": "waiting: channel not created (YouTube ID check)"
+  },
+  "peanut": {
+    "streamer": "TheBurntPeanut",
+    "short": "Peanut",
+    "handle": "TOASTEDCLIPZ",
+    "hashtags": "#theburntpeanut #streamer #shorts",
+    "title_tag": "#theburntpeanut",
+    "credit": "Credit: TheBurntPeanut (twitch.tv/theburntpeanut). Fan edit, not affiliated.",
+    "where_they_stream": "Twitch (twitch.tv/theburntpeanut)",
+    "people": [],
+    "sources": {
+      "twitch_clips": [
+        "theburntpeanut"
+      ]
+    },
+    "platforms": [
+      "youtube"
+    ],
+    "accounts": {
+      "youtube": ""
+    },
+    "blotato": {
+      "youtube": ""
+    },
+    "post_times_utc": [
+      "14:00",
+      "16:45",
+      "19:00"
+    ],
+    "status": "waiting: channel not created (YouTube ID check)"
+  },
+  "plaqueboymax": {
+    "streamer": "PlaqueBoyMax",
+    "short": "Max",
+    "handle": "STUDIOCLIPZ",
+    "hashtags": "#plaqueboymax #streamer #shorts",
+    "title_tag": "#plaqueboymax",
+    "credit": "Credit: PlaqueBoyMax (twitch.tv/plaqueboymax). Fan edit, not affiliated.",
+    "where_they_stream": "Twitch (twitch.tv/plaqueboymax)",
+    "people": [],
+    "sources": {
+      "twitch_clips": [
+        "plaqueboymax"
+      ]
+    },
+    "platforms": [
+      "youtube"
+    ],
+    "accounts": {
+      "youtube": ""
+    },
+    "blotato": {
+      "youtube": ""
+    },
+    "post_times_utc": [
+      "14:00",
+      "16:45",
+      "19:00"
+    ],
+    "status": "waiting: channel not created (YouTube ID check)"
   }
 }
