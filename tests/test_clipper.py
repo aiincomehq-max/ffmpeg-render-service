@@ -264,6 +264,20 @@ class TestLiveServiceFixes(unittest.TestCase):
         self.assertFalse(x - 200 < 640 and 440 < x + 200)   # no horizontal overlap with the face box
 
 
+class TestFacebook(unittest.TestCase):
+    def test_facebook_post_carries_page_id(self):
+        from clipper import blotato
+        log = []
+        blotato.create_post("facebook", {"account": "31275", "page": "1420386957826930"}, "t", "https://x/v.mp4",
+                            "title", None, log)
+        body = log[-1]["post"]["post"]
+        self.assertEqual(body["accountId"], "31275")
+        self.assertEqual(body["target"], {"targetType": "facebook", "pageId": "1420386957826930", "mediaType": "reel"})
+        self.assertIn("facebook", publish.PLATFORMS)
+        with self.assertRaises(ValueError):
+            blotato.create_post("facebook", "31275", "t", "u", "title", None, [])
+
+
 class TestFFmpegPath(unittest.TestCase):
     def test_prefers_full_build(self):
         import tempfile

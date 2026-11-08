@@ -11,7 +11,7 @@ from pathlib import Path
 
 from . import ROOT, blotato
 
-PLATFORMS = ["youtube", "tiktok", "instagram"]
+PLATFORMS = ["youtube", "tiktok", "instagram", "facebook"]
 
 
 def state_path(ch: dict) -> Path:
@@ -47,7 +47,7 @@ def next_slot(ch: dict, st: dict, now: dt.datetime | None = None) -> dt.datetime
 def caption(platform: str, title: str, post: dict, ch: dict) -> str:
     if platform == "youtube":
         return post.get("description") or f"{ch['credit']}\n{ch['hashtags']}"
-    # TikTok / Instagram: the caption IS the title + credit + tags
+    # TikTok / Instagram / Facebook: the caption IS the title + credit + tags
     return f"{title}\n\n{ch['credit']}\n{ch['hashtags']}"
 
 

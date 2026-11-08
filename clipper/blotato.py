@@ -65,7 +65,7 @@ def upload(path: Path, log: list) -> str:
     return j["publicUrl"]
 
 
-def target(platform: str, title: str) -> dict:
+def target(platform: str, title: str, page_id: str | None = None) -> dict:
     """Platform-specific fields (YouTube needs title/privacy/notify; TikTok needs privacy + flags)."""
     if platform == "youtube":
         return {"targetType": "youtube", "title": title[:100], "privacyStatus": "public",
@@ -76,14 +76,22 @@ def target(platform: str, title: str) -> dict:
                 "isYourBrand": False, "isAiGenerated": False, "title": title[:90]}
     if platform == "instagram":
         return {"targetType": "instagram", "mediaType": "reel", "shareToFeed": True}
+    if platform == "facebook":  # page_id: the Page under the connected Facebook account (Blotato subaccount)
+        return {"targetType": "facebook", "pageId": page_id, "mediaType": "reel"}
     raise ValueError(platform)
 
 
-def create_post(platform: str, account_id: str, text: str, media_url: str, title: str,
+def create_post(platform: str, account_id: str | dict, text: str, media_url: str, title: str,
                 scheduled_iso: str | None, log: list) -> str:
-    body = {"post": {"accountId": account_id,
+    """account_id: Blotato account id, or for Facebook {"account": "<id>", "page": "<page id>"}."""
+    page_id = None
+    if isinstance(account_id, dict):
+        account_id, page_id = account_id["account"], account_id.get("page")
+    if platform == "facebook" and not page_id:
+        raise ValueError('facebook needs {"account": ..., "page": ...} in channels.json → blotato')
+    body = {"post": {"accountId": str(account_id),
                      "content": {"text": text, "mediaUrls": [media_url], "platform": platform},
-                     "target": target(platform, title)}}
+                     "target": target(platform, title, page_id)}}
     if scheduled_iso:
         body["scheduledTime"] = scheduled_iso
     if dry_run():
