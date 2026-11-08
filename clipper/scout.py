@@ -89,3 +89,21 @@ def twitch_top_clips(login: str, n: int = 10, range_: str = "7d") -> list[dict]:
              for e in entries if e.get("url")]
     clips.sort(key=lambda c: -c["views"])  # Twitch already lists by views; this keeps it explicit
     return clips[:n]
+
+
+GQL_CLIENT = "kimne78kx3ncx6brgo4mv6wki5h1ko"  # Twitch's public web client id (the one yt-dlp uses)
+_PERIOD = {"24hr": "LAST_DAY", "7d": "LAST_WEEK", "30d": "LAST_MONTH"}
+
+
+def twitch_game_clips(game: str, n: int = 10, range_: str = "7d") -> list[dict]:
+    """Most-viewed English clips of a whole GAME (every streamer), e.g. 'Grand Theft Auto V', 'Roblox'."""
+    import requests
+    q = ('query($g:String!,$n:Int!,$p:ClipsPeriod!){ game(name:$g){ clips(first:$n, criteria:{period:$p, sort:VIEWS_DESC, '
+         'languages:[EN]}){ edges{ node{ slug title viewCount url broadcaster{login} } } } } }')
+    r = requests.post("https://gql.twitch.tv/gql", headers={"Client-ID": GQL_CLIENT},
+                      json={"query": q, "variables": {"g": game, "n": min(n, 100), "p": _PERIOD[range_]}}, timeout=30)
+    r.raise_for_status()
+    edges = (((r.json().get("data") or {}).get("game") or {}).get("clips") or {}).get("edges") or []
+    return [{"id": e["node"]["slug"], "url": e["node"]["url"], "title": e["node"]["title"], "views": e["node"]["viewCount"],
+             "by": (e["node"].get("broadcaster") or {}).get("login", "")} for e in edges]
+

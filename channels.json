@@ -142,36 +142,6 @@
     ],
     "status": "waiting: channel not created (YouTube ID check)"
   },
-  "fanum": {
-    "streamer": "Fanum",
-    "short": "Fanum",
-    "handle": "SNACKCLIPZ",
-    "hashtags": "#fanum #streamer #shorts",
-    "title_tag": "#fanum",
-    "credit": "Credit: Fanum (twitch.tv/fanum). Fan edit, not affiliated.",
-    "where_they_stream": "Twitch (twitch.tv/fanum)",
-    "people": [],
-    "sources": {
-      "twitch_clips": [
-        "fanum"
-      ]
-    },
-    "platforms": [
-      "youtube"
-    ],
-    "accounts": {
-      "youtube": ""
-    },
-    "blotato": {
-      "youtube": ""
-    },
-    "post_times_utc": [
-      "14:00",
-      "16:45",
-      "19:00"
-    ],
-    "status": "waiting: channel not created (YouTube ID check)"
-  },
   "agent": {
     "streamer": "Agent 00",
     "short": "Agent",
@@ -214,36 +184,6 @@
     "sources": {
       "twitch_clips": [
         "theburntpeanut"
-      ]
-    },
-    "platforms": [
-      "youtube"
-    ],
-    "accounts": {
-      "youtube": ""
-    },
-    "blotato": {
-      "youtube": ""
-    },
-    "post_times_utc": [
-      "14:00",
-      "16:45",
-      "19:00"
-    ],
-    "status": "waiting: channel not created (YouTube ID check)"
-  },
-  "plaqueboymax": {
-    "streamer": "PlaqueBoyMax",
-    "short": "Max",
-    "handle": "STUDIOCLIPZ",
-    "hashtags": "#plaqueboymax #streamer #shorts",
-    "title_tag": "#plaqueboymax",
-    "credit": "Credit: PlaqueBoyMax (twitch.tv/plaqueboymax). Fan edit, not affiliated.",
-    "where_they_stream": "Twitch (twitch.tv/plaqueboymax)",
-    "people": [],
-    "sources": {
-      "twitch_clips": [
-        "plaqueboymax"
       ]
     },
     "platforms": [
@@ -341,6 +281,68 @@
       "youtube_streams": "https://www.youtube.com/@KreekCraft/streams",
       "twitch_clips": [
         "kreekcraft"
+      ]
+    },
+    "platforms": [
+      "youtube"
+    ],
+    "accounts": {
+      "youtube": ""
+    },
+    "blotato": {
+      "youtube": ""
+    },
+    "post_times_utc": [
+      "14:00",
+      "16:45",
+      "19:00"
+    ],
+    "status": "waiting: channel not created (YouTube ID check)",
+    "gameplay_ok": true
+  },
+  "gta": {
+    "streamer": "GTA streamers",
+    "short": "GTA",
+    "handle": "SNACKCLIPZ",
+    "hashtags": "#gta5 #gtarp #gaming #shorts",
+    "title_tag": "#gta5",
+    "credit": "Credit: the original Twitch streamers (named in each Short). Fan edit, not affiliated.",
+    "where_they_stream": "Twitch (GTA V category)",
+    "people": [],
+    "sources": {
+      "twitch_game_clips": [
+        "Grand Theft Auto V"
+      ]
+    },
+    "platforms": [
+      "youtube"
+    ],
+    "accounts": {
+      "youtube": ""
+    },
+    "blotato": {
+      "youtube": ""
+    },
+    "post_times_utc": [
+      "14:00",
+      "16:45",
+      "19:00"
+    ],
+    "status": "waiting: channel not created (YouTube ID check)",
+    "gameplay_ok": true
+  },
+  "fortnite": {
+    "streamer": "Fortnite streamers",
+    "short": "Fortnite",
+    "handle": "STUDIOCLIPZ",
+    "hashtags": "#fortnite #gaming #shorts",
+    "title_tag": "#fortnite",
+    "credit": "Credit: the original Twitch streamers (named in each Short). Fan edit, not affiliated.",
+    "where_they_stream": "Twitch (Fortnite category)",
+    "people": [],
+    "sources": {
+      "twitch_game_clips": [
+        "Fortnite"
       ]
     },
     "platforms": [

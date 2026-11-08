@@ -324,8 +324,10 @@ def cmd_auto(a) -> None:
             mark_seen(new_ids, "heatmap")
     new_ids = set()
     done = seen("heatmap")
-    for login in src_cfg.get("twitch_clips", []):
-        for clip in scout.twitch_top_clips(login, a.clips, a.range):
+    clips = [c for login in src_cfg.get("twitch_clips", []) for c in scout.twitch_top_clips(login, a.clips, a.range)]
+    clips += [c for game in src_cfg.get("twitch_game_clips", []) for c in scout.twitch_game_clips(game, a.clips, a.range)]
+    if True:
+        for clip in clips:
             if clip["id"] in done:
                 continue
             print(f"clip: {clip['title'][:60]} ({clip['views']} views)")
