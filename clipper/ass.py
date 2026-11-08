@@ -39,6 +39,8 @@ def header(style: dict) -> str:
     styles = [
         f"Style: Caption,{font},92,{white},{white},{black},{ass_color('#000000', 80)},-1,0,0,0,100,100,0,0,1,{stroke},3,5,40,40,0,1",
         f"Style: Tag,{font},78,{yellow},{yellow},{black},{ass_color('#000000', 80)},-1,0,0,0,100,100,0,0,1,{stroke},3,5,40,40,0,1",
+        # Opening hook: the first frame is what decides the swipe, so it must read as a headline.
+        f"Style: Hook,{font},120,{yellow},{yellow},{black},{ass_color('#000000', 60)},-1,0,0,0,100,100,0,0,1,{stroke + 4},5,5,50,50,0,1",
         f"Style: Header,{font},84,{yellow},{yellow},{black},{ass_color('#000000', 80)},-1,0,0,0,100,100,0,0,1,{stroke + 1},3,8,40,40,0,1",
         f"Style: Watermark,{font},40,{ass_color(wm['color'], wm_alpha)},{white},{ass_color('#000000', min(255, wm_alpha + 60))},{ass_color('#000000', 255)},0,0,0,0,100,100,1,0,1,2,0,2,40,40,0,1",
     ]

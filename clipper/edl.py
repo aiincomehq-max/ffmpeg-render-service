@@ -17,6 +17,7 @@ KEEP_GAP = 0.40      # remove silences longer than this
 PAD = 0.12           # keep this much around speech when cutting
 PROTECT = 1.5        # never cut within +-PROTECT of payoff / impacts
 MAX_LEN = 58.0
+HOOK_S = 2.5        # big opening hook text on screen 0..HOOK_S
 
 
 def _speech_ranges(m: dict) -> list[tuple[float, float]]:
@@ -102,10 +103,10 @@ def single_moment(m: dict, style: dict, handle: str, music: str | None) -> dict:
 
     texts = []
     if m.get("hook_tag"):
-        texts.append({"text": f"*{m['hook_tag'].strip('*')}*", "start": 0.0, "end": 2.0, "kind": "tag", "color": "yellow", "y_pct": 36})
+        texts.append({"text": m["hook_tag"].strip("* "), "start": 0.0, "end": HOOK_S, "kind": "hook", "color": "yellow", "y_pct": 24})
     for tag in m.get("action_tags", []):
         t = tl.to_out(tag["t"])
-        if t is not None and t > 2.0:
+        if t is not None and t > HOOK_S:
             texts.append({"text": f"*{tag['text'].strip('*')}*", "start": round(t, 3), "end": round(min(duration, t + 1.6), 3), "kind": "tag", "color": "yellow", "y_pct": 36})
 
     impacts = []

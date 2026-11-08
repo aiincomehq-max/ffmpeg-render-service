@@ -107,7 +107,7 @@ def render_single(m: dict, handle: str, d: Path) -> Path:
     name = f"{dt.datetime.now():%H%M%S}_{slug(m.get('hook_tag', 'moment'))}.mp4"
     out = render(edl, style, d / name)
     write_post(d, {"file": out.name, "format": edl["format"], "titles": m.get("titles", []),
-                   "description": f"{m.get('hook_tag', '').title()}\n\n{CH['credit']}\n{CH['hashtags']}",
+                   "description": f"{CH['credit']}\n{CH['hashtags']}",  # (title-casing the hook turned KFC into "Kfc")
                    "virality": m.get("virality"), "why": m.get("why"), "source": m.get("source", ""),
                    "type": m.get("type"), "hook_tag": m.get("hook_tag"), "people": m.get("people", []),
                    "duration": round(sum((p["end"] - p["start"]) / p.get("speed", 1) for p in edl["pieces"]), 1)})

@@ -278,6 +278,22 @@ class TestFacebook(unittest.TestCase):
             blotato.create_post("facebook", "31275", "t", "u", "title", None, [])
 
 
+class TestHook(unittest.TestCase):
+    def test_opening_hook_is_big_and_first(self):
+        from clipper import ass
+        self.assertIn("Style: Hook,", ass.header(STYLE))
+        m = {"start": 10.0, "end": 30.0, "payoff_t": 25.0, "impact_ts": [25.0], "hook_tag": "SPEED WORKS THE KFC DRIVE-THRU",
+             "words": words(10.0, 30.0), "action_tags": [{"t": 11.0, "text": "TOO EARLY"}, {"t": 20.0, "text": "WAIT"}],
+             "src": "x.mp4", "type": "funny"}
+        edl = E.single_moment(m, STYLE, "TURBOCLIPZ", None)
+        hook = [t for t in edl["texts"] if t["kind"] == "hook"]
+        self.assertEqual(len(hook), 1)
+        self.assertEqual(hook[0]["start"], 0.0)
+        self.assertEqual(hook[0]["text"], "SPEED WORKS THE KFC DRIVE-THRU")
+        # no action tag fights the hook on screen
+        self.assertTrue(all(t["start"] >= hook[0]["end"] for t in edl["texts"] if t["kind"] != "hook"))
+
+
 class TestFFmpegPath(unittest.TestCase):
     def test_prefers_full_build(self):
         import tempfile

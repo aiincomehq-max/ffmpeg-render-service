@@ -145,7 +145,7 @@ def build_ass(edl: dict, style: dict, duration: float, path: Path) -> None:
         lines += A.caption_events(words, style, edl.get("caption_active", color(style, "green")), y_pct=g["action_tag"]["y_pct"] + 8)
     for t in edl.get("texts", []):
         kind = t.get("kind", "tag")
-        sname = "Header" if kind == "header" else "Tag"
+        sname = {"header": "Header", "hook": "Hook"}.get(kind, "Tag")
         y = t.get("y_pct", 8 if kind == "header" else g["action_tag"]["y_pct"])
         hexc = color(style, t["color"]) if t.get("color") else None
         lines.append(A.text_event(t["text"], t["start"], t["end"], sname, y, hexc))
