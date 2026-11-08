@@ -239,7 +239,8 @@
       "19:00"
     ],
     "status": "waiting: channel not created (YouTube ID check)",
-    "gameplay_ok": true
+    "gameplay_ok": true,
+    "format": "ranking"
   },
   "fortnite": {
     "streamer": "Fortnite streamers",
@@ -270,7 +271,8 @@
       "19:00"
     ],
     "status": "waiting: channel not created (YouTube ID check)",
-    "gameplay_ok": true
+    "gameplay_ok": true,
+    "format": "ranking"
   },
   "minecraft": {
     "streamer": "Minecraft streamers",
