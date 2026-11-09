@@ -144,7 +144,7 @@
   },
   "caylus": {
     "streamer": "Caylus",
-    "short": "Caylus",
+    "short": "Roblox",
     "handle": "COZYCLIPZ",
     "hashtags": "#caylus #roblox #shorts",
     "title_tag": "#roblox",
@@ -173,11 +173,12 @@
       "19:00"
     ],
     "status": "waiting: channel not created (YouTube ID check)",
-    "gameplay_ok": true
+    "gameplay_ok": true,
+    "format": "ranking"
   },
   "kreek": {
     "streamer": "KreekCraft",
-    "short": "Kreek",
+    "short": "Roblox",
     "handle": "RAGECLIPZ",
     "hashtags": "#kreekcraft #roblox #shorts",
     "title_tag": "#roblox",
@@ -188,7 +189,6 @@
       "Caylus"
     ],
     "sources": {
-      "youtube_streams": "https://www.youtube.com/@KreekCraft/streams",
       "twitch_clips": [
         "kreekcraft"
       ]
@@ -208,7 +208,8 @@
       "19:00"
     ],
     "status": "waiting: channel not created (YouTube ID check)",
-    "gameplay_ok": true
+    "gameplay_ok": true,
+    "format": "ranking"
   },
   "gta": {
     "streamer": "GTA streamers",
