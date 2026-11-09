@@ -41,7 +41,8 @@ def _ask(prompt: str, n: int, channel: str) -> list[str]:
 
 STYLE = ("You are the voice of a gaming/streamer clips Shorts channel: a hype, funny narrator reacting to the clip like "
          "a friend watching with you. Plain spoken English, no emojis, no hashtags, no swearing, never say 'subscribe'. "
-         "Each line must be about what really happens in the clip (use the details given), never generic.")
+         "Each line must be about what really happens in the clip (use the details given), never generic. "
+         "Never guess anyone's gender: use their name, 'bro', or 'they', never he/she/his/her.")
 
 
 def ranking_lines(group: list[dict], game: str, channel: str) -> list[str]:

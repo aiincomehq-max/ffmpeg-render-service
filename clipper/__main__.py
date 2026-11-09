@@ -136,6 +136,7 @@ def render_single(m: dict, handle: str, d: Path) -> Path:
                    "virality": m.get("virality"), "why": m.get("why"), "source": m.get("source", ""),
                    "source_kind": m.get("source_kind", "heatmap"),
                    "type": m.get("type"), "hook_tag": m.get("hook_tag"), "people": m.get("people", []),
+                   "moment_ids": [m["_id"]] if "_id" in m else [],
                    "duration": round(sum((p["end"] - p["start"]) / p.get("speed", 1) for p in edl["pieces"]), 1)})
     return out
 
@@ -156,7 +157,7 @@ def render_ranking(group: list[dict], handle: str, d: Path) -> Path:
                    "description": f"{CH['credit']}\n{CH['hashtags']}", "virality": max(m.get("virality", 0) for m in group),
                    "why": " | ".join(f"#{5 - i} {m.get('hook_tag', '')}" for i, m in enumerate(group)),
                    "source": " ".join(m.get("source", "") for m in group), "source_kind": "heatmap", "type": "ranking",
-                   "hook_tag": edl["title"], "people": [],
+                   "hook_tag": edl["title"], "people": [], "moment_ids": [m["_id"] for m in group if "_id" in m],
                    "duration": round(sum((p["end"] - p["start"]) / p.get("speed", 1) for p in edl["pieces"]), 1)})
     return out
 
@@ -460,6 +461,33 @@ def cmd_comp(a) -> None:
     print("->", out)
 
 
+def cmd_rerender(a) -> None:
+    """Rebuild a rendered Short from its stored moments with the CURRENT pipeline (fixes reach old Shorts too);
+    the old file is marked skipped so it can never be posted."""
+    from . import publish
+    f = next((OUT / CH["key"]).glob(f"*/{a.file}"), None)
+    if not f:
+        print(f"{a.file} not found under out/{CH['key']}/")
+        return
+    d = f.parent
+    post = next(p for p in json.loads((d / "posts.json").read_text()) if p["file"] == a.file)
+    rows = {r["_id"]: r for r in library._rows("select id, used, vod_key, data from moments")}
+    ids = post.get("moment_ids") or []
+    if not ids:  # Shorts made before ids were stored: match by hook text
+        tags = [t.split(" ", 1)[1] for t in post.get("why", "").split(" | ")] if post.get("format") == "ranking_comp" \
+            else [post.get("hook_tag")]
+        by_tag = {r.get("hook_tag"): i for i, r in rows.items()}
+        ids = [by_tag[t] for t in tags if t in by_tag]
+    ms = [rows[i] for i in ids if i in rows]
+    if post.get("format") == "ranking_comp":
+        out = render_ranking(ms, a.handle, d)
+    else:
+        out = render_single(ms[0], a.handle, d)
+    publish.skip(CH, d, post)
+    write_review(d)
+    print("->", out, "(old one skipped)")
+
+
 def cmd_review(a) -> None:
     from .review_server import latest_day, serve
     base = OUT / CH["key"]
@@ -582,6 +610,8 @@ def main() -> None:
     rv.add_argument("--no-browser", action="store_true")
     sub.add_parser("accounts", help="list Blotato accounts (to fill channels.json → blotato)")
     sub.add_parser("stats", help="views of posted Shorts + what the channel has learned")
+    rr = sub.add_parser("rerender", help="rebuild one rendered Short with the current pipeline")
+    rr.add_argument("file", help="the .mp4 file name in out/<channel>/<date>/")
     sub.add_parser("skills")
     sub.add_parser("demo")
     load_env()
@@ -591,7 +621,7 @@ def main() -> None:
     library.CHANNEL = a.channel
     if a.cmd == "demo":
         library.CHANNEL = CH["key"] = "demo"
-    {"run": cmd_run, "auto": cmd_auto, "review": cmd_review, "accounts": cmd_accounts, "stats": cmd_stats, "comp": cmd_comp, "skills": cmd_skills, "demo": cmd_demo}[a.cmd](a)
+    {"run": cmd_run, "auto": cmd_auto, "review": cmd_review, "rerender": cmd_rerender, "accounts": cmd_accounts, "stats": cmd_stats, "comp": cmd_comp, "skills": cmd_skills, "demo": cmd_demo}[a.cmd](a)
 
 
 if __name__ == "__main__":
