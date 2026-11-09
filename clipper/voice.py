@@ -65,13 +65,39 @@ ORDINAL = {1: "first", 2: "second", 3: "third", 4: "fourth", 5: "fifth", 6: "six
 def countdown_calls(count: int, look: dict) -> list[str]:
     """Rank calls only, no model call: e.g. 'Coming in at number 5.' ... 'And number one.'
     look: vo_opener ('{n}' / '{ord}'), optional vo_first (top rank) and vo_last (rank 1)."""
+    import random
+
+    def pool(key, fallback):
+        v = look.get(key + "s") or look.get(key) or fallback  # list ("vo_openers") or single string ("vo_opener")
+        return list(v) if isinstance(v, list) else [v]
+    mids = pool("vo_opener", "Number {n}.")
+    random.shuffle(mids)  # 9 Nov: never the same phrase on every rank, nor the same order every day
+    first = random.choice(pool("vo_first", "")) if look.get("vo_firsts", look.get("vo_first")) else None
+    if first:  # don't echo the opening's wording later ("At number five" ... "At number 2")
+        lead = first.lower().split("number")[0].split("place")[0].strip()
+        mids = [t for t in mids if t.lower().split("{")[0].strip() != lead] or mids
     out = []
     for i in range(count):
         n = count - i
-        tpl = (look.get("vo_first") if n == count else None) or (look.get("vo_last") if n == 1 else None) \
-            or look.get("vo_opener", "Number {n}.")
+        if n == count and first:
+            tpl = first
+        elif n == 1:
+            tpl = random.choice(pool("vo_last", "And number one."))
+        else:
+            tpl = mids[i % len(mids)]
         out.append(tpl.format(n=n, ord=ORDINAL.get(n, str(n))))
     return out
+
+
+def context_line(m: dict, channel: str) -> str:
+    """9 Nov: no-VO channels (Speed/Kai) explain the moment in on-screen text instead: one plain line at the top."""
+    p = (f"{STYLE}\nClip: {m.get('hook_tag', '')} | {m.get('why', '')[:300]}\n\n"
+         "Write exactly 1 line of at most 7 words and at most 40 characters that tells a viewer what is going on "
+         "in this clip (the situation, not the payoff). Use the streamer's name, e.g. 'Speed meets a kid who wants a 1v1'.")
+    line = _ask(p, 1, channel)[0].strip().rstrip(".")
+    if len(line) > 44:  # 9 Nov: a 52-char line was cut mid-sentence on screen ("...THEN A YOUNG")
+        line = _ask(p + f"\nToo long ({len(line)} characters). Max 40.", 1, channel)[0].strip().rstrip(".")
+    return line
 
 
 def single_lines(m: dict, channel: str) -> list[str]:

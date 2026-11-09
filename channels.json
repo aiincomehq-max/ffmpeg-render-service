@@ -195,8 +195,22 @@
         "Caylus went too far this time 💀",
         "Only Caylus would do this 😭"
       ],
-      "vo_opener": "Here's number {n}.",
-      "vo_last": "And number one."
+      "vo_openers": [
+        "Here's number {n}.",
+        "Number {n}.",
+        "At number {n}.",
+        "Up next, number {n}."
+      ],
+      "vo_firsts": [
+        "Starting with number five.",
+        "First up, number five.",
+        "Here's number five."
+      ],
+      "vo_lasts": [
+        "And number one.",
+        "And the craziest one.",
+        "Finally, number one."
+      ]
     },
     "vo_voice": "af_heart",
     "vo_speed": 1.08,
@@ -248,9 +262,22 @@
         "KreekCraft did NOT see this coming",
         "Peak KreekCraft energy 💀"
       ],
-      "vo_opener": "Next up, number {n}.",
-      "vo_last": "And number one.",
-      "vo_first": "Starting at number five."
+      "vo_openers": [
+        "Next up, number {n}.",
+        "Number {n}.",
+        "At number {n}.",
+        "Here's number {n}."
+      ],
+      "vo_firsts": [
+        "Starting at number five.",
+        "Kicking off at number five.",
+        "Number five."
+      ],
+      "vo_lasts": [
+        "And number one.",
+        "And the wildest one.",
+        "Finally, number one."
+      ]
     },
     "vo_voice": "am_liam",
     "vo_speed": 1.12,
@@ -300,8 +327,24 @@
         "This GTA city is unhinged 💀",
         "Worst GTA RP decisions this week"
       ],
-      "vo_opener": "Coming in at number {n}.",
-      "vo_last": "And number one."
+      "vo_openers": [
+        "Coming in at number {n}.",
+        "Number {n}.",
+        "At number {n}.",
+        "Sliding in at number {n}.",
+        "Next up, number {n}."
+      ],
+      "vo_firsts": [
+        "Kicking things off at number five.",
+        "Starting at number five.",
+        "Coming in at number five."
+      ],
+      "vo_lasts": [
+        "And number one.",
+        "And taking the top spot.",
+        "Finally, number one."
+      ],
+      "layout": "game"
     },
     "vo_voice": "am_puck",
     "vo_speed": 1.1,
@@ -352,8 +395,23 @@
         "Nobody expected this Fortnite ending",
         "Bro was NOT ready for this 💀"
       ],
-      "vo_opener": "At number {n}.",
-      "vo_last": "And at number one."
+      "vo_openers": [
+        "At number {n}.",
+        "Number {n}.",
+        "Dropping in at number {n}.",
+        "Up next, number {n}."
+      ],
+      "vo_firsts": [
+        "First up, number five.",
+        "Starting with number five.",
+        "At number five."
+      ],
+      "vo_lasts": [
+        "And at number one.",
+        "And the number one play.",
+        "Number one, and it's a big one."
+      ],
+      "layout": "game"
     },
     "vo_voice": "am_eric",
     "vo_speed": 1.15,
@@ -404,8 +462,23 @@
         "The creeper always wins 💀",
         "Minecraft streamers are not okay"
       ],
-      "vo_opener": "Number {n}.",
-      "vo_last": "And number one."
+      "vo_openers": [
+        "Number {n}.",
+        "At number {n}.",
+        "Next, number {n}.",
+        "Moving on to number {n}."
+      ],
+      "vo_firsts": [
+        "Starting off at number five.",
+        "Number five.",
+        "First up, number five."
+      ],
+      "vo_lasts": [
+        "And number one.",
+        "And the biggest fail of the week.",
+        "Finally, number one."
+      ],
+      "layout": "game"
     },
     "vo_voice": "af_bella",
     "vo_speed": 1.1,
@@ -493,8 +566,22 @@
         "The rarest drop reactions this week",
         "Bro finally got the drop 😭"
       ],
-      "vo_opener": "In {ord} place.",
-      "vo_last": "And in first place."
+      "vo_openers": [
+        "In {ord} place.",
+        "At number {n}.",
+        "Taking {ord} place.",
+        "Number {n}."
+      ],
+      "vo_firsts": [
+        "Starting in fifth place.",
+        "In fifth place.",
+        "First up, in fifth place."
+      ],
+      "vo_lasts": [
+        "And in first place.",
+        "And the biggest drop of the week.",
+        "Finally, first place."
+      ]
     },
     "vo_voice": "bm_george",
     "vo_speed": 1.05,

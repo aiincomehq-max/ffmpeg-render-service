@@ -204,6 +204,49 @@ def subversion_comp(claim: str, fail: dict, successes: list[dict], style: dict, 
 RANK_PRE, RANK_POST = 5.0, 2.5  # seconds kept before/after each moment's payoff (~7.5 s a clip, 5 clips ≈ 40 s)
 
 
+_IRREG = {"IS": "ARE", "WAS": "WERE", "HAS": "HAVE", "DOES": "DO", "DOESN'T": "DON'T", "ISN'T": "AREN'T", "WASN'T": "WEREN'T"}
+
+
+def neutral(t: str) -> str:
+    """9 Nov: game channels clip many streamers and the library doesn't know who is male or female, so
+    on-screen labels never guess: HE/SHE -> THEY (verb agreed), HIS/HIM/HER -> THEIR/THEM."""
+    w = t.split(" ")
+    out = []
+    i = 0
+    while i < len(w):
+        u = w[i].upper()
+        core = re.sub(r"[^A-Z']", "", u)
+        tail = u[len(core):] if u.startswith(core) else ""
+        if core in ("HE", "SHE"):
+            out.append("THEY" + tail)
+            if i + 1 < len(w):
+                v = w[i + 1].upper()
+                if v in _IRREG:
+                    v = _IRREG[v]
+                elif re.fullmatch(r"[A-Z]+IES", v):
+                    v = v[:-3] + "Y"
+                elif re.fullmatch(r"[A-Z]+(SH|CH|X|SS|O)ES", v):
+                    v = v[:-2]
+                elif re.fullmatch(r"[A-Z]+[^S]S", v):
+                    v = v[:-1]
+                out.append(v)
+                i += 2
+                continue
+        elif core in ("HE'S", "SHE'S"):
+            out.append("THEY'RE" + tail)
+        elif core in ("HIS",):
+            out.append("THEIR" + tail)
+        elif core in ("HIM", "HIMSELF", "HERSELF"):
+            out.append(("THEMSELVES" if core.endswith("SELF") else "THEM") + tail)
+        elif core == "HER":
+            nxt = w[i + 1] if i + 1 < len(w) else ""
+            out.append(("THEIR" if nxt and not tail else "THEM") + tail)
+        else:
+            out.append(w[i])
+        i += 1
+    return " ".join(out)
+
+
 def ranking_comp(ms: list[dict], game: str, handle: str, music: str | None, look: dict | None = None) -> dict:
     """'Ranking the funniest {game} moments' (the format breaking out on tiny channels, Nov 2026 vidIQ):
     5 clips counted down #5 -> #1, strongest last, a white flash + thud on each payoff."""
@@ -216,12 +259,14 @@ def ranking_comp(ms: list[dict], game: str, handle: str, music: str | None, look
         a, b = max(m["start"], pay - RANK_PRE), min(m["end"], pay + RANK_POST)
         o0 = tl.out_t
         tl.add(m["src"], a, b)
+        if look.get("layout") and tl.pieces:
+            tl.pieces[-1]["layout"] = look["layout"]  # "game": centre of the game screen big, blurred fill (9 Nov)
         o1 = tl.out_t
         slots.append(round(o0 + 0.1, 3))
         texts.append({"text": look.get("rank_fmt", "#{n}").format(n=rank), "start": round(o0, 3), "end": round(o1, 3), "kind": "hook",
                       "color": look.get("rank_color", "yellow"), "y_pct": look.get("rank_y", 22)})
         if m.get("hook_tag"):
-            texts.append({"text": hook_text(m["hook_tag"], 30), "start": round(o0, 3), "end": round(min(o1, o0 + 2.5), 3),
+            texts.append({"text": hook_text(neutral(m["hook_tag"]), 30), "start": round(o0, 3), "end": round(min(o1, o0 + 2.5), 3),
                           "kind": "tag", "color": look.get("tag_color", "white"), "y_pct": look.get("rank_y", 22) + 10})
         if not m.get("burned_captions"):
             for w in m.get("words", []):

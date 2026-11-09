@@ -90,6 +90,19 @@ def render_piece(p: dict, out: Path) -> None:
     shake = "+14*sin(t*55)" if p.get("shake") else ""
     shake_y = "+10*cos(t*47)" if p.get("shake") else ""
     kf = None
+    if p.get("layout") == "game":
+        # 9 Nov: a face-tracked 9:16 slice of a game stream showed walls/sky, the character was cut off.
+        # Game layout = the middle of the screen (64% of the width, full height) big in the centre,
+        # a blurred, darkened copy of the same frame filling the top and bottom.
+        fw = f"trunc(iw*0.64/{zoom}/2)*2"
+        fh = f"trunc(ih/{zoom}/2)*2"
+        vf = (
+            f"setpts=(PTS-STARTPTS)/{speed},split[bg][fg];"
+            f"[bg]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},boxblur=25:2,eq=brightness=-0.12[bgb];"
+            f"[fg]crop={fw}:{fh}:x='(iw-ow)/2{shake}':y='(ih-oh)/2{shake_y}',scale={W}:-2[fgs];"
+            f"[bgb][fgs]overlay=(W-w)/2:(H-h)/2,setsar=1,fps={FPS},format=yuv420p"
+        )
+        return _encode_piece(p, vf, speed, src_dur, out)
     if p.get("track", True) and os.environ.get("CLIPPER_TRACK", "1") == "1":
         try:
             from .track import crop_keyframes
@@ -114,6 +127,10 @@ def render_piece(p: dict, out: Path) -> None:
         f"scale=w={int(W * zoom)}:h={int(H * zoom)}:force_original_aspect_ratio=increase,"
         f"{crop},setsar=1,fps={FPS},format=yuv420p"
     )
+    _encode_piece(p, vf, speed, src_dur, out)
+
+
+def _encode_piece(p: dict, vf: str, speed: float, src_dur: float, out: Path) -> None:
     cmd = ["ffmpeg", "-y", "-ss", f"{p['start']:.3f}", "-t", f"{src_dur:.3f}", "-i", p["src"]]
     if has_audio(p["src"]):
         af = f"asetpts=PTS-STARTPTS,{atempo_chain(speed)},aformat=sample_rates={SR}:channel_layouts=stereo"

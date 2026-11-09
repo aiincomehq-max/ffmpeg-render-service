@@ -153,6 +153,15 @@ def render_single(m: dict, handle: str, d: Path) -> Path:
     from . import voice
     if CH.get("vo_mode", "full") != "none":  # 9 Nov: winners' single-clip Shorts have no narrator
         add_voice(edl, lambda: voice.single_lines(m, CH["key"]))
+    else:  # ...so the situation is explained on screen instead, top of frame, whole Short
+        try:
+            line = voice.context_line(m, CH["key"])
+            dur = sum((p["end"] - p["start"]) / p.get("speed", 1) for p in edl["pieces"])
+            edl["texts"].insert(0, {"text": E.hook_text(line, 46), "start": 0.0, "end": round(dur, 3),
+                                    "kind": "header", "color": "white", "y_pct": 9})
+            print("  context:", line)
+        except Exception as e:
+            print(f"  context skipped ({type(e).__name__}: {str(e)[:80]})")
     name = f"{dt.datetime.now():%H%M%S}_{slug(m.get('hook_tag', 'moment'))}.mp4"
     out = render(edl, style, d / name)
     write_post(d, {"file": out.name, "format": edl["format"], "titles": m.get("titles", []),
