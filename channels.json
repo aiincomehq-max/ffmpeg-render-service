@@ -210,7 +210,8 @@
         "And number one.",
         "And the craziest one.",
         "Finally, number one."
-      ]
+      ],
+      "layout": "game"
     },
     "vo_voice": "af_heart",
     "vo_speed": 1.08,
@@ -277,7 +278,8 @@
         "And number one.",
         "And the wildest one.",
         "Finally, number one."
-      ]
+      ],
+      "layout": "game"
     },
     "vo_voice": "am_liam",
     "vo_speed": 1.12,
@@ -581,7 +583,8 @@
         "And in first place.",
         "And the biggest drop of the week.",
         "Finally, first place."
-      ]
+      ],
+      "layout": "game"
     },
     "vo_voice": "bm_george",
     "vo_speed": 1.05,
