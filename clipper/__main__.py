@@ -148,12 +148,13 @@ def render_ranking(group: list[dict], handle: str, d: Path) -> Path:
     """group sorted weakest -> strongest; the strongest plays last as #1."""
     style = load()
     game = CH.get("short", "gaming")
-    edl = E.ranking_comp(group, game, handle, pick_music("phonk"))
+    look = CH.get("rank_style", {})
+    edl = E.ranking_comp(group, game, handle, pick_music("phonk"), look)
     from . import voice
-    add_voice(edl, lambda: voice.ranking_lines(group, game, CH["key"]))
+    add_voice(edl, lambda: voice.ranking_lines(group, game, CH["key"], look.get("vo_opener", "Number {n}.")))
     out = render(edl, style, d / f"{dt.datetime.now():%H%M%S}_ranking-{slug(game)}.mp4")
     write_post(d, {"file": out.name, "format": "ranking_comp",
-                   "titles": [edl["title"], f"Top 5 {game} moments that made me cry laughing 💀", f"{game} players will understand 😭"],
+                   "titles": [t.format(game=game) for t in look.get("titles", [])] or [edl["title"], f"Top 5 {game} moments that made me cry laughing 💀", f"{game} players will understand 😭"],
                    "description": f"{CH['credit']}\n{CH['hashtags']}", "virality": max(m.get("virality", 0) for m in group),
                    "why": " | ".join(f"#{5 - i} {m.get('hook_tag', '')}" for i, m in enumerate(group)),
                    "source": " ".join(m.get("source", "") for m in group), "source_kind": "heatmap", "type": "ranking",

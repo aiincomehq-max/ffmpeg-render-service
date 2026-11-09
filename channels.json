@@ -67,9 +67,7 @@
       "youtube": "56777"
     },
     "post_times_utc": [
-      "14:00",
-      "16:45",
-      "19:00"
+      "14:00"
     ],
     "platforms": [
       "youtube"
@@ -169,14 +167,26 @@
       "youtube": "56859"
     },
     "post_times_utc": [
-      "14:00",
-      "16:45",
-      "19:00"
+      "20:50"
     ],
     "status": "waiting: channel not created (YouTube ID check)",
     "gameplay_ok": true,
     "format": "ranking",
-    "moments_model": "claude-sonnet-5-5"
+    "moments_model": "claude-sonnet-5-5",
+    "rank_style": {
+      "header": "CAYLUS' CRAZIEST MOMENTS",
+      "rank_fmt": "NO. {n}",
+      "rank_color": "#FF66CC",
+      "caption_active": "#FF66CC",
+      "emoji": "😆",
+      "rank_y": 26,
+      "titles": [
+        "Caylus' craziest moments this week 😆",
+        "Caylus went too far this time 💀",
+        "Only Caylus would do this 😭"
+      ],
+      "vo_opener": "Spot {n}."
+    }
   },
   "kreek": {
     "streamer": "KreekCraft",
@@ -205,14 +215,25 @@
       "youtube": "56858"
     },
     "post_times_utc": [
-      "14:00",
-      "16:45",
-      "19:00"
+      "19:35"
     ],
     "status": "waiting: channel not created (YouTube ID check)",
     "gameplay_ok": true,
     "format": "ranking",
-    "moments_model": "claude-sonnet-5-5"
+    "moments_model": "claude-sonnet-5-5",
+    "rank_style": {
+      "header": "KREEKCRAFT'S WILDEST MOMENTS",
+      "rank_fmt": "#{n}",
+      "rank_color": "#FF2A2A",
+      "caption_active": "#FF2A2A",
+      "emoji": "😂",
+      "titles": [
+        "KreekCraft's wildest moments 😂",
+        "KreekCraft did NOT see this coming",
+        "Peak KreekCraft energy 💀"
+      ],
+      "vo_opener": "{n}."
+    }
   },
   "gta": {
     "streamer": "GTA streamers",
@@ -238,15 +259,26 @@
       "youtube": "56853"
     },
     "post_times_utc": [
-      "14:00",
-      "16:45",
-      "19:00"
+      "13:10"
     ],
     "status": "waiting: channel not created (YouTube ID check)",
     "gameplay_ok": true,
     "format": "ranking",
     "moments_model": "claude-sonnet-5-5",
-    "min_clip_views": 1000
+    "min_clip_views": 1000,
+    "rank_style": {
+      "header": "GTA RP WENT WRONG",
+      "rank_fmt": "{n}.",
+      "rank_color": "#33D1FF",
+      "caption_active": "#33D1FF",
+      "emoji": "😭",
+      "titles": [
+        "GTA RP went completely wrong 😭",
+        "This GTA city is unhinged 💀",
+        "Worst GTA RP decisions this week"
+      ],
+      "vo_opener": "Coming in at {n}:"
+    }
   },
   "fortnite": {
     "streamer": "Fortnite streamers",
@@ -272,15 +304,27 @@
       "youtube": "56855"
     },
     "post_times_utc": [
-      "14:00",
-      "16:45",
-      "19:00"
+      "15:25"
     ],
     "status": "waiting: channel not created (YouTube ID check)",
     "gameplay_ok": true,
     "format": "ranking",
     "moments_model": "claude-sonnet-5-5",
-    "min_clip_views": 1000
+    "min_clip_views": 1000,
+    "rank_style": {
+      "header": "FORTNITE PLAYS THAT BROKE STREAMERS",
+      "rank_fmt": "TOP {n}",
+      "rank_color": "#B266FF",
+      "caption_active": "#FFD700",
+      "tag_color": "#FFD700",
+      "emoji": "😱",
+      "titles": [
+        "Fortnite plays that broke streamers 😱",
+        "Nobody expected this Fortnite ending",
+        "Bro was NOT ready for this 💀"
+      ],
+      "vo_opener": "Top {n}."
+    }
   },
   "minecraft": {
     "streamer": "Minecraft streamers",
@@ -306,15 +350,27 @@
       "youtube": "56856"
     },
     "post_times_utc": [
-      "14:00",
-      "16:45",
-      "19:00"
+      "16:40"
     ],
     "status": "waiting: channel not created (YouTube ID check)",
     "gameplay_ok": true,
     "format": "ranking",
     "moments_model": "claude-sonnet-5-5",
-    "min_clip_views": 1000
+    "min_clip_views": 1000,
+    "rank_style": {
+      "header": "MINECRAFT FAILS OF THE WEEK",
+      "rank_fmt": "#{n}",
+      "rank_color": "#55FF55",
+      "caption_active": "#55FF55",
+      "emoji": "🤣",
+      "rank_y": 26,
+      "titles": [
+        "Minecraft fails of the week 🤣",
+        "The creeper always wins 💀",
+        "Minecraft streamers are not okay"
+      ],
+      "vo_opener": "Number {n}."
+    }
   },
   "wow": {
     "streamer": "WoW streamers",
@@ -375,14 +431,26 @@
       "youtube": "56857"
     },
     "post_times_utc": [
-      "14:00",
-      "16:45",
-      "19:00"
+      "18:05"
     ],
     "status": "waiting: channel not created (YouTube ID check)",
     "gameplay_ok": true,
     "format": "ranking",
     "moments_model": "claude-sonnet-5-5",
-    "min_clip_views": 1000
+    "min_clip_views": 1000,
+    "rank_style": {
+      "header": "OSRS: BIGGEST REACTIONS",
+      "rank_fmt": "{n}",
+      "rank_color": "#FF9933",
+      "caption_active": "#FF9933",
+      "header_color": "#FFD700",
+      "emoji": "🤯",
+      "titles": [
+        "OSRS drops that broke streamers 🤯",
+        "The rarest drop reactions this week",
+        "Bro finally got the drop 😭"
+      ],
+      "vo_opener": "At {n}:"
+    }
   }
 }

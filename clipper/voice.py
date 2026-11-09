@@ -45,11 +45,11 @@ STYLE = ("You are the voice of a gaming/streamer clips Shorts channel: a hype, f
          "Never guess anyone's gender: use their name, 'bro', or 'they', never he/she/his/her.")
 
 
-def ranking_lines(group: list[dict], game: str, channel: str) -> list[str]:
+def ranking_lines(group: list[dict], game: str, channel: str, opener: str = "Number {n}.") -> list[str]:
     """One line per clip, spoken over its first ~2 s. group is ordered #5 -> #1."""
     items = "\n".join(f"#{len(group) - i}: {m.get('hook_tag', '')} | {m.get('why', '')[:200]}" for i, m in enumerate(group))
     return _ask(f"{STYLE}\nThis Short ranks the funniest {game} moments, counting down.\n{items}\n\n"
-                f"Write exactly {len(group)} lines, one per clip in this order. Each line starts with 'Number N.' then at "
+                f"Write exactly {len(group)} lines, one per clip in this order. Each line starts with '{opener.replace("{n}", "N")}' (N = the rank number) then at "
                 f"most 7 more words setting up the clip without spoiling the payoff.", len(group), channel)
 
 

@@ -204,9 +204,10 @@ def subversion_comp(claim: str, fail: dict, successes: list[dict], style: dict, 
 RANK_PRE, RANK_POST = 5.0, 2.5  # seconds kept before/after each moment's payoff (~7.5 s a clip, 5 clips ≈ 40 s)
 
 
-def ranking_comp(ms: list[dict], game: str, handle: str, music: str | None) -> dict:
+def ranking_comp(ms: list[dict], game: str, handle: str, music: str | None, look: dict | None = None) -> dict:
     """'Ranking the funniest {game} moments' (the format breaking out on tiny channels, Nov 2026 vidIQ):
     5 clips counted down #5 -> #1, strongest last, a white flash + thud on each payoff."""
+    look = look or {}  # per-channel look (channels.json rank_style) so channels on one account are not one template
     ms = ms[:5]
     tl = Timeline()
     words, texts, impacts, slots = [], [], [], []
@@ -217,18 +218,19 @@ def ranking_comp(ms: list[dict], game: str, handle: str, music: str | None) -> d
         tl.add(m["src"], a, b)
         o1 = tl.out_t
         slots.append(round(o0 + 0.1, 3))
-        texts.append({"text": f"#{rank}", "start": round(o0, 3), "end": round(o1, 3), "kind": "hook", "color": "yellow", "y_pct": 22})
+        texts.append({"text": look.get("rank_fmt", "#{n}").format(n=rank), "start": round(o0, 3), "end": round(o1, 3), "kind": "hook",
+                      "color": look.get("rank_color", "yellow"), "y_pct": look.get("rank_y", 22)})
         if m.get("hook_tag"):
             texts.append({"text": hook_text(m["hook_tag"], 30), "start": round(o0, 3), "end": round(min(o1, o0 + 2.5), 3),
-                          "kind": "tag", "color": "white", "y_pct": 32})
+                          "kind": "tag", "color": look.get("tag_color", "white"), "y_pct": look.get("rank_y", 22) + 10})
         if not m.get("burned_captions"):
             for w in m.get("words", []):
                 if a <= w["s"] < b:
                     words.append({"w": w["w"], "s": round(o0 + w["s"] - a, 3), "e": round(o0 + min(w["e"], b) - a, 3)})
-        impacts.append({"t": round(o0 + pay - a, 3), "flash": "white", "sfx": "bass_thud", "emoji": m.get("emoji") or "💀",
+        impacts.append({"t": round(o0 + pay - a, 3), "flash": "white", "sfx": "bass_thud", "emoji": m.get("emoji") or look.get("emoji", "💀"),
                         "emoji_y_pct": 74, "emoji_dur": 1.2})
-    title = f"RANKING THE FUNNIEST {game.upper()} MOMENTS"
-    texts.insert(0, {"text": title, "start": 0.0, "end": round(tl.out_t, 3), "kind": "header", "color": "white", "y_pct": 8})
+    title = look.get("header", "RANKING THE FUNNIEST {GAME} MOMENTS").format(GAME=game.upper(), game=game)
+    texts.insert(0, {"text": title, "start": 0.0, "end": round(tl.out_t, 3), "kind": "header", "color": look.get("header_color", "white"), "y_pct": 8})
     return {
         "format": "ranking_comp",
         "pieces": tl.pieces,
@@ -238,7 +240,7 @@ def ranking_comp(ms: list[dict], game: str, handle: str, music: str | None) -> d
         "music": {"file": music, "drop_t": 0.0} if music else None,
         "handle": handle,
         "end_sfx": None,
-        "caption_active": "#00FF44",
-        "title": f"Ranking the funniest {game} moments 😭💀",
+        "caption_active": look.get("caption_active", "#00FF44"),
+        "title": (look.get("titles") or [f"Ranking the funniest {game} moments 😭💀"])[0].format(game=game),
         "vo_slots": slots,
     }
