@@ -41,7 +41,9 @@
       "facebook": "TurboClipz (Page 1420386957826930)"
     },
     "vo_voice": "am_fenrir",
-    "vo_speed": 1.12
+    "vo_speed": 1.12,
+    "el_voice": "TX3LPaxmHKxFdv7VOQHJ",
+    "el_voice_name": "Liam - Energetic Social Media Creator"
   },
   "kai": {
     "streamer": "Kai Cenat",
@@ -78,7 +80,9 @@
       "youtube": "@RowdyClipz-f4m"
     },
     "vo_voice": "am_michael",
-    "vo_speed": 1.1
+    "vo_speed": 1.1,
+    "el_voice": "RckSZHfvva0yOVRPzRfv",
+    "el_voice_name": "Arlo - Engaging Storyteller"
   },
   "core": {
     "streamer": "Lacy, StableRonaldo and the Core boys",
@@ -192,7 +196,9 @@
       "vo_opener": "Spot {n}."
     },
     "vo_voice": "af_heart",
-    "vo_speed": 1.08
+    "vo_speed": 1.08,
+    "el_voice": "sWsBiVcjjowceAScTnu3",
+    "el_voice_name": "Kayla - Casual American"
   },
   "kreek": {
     "streamer": "KreekCraft",
@@ -241,7 +247,9 @@
       "vo_opener": "{n}."
     },
     "vo_voice": "am_liam",
-    "vo_speed": 1.12
+    "vo_speed": 1.12,
+    "el_voice": "9m2QKYD6cdlV4SNdqWIZ",
+    "el_voice_name": "Haris - Youthful British"
   },
   "gta": {
     "streamer": "GTA streamers",
@@ -288,7 +296,9 @@
       "vo_opener": "Coming in at {n}:"
     },
     "vo_voice": "am_puck",
-    "vo_speed": 1.1
+    "vo_speed": 1.1,
+    "el_voice": "pNInz6obpgDQGcFmaJgB",
+    "el_voice_name": "Adam - Dominant, Firm"
   },
   "fortnite": {
     "streamer": "Fortnite streamers",
@@ -336,7 +346,9 @@
       "vo_opener": "Top {n}."
     },
     "vo_voice": "am_eric",
-    "vo_speed": 1.15
+    "vo_speed": 1.15,
+    "el_voice": "ktkP7Nsj67dw2zcplQYt",
+    "el_voice_name": "Lawrence - Bright and Energetic"
   },
   "minecraft": {
     "streamer": "Minecraft streamers",
@@ -384,7 +396,9 @@
       "vo_opener": "Number {n}."
     },
     "vo_voice": "af_bella",
-    "vo_speed": 1.1
+    "vo_speed": 1.1,
+    "el_voice": "FGY2WhTYpPnrIDTdsKH5",
+    "el_voice_name": "Laura - Enthusiast, Quirky"
   },
   "wow": {
     "streamer": "WoW streamers",
@@ -469,6 +483,8 @@
       "vo_opener": "At {n}:"
     },
     "vo_voice": "bm_george",
-    "vo_speed": 1.05
+    "vo_speed": 1.05,
+    "el_voice": "Sun6GPdivU7N4kTmYtDw",
+    "el_voice_name": "Echo - Young English High Energy"
   }
 }

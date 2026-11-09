@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import subprocess
 import tempfile
 import wave
@@ -19,6 +20,7 @@ MLX_PY = Path(os.environ.get("CLIPPER_MLX_PY", Path.home() / ".local/share/uv/to
 VOICE = os.environ.get("CLIPPER_VOICE_NAME", "am_puck")
 WORKER = ROOT / "tools" / "tts_kokoro.py"
 
+GENDERED = re.compile(r"\b(he|she|his|her|him|hers|himself|herself)\b", re.I)
 SCHEMA = {"type": "object", "additionalProperties": False, "required": ["lines"],
           "properties": {"lines": {"type": "array", "items": {"type": "string"}}}}
 
@@ -35,8 +37,10 @@ def _ask(prompt: str, n: int, channel: str) -> list[str]:
     resp = client.messages.create(model=MODEL, max_tokens=3000, messages=[{"role": "user", "content": prompt}],
                                   output_config={"format": {"type": "json_schema", "schema": SCHEMA}})
     log_usage(resp, "voice", channel)
-    lines = json.loads(next(b.text for b in resp.content if b.type == "text"))["lines"]
-    return [l.strip() for l in lines][:n]
+    lines = [l.strip() for l in json.loads(next(b.text for b in resp.content if b.type == "text"))["lines"]][:n]
+    if GENDERED.search(" ".join(lines)) and "Rewrite" not in prompt:
+        return _ask(prompt + "\nRewrite: you used he/she/his/her/him. Use the name, 'bro' or 'they' instead.", n, channel)
+    return lines
 
 
 STYLE = ("You are the voice of a gaming/streamer clips Shorts channel: a hype, funny narrator reacting to the clip like "
@@ -46,11 +50,13 @@ STYLE = ("You are the voice of a gaming/streamer clips Shorts channel: a hype, f
 
 
 def ranking_lines(group: list[dict], game: str, channel: str, opener: str = "Number {n}.") -> list[str]:
-    """One line per clip, spoken over its first ~2 s. group is ordered #5 -> #1."""
+    """One line per clip, spoken over its first ~2 s. group is ordered #5 -> #1. The rank opener is added here,
+    not by the model (9 Nov: the model counted 1,2,3,4 up instead of 5..1)."""
     items = "\n".join(f"#{len(group) - i}: {m.get('hook_tag', '')} | {m.get('why', '')[:200]}" for i, m in enumerate(group))
-    return _ask(f"{STYLE}\nThis Short ranks the funniest {game} moments, counting down.\n{items}\n\n"
-                f"Write exactly {len(group)} lines, one per clip in this order. Each line starts with '{opener.replace("{n}", "N")}' (N = the rank number) then at "
-                f"most 7 more words setting up the clip without spoiling the payoff.", len(group), channel)
+    bodies = _ask(f"{STYLE}\nThis Short ranks the funniest {game} moments, counting down.\n{items}\n\n"
+                  f"Write exactly {len(group)} lines, one per clip in this order. Each line is at most 7 words setting up "
+                  "the clip without spoiling the payoff. Do NOT include the rank number.", len(group), channel)
+    return [f"{opener.format(n=len(group) - i)} {b}" for i, b in enumerate(bodies)]
 
 
 def single_lines(m: dict, channel: str) -> list[str]:
@@ -60,16 +66,47 @@ def single_lines(m: dict, channel: str) -> list[str]:
                 "(no spoiler); 2) a reaction of at most 5 words said right after the payoff.", 2, channel)
 
 
-def speak(lines: list[str], workdir: Path | None = None, voice: str | None = None, speed: float | None = None) -> list[tuple[str, float]]:
-    """-> [(wav path, seconds)] via the Kokoro worker (separate python: mlx-audio lives in its own uv tool env)."""
+EL_MODEL = os.environ.get("CLIPPER_EL_MODEL", "eleven_multilingual_v2")
+
+
+def _el_speak(text: str, voice_id: str, out: Path) -> None:
+    """One ElevenLabs TTS call -> 24 kHz mono WAV. Authorised by the chairman 9 Nov 2026 (guardrail v8 standing
+    approval 'voice-turboclipz-'); run the pipeline with RENDER_OBJECTIVE=voice-turboclipz-... on the command."""
+    import urllib.request
+    req = urllib.request.Request(
+        f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}?output_format=pcm_24000",
+        data=json.dumps({"text": text, "model_id": EL_MODEL,
+                         "voice_settings": {"stability": 0.4, "similarity_boost": 0.75, "style": 0.35}}).encode(),
+        headers={"xi-api-key": os.environ["ELEVENLABS_API_KEY"], "Content-Type": "application/json"})
+    pcm = urllib.request.urlopen(req, timeout=60).read()
+    with wave.open(str(out), "wb") as w:
+        w.setnchannels(1); w.setsampwidth(2); w.setframerate(24000); w.writeframes(pcm)
+    with open(ROOT / "data" / "elevenlabs_usage.jsonl", "a") as f:
+        f.write(json.dumps({"voice": voice_id, "chars": len(text), "model": EL_MODEL}) + "\n")
+
+
+def speak(lines: list[str], workdir: Path | None = None, voice: str | None = None, speed: float | None = None,
+          el_voice: str | None = None) -> list[tuple[str, float]]:
+    """-> [(wav path, seconds)]. ElevenLabs when the channel has an el_voice and ELEVENLABS_API_KEY is set; else (or on
+    any ElevenLabs error) the local Kokoro worker (separate python: mlx-audio lives in its own uv tool env)."""
     d = Path(workdir or tempfile.mkdtemp(prefix="vo_"))
     d.mkdir(parents=True, exist_ok=True)
-    jobs = [{"text": t, "out": str(d / f"vo{i}.wav"), "voice": voice or VOICE, "speed": speed or 1.1} for i, t in enumerate(lines)]
-    jf = d / "jobs.json"
-    jf.write_text(json.dumps(jobs))
-    subprocess.run([str(MLX_PY), str(WORKER), str(jf)], check=True, capture_output=True)
+    outs = [d / f"vo{i}.wav" for i in range(len(lines))]
+    done = False
+    if el_voice and os.environ.get("ELEVENLABS_API_KEY"):
+        try:
+            for t, o in zip(lines, outs):
+                _el_speak(t, el_voice, o)
+            done = True
+        except Exception as e:
+            print(f"  elevenlabs failed ({type(e).__name__}: {str(e)[:80]}) -> kokoro")
+    if not done:
+        jobs = [{"text": t, "out": str(o), "voice": voice or VOICE, "speed": speed or 1.1} for t, o in zip(lines, outs)]
+        jf = d / "jobs.json"
+        jf.write_text(json.dumps(jobs))
+        subprocess.run([str(MLX_PY), str(WORKER), str(jf)], check=True, capture_output=True)
     out = []
-    for j in jobs:
-        with wave.open(j["out"]) as w:
-            out.append((j["out"], w.getnframes() / w.getframerate()))
+    for o in outs:
+        with wave.open(str(o)) as w:
+            out.append((str(o), w.getnframes() / w.getframerate()))
     return out

@@ -116,7 +116,7 @@ def add_voice(edl: dict, lines_fn) -> None:
         return
     try:
         lines = lines_fn()[:len(edl["vo_slots"])]
-        spoken = voice.speak(lines, voice=CH.get("vo_voice"), speed=CH.get("vo_speed"))  # own narrator per channel
+        spoken = voice.speak(lines, voice=CH.get("vo_voice"), speed=CH.get("vo_speed"), el_voice=CH.get("el_voice"))  # own narrator per channel
         edl["voice"] = [{"t": t, "file": f, "text": l} for t, (f, _), l in zip(edl["vo_slots"], spoken, lines)]
         print("  voice:", " / ".join(lines))
     except Exception as e:
