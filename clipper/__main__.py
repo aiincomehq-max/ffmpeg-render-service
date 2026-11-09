@@ -476,6 +476,24 @@ def cleanup(apply: bool, render_days: int = 7, previews: bool = False, vod_hours
         if db.exists():
             need |= {str(Path(s).resolve()) for (s,) in sqlite3.connect(db).execute("select src from moments where used=0")}
     now = time.time()
+    # 9 Nov bug: "used" != finished. Cancelled/unposted renders still need their sources to be re-rendered,
+    # so keep the source of every moment behind any Short rendered within render_days.
+    for k in cfg:
+        db = ROOT / "data" / k / "moments.db"
+        if not db.exists():
+            continue
+        ids = set()
+        for pj in (ROOT / "out" / k).glob("*/posts.json"):
+            if now - pj.stat().st_mtime > max(render_days, 7) * 86400:
+                continue
+            try:
+                for post in json.loads(pj.read_text()):
+                    ids |= set(post.get("moment_ids", []))
+            except Exception:
+                continue
+        if ids:
+            q = ",".join("?" * len(ids))
+            need |= {str(Path(s).resolve()) for (s,) in sqlite3.connect(db).execute(f"select src from moments where id in ({q})", list(ids))}
     doomed = [p for p in (ROOT / "data" / "vods").glob("*")
               if p.is_file() and str(p.resolve()) not in need and now - p.stat().st_mtime > vod_hours * 3600]
     for k in cfg:
