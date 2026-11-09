@@ -355,9 +355,12 @@ def cmd_auto(a) -> None:
                 for s0, s1, v in peaks:
                     sec = f"{scout.fmt(s0)}-{scout.fmt(s1)}"
                     print(f"  peak {sec} (replay score {v})")
-                    f, m = download(st["url"], sec, meta)
-                    process_file(f, m, kind="heatmap", offset=s0,
-                                 hint=f"this window is a 'Most replayed' peak (score {v}) - the best moment is inside it")
+                    try:
+                        f, m = download(st["url"], sec, meta)
+                        process_file(f, m, kind="heatmap", offset=s0,
+                                     hint=f"this window is a 'Most replayed' peak (score {v}) - the best moment is inside it")
+                    except Exception as e:  # one failed section download must not kill the whole run
+                        print(f"\n  skipped peak ({type(e).__name__}: {str(e)[:80]})")
                 new_ids.add(st["id"])
             mark_seen(new_ids, "heatmap")
     new_ids = set()
