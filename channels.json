@@ -39,7 +39,9 @@
       "instagram": "@turboclipz.x",
       "tiktok": "@turboclipz94",
       "facebook": "TurboClipz (Page 1420386957826930)"
-    }
+    },
+    "vo_voice": "am_fenrir",
+    "vo_speed": 1.12
   },
   "kai": {
     "streamer": "Kai Cenat",
@@ -74,7 +76,9 @@
     ],
     "accounts": {
       "youtube": "@RowdyClipz-f4m"
-    }
+    },
+    "vo_voice": "am_michael",
+    "vo_speed": 1.1
   },
   "core": {
     "streamer": "Lacy, StableRonaldo and the Core boys",
@@ -186,7 +190,9 @@
         "Only Caylus would do this 😭"
       ],
       "vo_opener": "Spot {n}."
-    }
+    },
+    "vo_voice": "af_heart",
+    "vo_speed": 1.08
   },
   "kreek": {
     "streamer": "KreekCraft",
@@ -233,7 +239,9 @@
         "Peak KreekCraft energy 💀"
       ],
       "vo_opener": "{n}."
-    }
+    },
+    "vo_voice": "am_liam",
+    "vo_speed": 1.12
   },
   "gta": {
     "streamer": "GTA streamers",
@@ -278,7 +286,9 @@
         "Worst GTA RP decisions this week"
       ],
       "vo_opener": "Coming in at {n}:"
-    }
+    },
+    "vo_voice": "am_puck",
+    "vo_speed": 1.1
   },
   "fortnite": {
     "streamer": "Fortnite streamers",
@@ -324,7 +334,9 @@
         "Bro was NOT ready for this 💀"
       ],
       "vo_opener": "Top {n}."
-    }
+    },
+    "vo_voice": "am_eric",
+    "vo_speed": 1.15
   },
   "minecraft": {
     "streamer": "Minecraft streamers",
@@ -370,7 +382,9 @@
         "Minecraft streamers are not okay"
       ],
       "vo_opener": "Number {n}."
-    }
+    },
+    "vo_voice": "af_bella",
+    "vo_speed": 1.1
   },
   "wow": {
     "streamer": "WoW streamers",
@@ -405,7 +419,9 @@
     "format": "ranking",
     "moments_model": "claude-sonnet-5-5",
     "min_clip_views": 1000,
-    "min_visual": 5
+    "min_visual": 5,
+    "vo_voice": "bm_lewis",
+    "vo_speed": 1.05
   },
   "osrs": {
     "streamer": "OSRS streamers",
@@ -451,6 +467,8 @@
         "Bro finally got the drop 😭"
       ],
       "vo_opener": "At {n}:"
-    }
+    },
+    "vo_voice": "bm_george",
+    "vo_speed": 1.05
   }
 }

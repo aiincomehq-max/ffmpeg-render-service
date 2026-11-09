@@ -60,11 +60,11 @@ def single_lines(m: dict, channel: str) -> list[str]:
                 "(no spoiler); 2) a reaction of at most 5 words said right after the payoff.", 2, channel)
 
 
-def speak(lines: list[str], workdir: Path | None = None) -> list[tuple[str, float]]:
+def speak(lines: list[str], workdir: Path | None = None, voice: str | None = None, speed: float | None = None) -> list[tuple[str, float]]:
     """-> [(wav path, seconds)] via the Kokoro worker (separate python: mlx-audio lives in its own uv tool env)."""
     d = Path(workdir or tempfile.mkdtemp(prefix="vo_"))
     d.mkdir(parents=True, exist_ok=True)
-    jobs = [{"text": t, "out": str(d / f"vo{i}.wav"), "voice": VOICE, "speed": 1.1} for i, t in enumerate(lines)]
+    jobs = [{"text": t, "out": str(d / f"vo{i}.wav"), "voice": voice or VOICE, "speed": speed or 1.1} for i, t in enumerate(lines)]
     jf = d / "jobs.json"
     jf.write_text(json.dumps(jobs))
     subprocess.run([str(MLX_PY), str(WORKER), str(jf)], check=True, capture_output=True)
