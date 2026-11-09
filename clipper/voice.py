@@ -74,8 +74,9 @@ def countdown_calls(count: int, look: dict) -> list[str]:
     random.shuffle(mids)  # 9 Nov: never the same phrase on every rank, nor the same order every day
     first = random.choice(pool("vo_first", "")) if look.get("vo_firsts", look.get("vo_first")) else None
     if first:  # don't echo the opening's wording later ("At number five" ... "At number 2")
-        lead = first.lower().split("number")[0].split("place")[0].strip()
-        mids = [t for t in mids if t.lower().split("{")[0].strip() != lead] or mids
+        def lead(s):
+            return s.lower().split("{")[0].split("number")[0].split("place")[0].strip(" ,.")
+        mids = [t for t in mids if lead(t) != lead(first)] or mids
     out = []
     for i in range(count):
         n = count - i
