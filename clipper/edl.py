@@ -162,6 +162,7 @@ def single_moment(m: dict, style: dict, handle: str, music: str | None) -> dict:
         "handle": handle,
         "end_sfx": {"t": max(0.0, duration - 1.2), "sfx": "vine_boom"} if m.get("comedic") and not wholesome else None,
         "caption_active": "#FFD700" if wholesome else "#00FF44",
+        "caption_y": 78 if lay.get("layout") == "stack" else None,
         "vo_slots": [0.3] + ([round(pay_out + 0.8, 3)] if pay_out is not None and pay_out + 2.5 < duration else []),
     }
 
@@ -314,6 +315,7 @@ def ranking_comp(ms: list[dict], game: str, handle: str, music: str | None, look
         "handle": handle,
         "end_sfx": None,
         "caption_active": look.get("caption_active", "#00FF44"),
+        "caption_y": 78 if any(pc.get("layout") == "stack" for pc in tl.pieces) else (70 if any(pc.get("layout") for pc in tl.pieces) else None),
         "title": (look.get("titles") or [f"Ranking the funniest {game} moments 😭💀"])[0].format(game=game),
         "vo_slots": slots,
     }

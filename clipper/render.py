@@ -149,7 +149,7 @@ def render_piece(p: dict, out: Path) -> None:
 def _encode_piece(p: dict, vf: str, speed: float, src_dur: float, out: Path) -> None:
     cmd = ["ffmpeg", "-y", "-ss", f"{p['start']:.3f}", "-t", f"{src_dur:.3f}", "-i", p["src"]]
     if has_audio(p["src"]):
-        af = f"asetpts=PTS-STARTPTS,{atempo_chain(speed)},aformat=sample_rates={SR}:channel_layouts=stereo"
+        af = f"asetpts=PTS-STARTPTS,{atempo_chain(speed)},aformat=sample_rates={SR}:channel_layouts=stereo,apad"  # apad: a source whose audio ends early (9 Nov Speed re-download) must not kill the render
         cmd += ["-filter_complex", f"[0:v]{vf}[v];[0:a]{af}[a]", "-map", "[v]", "-map", "[a]"]
     else:
         cmd += ["-f", "lavfi", "-t", f"{src_dur / speed:.3f}", "-i", f"anullsrc=r={SR}:cl=stereo",
@@ -175,7 +175,7 @@ def build_ass(edl: dict, style: dict, duration: float, path: Path) -> None:
     lines = [A.header(style)]
     words = edl.get("words") or []
     if words:
-        lines += A.caption_events(words, style, edl.get("caption_active", color(style, "green")), y_pct=g["action_tag"]["y_pct"] + 8)
+        lines += A.caption_events(words, style, edl.get("caption_active", color(style, "green")), y_pct=edl.get("caption_y") or g["action_tag"]["y_pct"] + 8)  # 9 Nov: stacked -> below the labels
     for t in edl.get("texts", []):
         kind = t.get("kind", "tag")
         sname = {"header": "Header", "hook": "Hook"}.get(kind, "Tag")

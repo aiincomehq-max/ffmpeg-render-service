@@ -36,7 +36,21 @@ def download(url: str, section: str | None = None, meta: dict | None = None) -> 
     if section:
         cmd[1:1] = ["--download-sections", f"*{section}", "--force-keyframes-at-cuts"]
     subprocess.run(cmd, check=True)
+    if section and _audio_short(out):  # 9 Nov: YouTube section + m4a audio sometimes stops early (75 s of 112 s)
+        cmd[cmd.index("-f") + 1] = "bv*[height<=1080]+ba[ext=webm]/bv*[height<=1080]+ba"
+        subprocess.run(cmd[:1] + ["--force-overwrites"] + cmd[1:], check=True)
     return out, meta
+
+
+def _audio_short(path: Path) -> bool:
+    """True when the audio track is clearly shorter than the video track."""
+    try:
+        r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec_type,duration", "-of", "csv=p=0", str(path)],
+                           capture_output=True, text=True).stdout
+        d = {l.split(",")[0]: float(l.split(",")[1]) for l in r.splitlines() if "," in l and l.split(",")[1] not in ("", "N/A")}
+        return "audio" in d and "video" in d and d["audio"] < 0.95 * d["video"]
+    except Exception:
+        return False
 
 
 def download_audio(url: str, meta: dict) -> Path:
