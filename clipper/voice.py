@@ -59,6 +59,21 @@ def ranking_lines(group: list[dict], game: str, channel: str, opener: str = "Num
     return [f"{opener.format(n=len(group) - i)} {b}" for i, b in enumerate(bodies)]
 
 
+ORDINAL = {1: "first", 2: "second", 3: "third", 4: "fourth", 5: "fifth", 6: "sixth", 7: "seventh"}
+
+
+def countdown_calls(count: int, look: dict) -> list[str]:
+    """Rank calls only, no model call: e.g. 'Coming in at number 5.' ... 'And number one.'
+    look: vo_opener ('{n}' / '{ord}'), optional vo_first (top rank) and vo_last (rank 1)."""
+    out = []
+    for i in range(count):
+        n = count - i
+        tpl = (look.get("vo_first") if n == count else None) or (look.get("vo_last") if n == 1 else None) \
+            or look.get("vo_opener", "Number {n}.")
+        out.append(tpl.format(n=n, ord=ORDINAL.get(n, str(n))))
+    return out
+
+
 def single_lines(m: dict, channel: str) -> list[str]:
     """[intro over the first ~2.5 s, reaction just after the payoff]."""
     return _ask(f"{STYLE}\nClip: {m.get('hook_tag', '')} | {m.get('why', '')[:300]}\n\n"

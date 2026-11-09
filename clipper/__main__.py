@@ -47,12 +47,35 @@ def notify(msg: str) -> None:
         subprocess.run(["osascript", "-e", f'display notification "{msg}" with title "Clipper"'], check=False)
 
 
+MUSIC_LOG = ROOT / "data" / "music_used.jsonl"
+
+
 def pick_music(kind: str = "phonk") -> str | None:
-    """assets/music/<kind>/: your own licensed tracks are preferred over the placeholder loops."""
-    tracks = [p for p in (ASSETS / "music" / kind).glob("*") if p.suffix.lower() in {".wav", ".mp3", ".m4a"}]
-    real = [p for p in tracks if not p.name.startswith("placeholder")]
-    pool = real or tracks
-    return str(random.choice(pool)) if pool else None
+    """'phonk' = the hype bed: assets/music/hiphop (YouTube Audio Library, no attribution) + the phonk loops.
+    9 Nov: a track is never reused by the same channel within 14 days, nor by ANY channel within 3 days;
+    if everything is blocked, the least recently used track wins. Every pick is logged to data/music_used.jsonl."""
+    dirs = ["hiphop", "phonk"] if kind == "phonk" else [kind]
+    pool = [p for d in dirs for p in (ASSETS / "music" / d).glob("*") if p.suffix.lower() in {".wav", ".mp3", ".m4a"}]
+    if not pool:
+        return None
+    now = dt.datetime.now()
+    last_any, last_mine = {}, {}
+    if MUSIC_LOG.exists():
+        for line in MUSIC_LOG.read_text().splitlines():
+            try:
+                r = json.loads(line); t = dt.datetime.fromisoformat(r["at"])
+            except Exception:
+                continue
+            last_any[r["track"]] = max(last_any.get(r["track"], t), t)
+            if r.get("channel") == CH.get("key"):
+                last_mine[r["track"]] = max(last_mine.get(r["track"], t), t)
+    ok = [p for p in pool if (now - last_mine.get(p.name, dt.datetime.min)).days >= 14
+          and (now - last_any.get(p.name, dt.datetime.min)).days >= 3]
+    pick = random.choice(ok) if ok else min(pool, key=lambda p: last_any.get(p.name, dt.datetime.min))
+    MUSIC_LOG.parent.mkdir(parents=True, exist_ok=True)
+    with open(MUSIC_LOG, "a") as f:
+        f.write(json.dumps({"at": now.isoformat(timespec="seconds"), "channel": CH.get("key"), "track": pick.name}) + "\n")
+    return str(pick)
 
 
 def ensure_assets() -> None:
@@ -128,7 +151,8 @@ def render_single(m: dict, handle: str, d: Path) -> Path:
     wholesome = m.get("type") == "wholesome"
     edl = E.single_moment(m, style, handle, pick_music("emotional" if wholesome else "phonk"))
     from . import voice
-    add_voice(edl, lambda: voice.single_lines(m, CH["key"]))
+    if CH.get("vo_mode", "full") != "none":  # 9 Nov: winners' single-clip Shorts have no narrator
+        add_voice(edl, lambda: voice.single_lines(m, CH["key"]))
     name = f"{dt.datetime.now():%H%M%S}_{slug(m.get('hook_tag', 'moment'))}.mp4"
     out = render(edl, style, d / name)
     write_post(d, {"file": out.name, "format": edl["format"], "titles": m.get("titles", []),
@@ -151,7 +175,10 @@ def render_ranking(group: list[dict], handle: str, d: Path) -> Path:
     look = CH.get("rank_style", {})
     edl = E.ranking_comp(group, game, handle, pick_music("phonk"), look)
     from . import voice
-    add_voice(edl, lambda: voice.ranking_lines(group, game, CH["key"], look.get("vo_opener", "Number {n}.")))
+    if CH.get("vo_mode", "full") == "countdown":  # 9 Nov: rank calls only, the streamer's audio carries the clip
+        add_voice(edl, lambda: voice.countdown_calls(len(group), look))
+    elif CH.get("vo_mode", "full") != "none":
+        add_voice(edl, lambda: voice.ranking_lines(group, game, CH["key"], look.get("vo_opener", "Number {n}.")))
     out = render(edl, style, d / f"{dt.datetime.now():%H%M%S}_ranking-{slug(game)}.mp4")
     write_post(d, {"file": out.name, "format": "ranking_comp",
                    "titles": [t.format(game=game) for t in look.get("titles", [])] or [edl["title"], f"Top 5 {game} moments that made me cry laughing 💀", f"{game} players will understand 😭"],

@@ -225,7 +225,8 @@ def finalize(base: Path, edl: dict, style: dict, ass_path: Path, out: Path) -> N
         g = style["global"]["audio"]["music"]
         drop = mus.get("drop_t", 0)
         pre, post = db(g["bed_gain_db"] - 6), db(g["bed_gain_db"] + 4)
-        inputs += ["-stream_loop", "-1", "-i", mus["file"]]
+        skip = [] if Path(mus["file"]).name.startswith("placeholder") else ["-ss", "12"]  # real tracks: skip the intro
+        inputs += ["-stream_loop", "-1", *skip, "-i", mus["file"]]
         graph.append(
             f"[{idx}:a]atrim=0:{duration:.3f},asetpts=PTS-STARTPTS,aformat=sample_rates=44100:channel_layouts=stereo,"
             f"lowpass=f=500:enable='lt(t,{drop:.3f})',volume='if(lt(t,{drop:.3f}),{pre:.4f},{post:.4f})':eval=frame[mraw]"

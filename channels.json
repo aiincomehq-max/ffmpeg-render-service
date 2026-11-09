@@ -43,7 +43,8 @@
     "vo_voice": "am_fenrir",
     "vo_speed": 1.12,
     "el_voice": "TX3LPaxmHKxFdv7VOQHJ",
-    "el_voice_name": "Liam - Energetic Social Media Creator"
+    "el_voice_name": "Liam - Energetic Social Media Creator",
+    "vo_mode": "none"
   },
   "kai": {
     "streamer": "Kai Cenat",
@@ -82,7 +83,8 @@
     "vo_voice": "am_michael",
     "vo_speed": 1.1,
     "el_voice": "RckSZHfvva0yOVRPzRfv",
-    "el_voice_name": "Arlo - Engaging Storyteller"
+    "el_voice_name": "Arlo - Engaging Storyteller",
+    "vo_mode": "none"
   },
   "core": {
     "streamer": "Lacy, StableRonaldo and the Core boys",
@@ -193,12 +195,14 @@
         "Caylus went too far this time 💀",
         "Only Caylus would do this 😭"
       ],
-      "vo_opener": "Spot {n}."
+      "vo_opener": "Here's number {n}.",
+      "vo_last": "And number one."
     },
     "vo_voice": "af_heart",
     "vo_speed": 1.08,
-    "el_voice": "sWsBiVcjjowceAScTnu3",
-    "el_voice_name": "Kayla - Casual American"
+    "el_voice": "TtRFBnwQdH1k01vR0hMz",
+    "el_voice_name": "Arthur",
+    "vo_mode": "countdown"
   },
   "kreek": {
     "streamer": "KreekCraft",
@@ -244,12 +248,15 @@
         "KreekCraft did NOT see this coming",
         "Peak KreekCraft energy 💀"
       ],
-      "vo_opener": "{n}."
+      "vo_opener": "Next up, number {n}.",
+      "vo_last": "And number one.",
+      "vo_first": "Starting at number five."
     },
     "vo_voice": "am_liam",
     "vo_speed": 1.12,
-    "el_voice": "9m2QKYD6cdlV4SNdqWIZ",
-    "el_voice_name": "Haris - Youthful British"
+    "el_voice": "TX3LPaxmHKxFdv7VOQHJ",
+    "el_voice_name": "Liam",
+    "vo_mode": "countdown"
   },
   "gta": {
     "streamer": "GTA streamers",
@@ -293,12 +300,14 @@
         "This GTA city is unhinged 💀",
         "Worst GTA RP decisions this week"
       ],
-      "vo_opener": "Coming in at {n}:"
+      "vo_opener": "Coming in at number {n}.",
+      "vo_last": "And number one."
     },
     "vo_voice": "am_puck",
     "vo_speed": 1.1,
-    "el_voice": "pNInz6obpgDQGcFmaJgB",
-    "el_voice_name": "Adam - Dominant, Firm"
+    "el_voice": "rPMkKgdwgIwqv4fXgR6N",
+    "el_voice_name": "Tyler",
+    "vo_mode": "countdown"
   },
   "fortnite": {
     "streamer": "Fortnite streamers",
@@ -343,12 +352,14 @@
         "Nobody expected this Fortnite ending",
         "Bro was NOT ready for this 💀"
       ],
-      "vo_opener": "Top {n}."
+      "vo_opener": "At number {n}.",
+      "vo_last": "And at number one."
     },
     "vo_voice": "am_eric",
     "vo_speed": 1.15,
     "el_voice": "ktkP7Nsj67dw2zcplQYt",
-    "el_voice_name": "Lawrence - Bright and Energetic"
+    "el_voice_name": "Lawrence",
+    "vo_mode": "countdown"
   },
   "minecraft": {
     "streamer": "Minecraft streamers",
@@ -393,12 +404,14 @@
         "The creeper always wins 💀",
         "Minecraft streamers are not okay"
       ],
-      "vo_opener": "Number {n}."
+      "vo_opener": "Number {n}.",
+      "vo_last": "And number one."
     },
     "vo_voice": "af_bella",
     "vo_speed": 1.1,
-    "el_voice": "FGY2WhTYpPnrIDTdsKH5",
-    "el_voice_name": "Laura - Enthusiast, Quirky"
+    "el_voice": "y0s2ExEMuum3muUnA6Zd",
+    "el_voice_name": "Marcus",
+    "vo_mode": "countdown"
   },
   "wow": {
     "streamer": "WoW streamers",
@@ -480,11 +493,13 @@
         "The rarest drop reactions this week",
         "Bro finally got the drop 😭"
       ],
-      "vo_opener": "At {n}:"
+      "vo_opener": "In {ord} place.",
+      "vo_last": "And in first place."
     },
     "vo_voice": "bm_george",
     "vo_speed": 1.05,
-    "el_voice": "Sun6GPdivU7N4kTmYtDw",
-    "el_voice_name": "Echo - Young English High Energy"
+    "el_voice": "RolvCZ4e0AkAR2dzyTx0",
+    "el_voice_name": "Christopher",
+    "vo_mode": "countdown"
   }
 }

@@ -7,3 +7,6 @@ out/
 assets/music/**/*.wav
 assets/sfx/*.wav
 .env
+assets/music/hiphop/
+data/music_used.jsonl
+assets/music/emotional/*.mp3
