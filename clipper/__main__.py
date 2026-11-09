@@ -90,7 +90,7 @@ def vision_filter(cands: list[dict], want: int) -> list[dict]:
     kept = []
     for m in cands:
         r = check(m, CH)
-        if r["keep"] and r.get("visual_score") is not None and r["visual_score"] < MIN_VISUAL:
+        if r["keep"] and r.get("visual_score") is not None and r["visual_score"] < CH.get("min_visual", MIN_VISUAL):
             r["keep"] = False
         print(f"  vision: {'KEEP' if r['keep'] else 'DROP'} ({r.get('visual_score')}) {r['reason'][:90]}")
         if r["keep"]:
