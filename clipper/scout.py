@@ -9,6 +9,7 @@ moments we pick are ones the audience already proved it rewatches.
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 
 PEAKS_PER_STREAM = 8
@@ -104,6 +105,11 @@ def twitch_game_clips(game: str, n: int = 10, range_: str = "7d") -> list[dict]:
                       json={"query": q, "variables": {"g": game, "n": min(n, 100), "p": _PERIOD[range_]}}, timeout=30)
     r.raise_for_status()
     edges = (((r.json().get("data") or {}).get("game") or {}).get("clips") or {}).get("edges") or []
-    return [{"id": e["node"]["slug"], "url": e["node"]["url"], "title": e["node"]["title"], "views": e["node"]["viewCount"],
-             "by": (e["node"].get("broadcaster") or {}).get("login", "")} for e in edges]
+    clips = [{"id": e["node"]["slug"], "url": e["node"]["url"], "title": e["node"]["title"], "views": e["node"]["viewCount"],
+              "by": (e["node"].get("broadcaster") or {}).get("login", "")} for e in edges]
+    # official tournament broadcasts (ESL, BLAST, Riot...) are rights-owned footage: never clip them
+    return [c for c in clips if not ORG_LOGIN.search(c["by"])]
+
+
+ORG_LOGIN = re.compile(r"esl|blast|pgl|riot|valorant|vct|lck|lec|lcs|faceit|official|tournament|esports|league", re.I)
 

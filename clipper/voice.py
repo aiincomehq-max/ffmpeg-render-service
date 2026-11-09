@@ -32,7 +32,7 @@ def _ask(prompt: str, n: int, channel: str) -> list[str]:
 
     from . import log_usage
     client = anthropic.Anthropic()
-    resp = client.messages.create(model=MODEL, max_tokens=600, messages=[{"role": "user", "content": prompt}],
+    resp = client.messages.create(model=MODEL, max_tokens=3000, messages=[{"role": "user", "content": prompt}],
                                   output_config={"format": {"type": "json_schema", "schema": SCHEMA}})
     log_usage(resp, "voice", channel)
     lines = json.loads(next(b.text for b in resp.content if b.type == "text"))["lines"]

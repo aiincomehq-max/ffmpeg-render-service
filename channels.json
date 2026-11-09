@@ -307,18 +307,18 @@
     "gameplay_ok": true,
     "format": "ranking"
   },
-  "arcraiders": {
-    "streamer": "ARC Raiders streamers",
-    "short": "ARC Raiders",
-    "handle": "STEALTHCLIPZ",
-    "hashtags": "#arcraiders #gaming #shorts",
-    "title_tag": "#arcraiders",
+  "lol": {
+    "streamer": "League streamers",
+    "short": "League",
+    "handle": "HYPERCLIPZ",
+    "hashtags": "#leagueoflegends #gaming #shorts",
+    "title_tag": "#leagueoflegends",
     "credit": "Credit: the original Twitch streamers (named in each Short). Fan edit, not affiliated.",
-    "where_they_stream": "Twitch (ARC Raiders category)",
+    "where_they_stream": "Twitch (League of Legends category)",
     "people": [],
     "sources": {
       "twitch_game_clips": [
-        "ARC Raiders"
+        "League of Legends"
       ]
     },
     "platforms": [
@@ -339,18 +339,18 @@
     "gameplay_ok": true,
     "format": "ranking"
   },
-  "cs2": {
-    "streamer": "CS2 streamers",
-    "short": "CS2",
-    "handle": "HYPERCLIPZ",
-    "hashtags": "#cs2 #counterstrike #gaming #shorts",
-    "title_tag": "#cs2",
+  "valorant": {
+    "streamer": "Valorant streamers",
+    "short": "Valorant",
+    "handle": "STEALTHCLIPZ",
+    "hashtags": "#valorant #gaming #shorts",
+    "title_tag": "#valorant",
     "credit": "Credit: the original Twitch streamers (named in each Short). Fan edit, not affiliated.",
-    "where_they_stream": "Twitch (Counter-Strike category)",
+    "where_they_stream": "Twitch (Valorant category)",
     "people": [],
     "sources": {
       "twitch_game_clips": [
-        "Counter-Strike"
+        "Valorant"
       ]
     },
     "platforms": [
