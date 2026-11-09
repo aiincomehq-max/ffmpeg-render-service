@@ -114,7 +114,7 @@ def _system(ch: dict) -> str:
 
 def _call(client: anthropic.Anthropic, text: str, skills: list[str], context: str, ch: dict) -> list[dict]:
     kwargs = dict(
-        model=MODEL,
+        model=ch.get("moments_model", MODEL),  # game channels: Sonnet (half the price; Opus was 90% of spend)
         max_tokens=16000,
         system=_system(ch),
         messages=[{"role": "user", "content": f"Stream: {context}\nSkill list: {', '.join(skills)}\n\nTranscript window (seconds):\n{text}"}],

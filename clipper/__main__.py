@@ -367,6 +367,7 @@ def cmd_auto(a) -> None:
     done = seen("heatmap")
     clips = [c for login in src_cfg.get("twitch_clips", []) for c in scout.twitch_top_clips(login, a.clips, a.range)]
     clips += [c for game in src_cfg.get("twitch_game_clips", []) for c in scout.twitch_game_clips(game, a.clips, a.range)]
+    clips = [c for c in clips if c["views"] >= CH.get("min_clip_views", 0)]  # unproven clips cost the same to scan
     if True:
         for clip in clips:
             if clip["id"] in done:

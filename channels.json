@@ -140,7 +140,8 @@
       "16:45",
       "19:00"
     ],
-    "status": "waiting: channel not created (YouTube ID check)"
+    "status": "waiting: channel not created (YouTube ID check)",
+    "moments_model": "claude-sonnet-5-5"
   },
   "caylus": {
     "streamer": "Caylus",
@@ -174,7 +175,8 @@
     ],
     "status": "waiting: channel not created (YouTube ID check)",
     "gameplay_ok": true,
-    "format": "ranking"
+    "format": "ranking",
+    "moments_model": "claude-sonnet-5-5"
   },
   "kreek": {
     "streamer": "KreekCraft",
@@ -209,7 +211,8 @@
     ],
     "status": "waiting: channel not created (YouTube ID check)",
     "gameplay_ok": true,
-    "format": "ranking"
+    "format": "ranking",
+    "moments_model": "claude-sonnet-5-5"
   },
   "gta": {
     "streamer": "GTA streamers",
@@ -241,7 +244,9 @@
     ],
     "status": "waiting: channel not created (YouTube ID check)",
     "gameplay_ok": true,
-    "format": "ranking"
+    "format": "ranking",
+    "moments_model": "claude-sonnet-5-5",
+    "min_clip_views": 1000
   },
   "fortnite": {
     "streamer": "Fortnite streamers",
@@ -273,7 +278,9 @@
     ],
     "status": "waiting: channel not created (YouTube ID check)",
     "gameplay_ok": true,
-    "format": "ranking"
+    "format": "ranking",
+    "moments_model": "claude-sonnet-5-5",
+    "min_clip_views": 1000
   },
   "minecraft": {
     "streamer": "Minecraft streamers",
@@ -305,7 +312,9 @@
     ],
     "status": "waiting: channel not created (YouTube ID check)",
     "gameplay_ok": true,
-    "format": "ranking"
+    "format": "ranking",
+    "moments_model": "claude-sonnet-5-5",
+    "min_clip_views": 1000
   },
   "wow": {
     "streamer": "WoW streamers",
@@ -337,7 +346,9 @@
     ],
     "status": "waiting: channel not created (YouTube ID check)",
     "gameplay_ok": true,
-    "format": "ranking"
+    "format": "ranking",
+    "moments_model": "claude-sonnet-5-5",
+    "min_clip_views": 1000
   },
   "osrs": {
     "streamer": "OSRS streamers",
@@ -369,6 +380,8 @@
     ],
     "status": "waiting: channel not created (YouTube ID check)",
     "gameplay_ok": true,
-    "format": "ranking"
+    "format": "ranking",
+    "moments_model": "claude-sonnet-5-5",
+    "min_clip_views": 1000
   }
 }
