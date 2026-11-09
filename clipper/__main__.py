@@ -587,6 +587,15 @@ def cmd_rerender(a) -> None:
         by_tag = {r.get("hook_tag"): i for i, r in rows.items()}
         ids = [by_tag[t] for t in tags if t in by_tag]
     ms = [rows[i] for i in ids if i in rows]
+    for m in ms:  # 9 Nov: the daily cleanup may have removed a source clip; fetch it again from its stored link
+        if not Path(m["src"]).exists() and m.get("source"):
+            from . import ingest
+            url, *sec = m["source"].split(" ")
+            print(f"  restoring source {Path(m['src']).name}")
+            try:
+                ingest.restore(url, sec[0] if sec else None, Path(m["src"]))
+            except Exception as e:
+                print(f"  restore failed ({type(e).__name__}: {str(e)[:80]})")
     if post.get("format") == "ranking_comp":
         out = render_ranking(ms, a.handle, d)
     else:

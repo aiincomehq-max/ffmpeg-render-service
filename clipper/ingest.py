@@ -61,3 +61,18 @@ def download_audio(url: str, meta: dict) -> Path:
         subprocess.run(["yt-dlp", "--ignore-config", "--no-warnings", "-f", "ba[ext=m4a]/ba", "-o", str(out), url],
                        check=True)
     return out
+
+
+def restore(url: str, section: str | None, dest: Path) -> Path:
+    """9 Nov: re-download a source clip the cleanup removed, to the exact path the moment records."""
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    cmd = ["yt-dlp", "--ignore-config", "--no-warnings", "-q", "--force-overwrites", "-f",
+           "bv*[height<=1080][ext=mp4]+ba[ext=m4a]/bv*[height<=1080]+ba/b[height<=1080]/b",
+           "--merge-output-format", "mp4", "-o", str(dest), url]
+    if section:
+        cmd[1:1] = ["--download-sections", f"*{section}", "--force-keyframes-at-cuts"]
+    subprocess.run(cmd, check=True)
+    if section and _audio_short(dest):
+        cmd[cmd.index("-f") + 1] = "bv*[height<=1080]+ba[ext=webm]/bv*[height<=1080]+ba"
+        subprocess.run(cmd, check=True)
+    return dest
