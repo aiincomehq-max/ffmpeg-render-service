@@ -451,9 +451,56 @@ def cmd_auto(a) -> None:
     waiting = len(best) - posted
     msg = f"{CH['key']}: {posted} posted automatically, " if posted else f"{CH['key']}: "
     notify(msg + f"{waiting} Shorts waiting for approval (localhost:8765)")
+    try:  # daily housekeeping so the Mac disk doesn't fill again (9 Nov)
+        cleanup(apply=True)
+    except Exception as e:
+        print(f"  cleanup skipped ({type(e).__name__}: {str(e)[:80]})")
     if a.serve and best:
         from .review_server import serve
         serve(CH, d, 8765, open_browser=True, timeout_h=12)
+
+
+def cleanup(apply: bool, render_days: int = 7, previews: bool = False, vod_hours: float = 24) -> None:
+    """9 Nov (chairman-approved): the Mac disk filled with downloaded stream clips. Deletes the pipeline's OWN cache:
+    - data/vods files no unused moment on a LIVE channel (one with a Blotato account) still needs, >24 h old;
+    - rendered Shorts in out/<channel>/ older than render_days (posted ones live on YouTube);
+    - with previews=True, out/voice_previews/* except the latest folder.
+    Clips still needed live in Drive (My Drive/CLIPZ_SOURCE_CLIPS) and are never touched here."""
+    import sqlite3
+    import time
+    cfg = json.loads((ROOT / "channels.json").read_text())
+    live = {k for k, v in cfg.items() if isinstance(v, dict) and v.get("blotato")}
+    need = set()
+    for k in live:
+        db = ROOT / "data" / k / "moments.db"
+        if db.exists():
+            need |= {str(Path(s).resolve()) for (s,) in sqlite3.connect(db).execute("select src from moments where used=0")}
+    now = time.time()
+    doomed = [p for p in (ROOT / "data" / "vods").glob("*")
+              if p.is_file() and str(p.resolve()) not in need and now - p.stat().st_mtime > vod_hours * 3600]
+    for k in cfg:
+        od = ROOT / "out" / k
+        if od.is_dir():
+            doomed += [p for p in od.rglob("*") if p.is_file() and p.suffix in {".mp4", ".wav", ".mp3", ".jpg"}
+                       and now - p.stat().st_mtime > render_days * 86400]
+    if previews and (ROOT / "out" / "voice_previews").is_dir():
+        vp = sorted((ROOT / "out" / "voice_previews").iterdir(), key=lambda p: p.stat().st_mtime)
+        latest = max((p for p in vp if p.is_dir()), key=lambda p: p.stat().st_mtime, default=None)
+        for p in vp:
+            if p == latest:
+                continue
+            doomed += [p] if p.is_file() else [f for f in p.rglob("*") if f.is_file()]
+    size = sum(p.stat().st_size for p in doomed)
+    print(f"cleanup: {len(doomed)} files, {size / 1024**3:.2f} GB" + ("" if apply else " (dry run, add --yes to delete)"))
+    if apply:
+        for p in doomed:
+            p.unlink()
+        with open(ROOT / "data" / "cleanup_log.jsonl", "a") as f:
+            f.write(json.dumps({"at": dt.datetime.now().isoformat(timespec="seconds"), "files": len(doomed), "bytes": size}) + "\n")
+
+
+def cmd_cleanup(a) -> None:
+    cleanup(a.yes, a.render_days, a.previews, a.vod_hours)
 
 
 def cmd_run(a) -> None:
@@ -655,6 +702,11 @@ def main() -> None:
     rr.add_argument("file", help="the .mp4 file name in out/<channel>/<date>/")
     sub.add_parser("skills")
     sub.add_parser("demo")
+    cl = sub.add_parser("cleanup", help="delete the pipeline's own used stream clips + old renders (dry run unless --yes)")
+    cl.add_argument("--yes", action="store_true")
+    cl.add_argument("--render-days", type=int, default=7)
+    cl.add_argument("--previews", action="store_true")
+    cl.add_argument("--vod-hours", type=float, default=24, help="only delete clips downloaded more than N hours ago")
     load_env()
     a = ap.parse_args()
     CH.update(channels.get(a.channel))
@@ -662,7 +714,7 @@ def main() -> None:
     library.CHANNEL = a.channel
     if a.cmd == "demo":
         library.CHANNEL = CH["key"] = "demo"
-    {"run": cmd_run, "auto": cmd_auto, "review": cmd_review, "rerender": cmd_rerender, "accounts": cmd_accounts, "stats": cmd_stats, "comp": cmd_comp, "skills": cmd_skills, "demo": cmd_demo}[a.cmd](a)
+    {"run": cmd_run, "auto": cmd_auto, "review": cmd_review, "rerender": cmd_rerender, "accounts": cmd_accounts, "stats": cmd_stats, "comp": cmd_comp, "skills": cmd_skills, "demo": cmd_demo, "cleanup": cmd_cleanup}[a.cmd](a)
 
 
 if __name__ == "__main__":
