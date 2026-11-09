@@ -77,7 +77,8 @@ def check(m: dict, ch: dict, client: anthropic.Anthropic | None = None) -> dict:
             "payoff_frame = the frame where the payoff is "
             "most visible. visual_score 1-10 for how watchable it is on a phone. burned_captions=true if the footage "
             "already shows its own subtitles of the speech (stream caption overlay or a previous edit's captions).")})
-        kwargs = dict(model=MODEL, max_tokens=4000, messages=[{"role": "user", "content": content}],
+        kwargs = dict(model=ch.get("vision_model", ch.get("moments_model", MODEL)), max_tokens=4000,  # 9 Nov: game channels check on Sonnet too
+                      messages=[{"role": "user", "content": content}],
                       output_config={"format": {"type": "json_schema", "schema": SCHEMA}})
         if os.environ.get("CLIPPER_FALLBACKS", "1") == "1":
             resp = client.beta.messages.create(betas=["server-side-fallback-2026-07-01"], fallbacks="default", **kwargs)

@@ -150,3 +150,83 @@ def crop_keyframes(src: str, start: float, end: float, src_w: int, src_h: int, o
         x = int(max(0, min(scaled_w - out_w, x)))
         kf.append((t / speed, x))
     return kf
+
+
+# ---- 9 Nov: "stacked" layout for gaming streams (webcam panel on top, gameplay below) ----
+CAM_PANEL = (1080, 600)    # output size of the webcam panel
+GAME_PANEL = (1080, 820)   # output size of the gameplay panel
+
+
+def webcam_box(src: str, start: float, end: float, n: int = 6):
+    """A streamer webcam = a face that stays in the same place through the clip (IRL faces and game characters move).
+    Returns (x, y, w, h, src_w, src_h) of the median face box, or None."""
+    cap = cv2.VideoCapture(src)
+    sw, sh = cap.get(cv2.CAP_PROP_FRAME_WIDTH), cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+    frames = []
+    try:
+        for i in range(n):
+            cap.set(cv2.CAP_PROP_POS_MSEC, (start + (end - start) * (i + 0.5) / n) * 1000)
+            ok, fr = cap.read()
+            if not ok:
+                continue
+            k = DET_W / fr.shape[1]
+            small = cv2.resize(fr, (DET_W, int(fr.shape[0] * k)))
+            _, faces = _detector(small.shape[1], small.shape[0]).detect(small)
+            frames.append([(f[0] / k, f[1] / k, f[2] / k, f[3] / k) for f in (faces if faces is not None else [])])
+    finally:
+        cap.release()
+    if not sw or len(frames) < 3:
+        return None
+    best = None
+    for fb in frames:
+        for b in fb:
+            cx, cy = b[0] + b[2] / 2, b[1] + b[3] / 2
+            hits = []
+            for other in frames:
+                m = [o for o in other if abs(o[0] + o[2] / 2 - cx) < 0.04 * sw and abs(o[1] + o[3] / 2 - cy) < 0.05 * sh
+                     and 0.7 < (o[2] / max(b[2], 1)) < 1.4]
+                if m:
+                    hits.append(m[0])
+            if len(hits) >= len(frames) - 1 and (best is None or len(hits) > len(best)):
+                best = hits
+    if not best:
+        return None
+    med = [float(np.median([h[i] for h in best])) for i in range(4)]
+    if med[3] > 0.22 * sh:  # a face that big is an in-game close-up (GTA RP), not a webcam overlay
+        return None
+    if med[3] * 2.6 * CAM_PANEL[0] / CAM_PANEL[1] < 300:  # webcam too small: blown up 4x it's just blur
+        return None
+    return (*med, sw, sh)
+
+
+def stacked_rects(cam):
+    """From webcam_box -> {'cam': [x,y,w,h], 'game': [x,y,w,h]} in source pixels.
+    Game crop = the largest centred-ish GAME_PANEL-shaped window that keeps the webcam face out of it."""
+    x, y, w, h, sw, sh = cam
+    ar_c = CAM_PANEL[0] / CAM_PANEL[1]
+    ch = min(sh, h * 2.6)
+    cw = min(sw, ch * ar_c)
+    ch = cw / ar_c
+    cx = min(max(0, x + w / 2 - cw / 2), sw - cw)
+    cy = min(max(0, y + h * 0.45 - ch / 2), sh - ch)
+    ar_g = GAME_PANEL[0] / GAME_PANEL[1]
+    fx0, fy0, fx1, fy1 = x - w * 0.3, y - h * 0.3, x + w * 1.3, y + h * 1.6   # face + a margin = keep out
+    game = None
+    for frac in (1.0, 0.9, 0.8, 0.7, 0.6, 0.5):
+        gh = sh * frac
+        gw = min(sw, gh * ar_g)
+        gh = gw / ar_g
+        cands = []
+        for gx in np.linspace(0, sw - gw, 9):
+            for gy in np.linspace(0, sh - gh, 5):
+                if not (gx < fx1 and fx0 < gx + gw and gy < fy1 and fy0 < gy + gh):
+                    cands.append((abs(gx + gw / 2 - sw / 2) + abs(gy + gh / 2 - sh / 2), gx, gy))
+        if cands:
+            _, gx, gy = min(cands)
+            game = [gx, gy, gw, gh]
+            break
+    if game is None:  # webcam sits in the middle of everything: plain centre crop
+        gw = min(sw, sh * ar_g); gh = gw / ar_g
+        game = [(sw - gw) / 2, (sh - gh) / 2, gw, gh]
+    ev = lambda v: int(v) // 2 * 2
+    return {"cam": [ev(cx), ev(cy), ev(cw), ev(ch)], "game": [ev(v) for v in game]}

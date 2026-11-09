@@ -116,6 +116,11 @@ def single_moment(m: dict, style: dict, handle: str, music: str | None) -> dict:
         total += d
     tl.pieces = trimmed
     duration = min(tl.out_t, MAX_LEN)
+    # 9 Nov: gaming stream with a fixed webcam -> stacked cam-over-gameplay (Speed's Fortnite clip lost the game)
+    lay = pick_layout(m["src"], m["start"], m["end"])
+    for p in tl.pieces:
+        p.update(lay)
+    ys = TEXT_Y[lay.get("layout", "face")]
 
     words = []
     # 8 Nov: Kai's stream has its own captions burned in; a second caption track on top is unreadable
@@ -126,11 +131,11 @@ def single_moment(m: dict, style: dict, handle: str, music: str | None) -> dict:
 
     texts = []
     if m.get("hook_tag"):
-        texts.append({"text": hook_text(m["hook_tag"]), "start": 0.0, "end": HOOK_S, "kind": "hook", "color": "yellow", "y_pct": 24})
+        texts.append({"text": hook_text(m["hook_tag"]), "start": 0.0, "end": HOOK_S, "kind": "hook", "color": "yellow", "y_pct": ys["hook"]})
     for tag in m.get("action_tags", []):
         t = tl.to_out(tag["t"])
         if t is not None and t > HOOK_S:
-            texts.append({"text": f"*{hook_text(tag['text'], 40)}*", "start": round(t, 3), "end": round(min(duration, t + 1.6), 3), "kind": "tag", "color": "yellow", "y_pct": 36})
+            texts.append({"text": f"*{hook_text(tag['text'], 40)}*", "start": round(t, 3), "end": round(min(duration, t + 1.6), 3), "kind": "tag", "color": "yellow", "y_pct": ys["action"]})
 
     impacts = []
     pay_out = tl.to_out(payoff) if payoff is not None else None
@@ -204,6 +209,25 @@ def subversion_comp(claim: str, fail: dict, successes: list[dict], style: dict, 
 RANK_PRE, RANK_POST = 5.0, 2.5  # seconds kept before/after each moment's payoff (~7.5 s a clip, 5 clips ≈ 40 s)
 
 
+# 9 Nov: text sits just above the picture, not at the very top. y in % of the 1920 frame.
+TEXT_Y = {"stack": {"header": 8.5, "rank": 19.5, "tag": 56.5, "hook": 56.5, "action": 64},   # cam 24-55%, game 55-98%
+          "game": {"header": 11, "rank": 18, "tag": 27, "hook": 27, "action": 36},         # game band 24-76%
+          "face": {"header": 8, "rank": 22, "tag": 32, "hook": 24, "action": 36}}
+
+
+def pick_layout(src: str, a: float, b: float, fallback: str | None = None) -> dict:
+    """Webcam found (a face that stays put) -> stacked cam-over-gameplay; else the channel's fallback
+    ('game' = centre of the game screen) ; else {} = face-tracked crop (IRL)."""
+    try:
+        from .track import stacked_rects, webcam_box
+        cam = webcam_box(src, a, b)
+        if cam:
+            return {"layout": "stack", "rects": stacked_rects(cam)}
+    except Exception as e:
+        print(f"  (webcam detect skipped: {e})")
+    return {"layout": fallback} if fallback else {}
+
+
 _IRREG = {"IS": "ARE", "WAS": "WERE", "HAS": "HAVE", "DOES": "DO", "DOESN'T": "DON'T", "ISN'T": "AREN'T", "WASN'T": "WEREN'T"}
 
 
@@ -259,15 +283,18 @@ def ranking_comp(ms: list[dict], game: str, handle: str, music: str | None, look
         a, b = max(m["start"], pay - RANK_PRE), min(m["end"], pay + RANK_POST)
         o0 = tl.out_t
         tl.add(m["src"], a, b)
-        if look.get("layout") and tl.pieces:
-            tl.pieces[-1]["layout"] = look["layout"]  # "game": centre of the game screen big, blurred fill (9 Nov)
+        lay = pick_layout(m["src"], a, b, look.get("layout"))
+        if tl.pieces:
+            tl.pieces[-1].update(lay)
+        ys = TEXT_Y[lay.get("layout", "face")]
         o1 = tl.out_t
         slots.append(round(o0 + 0.1, 3))
         texts.append({"text": look.get("rank_fmt", "#{n}").format(n=rank), "start": round(o0, 3), "end": round(o1, 3), "kind": "hook",
-                      "color": look.get("rank_color", "yellow"), "y_pct": look.get("rank_y", 22)})
+                      "color": look.get("rank_color", "yellow"), "y_pct": ys["rank"] if lay else look.get("rank_y", 22)})
         if m.get("hook_tag"):
             texts.append({"text": hook_text(neutral(m["hook_tag"]), 30), "start": round(o0, 3), "end": round(min(o1, o0 + 2.5), 3),
-                          "kind": "tag", "color": look.get("tag_color", "white"), "y_pct": look.get("rank_y", 22) + 10})
+                          "kind": "tag", "color": look.get("tag_color", "white"),
+                          "y_pct": ys["tag"] if lay else look.get("rank_y", 22) + 10})
         if not m.get("burned_captions"):
             for w in m.get("words", []):
                 if a <= w["s"] < b:
@@ -275,7 +302,8 @@ def ranking_comp(ms: list[dict], game: str, handle: str, music: str | None, look
         impacts.append({"t": round(o0 + pay - a, 3), "flash": "white", "sfx": "bass_thud", "emoji": m.get("emoji") or look.get("emoji", "💀"),
                         "emoji_y_pct": 74, "emoji_dur": 1.2})
     title = look.get("header", "RANKING THE FUNNIEST {GAME} MOMENTS").format(GAME=game.upper(), game=game)
-    texts.insert(0, {"text": title, "start": 0.0, "end": round(tl.out_t, 3), "kind": "header", "color": look.get("header_color", "white"), "y_pct": 8})
+    texts.insert(0, {"text": title, "start": 0.0, "end": round(tl.out_t, 3), "kind": "header", "color": look.get("header_color", "white"),
+                     "y_pct": 8.5 if any(pc.get("layout") == "stack" for pc in tl.pieces) else (11 if any(pc.get("layout") for pc in tl.pieces) else 8)})
     return {
         "format": "ranking_comp",
         "pieces": tl.pieces,

@@ -90,6 +90,22 @@ def render_piece(p: dict, out: Path) -> None:
     shake = "+14*sin(t*55)" if p.get("shake") else ""
     shake_y = "+10*cos(t*47)" if p.get("shake") else ""
     kf = None
+    if p.get("layout") == "stack" and p.get("rects"):
+        # 9 Nov: webcam panel on top (y 460-1060), gameplay below (1060-1880), blurred frame behind, text bands free.
+        from .track import CAM_PANEL, GAME_PANEL
+        cx, cy, cw, ch = p["rects"]["cam"]
+        gx, gy, gw, gh = p["rects"]["game"]
+        if zoom > 1.0:  # payoff punch-in on the gameplay
+            nw, nh = int(gw / zoom) // 2 * 2, int(gh / zoom) // 2 * 2
+            gx, gy, gw, gh = gx + (gw - nw) // 2, gy + (gh - nh) // 2, nw, nh
+        vf = (
+            f"setpts=(PTS-STARTPTS)/{speed},split=3[bg][c][g];"
+            f"[bg]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},boxblur=25:2,eq=brightness=-0.15[bgb];"
+            f"[c]crop={cw}:{ch}:{cx}:{cy},scale={CAM_PANEL[0]}:{CAM_PANEL[1]}[cs];"
+            f"[g]crop={gw}:{gh}:x='{gx}{shake}':y='{gy}{shake_y}',scale={GAME_PANEL[0]}:{GAME_PANEL[1]}[gs];"
+            f"[bgb][cs]overlay=0:460[t];[t][gs]overlay=0:1060,setsar=1,fps={FPS},format=yuv420p"
+        )
+        return _encode_piece(p, vf, speed, src_dur, out)
     if p.get("layout") == "game":
         # 9 Nov: a face-tracked 9:16 slice of a game stream showed walls/sky, the character was cut off.
         # Game layout = the middle of the screen (64% of the width, full height) big in the centre,

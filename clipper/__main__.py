@@ -426,6 +426,8 @@ def cmd_auto(a) -> None:
     rendered = []
     if CH.get("format") == "ranking":
         # countdown comps: each clip only needs one strong payoff, so the bar is one lower and no minimum length
+        # 9 Nov cost: one countdown is posted per day, so make one (the default --count 4 made 4 and vision-checked ~35 clips)
+        a.count = min(a.count, CH.get("daily_count", 1))
         rpool = diversify(library.top(None, a.count * RANK_N * 4, a.min_virality - 1), library.used_positions())
         best = vision_filter(rpool, a.count * RANK_N)
         print(f"rendering {len(best) // RANK_N} ranking comps from {len(best)} clips...")
