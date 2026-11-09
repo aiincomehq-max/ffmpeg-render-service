@@ -47,7 +47,10 @@ STREAMER_RULE = ("keep=false if the moment would be boring to WATCH: streamer no
                  "loading/menu screens, the payoff happens off-camera, or the streamer is only a small corner facecam over a "
                  "still image / game / screen-share (the 9:16 crop will lose them). ")
 # game channels (Roblox etc.): the GAME is the show, a facecam is optional
-GAMEPLAY_RULE = ("keep=false if the moment would be boring to WATCH: static/black/loading/menu screens, nothing happening "
+GAMEPLAY_RULE = ("keep=false if the footage is a pro tournament / esports BROADCAST (caster overlays, team scoreboards, "
+                 "event logos like Champions/EWC/VCT/ESL, a streamer watching a match) - that is rights-owned footage; "
+                 "keep=false if it is not actual gameplay of a video game (IRL, fan art, slideshows). "
+                 "keep=false if the moment would be boring to WATCH: static/black/loading/menu screens, nothing happening "
                  "on screen, or the payoff happens off-screen. Gameplay with no facecam is FINE if the action in the "
                  "centre of the frame shows the payoff (the 9:16 crop keeps the centre). ")
 

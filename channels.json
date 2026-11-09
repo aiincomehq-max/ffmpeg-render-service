@@ -307,18 +307,18 @@
     "gameplay_ok": true,
     "format": "ranking"
   },
-  "lol": {
-    "streamer": "League streamers",
-    "short": "League",
-    "handle": "HYPERCLIPZ",
-    "hashtags": "#leagueoflegends #gaming #shorts",
-    "title_tag": "#leagueoflegends",
+  "wow": {
+    "streamer": "WoW streamers",
+    "short": "WoW",
+    "handle": "STEALTHCLIPZ",
+    "hashtags": "#worldofwarcraft #wow #gaming #shorts",
+    "title_tag": "#worldofwarcraft",
     "credit": "Credit: the original Twitch streamers (named in each Short). Fan edit, not affiliated.",
-    "where_they_stream": "Twitch (League of Legends category)",
+    "where_they_stream": "Twitch (World of Warcraft category)",
     "people": [],
     "sources": {
       "twitch_game_clips": [
-        "League of Legends"
+        "World of Warcraft"
       ]
     },
     "platforms": [
@@ -339,18 +339,18 @@
     "gameplay_ok": true,
     "format": "ranking"
   },
-  "valorant": {
-    "streamer": "Valorant streamers",
-    "short": "Valorant",
-    "handle": "STEALTHCLIPZ",
-    "hashtags": "#valorant #gaming #shorts",
-    "title_tag": "#valorant",
+  "osrs": {
+    "streamer": "OSRS streamers",
+    "short": "OSRS",
+    "handle": "HYPERCLIPZ",
+    "hashtags": "#osrs #runescape #gaming #shorts",
+    "title_tag": "#osrs",
     "credit": "Credit: the original Twitch streamers (named in each Short). Fan edit, not affiliated.",
-    "where_they_stream": "Twitch (Valorant category)",
+    "where_they_stream": "Twitch (Old School RuneScape category)",
     "people": [],
     "sources": {
       "twitch_game_clips": [
-        "Valorant"
+        "Old School RuneScape"
       ]
     },
     "platforms": [
