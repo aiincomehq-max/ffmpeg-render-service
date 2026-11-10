@@ -44,7 +44,8 @@
     "vo_speed": 1.12,
     "el_voice": "TX3LPaxmHKxFdv7VOQHJ",
     "el_voice_name": "Liam - Energetic Social Media Creator",
-    "vo_mode": "none"
+    "vo_mode": "none",
+    "lookback": 60
   },
   "kai": {
     "streamer": "Kai Cenat",
@@ -84,7 +85,8 @@
     "vo_speed": 1.1,
     "el_voice": "RckSZHfvva0yOVRPzRfv",
     "el_voice_name": "Arlo - Engaging Storyteller",
-    "vo_mode": "none"
+    "vo_mode": "none",
+    "moments_model": "claude-sonnet-5-5"
   },
   "core": {
     "streamer": "Lacy, StableRonaldo and the Core boys",
@@ -355,7 +357,33 @@
     "vo_speed": 1.1,
     "el_voice": "rPMkKgdwgIwqv4fXgR6N",
     "el_voice_name": "Tyler",
-    "vo_mode": "countdown"
+    "vo_mode": "countdown",
+    "windows": [
+      {
+        "from": "2026-11-19",
+        "to": "2026-11-25",
+        "why": "GTA 6 launch week (release 19 Nov 2026): GTA 6 clips only, 2 Shorts a day (Andrew 10 Nov)",
+        "sources": {
+          "twitch_game_clips": [
+            "Grand Theft Auto VI"
+          ]
+        },
+        "daily_count": 2,
+        "post_times_utc": [
+          "13:10",
+          "19:55"
+        ],
+        "hashtags": "#gta6 #gtavi #gta #gaming #shorts",
+        "rank_style": {
+          "header": "GTA 6 MOMENTS THAT BROKE STREAMERS",
+          "titles": [
+            "GTA 6 broke these streamers 😭",
+            "Streamers playing GTA 6 for the first time 💀",
+            "GTA 6 day one was chaos 🔥"
+          ]
+        }
+      }
+    ]
   },
   "fortnite": {
     "streamer": "Fortnite streamers",

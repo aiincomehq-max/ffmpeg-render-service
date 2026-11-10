@@ -376,7 +376,7 @@ def cmd_auto(a) -> None:
     src_cfg = CH.get("sources", {})
     modes = ["fresh", "heatmap"] if a.mode == "both" else [a.mode]
     if src_cfg.get("youtube_streams"):
-        streams = scout.latest_streams(src_cfg["youtube_streams"], a.lookback)
+        streams = scout.latest_streams(src_cfg["youtube_streams"], CH.get("lookback", a.lookback))
         if "fresh" in modes:
             done, used, new_ids = seen("fresh"), 0, set()
             for st in streams:
