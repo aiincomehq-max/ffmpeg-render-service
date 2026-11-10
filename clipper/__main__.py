@@ -406,7 +406,12 @@ def cmd_auto(a) -> None:
                 if st["id"] in done:
                     continue
                 print(f"stream (most replayed): {st['title'][:70]}")
-                meta, peaks = scout.stream_peaks(st["url"], a.peaks)
+                try:
+                    meta, peaks = scout.stream_peaks(st["url"], a.peaks)
+                except Exception as e:  # 10 Nov: a members-only/private stream ("SECRET STREAM") crashed the whole run
+                    print(f"  unreadable ({type(e).__name__}) -> skipped for good")
+                    mark_seen({st["id"]}, "heatmap")
+                    continue
                 if not peaks:
                     print("  no 'Most replayed' data yet (too new?) -> skipping for now")
                     continue
