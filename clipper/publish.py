@@ -123,7 +123,8 @@ def approve(ch: dict, day_dir: Path, post: dict, title: str, platforms: list[str
     entry = {"status": "scheduled" if iso else "posted", "slot": slot.isoformat() if slot else None,
              "utc": iso or dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
              "title": title, "platforms": results, "dry_run": blotato.dry_run(),
-             "meta": {k: post.get(k) for k in ("format", "type", "virality", "why", "hook_tag", "people", "duration", "titles")}}
+             "meta": {k: post.get(k) for k in ("format", "type", "virality", "why", "hook_tag", "people", "duration", "titles",
+                                                "origin", "clip_views")}}
     st[key] = entry
     save_state(ch, st)
     if log:

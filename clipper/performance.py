@@ -92,7 +92,10 @@ def learnings(ch: dict) -> str:
         m = e.get("meta") or {}
         rows.append({"title": e.get("title", ""), "views": v, "format": m.get("format") or "?",
                      "type": m.get("type") or "?", "virality": m.get("virality"), "duration": m.get("duration"),
-                     "hook": m.get("hook_tag") or "", "why": m.get("why") or ""})
+                     "hook": m.get("hook_tag") or "", "why": m.get("why") or "",
+                     "origin": m.get("origin") or "?",
+                     "clip_views": ("?" if not m.get("clip_views") else "<1k" if m["clip_views"] < 1000
+                                    else "1k-5k" if m["clip_views"] < 5000 else "5k+")})
     if len(rows) < MIN_FOR_LEARNINGS:
         return ""
     rows.sort(key=lambda r: -r["views"])
@@ -111,7 +114,10 @@ def learnings(ch: dict) -> str:
             g[r[field]].append(r["views"])
         return sorted(((k, statistics.median(v), len(v)) for k, v in g.items()), key=lambda x: -x[1])
 
-    for field, label in (("type", "Moment type"), ("format", "Format")):
+    # 10 Nov (Andrew): test new-stream estimates vs older 'Most replayed' streams vs Twitch clips, and whether the
+    # source clip's own view count predicts the Short's views (decides the min_clip_views floor)
+    for field, label in (("type", "Moment type"), ("format", "Format"), ("origin", "Source"),
+                         ("clip_views", "Source clip views")):
         lines.append(f"{label} by median views: " + "; ".join(f"{k} {m:,.0f} (n={n})" for k, m, n in group(field)))
     lens = [(r["duration"], r["views"]) for r in rows if r["duration"]]
     if len(lens) >= MIN_FOR_LEARNINGS:

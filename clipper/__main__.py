@@ -174,6 +174,7 @@ def render_single(m: dict, handle: str, d: Path) -> Path:
                    "virality": m.get("virality"), "why": m.get("why"), "source": m.get("source", ""),
                    "source_kind": m.get("source_kind", "heatmap"),
                    "type": m.get("type"), "hook_tag": m.get("hook_tag"), "people": m.get("people", []),
+                   "origin": m.get("origin"), "clip_views": m.get("clip_views"),
                    "moment_ids": [m["_id"]] if "_id" in m else [],
                    "duration": round(sum((p["end"] - p["start"]) / p.get("speed", 1) for p in edl["pieces"]), 1)})
     return out
@@ -212,6 +213,8 @@ def render_ranking(group: list[dict], handle: str, d: Path) -> Path:
                    "why": " | ".join(f"#{5 - i} {m.get('hook_tag', '')}" for i, m in enumerate(group)),
                    "source": " ".join(m.get("source", "") for m in group), "source_kind": "heatmap", "type": "ranking",
                    "hook_tag": edl["title"], "people": [], "moment_ids": [m["_id"] for m in group if "_id" in m],
+                   "origin": max(set(o := [m.get("origin") or "?" for m in group]), key=o.count),
+                   "clip_views": sorted(v)[len(v) // 2] if (v := [m["clip_views"] for m in group if m.get("clip_views")]) else None,
                    "duration": round(sum((p["end"] - p["start"]) / p.get("speed", 1) for p in edl["pieces"]), 1)})
     return out
 
@@ -240,7 +243,8 @@ def write_review(d: Path) -> Path:
     return out
 
 
-def process_file(src: Path, meta: dict, hint: str = "", kind: str = "manual", offset: float = 0.0) -> list[dict]:
+def process_file(src: Path, meta: dict, hint: str = "", kind: str = "manual", offset: float = 0.0,
+                 extra: dict | None = None) -> list[dict]:
     """kind: 'fresh' | 'heatmap' | 'manual'. offset = where src starts inside the original stream (sections)."""
     from .moments import find_moments
     from .transcribe import transcribe
@@ -251,6 +255,7 @@ def process_file(src: Path, meta: dict, hint: str = "", kind: str = "manual", of
         m["source"] = f"{meta.get('url', '')} {meta.get('section') or ''}".strip()
         m["source_kind"], m["video_id"] = kind, meta.get("id")
         m["abs_start"] = round(offset + m["start"], 1)
+        m.update(extra or {})  # 10 Nov: origin + clip_views/replay_score, so learnings can test what source wins
         if m["video_id"] and library.exists_near(m["video_id"], m["abs_start"]):
             print(f"  (already in library: {m.get('hook_tag')})")
             continue
@@ -333,7 +338,7 @@ def scan_fresh(st: dict, a) -> bool:
         sec = f"{scout.fmt(s0)}-{scout.fmt(s1)}"
         print(f"  window {sec}")
         f, m = download(st["url"], sec, meta)
-        process_file(f, m, kind="fresh", offset=s0,
+        process_file(f, m, kind="fresh", offset=s0, extra={"origin": "new_stream"},
                      hint="Claude-estimated viral window from a FRESH stream (no audience data yet) - the best moment should be inside it")
     return True
 
@@ -411,7 +416,7 @@ def cmd_auto(a) -> None:
                     print(f"  peak {sec} (replay score {v})")
                     try:
                         f, m = download(st["url"], sec, meta)
-                        process_file(f, m, kind="heatmap", offset=s0,
+                        process_file(f, m, kind="heatmap", offset=s0, extra={"origin": "older_stream", "replay_score": v},
                                      hint=f"this window is a 'Most replayed' peak (score {v}) - the best moment is inside it")
                     except Exception as e:  # one failed section download must not kill the whole run
                         print(f"\n  skipped peak ({type(e).__name__}: {str(e)[:80]})")
@@ -439,7 +444,7 @@ def cmd_auto(a) -> None:
             print(f"clip: {clip['title'][:60]} ({clip['views']} views)")
             try:
                 f, m = download(clip["url"])
-                process_file(f, m, kind="heatmap",
+                process_file(f, m, kind="heatmap", extra={"origin": "twitch_clip", "clip_views": clip["views"]},
                              hint=f"fan-made Twitch clip with {clip['views']} views - a proven moment; tighten it to the payoff")
             except Exception as e:  # one bad clip (e.g. whisper alignment crash on near-silent audio) must not kill the run
                 print(f"\n  skipped clip ({type(e).__name__}: {str(e)[:80]})")
