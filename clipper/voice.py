@@ -191,6 +191,36 @@ def label_qa(ms: list[dict], channel: str, streamer: str, max_chars: int = 30) -
     return final
 
 
+def ranking_titles(labels: list[str], game: str, examples: list[str], recent: list[str], channel: str) -> list[str]:
+    """10 Nov: every countdown used its channel's first fixed title, so the same title went out daily (a repetitive
+    pattern on one account) and it often didn't fit the clips ('OSRS drops...' over a speedrun and a raid).
+    Write 3 titles from THIS Short's clip captions, in the channel's voice, unlike recent titles."""
+    import anthropic
+
+    from . import log_usage
+    prompt = (f"Write 3 YouTube Shorts titles for a countdown of {game} streamer moments. The clips, in order:\n"
+              + "\n".join(f"- {l}" for l in labels if l)
+              + f"\n\nMatch this channel's voice (examples): {' | '.join(examples)}\n"
+              f"Must NOT repeat or closely echo these recent titles: {' | '.join(recent) or 'none'}\n"
+              "Rules: under 60 characters, 0-2 emoji at the end, true to the clips above (don't promise drops/wins/fails "
+              "that aren't there), no he/she, no claims about anyone's real life, no clickbait lies, no hashtags.\n"
+              "Order them best first: lead with the most specific, curiosity-driving one (a concrete detail from the clips "
+              "beats a generic 'top 3 moments'). Don't say 'countdown' or 'top N'.")
+    schema = {"type": "object", "additionalProperties": False, "required": ["titles"],
+              "properties": {"titles": {"type": "array", "items": {"type": "string"}}}}
+    try:
+        resp = anthropic.Anthropic().messages.create(model=LABEL_MODEL, max_tokens=3000, messages=[{"role": "user", "content": prompt}],
+                                                     output_config={"format": {"type": "json_schema", "schema": schema}})
+        log_usage(resp, "titles", channel)
+        out = [t.strip() for t in json.loads(next(b.text for b in resp.content if b.type == "text"))["titles"]]
+        out = [t for t in out if 0 < len(t) <= 70 and not GENDERED.search(t) and t not in recent]
+        if out:
+            return out[:3]
+    except Exception as e:
+        print(f"  titles fallback ({type(e).__name__}: {str(e)[:80]})")
+    return [t for t in examples if t not in recent] or examples
+
+
 EL_MODEL = os.environ.get("CLIPPER_EL_MODEL", "eleven_multilingual_v2")
 
 

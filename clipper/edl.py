@@ -70,6 +70,15 @@ class Timeline:
         return None
 
 
+_SWEAR = re.compile(r"\b(f+u+c+k\w*|motherf\w*|sh[i1]t\w*|bitch\w*|cunt\w*|n[i1]gg\w*|dick(s|head\w*)?|puss(y|ies)|ass(hole)?s?|bastard\w*)\b", re.I)
+
+
+def mask(word: str) -> str:
+    """10 Nov: on-screen captions showed 'FUCK THIS' in a Short's first seconds; YouTube's advertiser rules count
+    visible strong profanity against ads, so caption text keeps the first letter and stars the rest."""
+    return _SWEAR.sub(lambda m: m.group(0)[0] + "*" * (len(m.group(0)) - 1), word)
+
+
 def hook_text(tag: str, max_chars: int = 34) -> str:
     """Frame-1 hook: the font has no emoji glyphs and 120px fits ~2 lines, so keep plain text, cut at a word."""
     t = re.sub(r"[^A-Za-z0-9 '!?$%&.,#:-]", "", tag).replace("*", "").strip().upper()
@@ -127,7 +136,7 @@ def single_moment(m: dict, style: dict, handle: str, music: str | None) -> dict:
     for w in ([] if m.get("burned_captions") else m.get("words", [])):
         s, e = tl.to_out(w["s"]), tl.to_out(w["e"])
         if s is not None and s < duration:
-            words.append({"w": w["w"], "s": round(s, 3), "e": round(e if e is not None else s + 0.2, 3)})
+            words.append({"w": mask(w["w"]), "s": round(s, 3), "e": round(e if e is not None else s + 0.2, 3)})
 
     texts = []
     lab = m["label"] if "label" in m else (hook_text(m["hook_tag"]) if m.get("hook_tag") else "")  # label = QA'd caption
@@ -301,7 +310,7 @@ def ranking_comp(ms: list[dict], game: str, handle: str, music: str | None, look
         if not m.get("burned_captions"):
             for w in m.get("words", []):
                 if a <= w["s"] < b:
-                    words.append({"w": w["w"], "s": round(o0 + w["s"] - a, 3), "e": round(o0 + min(w["e"], b) - a, 3)})
+                    words.append({"w": mask(w["w"]), "s": round(o0 + w["s"] - a, 3), "e": round(o0 + min(w["e"], b) - a, 3)})
         impacts.append({"t": round(o0 + pay - a, 3), "flash": "white", "sfx": "bass_thud", "emoji": m.get("emoji") or look.get("emoji", "💀"),
                         "emoji_y_pct": 74, "emoji_dur": 1.2})
     title = look.get("header", "RANKING THE FUNNIEST {GAME} MOMENTS").format(GAME=game.upper(), game=game)
