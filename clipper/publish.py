@@ -54,6 +54,38 @@ def next_slot(ch: dict, st: dict, now: dt.datetime | None = None) -> dt.datetime
     raise RuntimeError("no free slot in 30 days")
 
 
+JITTER_MIN = 75   # each slot moves up to +/-75 min from its base time, a different amount every day
+GAP_MIN = 15      # no two channels on this account post within 15 min of each other
+
+
+def day_plan(date: dt.date) -> dict[str, list[dt.datetime]]:
+    """10 Nov (Andrew): 8 channels on one Google login posting at the same minutes every day is a pattern, so each
+    channel's base times (channels.json post_times_utc, incl. dated windows) get a different offset each day.
+    Deterministic per channel+date (re-running gives the same plan); odd minutes; channels kept GAP_MIN apart."""
+    import hashlib
+    import random
+
+    from . import channels
+    slots = []
+    for key, raw in channels.load_all().items():
+        if not any(raw.get("blotato", {}).values()):  # only channels that can actually post
+            continue
+        ch = channels.with_window(dict(raw, key=key), date)
+        for i, hm in enumerate(ch.get("post_times_utc") or []):
+            h, m = map(int, hm.split(":"))
+            base = dt.datetime(date.year, date.month, date.day, h, m, tzinfo=dt.timezone.utc)
+            rng = random.Random(int(hashlib.sha256(f"{key}|{date}|{i}".encode()).hexdigest(), 16))
+            slots.append([base + dt.timedelta(minutes=rng.randint(-JITTER_MIN, JITTER_MIN)), key])
+    slots.sort()
+    for j in range(1, len(slots)):  # push apart anything too close to the previous post
+        if slots[j][0] - slots[j - 1][0] < dt.timedelta(minutes=GAP_MIN):
+            slots[j][0] = slots[j - 1][0] + dt.timedelta(minutes=GAP_MIN + j % 7)
+    plan: dict[str, list[dt.datetime]] = {}
+    for t, key in slots:
+        plan.setdefault(key, []).append(t)
+    return plan
+
+
 def caption(platform: str, title: str, post: dict, ch: dict) -> str:
     if platform == "youtube":
         return post.get("description") or f"{ch['credit']}\n{ch['hashtags']}"
