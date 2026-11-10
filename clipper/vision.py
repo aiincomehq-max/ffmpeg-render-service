@@ -34,6 +34,12 @@ SCHEMA = {
 
 def _frames(src: str, times: list[float]) -> list[bytes]:
     out = []
+    try:  # 10 Nov: a moment's end can overrun a short clip (Clix: end 15 s, file 13.3 s) -> no frame -> check crashed
+        dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", src],
+                                   capture_output=True, text=True).stdout.strip())
+        times = [min(t, max(0.0, dur - 0.15)) for t in times]
+    except ValueError:
+        pass
     with tempfile.TemporaryDirectory() as td:
         for i, t in enumerate(times):
             f = Path(td) / f"{i}.jpg"
@@ -93,4 +99,5 @@ def check(m: dict, ch: dict, client: anthropic.Anthropic | None = None) -> dict:
         return {"keep": r["keep"], "payoff_t": times[pf], "visual_score": r["visual_score"], "reason": r["reason"],
                 "burned_captions": bool(r.get("burned_captions"))}
     except Exception as e:  # never block the pipeline on QA
-        return {"keep": True, "payoff_t": m.get("payoff_t"), "visual_score": None, "reason": f"vision check skipped: {e}"}
+        # 10 Nov: this used to KEEP on any error, so an unchecked clip became a Short. A failed check is not a pass.
+        return {"keep": False, "payoff_t": m.get("payoff_t"), "visual_score": None, "reason": f"vision check failed: {e}"}
