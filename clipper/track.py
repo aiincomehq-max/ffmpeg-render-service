@@ -230,3 +230,47 @@ def stacked_rects(cam):
         game = [(sw - gw) / 2, (sh - gh) / 2, gw, gh]
     ev = lambda v: int(v) // 2 * 2
     return {"cam": [ev(cx), ev(cy), ev(cw), ev(ch)], "game": [ev(v) for v in game]}
+
+
+def split_rects(src: str, start: float, end: float, n: int = 6):
+    """10 Nov: Speed's iPhone call-in stream is a side-by-side split (Speed | caller). The cam check rejected Speed's
+    big face, face-tracking then followed the caller's (bigger) face and cut Speed out. Two faces that each stay put
+    in opposite halves = a split screen: return stack rects with both people, left half on top, right half below."""
+    cap = cv2.VideoCapture(src)
+    sw, sh = cap.get(cv2.CAP_PROP_FRAME_WIDTH), cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+    frames = []
+    try:
+        for i in range(n):
+            cap.set(cv2.CAP_PROP_POS_MSEC, (start + (end - start) * (i + 0.5) / n) * 1000)
+            ok, fr = cap.read()
+            if not ok:
+                continue
+            k = DET_W / fr.shape[1]
+            small = cv2.resize(fr, (DET_W, int(fr.shape[0] * k)))
+            _, faces = _detector(small.shape[1], small.shape[0]).detect(small)
+            frames.append([(f[0] / k, f[1] / k, f[2] / k, f[3] / k) for f in (faces if faces is not None else [])])
+    finally:
+        cap.release()
+    if not sw or len(frames) < 4:
+        return None
+    halves = {}
+    for side, inside in (("L", lambda c: c < 0.47 * sw), ("R", lambda c: c > 0.53 * sw)):
+        hits = [max((b for b in fb if inside(b[0] + b[2] / 2)), key=lambda b: b[2] * b[3], default=None) for fb in frames]
+        hits = [h for h in hits if h is not None and h[3] > 0.08 * sh]
+        if len(hits) < len(frames) - 1:
+            return None
+        cxs = [h[0] + h[2] / 2 for h in hits]
+        if max(cxs) - min(cxs) > 0.12 * sw:  # a moving face (IRL walk-and-talk), not a fixed split panel
+            return None
+        halves[side] = [float(np.median([h[i] for h in hits])) for i in range(4)]
+
+    def around(box, x0, x1, ar):  # largest ar-shaped window inside [x0, x1] centred on the face
+        bx, by, bw, bh = box
+        w = x1 - x0
+        h = min(sh, w / ar)
+        w = h * ar
+        x = min(max(x0, bx + bw / 2 - w / 2), x1 - w)
+        y = min(max(0, by + bh * 0.45 - h / 2), sh - h)
+        return [int(v) // 2 * 2 for v in (x, y, w, h)]
+    return {"cam": around(halves["L"], 0, sw / 2, CAM_PANEL[0] / CAM_PANEL[1]),
+            "game": around(halves["R"], sw / 2, sw, GAME_PANEL[0] / GAME_PANEL[1])}

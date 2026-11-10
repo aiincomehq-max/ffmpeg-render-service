@@ -234,6 +234,10 @@ def pick_layout(src: str, a: float, b: float, fallback: str | None = None) -> di
         cam = webcam_box(src, a, b)
         if cam:
             return {"layout": "stack", "rects": stacked_rects(cam)}
+        from .track import split_rects
+        split = split_rects(src, a, b)  # side-by-side call / duo stream: show both people
+        if split:
+            return {"layout": "stack", "rects": split}
     except Exception as e:
         print(f"  (webcam detect skipped: {e})")
     return {"layout": fallback} if fallback else {}
