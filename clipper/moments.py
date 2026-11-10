@@ -116,7 +116,9 @@ def _call(client: anthropic.Anthropic, text: str, skills: list[str], context: st
     kwargs = dict(
         model=ch.get("moments_model", MODEL),  # game channels: Sonnet (half the price; Opus was 90% of spend)
         max_tokens=16000,
-        system=_system(ch),
+        # 10 Nov: prompt caching. The system prompt + output schema (~2.85k of ~3.3k input tokens) is identical for every
+        # transcript window of a stream, and windows run back to back, so calls after the first read it at 0.05-0.1x price.
+        system=[{"type": "text", "text": _system(ch), "cache_control": {"type": "ephemeral"}}],
         messages=[{"role": "user", "content": f"Stream: {context}\nSkill list: {', '.join(skills)}\n\nTranscript window (seconds):\n{text}"}],
         output_config={"format": {"type": "json_schema", "schema": _schema(skills)}},
     )
