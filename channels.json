@@ -320,7 +320,7 @@
     "gameplay_ok": true,
     "format": "ranking",
     "moments_model": "claude-sonnet-5-5",
-    "min_clip_views": 1000,
+    "min_clip_views": 300,
     "rank_style": {
       "header": "GTA RP WENT WRONG",
       "rank_fmt": "{n}.",
@@ -387,7 +387,7 @@
     "gameplay_ok": true,
     "format": "ranking",
     "moments_model": "claude-sonnet-5-5",
-    "min_clip_views": 1000,
+    "min_clip_views": 300,
     "rank_style": {
       "header": "FORTNITE PLAYS THAT BROKE STREAMERS",
       "rank_fmt": "TOP {n}",
@@ -454,7 +454,7 @@
     "gameplay_ok": true,
     "format": "ranking",
     "moments_model": "claude-sonnet-5-5",
-    "min_clip_views": 1000,
+    "min_clip_views": 300,
     "rank_style": {
       "header": "MINECRAFT FAILS OF THE WEEK",
       "rank_fmt": "#{n}",
@@ -558,7 +558,7 @@
     "gameplay_ok": true,
     "format": "ranking",
     "moments_model": "claude-sonnet-5-5",
-    "min_clip_views": 1000,
+    "min_clip_views": 300,
     "rank_style": {
       "header": "OSRS: BIGGEST REACTIONS",
       "rank_fmt": "{n}",

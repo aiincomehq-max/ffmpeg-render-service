@@ -410,9 +410,19 @@ def cmd_auto(a) -> None:
             mark_seen(new_ids, "heatmap")
     new_ids = set()
     done = seen("heatmap")
-    clips = [c for login in src_cfg.get("twitch_clips", []) for c in scout.twitch_top_clips(login, a.clips, a.range)]
-    clips += [c for game in src_cfg.get("twitch_game_clips", []) for c in scout.twitch_game_clips(game, a.clips, a.range)]
-    clips = [c for c in clips if c["views"] >= CH.get("min_clip_views", 0)]  # unproven clips cost the same to scan
+    # 10 Nov: asked Twitch for the top N then skipped seen ones, so after day 1 the scan found ~0 new clips
+    # (GTA: 27 unseen 1k+ clips this week, the top 30 held 1). Fetch 100, drop seen, THEN take the top N unseen;
+    # a quiet week (KreekCraft: no clips in 7d) falls back to the last 30 days.
+    def fetch(rng):
+        cs = [c for login in src_cfg.get("twitch_clips", []) for c in scout.twitch_top_clips(login, 100, rng)]
+        cs += [c for game in src_cfg.get("twitch_game_clips", []) for c in scout.twitch_game_clips(game, 100, rng)]
+        return [c for c in cs if c["views"] >= CH.get("min_clip_views", 0) and c["id"] not in done]  # unproven clips cost the same to scan
+    clips = fetch(a.range) if (src_cfg.get("twitch_clips") or src_cfg.get("twitch_game_clips")) else []
+    if clips is not None and len(clips) < a.clips and a.range == "7d" and (src_cfg.get("twitch_clips") or src_cfg.get("twitch_game_clips")):
+        have = {c["id"] for c in clips}
+        clips += [c for c in fetch("30d") if c["id"] not in have]
+    clips = sorted(clips, key=lambda c: -c["views"])[:a.clips]
+    print(f"twitch: {len(clips)} unseen clips to scan")
     if True:
         for clip in clips:
             if clip["id"] in done:
