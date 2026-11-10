@@ -220,7 +220,8 @@
     "el_voice": "TtRFBnwQdH1k01vR0hMz",
     "el_voice_name": "Arthur",
     "vo_mode": "countdown",
-    "min_rank": 3
+    "min_rank": 3,
+    "lookback": 60
   },
   "kreek": {
     "streamer": "KreekCraft",
@@ -237,7 +238,8 @@
     "sources": {
       "twitch_clips": [
         "kreekcraft"
-      ]
+      ],
+      "youtube_streams": "https://www.youtube.com/@KreekCraft/streams"
     },
     "platforms": [
       "youtube"
@@ -289,7 +291,8 @@
     "el_voice": "TX3LPaxmHKxFdv7VOQHJ",
     "el_voice_name": "Liam",
     "vo_mode": "countdown",
-    "min_rank": 3
+    "min_rank": 3,
+    "lookback": 60
   },
   "gta": {
     "streamer": "GTA streamers",
