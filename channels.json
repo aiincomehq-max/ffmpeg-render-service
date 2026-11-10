@@ -217,7 +217,8 @@
     "vo_speed": 1.08,
     "el_voice": "TtRFBnwQdH1k01vR0hMz",
     "el_voice_name": "Arthur",
-    "vo_mode": "countdown"
+    "vo_mode": "countdown",
+    "min_rank": 3
   },
   "kreek": {
     "streamer": "KreekCraft",
@@ -285,19 +286,21 @@
     "vo_speed": 1.12,
     "el_voice": "TX3LPaxmHKxFdv7VOQHJ",
     "el_voice_name": "Liam",
-    "vo_mode": "countdown"
+    "vo_mode": "countdown",
+    "min_rank": 3
   },
   "gta": {
     "streamer": "GTA streamers",
     "short": "GTA",
     "handle": "SNACKCLIPZ",
-    "hashtags": "#gta5 #gtarp #gaming #shorts",
+    "hashtags": "#gta6 #gta5 #gtarp #gaming #shorts",
     "title_tag": "#gta5",
     "credit": "Credit: the original Twitch streamers (named in each Short). Fan edit, not affiliated.",
     "where_they_stream": "Twitch (GTA V category)",
     "people": [],
     "sources": {
       "twitch_game_clips": [
+        "Grand Theft Auto VI",
         "Grand Theft Auto V"
       ]
     },

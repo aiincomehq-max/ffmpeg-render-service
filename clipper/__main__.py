@@ -438,9 +438,11 @@ def cmd_auto(a) -> None:
         a.count = min(a.count, CH.get("daily_count", 1))
         rpool = diversify(library.top(None, a.count * RANK_N * 4, a.min_virality - 1), library.used_positions())
         best = vision_filter(rpool, a.count * RANK_N)
-        print(f"rendering {len(best) // RANK_N} ranking comps from {len(best)} clips...")
-        for i in range(len(best) // RANK_N):
-            group = sorted(best[i * RANK_N:(i + 1) * RANK_N], key=lambda m: (m.get("virality", 0), m.get("visual_score") or 0))
+        # 10 Nov: slower streamers (Kreek/Caylus) rarely yield 5 keepers a day -> a shorter countdown beats no post
+        n = RANK_N if len(best) >= RANK_N else (len(best) if len(best) >= CH.get("min_rank", 3) else RANK_N)
+        print(f"rendering {len(best) // n} ranking comps (top {n}) from {len(best)} clips...")
+        for i in range(len(best) // n):
+            group = sorted(best[i * n:(i + 1) * n], key=lambda m: (m.get("virality", 0), m.get("visual_score") or 0))
             out = render_ranking(group, a.handle, d)
             print("  ->", out)
             rendered.append((group[-1], out))

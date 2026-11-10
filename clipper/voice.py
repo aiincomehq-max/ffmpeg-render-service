@@ -59,6 +59,7 @@ def ranking_lines(group: list[dict], game: str, channel: str, opener: str = "Num
     return [f"{opener.format(n=len(group) - i)} {b}" for i, b in enumerate(bodies)]
 
 
+WORDS = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five"}  # vo_firsts are written for a top 5
 ORDINAL = {1: "first", 2: "second", 3: "third", 4: "fourth", 5: "fifth", 6: "sixth", 7: "seventh"}
 
 
@@ -81,7 +82,8 @@ def countdown_calls(count: int, look: dict) -> list[str]:
     for i in range(count):
         n = count - i
         if n == count and first:
-            tpl = first
+            tpl = first if count == 5 else re.sub(r"\bfifth\b", ORDINAL.get(count, str(count)),
+                                                  re.sub(r"\bfive\b", WORDS.get(count, str(count)), first))
         elif n == 1:
             tpl = random.choice(pool("vo_last", "And number one."))
         else:
