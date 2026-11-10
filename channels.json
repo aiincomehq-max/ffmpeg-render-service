@@ -220,7 +220,7 @@
     "el_voice": "TtRFBnwQdH1k01vR0hMz",
     "el_voice_name": "Arthur",
     "vo_mode": "countdown",
-    "min_rank": 3,
+    "min_rank": 2,
     "lookback": 60
   },
   "kreek": {
@@ -291,7 +291,7 @@
     "el_voice": "TX3LPaxmHKxFdv7VOQHJ",
     "el_voice_name": "Liam",
     "vo_mode": "countdown",
-    "min_rank": 3,
+    "min_rank": 2,
     "lookback": 60
   },
   "gta": {

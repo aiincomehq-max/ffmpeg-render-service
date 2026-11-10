@@ -99,7 +99,7 @@ def kept_len(m: dict) -> float:
     return sum(b - a for a, b in _speech_ranges(m))
 
 
-def single_moment(m: dict, style: dict, handle: str, music: str | None) -> dict:
+def single_moment(m: dict, style: dict, handle: str, music: str | None, layout_fallback: str | None = None) -> dict:
     tl = Timeline()
     payoff = m.get("payoff_t")
     for a, b in _speech_ranges(m):
@@ -126,7 +126,7 @@ def single_moment(m: dict, style: dict, handle: str, music: str | None) -> dict:
     tl.pieces = trimmed
     duration = min(tl.out_t, MAX_LEN)
     # 9 Nov: gaming stream with a fixed webcam -> stacked cam-over-gameplay (Speed's Fortnite clip lost the game)
-    lay = pick_layout(m["src"], m["start"], m["end"])
+    lay = pick_layout(m["src"], m["start"], m["end"], layout_fallback)  # game channels: "game" when no webcam
     for p in tl.pieces:
         p.update(lay)
     ys = TEXT_Y[lay.get("layout", "face")]

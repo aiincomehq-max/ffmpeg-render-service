@@ -150,11 +150,14 @@ def render_single(m: dict, handle: str, d: Path) -> Path:
     style = load()
     wholesome = m.get("type") == "wholesome"
     from . import voice
-    if m.get("hook_tag") and CH.get("vo_mode", "full") != "none":  # 10 Nov caption QA (34 = single-Short hook width)
+    # countdown channels' 1-clip Shorts (10 Nov) are built like Speed/Kai: on-screen context header, no narrator
+    narrate = CH.get("vo_mode", "full") not in ("none", "countdown")
+    if m.get("hook_tag") and narrate:  # 10 Nov caption QA (34 = single-Short hook width)
         m["label"] = voice.label_qa([m], CH["key"], CH.get("streamer", CH.get("short", "")), 34)[0]
-    edl = E.single_moment(m, style, handle, pick_music("emotional" if wholesome else "phonk"))
+    edl = E.single_moment(m, style, handle, pick_music("emotional" if wholesome else "phonk"),
+                          CH.get("rank_style", {}).get("layout"))
     from . import voice
-    if CH.get("vo_mode", "full") != "none":  # 9 Nov: winners' single-clip Shorts have no narrator
+    if narrate:  # 9 Nov: winners' single-clip Shorts have no narrator
         add_voice(edl, lambda: voice.single_lines(m, CH["key"]))
     else:  # ...so the situation is explained on screen instead, top of frame, whole Short
         try:
@@ -468,7 +471,13 @@ def cmd_auto(a) -> None:
         rpool = diversify(library.top(None, a.count * RANK_N * 4, a.min_virality - 1), library.used_positions())
         best = vision_filter(rpool, a.count * RANK_N)
         # 10 Nov: slower streamers (Kreek/Caylus) rarely yield 5 keepers a day -> a shorter countdown beats no post
-        n = RANK_N if len(best) >= RANK_N else (len(best) if len(best) >= CH.get("min_rank", 3) else RANK_N)
+        # 10 Nov (Andrew): 2 good clips -> a top 2; 1 good clip -> a single-clip Short; only 0 skips the day
+        n = RANK_N if len(best) >= RANK_N else (len(best) if len(best) >= CH.get("min_rank", 2) else RANK_N)
+        if len(best) == 1:
+            out = render_single(best[0], a.handle, d)
+            print("  -> (single)", out)
+            rendered.append((best[0], out))
+            library.mark_used([best[0]["_id"]])
         print(f"rendering {len(best) // n} ranking comps (top {n}) from {len(best)} clips...")
         for i in range(len(best) // n):
             group = sorted(best[i * n:(i + 1) * n], key=lambda m: (m.get("virality", 0), m.get("visual_score") or 0))
