@@ -130,8 +130,9 @@ def single_moment(m: dict, style: dict, handle: str, music: str | None) -> dict:
             words.append({"w": w["w"], "s": round(s, 3), "e": round(e if e is not None else s + 0.2, 3)})
 
     texts = []
-    if m.get("hook_tag"):
-        texts.append({"text": hook_text(m["hook_tag"]), "start": 0.0, "end": HOOK_S, "kind": "hook", "color": "yellow", "y_pct": ys["hook"]})
+    lab = m["label"] if "label" in m else (hook_text(m["hook_tag"]) if m.get("hook_tag") else "")  # label = QA'd caption
+    if lab:
+        texts.append({"text": lab, "start": 0.0, "end": HOOK_S, "kind": "hook", "color": "yellow", "y_pct": ys["hook"]})
     for tag in m.get("action_tags", []):
         t = tl.to_out(tag["t"])
         if t is not None and t > HOOK_S:
@@ -292,8 +293,9 @@ def ranking_comp(ms: list[dict], game: str, handle: str, music: str | None, look
         slots.append(round(o0 + 0.1, 3))
         texts.append({"text": look.get("rank_fmt", "#{n}").format(n=rank), "start": round(o0, 3), "end": round(o1, 3), "kind": "hook",
                       "color": look.get("rank_color", "yellow"), "y_pct": ys["rank"] if lay else look.get("rank_y", 22)})
-        if m.get("hook_tag"):
-            texts.append({"text": hook_text(neutral(m["hook_tag"]), 30), "start": round(o0, 3), "end": round(min(o1, o0 + 2.5), 3),
+        lab = m["label"] if "label" in m else (hook_text(neutral(m["hook_tag"]), 30) if m.get("hook_tag") else "")  # label = QA'd caption
+        if lab:
+            texts.append({"text": lab, "start": round(o0, 3), "end": round(min(o1, o0 + 2.5), 3),
                           "kind": "tag", "color": look.get("tag_color", "white"),
                           "y_pct": ys["tag"] if lay else look.get("rank_y", 22) + 10})
         if not m.get("burned_captions"):

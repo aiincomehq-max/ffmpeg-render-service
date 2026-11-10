@@ -149,6 +149,9 @@ def add_voice(edl: dict, lines_fn) -> None:
 def render_single(m: dict, handle: str, d: Path) -> Path:
     style = load()
     wholesome = m.get("type") == "wholesome"
+    from . import voice
+    if m.get("hook_tag") and CH.get("vo_mode", "full") != "none":  # 10 Nov caption QA (34 = single-Short hook width)
+        m["label"] = voice.label_qa([m], CH["key"], CH.get("streamer", CH.get("short", "")), 34)[0]
     edl = E.single_moment(m, style, handle, pick_music("emotional" if wholesome else "phonk"))
     from . import voice
     if CH.get("vo_mode", "full") != "none":  # 9 Nov: winners' single-clip Shorts have no narrator
@@ -157,6 +160,8 @@ def render_single(m: dict, handle: str, d: Path) -> Path:
         try:
             line = voice.context_line(m, CH["key"])
             dur = sum((p["end"] - p["start"]) / p.get("speed", 1) for p in edl["pieces"])
+            # 10 Nov: the header already explains the clip; a second hook caption under it said the same thing twice
+            edl["texts"] = [t for t in edl["texts"] if t.get("kind") != "hook"]
             edl["texts"].insert(0, {"text": E.hook_text(line, 46), "start": 0.0, "end": round(dur, 3),
                                     "kind": "header", "color": "white", "y_pct": 9})
             print("  context:", line)
@@ -182,6 +187,9 @@ def render_ranking(group: list[dict], handle: str, d: Path) -> Path:
     style = load()
     game = CH.get("short", "gaming")
     look = CH.get("rank_style", {})
+    from . import voice
+    for m, lab in zip(group, voice.label_qa(group, CH["key"], CH.get("streamer", game), 30)):  # 10 Nov caption QA
+        m["label"] = lab
     edl = E.ranking_comp(group, game, handle, pick_music("phonk"), look)
     from . import voice
     if CH.get("vo_mode", "full") == "countdown":  # 9 Nov: rank calls only, the streamer's audio carries the clip

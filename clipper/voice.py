@@ -108,6 +108,87 @@ def single_lines(m: dict, channel: str) -> list[str]:
                 "(no spoiler); 2) a reaction of at most 5 words said right after the payoff.", 2, channel)
 
 
+LABEL_MODEL = os.environ.get("CLIPPER_LABEL_MODEL", "claude-sonnet-5-5")
+_DANGLING = {"A", "AN", "THE", "AT", "TO", "OF", "IN", "ON", "FOR", "AND", "WITH", "HIS", "HER", "MY", "BY", "FROM",
+             "IS", "WAS", "BUT", "OR", "THIS", "THAT", "THEIR", "ONE", "GO", "BRING"}
+LABEL_LOG = ROOT / "data" / "label_qa.jsonl"
+
+
+def label_problems(label: str, max_chars: int) -> list[str]:
+    """Deterministic caption gate: what a viewer would see wrong on screen."""
+    probs = []
+    words = label.split()
+    if not words:
+        return ["empty"]
+    if len(label) > max_chars:
+        probs.append(f"{len(label)} characters, max {max_chars} (it would be cut off)")
+    if words[-1].strip("?!.,").upper() in _DANGLING:
+        probs.append(f"ends on '{words[-1]}', so it reads unfinished")
+    if GENDERED.search(label):
+        probs.append("uses he/she/his/her/him: use the name or 'they'")
+    if re.search(r"[^A-Za-z0-9 '!?$%&.,#:-]", label):
+        probs.append("has characters the font cannot draw (emoji/symbols)")
+    return probs
+
+
+def label_qa(ms: list[dict], channel: str, streamer: str, max_chars: int = 30) -> list[str]:
+    """10 Nov caption QA: hook tags were hard-cut at 30 characters on screen ('MIKKAA USED CASH FOR THE 1ST',
+    'THEY WORE A BIKINI TO GO') - 17 of 37 labels in the first 8 test Shorts. The chairman can't judge streamer
+    captions himself, so every on-screen clip label is rewritten to fit and checked here before render:
+    one Sonnet call per Short, then a hard gate; a label that still fails is dropped, never shown broken."""
+    import anthropic
+
+    from . import log_usage
+    clips = "\n".join(f"{i + 1}. tag: {m.get('hook_tag', '')} | what happens: {(m.get('why') or '')[:260]}"
+                      for i, m in enumerate(ms))
+    base = (f"You check the on-screen captions of a Shorts channel that clips {streamer}. Each clip gets ONE caption "
+            f"in ALL CAPS shown for 2.5 seconds over the clip. Viewers are fans who know the game, but the caption must "
+            f"still make sense to someone seeing the clip cold.\n\nClips:\n{clips}\n\n"
+            f"Return one caption per clip, same order. Each caption MUST:\n"
+            f"- be at most {max_chars} characters INCLUDING spaces (count them), a complete phrase that does not trail off\n"
+            f"- say concretely what happens or sets up the moment (who + what), true to 'what happens', no spoiler of the final reaction\n"
+            f"- never use he/she/his/her/him: use the person's name if known, else 'THEY'/'THIS STREAMER'\n"
+            f"- plain letters/numbers/basic punctuation, no emoji, no hashtags\n"
+            f"- read naturally out loud (no clumsy abbreviations, no grammar errors)\n"
+            f"- never read as real-world harm out of context: if the hitting/killing/attacking happens in a game, say so "
+            f"or name the game thing (e.g. 'A ROBLOX MOB', 'A WOLF IN MINECRAFT'), never 'HITS KIDS' or 'USED A SKILLET ON A DOG'\n"
+            f"- if the 'what happens' text does not say who did it, use 'THEY' - never invent a name\n"
+            f"- if a moment can't be captioned without sounding like harm to real people, caption the situation or "
+            f"reaction instead (e.g. 'THE CANDY RULE GOT OUT OF HAND')\n"
+            + (f"- this channel clips ONE streamer: in the notes 'he/the streamer' means {streamer} unless someone else is "
+               f"named, so use '{streamer.upper()}' (not 'THEY') when it is them\n" if "streamers" not in streamer.lower() else "")
+            + f"Keep the original tag if it already passes all of these.")
+    schema = {"type": "object", "additionalProperties": False, "required": ["captions"],
+              "properties": {"captions": {"type": "array", "items": {"type": "string"}}}}
+    client = anthropic.Anthropic()
+    prompt, out = base, []
+    for attempt in range(2):
+        try:
+            resp = client.messages.create(model=LABEL_MODEL, max_tokens=4000, messages=[{"role": "user", "content": prompt}],
+                                          output_config={"format": {"type": "json_schema", "schema": schema}})
+            log_usage(resp, "label_qa", channel)
+            out = [re.sub(r"\s+", " ", c).strip().upper() for c in
+                   json.loads(next(b.text for b in resp.content if b.type == "text"))["captions"]][:len(ms)]
+        except Exception as e:  # never block a render: fall back to the original tag, still gated below
+            print(f"  label QA call failed ({type(e).__name__}: {str(e)[:80]})")
+            out = out or [(m.get("hook_tag") or "").upper() for m in ms]
+        out += [""] * (len(ms) - len(out))
+        bad = {i: label_problems(c, max_chars) for i, c in enumerate(out)}
+        bad = {i: p for i, p in bad.items() if p}
+        if not bad:
+            break
+        prompt = base + "\n\nYour last answer failed the check:\n" + "\n".join(
+            f"{i + 1}. '{out[i]}': {'; '.join(p)}" for i, p in bad.items()) + "\nFix those; return all captions again."
+    final = [c if not label_problems(c, max_chars) else "" for c in out]
+    with LABEL_LOG.open("a") as f:
+        for m, c, fin in zip(ms, out, final):
+            f.write(json.dumps({"channel": channel, "moment": m.get("_id"), "tag": m.get("hook_tag"), "label": c,
+                                "shown": fin, "problems": label_problems(c, max_chars)}) + "\n")
+    for m, fin in zip(ms, final):
+        print(f"  label: {m.get('hook_tag', '')!r} -> {fin!r}" + ("" if fin else "  (DROPPED: failed QA)"))
+    return final
+
+
 EL_MODEL = os.environ.get("CLIPPER_EL_MODEL", "eleven_multilingual_v2")
 
 
