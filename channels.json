@@ -44,8 +44,39 @@
     "vo_speed": 1.12,
     "el_voice": "TX3LPaxmHKxFdv7VOQHJ",
     "el_voice_name": "Liam - Energetic Social Media Creator",
-    "vo_mode": "none",
-    "lookback": 60
+    "vo_mode": "countdown",
+    "lookback": 60,
+    "format": "ranking",
+    "min_rank": 5,
+    "rank_style": {
+      "header": "SPEED'S CRAZIEST MOMENTS",
+      "rank_fmt": "#{n}",
+      "rank_color": "#FFE600",
+      "caption_active": "#FFE600",
+      "emoji": "🔥",
+      "rank_y": 26,
+      "titles": [
+        "Speed's craziest moments 🔥",
+        "Speed was NOT ready for this 😭",
+        "Only Speed would do this 💀"
+      ],
+      "vo_openers": [
+        "Number {n}.",
+        "At number {n}.",
+        "Up next, number {n}.",
+        "Coming in at number {n}."
+      ],
+      "vo_firsts": [
+        "Starting at number five.",
+        "Number five.",
+        "First up, number five."
+      ],
+      "vo_lasts": [
+        "And number one.",
+        "And the craziest one.",
+        "Finally, number one."
+      ]
+    }
   },
   "kai": {
     "streamer": "Kai Cenat",
