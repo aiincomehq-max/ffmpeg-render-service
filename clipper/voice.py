@@ -96,7 +96,10 @@ def context_line(m: dict, channel: str) -> str:
     """9 Nov: no-VO channels (Speed/Kai) explain the moment in on-screen text instead: one plain line at the top."""
     p = (f"{STYLE}\nClip: {m.get('hook_tag', '')} | {m.get('why', '')[:300]}\n\n"
          "Write exactly 1 line of at most 7 words and at most 40 characters that tells a viewer what is going on "
-         "in this clip (the situation, not the payoff). Use the streamer's name, e.g. 'Speed meets a kid who wants a 1v1'.")
+         "in this clip (the situation, not the payoff). Use the streamer's name, e.g. 'Speed meets a kid who wants a 1v1'. "
+         # 11 Nov: hook 'SPEED GOT IT FIRST TRY?' (he got called out) became 'SPEED CELEBRATES A FIRST-TRY WIN'
+         "Never turn a question, doubt or irony into a claim: if the clip tag is a question or the notes say they were "
+         "wrong, called out, lying or failed, keep the doubt (e.g. 'Speed thinks he got it first try').")
     line = _ask(p, 1, channel)[0].strip().rstrip(".")
     if len(line) > 44:  # 9 Nov: a 52-char line was cut mid-sentence on screen ("...THEN A YOUNG")
         line = _ask(p + f"\nToo long ({len(line)} characters). Max 40.", 1, channel)[0].strip().rstrip(".")
@@ -154,6 +157,9 @@ def label_qa(ms: list[dict], channel: str, streamer: str, max_chars: int = 30) -
             f"- read naturally out loud (no clumsy abbreviations, no grammar errors)\n"
             f"- never read as real-world harm out of context: if the hitting/killing/attacking happens in a game, say so "
             f"or name the game thing (e.g. 'A ROBLOX MOB', 'A WOLF IN MINECRAFT'), never 'HITS KIDS' or 'USED A SKILLET ON A DOG'\n"
+            f"- never turn a question, doubt or irony into a claim: if the tag is a question or the notes say they were "
+            f"wrong, called out, lying or failed, keep the doubt (e.g. tag 'SPEED GOT IT FIRST TRY?' stays a question, "
+            f"never 'SPEED CELEBRATES A FIRST-TRY WIN')\n"
             f"- if the 'what happens' text does not say who did it, use 'THEY' - never invent a name\n"
             f"- if a moment can't be captioned without sounding like harm to real people, caption the situation or "
             f"reaction instead (e.g. 'THE CANDY RULE GOT OUT OF HAND')\n"

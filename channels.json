@@ -256,7 +256,7 @@
     "status": "waiting: channel not created (YouTube ID check)",
     "gameplay_ok": true,
     "format": "ranking",
-    "moments_model": "claude-sonnet-5-5",
+    "moments_model": "claude-opus-5-5",
     "rank_style": {
       "header": "KREEKCRAFT'S WILDEST MOMENTS",
       "rank_fmt": "#{n}",
@@ -324,7 +324,7 @@
     "status": "waiting: channel not created (YouTube ID check)",
     "gameplay_ok": true,
     "format": "ranking",
-    "moments_model": "claude-sonnet-5-5",
+    "moments_model": "claude-opus-5-5",
     "min_clip_views": 300,
     "rank_style": {
       "header": "GTA RP WENT WRONG",
@@ -484,7 +484,7 @@
     "status": "waiting: channel not created (YouTube ID check)",
     "gameplay_ok": true,
     "format": "ranking",
-    "moments_model": "claude-sonnet-5-5",
+    "moments_model": "claude-opus-5-5",
     "min_clip_views": 300,
     "rank_style": {
       "header": "MINECRAFT FAILS OF THE WEEK",
@@ -588,7 +588,7 @@
     "status": "waiting: channel not created (YouTube ID check)",
     "gameplay_ok": true,
     "format": "ranking",
-    "moments_model": "claude-sonnet-5-5",
+    "moments_model": "claude-opus-5-5",
     "min_clip_views": 300,
     "rank_style": {
       "header": "OSRS: BIGGEST REACTIONS",
