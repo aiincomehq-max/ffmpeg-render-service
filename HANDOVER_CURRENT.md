@@ -1,7 +1,28 @@
 # CLIPZ NETWORK — HANDOVER_CURRENT (8 clip channels, repo ~/ffmpeg-render-service)
 
 Load this first. Also: memory `project_turboclipz_speed_clipper.md`, `SESSION_1_BUILD.md`, `channels.json`.
-Branch `claude/tender-goodall-hg7yeu` (all commits pushed; head cbbc91c at time of writing).
+Branch `claude/tender-goodall-hg7yeu` (all commits pushed; head ac94804 at time of writing).
+
+---
+
+## RESUME POINT — CLIPZ NETWORK (2026-11-12 23:05 UTC) — supersedes 21:35
+
+### Done since 21:35
+- Commit e345557: `allow_single: false` on ALL live channels (singles 1–19 views vs countdowns ~1k). No channel posts a single any more; no countdown = skip the day.
+- 13 Nov evening builds (gta/fortnite/minecraft/osrs `auto --count 1`; caylus/kreek timed out scanning, then rebuilt `--streams 0`):
+  - gta 0 keepers · fortnite 1 · minecraft 0 · osrs 0 → nothing rendered.
+  - caylus `out/caylus/2026-11-12/225326_ranking-caylus.mp4` top 2 (13.8 s) — **REJECTED**: only 2 clips, #1 ends mid-sentence.
+  - kreek `out/kreek/2026-11-12/225732_ranking-kreekcraft.mp4` top 3 (22.5 s) — **REJECTED**: ~7 s clips end mid-sentence ("I DON'T…"), #3 mostly a dark screen.
+  - Nothing booked for these channels. Speed 12:55Z remains the only 13 Nov booking.
+- Commit ac94804 (Rule 55, fix the generator): `rank_style.clip_s [10,12]` on caylus, kreek, gta, fortnite, minecraft, osrs, so every game clip now uses `edl.story_window` (ends on a sentence end after the payoff; no window = moment not used).
+- Offline supply check ($0): unused banked moments that have a story window — gta 8, fortnite 10, minecraft 8, osrs 2, caylus 18, kreek 24. Vision keeps about 1 in 4, so most channels need FRESH scans to reach a top 5.
+- ⚠️ caylus/kreek have min_rank 2 in channels.json, which is how a 2-clip comp got rendered. Recommend raising to 3 (or 5 like the ~1k-view posts) — not changed tonight.
+- caylus/kreek timed-out scans: moments banked, but seen.json NOT updated (known gotcha).
+
+### EXACT NEXT ACTION (13 Nov morning)
+1. Normal morning build for all six game channels, now using the story cut. QA every comp (contact sheet + last caption of each clip is a full sentence). Book only the ones that pass, in their day_plan slots. Verify with get_post_status.
+2. Kai: build its countdown look (rank_style) or leave it idle — owner to choose.
+3. ~14–15 Nov: Speed keep/drop judgement on its countdown views.
 
 ---
 
