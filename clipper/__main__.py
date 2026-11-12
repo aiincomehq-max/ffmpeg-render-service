@@ -105,14 +105,26 @@ def write_post(d: Path, entry: dict) -> None:
 MIN_VISUAL = 6  # 8 Nov: a 5/10 'KEEP' was 43 s of a still anime image with Speed tiny in the corner
 
 
+def skip_stream(title: str | None) -> bool:
+    """12 Nov (owner): no call-in / phone-giveaway filler. channels.json skip_streams_re matches stream titles."""
+    pat = CH.get("skip_streams_re")
+    return bool(pat and title and re.search(pat, title, re.I))
+
+
 def vision_filter(cands: list[dict], want: int) -> list[dict]:
     """Visual QA: drop moments that are boring to watch, fix payoff timing. CLIPPER_VISION=0 to skip."""
     if os.environ.get("CLIPPER_VISION", "1") != "1":
         return cands[:want]
     from .vision import check
     kept = []
+    clip_s = CH.get("rank_style", {}).get("clip_s") if CH.get("format") == "ranking" else None
     for m in cands:
-        r = check(m, CH)
+        # 12 Nov: judge the ~11 s that will actually play, not the whole 40 s moment (menu/chat screens got through)
+        w = E.story_window(m, *clip_s) if clip_s else None
+        if clip_s and not w:  # the story can't finish inside a countdown slot -> not offered (no vision spend)
+            print(f"  story: DROP (no clean sentence end/start near the payoff) {m.get('hook_tag', '')[:60]}")
+            continue
+        r = check(dict(m, start=w[0], end=w[1]) if w else m, CH)
         if r["keep"] and r.get("visual_score") is not None and r["visual_score"] < CH.get("min_visual", MIN_VISUAL):
             r["keep"] = False
         print(f"  vision: {'KEEP' if r['keep'] else 'DROP'} ({r.get('visual_score')}) {r['reason'][:90]}")
@@ -121,9 +133,11 @@ def vision_filter(cands: list[dict], want: int) -> list[dict]:
                 m["payoff_t"] = r["payoff_t"]
             m["visual_score"] = r.get("visual_score")
             m["burned_captions"] = bool(r.get("burned_captions"))
+            if w:  # 12 Nov: render exactly the window vision judged (a moved payoff must not re-cut it)
+                m["clip_win"] = list(w)
             if "_id" in m:
                 library.update(m["_id"], payoff_t=m.get("payoff_t"), visual_score=m["visual_score"],
-                               burned_captions=m["burned_captions"])
+                               burned_captions=m["burned_captions"], **({"clip_win": m["clip_win"]} if w else {}))
             kept.append(m)
         else:
             library.mark_used([m["_id"]])  # don't offer it again
@@ -257,6 +271,7 @@ def process_file(src: Path, meta: dict, hint: str = "", kind: str = "manual", of
     for m in find_moments(tr, ctx, CH):
         m["source"] = f"{meta.get('url', '')} {meta.get('section') or ''}".strip()
         m["source_kind"], m["video_id"] = kind, meta.get("id")
+        m["stream_title"] = meta.get("title", "")  # 12 Nov: so call-in streams can be kept out of the pool
         m["abs_start"] = round(offset + m["start"], 1)
         m.update(extra or {})  # 10 Nov: origin + clip_views/replay_score, so learnings can test what source wins
         if m["video_id"] and library.exists_near(m["video_id"], m["abs_start"]):
@@ -392,6 +407,9 @@ def cmd_auto(a) -> None:
                     break
                 if st["id"] in done:
                     continue
+                if skip_stream(st.get("title")):
+                    print(f"stream SKIPPED (call-in, skip_streams_re): {st['title'][:70]}")
+                    continue
                 print(f"stream (fresh): {st['title'][:70]}")
                 if scan_fresh(st, a):
                     used += 1
@@ -407,6 +425,9 @@ def cmd_auto(a) -> None:
                 if used >= a.streams:
                     break
                 if st["id"] in done:
+                    continue
+                if skip_stream(st.get("title")):
+                    print(f"stream SKIPPED (call-in, skip_streams_re): {st['title'][:70]}")
                     continue
                 print(f"stream (most replayed): {st['title'][:70]}")
                 try:
@@ -461,14 +482,17 @@ def cmd_auto(a) -> None:
     pool = [] if a.mode == "heatmap" else library.top(None, a.count * 5, a.min_virality, kind="fresh")
     if a.mode != "fresh":
         pool += [m for m in library.top(None, a.count * 5, a.min_virality) if m.get("source_kind", "heatmap") != "fresh"]
-    pool = diversify(pool, library.used_positions())
+    pool = diversify([m for m in pool if not skip_stream(m.get("stream_title"))], library.used_positions())
     d = day_dir()
     rendered = []
     if CH.get("format") == "ranking":
         # countdown comps: each clip only needs one strong payoff, so the bar is one lower and no minimum length
         # 9 Nov cost: one countdown is posted per day, so make one (the default --count 4 made 4 and vision-checked ~35 clips)
         a.count = min(a.count, CH.get("daily_count", 1))
-        rpool = diversify(library.top(None, a.count * RANK_N * 4, a.min_virality - 1), library.used_positions())
+        clip_s = CH.get("rank_style", {}).get("clip_s")  # story gate BEFORE diversify, so the per-stream caps aren't spent on drops
+        rpool = [m for m in library.top(None, a.count * RANK_N * 8, a.min_virality - 1)
+                 if not skip_stream(m.get("stream_title")) and (not clip_s or E.story_window(m, *clip_s))]
+        rpool = diversify(rpool, library.used_positions())
         best = vision_filter(rpool, a.count * RANK_N)
         # 10 Nov: slower streamers (Kreek/Caylus) rarely yield 5 keepers a day -> a shorter countdown beats no post
         # 10 Nov (Andrew): 2 good clips -> a top 2; 1 good clip -> a single-clip Short; only 0 skips the day

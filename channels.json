@@ -75,8 +75,15 @@
         "And number one.",
         "And the craziest one.",
         "Finally, number one."
+      ],
+      "clip_s": [
+        10,
+        12
       ]
-    }
+    },
+    "skip_streams_re": "JOIN TH(IS|E) STRE|WIN AN? IPHONE|CALL[ -]?IN|FACETIME",
+    "vision_extra": "For this channel keep=false if most frames are a phone/computer screen, a chat or text-message screen, a video-call window or call-in grid, or a game menu - the viewer must see Speed himself big on screen or an IRL scene with people. ",
+    "min_visual": 7
   },
   "kai": {
     "streamer": "Kai Cenat",

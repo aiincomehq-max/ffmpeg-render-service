@@ -79,7 +79,7 @@ def check(m: dict, ch: dict, client: anthropic.Anthropic | None = None) -> dict:
             f"These are {N_FRAMES} frames from a candidate {ch['streamer']} Short (cropped to 9:16 later).\n"
             f"Planned hook: {m.get('hook_tag')}. Why it was picked: {m.get('why')}.\n"
             f"Transcript-estimated payoff is frame {j}.\n"
-            + (GAMEPLAY_RULE if ch.get("gameplay_ok") else STREAMER_RULE) +
+            + (GAMEPLAY_RULE if ch.get("gameplay_ok") else STREAMER_RULE) + ch.get("vision_extra", "") +  # 12 Nov per-channel rule
             "payoff_frame = the frame where the payoff is "
             "most visible. visual_score 1-10 for how watchable it is on a phone. burned_captions=true if the footage "
             "already shows its own subtitles of the speech (stream caption overlay or a previous edit's captions).")})

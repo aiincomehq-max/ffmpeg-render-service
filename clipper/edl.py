@@ -218,6 +218,42 @@ def subversion_comp(claim: str, fail: dict, successes: list[dict], style: dict, 
 
 
 RANK_PRE, RANK_POST = 5.0, 2.5  # seconds kept before/after each moment's payoff (~7.5 s a clip, 5 clips ≈ 40 s)
+_EOS = (".", "!", "?")
+
+
+def _eos(w: str) -> bool:
+    return w.strip().rstrip("\"'”’)").endswith(_EOS)
+
+
+def story_window(m: dict, lo: float = 10.0, hi: float = 12.0) -> tuple[float, float] | None:
+    """12 Nov (owner: a cut-off story is 'shit'): the clip ENDS on the first clean sentence end 1.5-5 s after the
+    payoff (the reaction lands) and STARTS on a sentence start, ~lo..hi s long. A fixed pre/post window cut
+    'Unfortunately Jamal there's…' mid-sentence. Returns None when no clean end/start exists = the story cannot
+    finish inside a countdown slot -> the moment is not used in a countdown (a gate, not a best effort)."""
+    s0, s1 = m["start"], m["end"]
+    pay = m.get("payoff_t") or (s0 + s1) / 2
+    ws = sorted((w for w in m.get("words", []) if s0 <= w["s"] < s1), key=lambda w: w["s"])
+    if not ws:
+        return None
+
+    def gap(i: int) -> float:  # silence after word i (unknown after the last stored word)
+        return ws[i + 1]["s"] - ws[i]["e"] if i + 1 < len(ws) else (1.0 if _eos(ws[i]["w"]) else 0.0)
+
+    # clean end = punctuation + a real pause, or a long pause (unpunctuated transcripts)
+    ends = [i for i, w in enumerate(ws) if pay + 1.5 <= w["e"] <= pay + 5.0
+            and ((_eos(w["w"]) and gap(i) >= 0.3) or gap(i) >= 0.7)]
+    if not ends:
+        return None
+    i = ends[0]
+    e = ws[i]["e"] + min(0.4, gap(i) - 0.05)
+    # clean start = after a sentence end with a pause, or after a long pause
+    starts = [w["s"] for j, w in enumerate(ws) if j > 0 and ((_eos(ws[j - 1]["w"]) and w["s"] - ws[j - 1]["e"] >= 0.15)
+                                                            or w["s"] - ws[j - 1]["e"] >= 0.6)]
+    band = [x for x in starts if e - hi - 1.0 <= x <= e - lo + 1.0 and x <= pay - 3.0]
+    if not band:
+        return None
+    a = min(band, key=lambda x: abs(x - (e - (lo + hi) / 2))) - 0.15
+    return round(max(a, s0), 3), round(min(e, s1), 3)
 
 
 # 9 Nov: text sits just above the picture, not at the very top. y in % of the 1920 frame.
@@ -295,7 +331,13 @@ def ranking_comp(ms: list[dict], game: str, handle: str, music: str | None, look
     words, texts, impacts, slots = [], [], [], []
     for rank, m in zip(range(len(ms), 0, -1), ms):
         pay = m.get("payoff_t") or (m["start"] + m["end"]) / 2
-        a, b = max(m["start"], pay - RANK_PRE), min(m["end"], pay + RANK_POST)
+        if look.get("clip_s"):  # 12 Nov: story-complete window (Speed); other channels keep the fixed window for now
+            w = m.get("clip_win") or story_window(m, *look["clip_s"])  # the window vision judged
+            if not w:
+                raise ValueError(f"no story-complete window for {m.get('hook_tag')} - refusing the fixed cut")
+            a, b = w
+        else:
+            a, b = max(m["start"], pay - RANK_PRE), min(m["end"], pay + RANK_POST)
         o0 = tl.out_t
         tl.add(m["src"], a, b)
         lay = pick_layout(m["src"], a, b, look.get("layout"))
