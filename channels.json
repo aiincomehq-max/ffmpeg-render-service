@@ -125,7 +125,8 @@
     "el_voice": "RckSZHfvva0yOVRPzRfv",
     "el_voice_name": "Arlo - Engaging Storyteller",
     "vo_mode": "none",
-    "moments_model": "claude-sonnet-5-5"
+    "moments_model": "claude-sonnet-5-5",
+    "allow_single": false
   },
   "core": {
     "streamer": "Lacy, StableRonaldo and the Core boys",
@@ -260,7 +261,8 @@
     "el_voice_name": "Arthur",
     "vo_mode": "countdown",
     "min_rank": 2,
-    "lookback": 60
+    "lookback": 60,
+    "allow_single": false
   },
   "kreek": {
     "streamer": "KreekCraft",
@@ -331,7 +333,8 @@
     "el_voice_name": "Liam",
     "vo_mode": "countdown",
     "min_rank": 2,
-    "lookback": 60
+    "lookback": 60,
+    "allow_single": false
   },
   "gta": {
     "streamer": "GTA streamers",
@@ -425,7 +428,8 @@
           ]
         }
       }
-    ]
+    ],
+    "allow_single": false
   },
   "fortnite": {
     "streamer": "Fortnite streamers",
@@ -492,7 +496,8 @@
     "vo_speed": 1.15,
     "el_voice": "ktkP7Nsj67dw2zcplQYt",
     "el_voice_name": "Lawrence",
-    "vo_mode": "countdown"
+    "vo_mode": "countdown",
+    "allow_single": false
   },
   "minecraft": {
     "streamer": "Minecraft streamers",
@@ -559,7 +564,8 @@
     "vo_speed": 1.1,
     "el_voice": "y0s2ExEMuum3muUnA6Zd",
     "el_voice_name": "Marcus",
-    "vo_mode": "countdown"
+    "vo_mode": "countdown",
+    "allow_single": false
   },
   "wow": {
     "streamer": "WoW streamers",
@@ -663,6 +669,7 @@
     "vo_speed": 1.05,
     "el_voice": "RolvCZ4e0AkAR2dzyTx0",
     "el_voice_name": "Christopher",
-    "vo_mode": "countdown"
+    "vo_mode": "countdown",
+    "allow_single": false
   }
 }
