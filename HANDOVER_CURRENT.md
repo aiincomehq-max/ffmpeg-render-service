@@ -5,6 +5,21 @@ Branch `claude/tender-goodall-hg7yeu` (all commits pushed; head cbbc91c at time 
 
 ---
 
+## RESUME POINT — CLIPZ NETWORK (2026-11-12 21:35 UTC) — supersedes 21:25
+
+### Owner 12 Nov: "you choose — let the original data and the learning data from views choose"
+- **YouTube views (live 12 Nov 21:20Z):** countdowns 1,018–1,454 each (gta/fortnite/minecraft/osrs/kreek/caylus, 10–11 Nov); singles 1–19 (Fortnite 8, Kai 3, Speed 12/19/1); Caylus single 242 (hours old). **Speed had never posted a countdown.**
+- Decision from that data: Speed gets ONE countdown test before the ~15 Nov keep/drop call. Commit: Speed `min_rank` 3 and `allow_single` false (no more Speed singles). `auto` cleanup is now REPORT ONLY (dry run); delete only with `cleanup --yes` after the owner says yes.
+- Rebuilt top 3 `out/speed/2026-11-12/211519_ranking-speed.mp4` (36 s; clips 12.0/11.1/13.0 s; moments 56, 64, 60). QA: all three stories end on a full sentence, all IRL, no call-in. Weak points: Speed is barely in frame in #3 (the fan raps) and #1 (the Apple presenter fills it); a stream chat column is beside his cam in #2.
+- **BOOKED 13 Nov 12:55Z** "Only Speed would drink Ochocinco's coffee 💀". YT b251c032 · TT 2b33699f · IG 5b25d60e · FB 8423e194 — all verified `scheduled`.
+
+### EXACT NEXT ACTION
+1. ~14–15 Nov: read the views on this Speed countdown vs the game countdowns (~1k). Clearly below → recommend dropping TurboClipz (owner decides). Near → scan 2–3 older IRL streams for top-5 supply.
+2. Normal morning routine for all channels.
+3. Learning gap: posted.json does not store the format (countdown/single), so `performance.learnings` cannot compare formats. Add it when next touching publish.
+
+---
+
 ## RESUME POINT — CLIPZ NETWORK (2026-11-12 21:25 UTC)
 
 ### Done 12 Nov (evening session)

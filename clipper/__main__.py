@@ -497,7 +497,7 @@ def cmd_auto(a) -> None:
         # 10 Nov: slower streamers (Kreek/Caylus) rarely yield 5 keepers a day -> a shorter countdown beats no post
         # 10 Nov (Andrew): 2 good clips -> a top 2; 1 good clip -> a single-clip Short; only 0 skips the day
         n = RANK_N if len(best) >= RANK_N else (len(best) if len(best) >= CH.get("min_rank", 2) else RANK_N)
-        if len(best) == 1:
+        if len(best) == 1 and CH.get("allow_single", True):  # 12 Nov data: singles 1-19 views vs countdowns ~1.0-1.4k
             out = render_single(best[0], a.handle, d)
             print("  -> (single)", out)
             rendered.append((best[0], out))
@@ -526,7 +526,7 @@ def cmd_auto(a) -> None:
     msg = f"{CH['key']}: {posted} posted automatically, " if posted else f"{CH['key']}: "
     notify(msg + f"{waiting} Shorts waiting for approval (localhost:8765)")
     try:  # daily housekeeping so the Mac disk doesn't fill again (9 Nov)
-        cleanup(apply=True)
+        cleanup(apply=False)  # 12 Nov (owner): nothing is deleted without his yes -> report only; delete via `cleanup --yes`
     except Exception as e:
         print(f"  cleanup skipped ({type(e).__name__}: {str(e)[:80]})")
     if a.serve and best:
