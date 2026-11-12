@@ -5,6 +5,28 @@ Branch `claude/tender-goodall-hg7yeu` (all commits pushed; head cbbc91c at time 
 
 ---
 
+## RESUME POINT — CLIPZ NETWORK (2026-11-12 21:25 UTC)
+
+### Done 12 Nov (evening session)
+- 12 Nov posts all PUBLISHED (Blotato get_post_status): GTA youtu.be/ig1X_z54LUA · OSRS olrmrB6Yaik · Kreek klTCLwXB4pg · Caylus 7_7ZWbTVqH8. Speed, Minecraft, Kai, Fortnite: no post.
+- Commit 26b14a6 (pushed). Speed countdown pipeline fixed (Rule 55, fix the generator):
+  - `edl.story_window`: each clip ENDS on the first clean sentence end 1.5–5 s after the payoff and STARTS on a sentence start, 10–12 s (channels.json `rank_style.clip_s`). No clean end/start = the moment is not used (gate, no fixed-cut fallback). Speed only; other channels still use the old 5 s + 2.5 s cut.
+  - Vision now judges exactly that window, and it is pinned as `clip_win` so the render = what was judged. (The old check sampled the whole 40 s moment, which is how menu/chat screens passed.)
+  - Call-ins: `skip_streams_re` in channels.json (JOIN THIS STREAM / WIN AN IPHONE / call-in / FaceTime), applied at scan time and in the pool. Moments now carry `stream_title` (93 Speed moments backfilled). Excluded: GfCnZ8cAYvQ "JOIN THIS STREAM, WIN AN IPHONE 18!" and glOhY5hiOwI "JOIN THIS STREM MESSI RETIRED" (frames confirm random video-call: Next/Stop buttons).
+  - Speed `vision_extra` (no phone/chat/call/menu screens) and `min_visual` 7.
+- Rebuild `auto --mode heatmap --streams 0`: 10 checked, 3 KEEP (60 iPhone Duo 8, 64 Ochocinco coffee 7, 56 Ohio freestyle 7). Speed needs 5 (min_rank 5), so **no comp and nothing booked**. 7 drops are marked used. Only 2 untested story-complete candidates are left in the bank (75 KSI, 39 John Bobby v5), so the bank cannot make a top 5.
+- ⚠️ The run's built-in cleanup (approved 9 Nov) deleted 155 local cache files (1.32 GB): stream clips no unused moment needs, plus renders >7 days. Drive was untouched. The owner now wants a yes before ANY deletion, so make `auto`'s cleanup a dry run unless he says otherwise (decision pending).
+
+### Decisions waiting on the owner
+1. Speed: (a) scan 2–3 more OLDER IRL streams (~$0.3–0.5 Claude each, ~20 min each), (b) allow a top 3 (min_rank 3) from the 3 keepers, or (c) drop TurboClipz (deadline ~15 Nov).
+2. Should `auto` keep its automatic cleanup, or report only?
+3. Drive eviction (~6.5 GB) still pending.
+
+### EXACT NEXT ACTION
+Owner's Speed answer. If (a): `RENDER_OBJECTIVE=voice-turboclipz-<tag>--h1-speed timeout 6000 python -m clipper --channel speed auto --mode heatmap --streams 3 --count 1` → QA contact sheet + each clip's transcript vs label → book in the 13 Nov day_plan slot only if it passes. Then the normal morning routine for all channels.
+
+---
+
 ## RESUME POINT — CLIPZ NETWORK (2026-11-11 22:30 UTC)
 
 ### Done this session (10–11 Nov)
