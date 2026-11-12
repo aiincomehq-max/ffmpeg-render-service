@@ -253,7 +253,11 @@
         "And the craziest one.",
         "Finally, number one."
       ],
-      "layout": "game"
+      "layout": "game",
+      "clip_s": [
+        10,
+        12
+      ]
     },
     "vo_voice": "af_heart",
     "vo_speed": 1.08,
@@ -325,7 +329,11 @@
         "And the wildest one.",
         "Finally, number one."
       ],
-      "layout": "game"
+      "layout": "game",
+      "clip_s": [
+        10,
+        12
+      ]
     },
     "vo_voice": "am_liam",
     "vo_speed": 1.12,
@@ -396,7 +404,11 @@
         "And taking the top spot.",
         "Finally, number one."
       ],
-      "layout": "game"
+      "layout": "game",
+      "clip_s": [
+        10,
+        12
+      ]
     },
     "vo_voice": "am_puck",
     "vo_speed": 1.1,
@@ -490,7 +502,11 @@
         "And the number one play.",
         "Number one, and it's a big one."
       ],
-      "layout": "game"
+      "layout": "game",
+      "clip_s": [
+        10,
+        12
+      ]
     },
     "vo_voice": "am_eric",
     "vo_speed": 1.15,
@@ -558,7 +574,11 @@
         "And the biggest fail of the week.",
         "Finally, number one."
       ],
-      "layout": "game"
+      "layout": "game",
+      "clip_s": [
+        10,
+        12
+      ]
     },
     "vo_voice": "af_bella",
     "vo_speed": 1.1,
@@ -663,7 +683,11 @@
         "And the biggest drop of the week.",
         "Finally, first place."
       ],
-      "layout": "game"
+      "layout": "game",
+      "clip_s": [
+        10,
+        12
+      ]
     },
     "vo_voice": "bm_george",
     "vo_speed": 1.05,
