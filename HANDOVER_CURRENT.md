@@ -1,5 +1,7 @@
 # CLIPZ NETWORK — HANDOVER_CURRENT (8 clip channels, repo ~/ffmpeg-render-service)
 
+**This channel now renders to the T7** (`out/` + `data/vods` → `/Volumes/T7/YT_RENDERS/clipz/`; prefix runs with `TMPDIR=/Volumes/T7/YT_RENDERS/_tmp`).
+
 Load this first. Also: memory `project_turboclipz_speed_clipper.md`, `SESSION_1_BUILD.md`, `channels.json`.
 Branch `claude/tender-goodall-hg7yeu` (all commits pushed; head ac94804 at time of writing).
 
@@ -22,7 +24,7 @@ Branch `claude/tender-goodall-hg7yeu` (all commits pushed; head ac94804 at time 
 ### ⭐ T7 (13 Nov): renders now go to the Samsung T7
 `out/` → `/Volumes/T7/YT_RENDERS/clipz/out` (symlink, already wired). Before any run: `ls /Volumes/T7/YT_RENDERS` must work (unplugged = ask the owner to plug it in; never replace the link with a Mac folder). Prefix every run with `TMPDIR=/Volumes/T7/YT_RENDERS/_tmp`, e.g.
 `TMPDIR=/Volumes/T7/YT_RENDERS/_tmp RENDER_OBJECTIVE=voice-turboclipz-<tag>--h1-<ch> timeout 3000 python -m clipper --channel <ch> auto --count 1`.
-Still on the Mac: `data/vods` 17 GB (stream cache) and `out.MAC_OLD_DELETE_ON_YES/` 3.6 GB (old renders, delete only on the owner's yes).
+`data/vods` (stream cache) is also on the T7 (`/Volumes/T7/YT_RENDERS/clipz/data_vods`); `data/` on the Mac is now ~28 MB. ⛔ Any delete on the T7 (incl. `cleanup --yes`) needs the owner's yes first; storage_tool does not cover symlinked/T7 paths. Full rule: Drive YT_ALL_CHANNELS_STANDARD.md › "RENDERS GO TO THE SAMSUNG T7 SSD".
 
 ### EXACT NEXT ACTION (13 Nov morning)
 1. Normal morning build for all six game channels, now using the story cut. QA every comp (contact sheet + last caption of each clip is a full sentence). Book only the ones that pass, in their day_plan slots. Verify with get_post_status.
