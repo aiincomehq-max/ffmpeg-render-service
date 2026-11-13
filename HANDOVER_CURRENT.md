@@ -19,6 +19,11 @@ Branch `claude/tender-goodall-hg7yeu` (all commits pushed; head ac94804 at time 
 - ⚠️ caylus/kreek have min_rank 2 in channels.json, which is how a 2-clip comp got rendered. Recommend raising to 3 (or 5 like the ~1k-view posts) — not changed tonight.
 - caylus/kreek timed-out scans: moments banked, but seen.json NOT updated (known gotcha).
 
+### ⭐ T7 (13 Nov): renders now go to the Samsung T7
+`out/` → `/Volumes/T7/YT_RENDERS/clipz/out` (symlink, already wired). Before any run: `ls /Volumes/T7/YT_RENDERS` must work (unplugged = ask the owner to plug it in; never replace the link with a Mac folder). Prefix every run with `TMPDIR=/Volumes/T7/YT_RENDERS/_tmp`, e.g.
+`TMPDIR=/Volumes/T7/YT_RENDERS/_tmp RENDER_OBJECTIVE=voice-turboclipz-<tag>--h1-<ch> timeout 3000 python -m clipper --channel <ch> auto --count 1`.
+Still on the Mac: `data/vods` 17 GB (stream cache) and `out.MAC_OLD_DELETE_ON_YES/` 3.6 GB (old renders, delete only on the owner's yes).
+
 ### EXACT NEXT ACTION (13 Nov morning)
 1. Normal morning build for all six game channels, now using the story cut. QA every comp (contact sheet + last caption of each clip is a full sentence). Book only the ones that pass, in their day_plan slots. Verify with get_post_status.
 2. Kai: build its countdown look (rank_style) or leave it idle — owner to choose.

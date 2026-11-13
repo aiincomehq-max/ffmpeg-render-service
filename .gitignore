@@ -11,3 +11,5 @@ assets/music/hiphop/
 data/music_used.jsonl
 assets/music/emotional/*.mp3
 handover/
+out
+out.MAC_OLD_DELETE_ON_YES/
