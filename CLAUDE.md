@@ -18,6 +18,11 @@ Every shot should look like it was filmed on a real cinema camera, not generated
   silhouettes, masks, or out-of-focus faces.
 - Before generating, flag any shot whose idea itself looks artificial, and propose a realistic version.
 
+## Spend on correctness, not resolution (user decision, 14 Nov)
+- **Default video model: Kling 3.0 `mode: "pro"` (7.5–10 credits). Do NOT use 4K mode.** The user upscales/finishes in CapCut.
+- Put credits into **getting the shot right**: an extra still option, an end frame, or a re-roll of a broken clip.
+- Images: `gpt_image_2_6`, medium quality, 2K. Don't go to high quality unless a shot fails on detail.
+
 ## Gate 1: shot bible (before writing any prompt)
 For each video, write a short shot bible at the top of `prompts/<video>.md` and get it right first:
 - **Location facts:** underground or above ground, interior or exterior, city, time of day, weather.
