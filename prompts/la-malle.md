@@ -52,3 +52,30 @@ Rejected at the image stage: D1-3 a/b and D2-3 a/b (**Eiffel Tower in the window
 | D2-1 | 430374df-7549-4d47-9e7e-8a53ddddb306 | 5f75dbf9-56d7-4c9a-a862-29b123d14f4e | Pro |
 | D2-2 | 488de7a2-b908-4eb9-b771-535d0fe98777 | — | 4K |
 | D2-3 | fc972628-e69f-425d-8780-73f7bb54d6b3 | — | Pro |
+
+## Days 3–24: containment-safe item list (drawers are ~7 cm wide; everything must fit inside, below the rim, per R08/R19)
+Each day = 3 shots: **(1) drawer N** (gloved hand on the closed drawer, single-digit plate N facing camera) · **(2) reveal** (the item inside the small open drawer, below the rim) · **(3) wonder** (salon, snowy rooftops, NO Eiffel Tower).
+| Day | Item (fits a ~7 cm drawer) | Wonder shot |
+|---|---|---|
+| 3 | Rolled narrow silk ribbon (~5 cm roll) | Ribbon unrolls through gloved hands |
+| 4 | 10ml hair-perfume vial | Mist over a strand of hair (no face) |
+| 5 | Mini votive candle, 5 cm | Wick lit with a long match |
+| 6 | Mini 15ml flacon, amber | A drop running down the facet |
+| 7 | Mini 15ml flacon, rose | Window light through the pink juice |
+| 8 | 5 cm gilded star ornament | Hanging on a fir branch |
+| 9 | 10ml roll-on | Glides across a gloved wrist |
+| 10 | Pearl drop earrings on velvet | Sparkle, rack focus |
+| 11 | 20ml cream tube (mini) | A pearl of cream on the glove |
+| 12 | 5 cm velvet bow ornament | Bow untied |
+| 13 | Mini 15ml flacon, gold | Mist through a window beam |
+| 14 | Mini 15ml flacon, smoky | Cap set down on marble |
+| 15 | Mini wrapped soap | Foam on gloved hands |
+| 16 | Gold lipstick case (plain) | Bullet twists up (no text) |
+| 17 | Embroidered bottle-cap charm | Stitch detail |
+| 18 | 5 cm porcelain gown ornament | Turning slowly on a ribbon |
+| 19 | 8ml travel atomiser + leather sleeve | Slides into the sleeve |
+| 20 | Mini 15ml flacon, ruby | Rose petals falling past |
+| 21 | Small gold key charm | Dangling on its ribbon |
+| 22 | Gold band ring | Sparkle on velvet |
+| 23 | 5 cm snow globe | Snow swirling |
+| 24 | Finale: gold tree-topper star → trunk with every drawer open → pull-back | — |
