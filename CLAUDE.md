@@ -31,6 +31,11 @@ For each video, write a short shot bible at the top of `prompts/<video>.md` and 
 - **Text/numbers that must read correctly**, and which shots risk mirroring them (gates, doors, reflections).
 - **The artist rule:** the stand-in's face is never visible.
 
+## Physical containment (check in Gate 1 and Gate 3)
+Anything stored in a drawer, box or compartment **must fit inside it when closed**: never taller, wider or deeper than its container.
+Show stored items **fully inside, below the rim** (lying down if needed). Don't copy a brand's staged display photo where products stand on top.
+At Gate 3, reject any still where an item sticks out of the container it lives in.
+
 ## Gate 2: prompt lint (before generating stills)
 Check every image prompt and motion prompt against the bible. Reject and rewrite any prompt that:
 - doesn't **state the location fact in words** (e.g. "deep underground: no sky, no buildings outside");
