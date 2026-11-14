@@ -7,6 +7,13 @@ Branch `claude/tender-goodall-hg7yeu` (all commits pushed; head ac94804 at time 
 
 ---
 
+## RESUME POINT — CLIPZ NETWORK (2026-11-14) — supersedes 12 Nov 23:05
+- Speed's first countdown PUBLISHED 13 Nov on all 4 (YT youtu.be/7eZTFtJw5Rw, TT, IG, FB — get_post_status verified). **YT 1,166 views by 14 Nov**, the same as the game countdowns (GTA 743, OSRS 1,141, Kreek 1,321, Caylus 1,258 for the 12 Nov posts). Singles had 1–19. → **Data says KEEP TurboClipz as countdown-only**; the drop question is closed unless the owner says otherwise.
+- No morning run happened on 13 Nov, so no game channel posted 13 Nov. Nothing booked for 14 Nov yet.
+- NEXT: morning build for all 6 game channels + Speed (`TMPDIR=/Volumes/T7/YT_RENDERS/_tmp ... auto --count 1`; story cut now on every channel). Speed needs fresh IRL streams (`--mode heatmap --streams 2`, timeout 6000). QA, then book only what passes, after the owner's go.
+
+---
+
 ## RESUME POINT — CLIPZ NETWORK (2026-11-12 23:05 UTC) — supersedes 21:35
 
 ### Done since 21:35
