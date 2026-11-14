@@ -178,3 +178,99 @@ The repo's `app.py` render service needs these changes before it can assemble Vi
 **Order of attack:** BEMZ → LawdGad (he's chasing followers, so he's the most likely to repost) → Rinsa Malone → KOJ → Rimzee.
 
 **For each one:** make the visual in about 20–25s using the section 4 pipeline. Use the track from IG/TikTok's in-app audio. Tag the artist, send a Collab invite, and DM them (and their management where listed): *"Made a spec AI visual for DND, free to repost with a credit 🎬"*. Keep faces backs-to-camera, masked or stand-ins (no AI copy of the artist).
+
+---
+
+## 8. SHOT LIST: BEMZ, "DND" (polished, mainstream)
+
+**Based on his DND promo reel:** about 90 BPM indie rap, so 4 beats is about 2.67s per shot. Cool desaturated greys and blues, with a **neon-yellow accent** (his tracksuit trim). Glasgow subway, 5am.
+**Lyrics used:** *"Do not disturb me, please don't call me"* · *"5:00 a.m. in the morning…"* · *"Text by text by text, now why's my phone all buzzing?"*
+
+**Concept: "DO NOT DISTURB."** At 5am Glasgow is asleep, but every phone is lit up. The **hidden motif is the 🌙 crescent moon, the phone's Do Not Disturb icon**, tucked into every shot for people to spot on rewatch.
+**Featuring him:** a stand-in in a dark-grey tracksuit with neon-yellow trim, seen from behind, in silhouette, or with his face out of frame. No AI copy of his face.
+**Length:** about 24s, 9 shots · **Audio:** "DND" from IG/TikTok's in-app library, starting on the hook
+
+**Style prefix for every image prompt:**
+`cinematic 35mm film still, vertical 9:16, Glasgow 5am, cold blue-grey pre-dawn light, desaturated, single neon-yellow accent, soft film grain, shallow depth of field, moody, high-end music video`
+
+| # | Time | Shot | Hidden 🌙 | Lyric hit | Animate? |
+|---|---|---|---|---|---|
+| 1 | 0–2.7s | ECU of a phone face-down on a subway seat, buzzing; the screen glow leaks out yellow round the edges | Crescent-shaped scratch on the phone case | *"Do not disturb me…"* | ✅ (the buzz) |
+| 2 | 2.7–5.3s | Wide: an empty Glasgow subway carriage at 5am, fluorescent lights; the figure in the tracksuit is sat alone, head down | The carriage window reflection of a ceiling light forms a crescent | *"…please don't call me"* | Still + push-in |
+| 3 | 5.3–8s | Over-the-shoulder shot of the lock screen: the time reads **05:00**, with 47 notifications stacking up | The DND moon icon in the status bar (the one place it's obvious) | *"5:00 a.m. in the morning"* | ✅ (notifications stacking) |
+| 4 | 8–10.7s | Overhead: a Glasgow tenement close (stairwell) spiral, with one landing light on | The spiral stairwell from above forms a crescent | Beat | Still + slow rotate |
+| 5 | 10.7–13.3s | Street level: the Clyde at dawn; the Squinty Bridge's arch lights reflecting in black water | The bridge arch plus its reflection make a crescent | Beat | Still + push-in |
+| 6 | 13.3–16s | A wall of 20 tenement windows; each one has a phone screen glowing behind the curtain | The lit windows form a 🌙 | *"Text by text by text…"* | ✅ (windows lighting up one by one) |
+| 7 | 16–18.7s | Close-up: neon-yellow trainers stepping off the train onto a wet platform | Crescent in the puddle reflection | *"…why's my phone all buzzing?"* | Still + push-in |
+| 8 | 18.7–21.3s | Wide, from behind: the figure walking up the subway escalator into the daylight, flicking his phone to silent | Escalator handrail light curves into a crescent | *"Do not disturb me, please… I beg don't call"* | ✅ (walk + light) |
+| 9 | 21.3–24s | Black screen, a DND toggle switches ON (yellow) → **"DND." · BEMZ · out now** → **"DREAMREACH."** | — | Song tail | Text only (ffmpeg) |
+
+**Animated shots:** 1, 3, 6, 8 (4 video generations). Everything else is a still with an ffmpeg push-in.
+**Caption:**
+```
+DO NOT DISTURB. 🌙
+
+Unofficial spec visual for "DND" by @bigbemz1, out now
+by DREAMREACH.
+
+How many moons did you spot? 👀
+#indierap #glasgow #ukrap #film
+```
+That last caption line drives rewatches and comments. **DM** @bigbemz1, cc `@turbo_mgmt` (his management).
+
+---
+
+## 9. SHOT LIST: RIMZEE, "HOMETOWN" (gritty East London)
+
+**Based on his Hometown Freestyle teaser:** drill at 140 BPM in half-time, so 4 beats is about 1.71s per shot. **Slate blue**, harsh sodium street lamps, night. Upper Clapton shopfronts, estate underpasses, sirens. His signature detail: an **iced-out "73" chain**.
+**Lyric used:** *"Ain't no peace in my hometown, I got beef in my hometown"*
+
+**Concept: "HOMETOWN, NO PEACE."** One night in East London that looks like CCTV, a camcorder and film at once. **The hidden motif is "73"**: on a bus blind, a door number, a shop's price tag, a moped number plate, a lighter. The ending sets up his **"Free At Last" headline show**.
+**Featuring him:** a stand-in in a slate-blue tracksuit with a "73" pendant, face out of frame or backlit. A crew in silhouette.
+**Length:** about 24s, 14 shots (faster cutting = grittier) · **Audio:** "Hometown Freestyle" in-app, or the YouTube release
+
+**Style prefix for every image prompt:**
+`gritty 16mm film still, vertical 9:16, East London estate at night, slate-blue and sodium-orange street light, wet pavement, heavy grain, crushed blacks, handheld documentary realism, UK drill music video`
+
+| # | Time | Shot | Hidden "73" | Audio | Animate? |
+|---|---|---|---|---|---|
+| 1 | 0–1.7s | CCTV angle (fisheye, timestamp burned in) of an estate stairwell; blue lights flicker across the wall | CCTV timestamp reads **23:73**… then glitches | Siren, then the beat drops | ✅ (lights flicker) |
+| 2 | 1.7–3.4s | ECU: an iced "73" pendant swinging in the dark, catching one sodium lamp | The pendant (the obvious one) | *"Ain't no peace…"* | ✅ (swing glint) |
+| 3 | 3.4–5.1s | Night bus pulling past; the destination blind glows | Blind reads **73 · HOMETOWN** | *"…in my hometown"* | Still + push |
+| 4 | 5.1–6.9s | Underpass, crew of 6 in silhouette, backlit by one lamp | Graffiti tag "73" on the tunnel wall | Beat | Still + push |
+| 5 | 6.9–8.6s | Corner shop front, a "£ PLUS" sign flickering, shutters half down | Price sticker "73p" in the window | Beat | Still + push |
+| 6 | 8.6–10.3s | Low angle: saucony-style trainers on wet tarmac, stepping into a puddle reflecting blue lights | — (pure texture) | *"I got beef…"* | Still + push |
+| 7 | 10.3–12s | A moped's tail light flaring as it rides off down an estate road | Number plate ends in **73** | *"…in my hometown"* | ✅ (motion) |
+| 8 | 12–13.7s | Estate balcony walkway; one door ajar, light spilling out | Door number **73** | Beat | Still + push |
+| 9 | 13.7–15.4s | Camcorder-style shot (4:3 crop inside the 9:16, with a REC dot): the crew laughing on a wall | Date on the camcorder overlay: **'73** | Beat | Still + jitter |
+| 10 | 15.4–17.1s | Pigeons scattering off a phone box, sodium light | — | Beat | Still + push |
+| 11 | 17.1–18.9s | Ambulance and police lights washing across a tower block | Lit windows form "73" (blink and you miss it) | Siren under the beat | Still + flicker (ffmpeg) |
+| 12 | 18.9–20.6s | From behind: the figure in the slate-blue tracksuit walking alone toward a closed gate | — | Beat | Still + push |
+| 13 | 20.6–22.3s | **The gate swings open**: dawn light floods in (from night to morning, the turn to "Free At Last") | Gate bars form "73" | Beat lifts | ✅ (gate opens) |
+| 14 | 22.3–24s | Title card **"HOMETOWN." · RIMZEE · FREE AT LAST, LIVE** → **"DREAMREACH."** | — | Song tail | Text only |
+
+**Animated shots:** 1, 2, 7, 13 (4 video generations). The rest are stills with ffmpeg push/jitter/flicker effects.
+**Caption:**
+```
+HOMETOWN. NO PEACE.
+
+Unofficial spec visual for @therealrimzee — Hometown Freestyle
+Free At Last headline show, tickets in his bio 🎟️
+by DREAMREACH.
+
+Count the 73s 👀
+#ukrap #ukdrill #eastlondon #film
+```
+Plugging his show in the caption gives him a commercial reason to repost. **DM** him: *"Made a spec visual for Hometown, plugs the headline show, free to use with a credit 🎬"*.
+
+---
+
+## 10. Production order
+1. **BEMZ first** (the warmer target: 27.7K followers, open to collabs). If it gets a repost or more than 5K views, do **Rimzee** next.
+2. **Both use the same pipeline:** stills, then 4 animated shots, then assembly in `ffmpeg-render-service`. That needs the section 6 upgrades, plus these effects: **push-in**, **jitter (camcorder)**, **flicker (sirens)**, **CCTV/REC overlays**, and a **4:3-in-9:16 crop**.
+3. **Total generation per video:** 12–14 stills plus 4 short clips.
+
+**Terminal next step:**
+```
+claude "Read docs/dreamreach-ai-visuals-plan.md sections 6, 8 and 9. Add the render-service upgrades, then write jobs/bemz-dnd.json and jobs/rimzee-hometown.json from the shot lists"
+```
