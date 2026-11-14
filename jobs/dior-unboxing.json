@@ -1,0 +1,81 @@
+{
+  "_notes": "Dior unboxing (AI-imagined). Caption must start 'AI-imagined unboxing'; turn on AI label. Foley kept. QC fixes: 03 uses only the settled-open end (the wings split unnaturally at 1-2s); 06 uses only 3.0s+ (it jumps to a different drawer at ~2.5s).",
+  "clips": [
+    {
+      "url": "assets/dior-unboxing/01.mp4",
+      "duration_s": 3.5,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/dior-unboxing/02.mp4",
+      "duration_s": 2.5,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/dior-unboxing/03.mp4",
+      "duration_s": 2.0,
+      "trim_start_s": 2.8
+    },
+    {
+      "url": "assets/dior-unboxing/05.mp4",
+      "duration_s": 3.0,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/dior-unboxing/06.mp4",
+      "duration_s": 1.8,
+      "trim_start_s": 3.0
+    },
+    {
+      "url": "assets/dior-unboxing/07.mp4",
+      "duration_s": 3.0,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/dior-unboxing/08.mp4",
+      "duration_s": 3.0,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/dior-unboxing/09.mp4",
+      "duration_s": 2.5,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/dior-unboxing/10.mp4",
+      "duration_s": 3.5,
+      "trim_start_s": 0.5
+    }
+  ],
+  "keep_clip_audio": true,
+  "grain": true,
+  "overlays": [
+    {
+      "text": "THE £6,500 DIOR",
+      "start_s": 0.0,
+      "end_s": 3.5,
+      "y": 0.1,
+      "fontsize": 80,
+      "color": "#F3E6C8",
+      "font": "serif"
+    },
+    {
+      "text": "ADVENT CALENDAR UNBOXING",
+      "start_s": 0.0,
+      "end_s": 3.5,
+      "y": 0.15,
+      "fontsize": 56,
+      "color": "#F3E6C8",
+      "font": "serif"
+    }
+  ],
+  "end_card": {
+    "text": "DREAMREACH.",
+    "subtext": "AI-imagined unboxing",
+    "duration_s": 2.0,
+    "color": "#F3E6C8",
+    "background": "black",
+    "font": "serif",
+    "fontsize": 90
+  }
+}

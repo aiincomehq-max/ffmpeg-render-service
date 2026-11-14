@@ -1,0 +1,76 @@
+{
+  "_notes": "Hermès Chypre Himalaya unboxing (AI). No price until verified. Foley kept. QC fixes: 05 uses 0.3-2.3s only (the sandal changes shape after ~2.3s); 02 ends before the ribbon tangles.",
+  "clips": [
+    {
+      "url": "assets/chypre-unboxing/01.mp4",
+      "duration_s": 3.0,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/chypre-unboxing/02.mp4",
+      "duration_s": 2.5,
+      "trim_start_s": 0.3
+    },
+    {
+      "url": "assets/chypre-unboxing/03.mp4",
+      "duration_s": 3.0,
+      "trim_start_s": 0.3
+    },
+    {
+      "url": "assets/chypre-unboxing/04.mp4",
+      "duration_s": 2.5,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/chypre-unboxing/05.mp4",
+      "duration_s": 2.0,
+      "trim_start_s": 0.3
+    },
+    {
+      "url": "assets/chypre-unboxing/06.mp4",
+      "duration_s": 3.5,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/chypre-unboxing/07.mp4",
+      "duration_s": 3.0,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/chypre-unboxing/08.mp4",
+      "duration_s": 3.0,
+      "trim_start_s": 0.5
+    }
+  ],
+  "keep_clip_audio": true,
+  "grain": true,
+  "overlays": [
+    {
+      "text": "HERMÈS CHYPRE",
+      "start_s": 0.0,
+      "end_s": 3.0,
+      "y": 0.1,
+      "fontsize": 84,
+      "color": "#F3E6C8",
+      "font": "serif"
+    },
+    {
+      "text": "HIMALAYA CROCODILE · LIMITED EDITION",
+      "start_s": 0.0,
+      "end_s": 3.0,
+      "y": 0.155,
+      "fontsize": 44,
+      "color": "#F3E6C8",
+      "font": "serif"
+    }
+  ],
+  "end_card": {
+    "text": "DREAMREACH.",
+    "subtext": "AI-imagined unboxing",
+    "duration_s": 2.0,
+    "color": "#F3E6C8",
+    "background": "black",
+    "font": "serif",
+    "fontsize": 90
+  }
+}

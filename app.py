@@ -92,6 +92,8 @@ class RenderRequest(BaseModel):
     grain: bool = False
     vignette: bool = False
     end_card: Optional[EndCard] = None
+    keep_clip_audio: bool = False            # keep the clips' own sound (foley/ASMR) in the edit
+    clip_audio_volume: float = 1.0
 
 
 # ---------- helpers ----------
@@ -205,6 +207,22 @@ def make_end_card(card: EndCard, out: str, job_dir: str):
                 "-vf", ",".join(filters), *VENC, out])
 
 
+def has_audio(path: str) -> bool:
+    out = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "a", "-show_entries",
+                          "stream=index", "-of", "csv=p=0", path], stdout=subprocess.PIPE, text=True).stdout
+    return bool(out.strip())
+
+
+def audio_segment(src: Optional[str], out: str, start: float, duration: float):
+    """The clip's own sound for its slot, or silence if it has none (images, reversed, silent clips)."""
+    if src and has_audio(src):
+        run_ffmpeg(["ffmpeg", "-y", "-ss", str(start), "-i", src, "-t", str(duration), "-vn",
+                    "-af", f"apad,atrim=0:{duration}", "-ac", "2", "-ar", "48000", "-c:a", "pcm_s16le", out])
+    else:
+        run_ffmpeg(["ffmpeg", "-y", "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-t", str(duration),
+                    "-c:a", "pcm_s16le", out])
+
+
 def video_duration(path: str) -> float:
     out = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
                           "-of", "csv=p=0", path], stdout=subprocess.PIPE, text=True).stdout
@@ -232,18 +250,37 @@ def render_video(req: RenderRequest):
         clips = [Clip(url=c) if isinstance(c, str) else c for c in req.clips]
 
         # 1. fetch + normalise each clip to 1080x1920 @30fps for its slot length
-        segments = []
+        segments, audio_segs = [], []
         for i, clip in enumerate(clips):
             src = os.path.join(job_dir, f"src_{i}")
             fetch(clip.url, src)
             seg = os.path.join(job_dir, f"seg_{i:03d}.mp4")
-            normalize_clip(src, seg, clip, clip_duration(clip, req), job_dir)
+            dur = clip_duration(clip, req)
+            normalize_clip(src, seg, clip, dur, job_dir)
             segments.append(seg)
+            if req.keep_clip_audio:
+                aseg = os.path.join(job_dir, f"aseg_{i:03d}.wav")
+                usable = None if (clip.reverse or is_image(src)) else src
+                audio_segment(usable, aseg, clip.trim_start_s, dur)
+                audio_segs.append(aseg)
 
         if req.end_card:
             card = os.path.join(job_dir, "seg_end.mp4")
             make_end_card(req.end_card, card, job_dir)
             segments.append(card)
+            if req.keep_clip_audio:
+                aseg = os.path.join(job_dir, "aseg_end.wav")
+                audio_segment(None, aseg, 0, req.end_card.duration_s)
+                audio_segs.append(aseg)
+
+        clip_audio = None
+        if audio_segs:
+            alist = os.path.join(job_dir, "aconcat.txt")
+            with open(alist, "w") as f:
+                for a in audio_segs:
+                    f.write(f"file '{a}'\n")
+            clip_audio = os.path.join(job_dir, "clip_audio.wav")
+            run_ffmpeg(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", alist, "-c", "copy", clip_audio])
 
         # 2. concat
         concat_file = os.path.join(job_dir, "concat.txt")
@@ -298,8 +335,17 @@ def render_video(req: RenderRequest):
             voice_labels.append(f"[v{n}]")
             idx += 1
 
+        if clip_audio:
+            audio_inputs += ["-i", clip_audio]
+            clip_label = f"[{idx}:a]volume={req.clip_audio_volume}[clipa]"
+            idx += 1
+
         if not audio_inputs:
             shutil.copy(styled, out)
+        elif clip_audio and not (music_label or voice_labels):
+            run_ffmpeg(["ffmpeg", "-y", "-i", styled, *audio_inputs, "-filter_complex", clip_label + ";[clipa]apad[aout]",
+                        "-map", "0:v", "-map", "[aout]", "-c:v", "copy", "-c:a", "aac",
+                        "-b:a", "192k", "-t", str(video_duration(styled)), out])
         else:
             if voice_labels:
                 if len(voice_labels) > 1:
@@ -322,7 +368,12 @@ def render_video(req: RenderRequest):
             else:
                 chains.append("[voicep]anull[aout]")
             chains[-1] = chains[-1].replace("[aout]", "[amixed]")
-            chains.append("[amixed]apad[aout]")
+            if clip_audio:
+                chains.append(clip_label)
+                chains.append("[amixed][clipa]amix=inputs=2:normalize=0[amixed2]")
+                chains.append("[amixed2]apad[aout]")
+            else:
+                chains.append("[amixed]apad[aout]")
             run_ffmpeg(["ffmpeg", "-y", "-i", styled, *audio_inputs,
                         "-filter_complex", ";".join(chains),
                         "-map", "0:v", "-map", "[aout]", "-c:v", "copy", "-c:a", "aac",
