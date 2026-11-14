@@ -1,5 +1,5 @@
 {
-  "_notes": "Hermès Chypre Himalaya unboxing (AI). No price until verified. Foley kept. QC fixes: 05 uses 0.3-2.3s only (the sandal changes shape after ~2.3s); 02 ends before the ribbon tangles.",
+  "_notes": "Hermès Chypre Himalaya unboxing (AI). No price until verified. Foley kept. QC fixes: 05 uses 0.3-2.3s only (the sandal changes shape after ~2.3s); 02 ends before the ribbon tangles. Lid clip (03) left out: it was still rendering; re-add it here when it's done.",
   "clips": [
     {
       "url": "assets/chypre-unboxing/01.mp4",
@@ -9,11 +9,6 @@
     {
       "url": "assets/chypre-unboxing/02.mp4",
       "duration_s": 2.5,
-      "trim_start_s": 0.3
-    },
-    {
-      "url": "assets/chypre-unboxing/03.mp4",
-      "duration_s": 3.0,
       "trim_start_s": 0.3
     },
     {
