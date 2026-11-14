@@ -29,6 +29,8 @@ ALLOW_LOCAL_FILES = os.environ.get("ALLOW_LOCAL_FILES") == "1"
 
 FONT_FILE = os.environ.get("FONT_FILE", "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")
 MONO_FONT_FILE = os.environ.get("MONO_FONT_FILE", "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf")
+SERIF_FONT_FILE = os.environ.get("SERIF_FONT_FILE", "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf")
+FONTS = {"sans": FONT_FILE, "serif": SERIF_FONT_FILE, "mono": MONO_FONT_FILE}
 
 W, H, FPS = 1080, 1920, 30
 
@@ -46,6 +48,7 @@ class Clip(BaseModel):
     look: Literal["none", "cctv", "camcorder"] = "none"
     look_text: Optional[str] = None          # CCTV timestamp / camcorder date text
     reverse: bool = False                    # play the clip backwards (fix wrong-direction motion for free)
+    zoom: float = 1.0                        # centre punch-in (e.g. 1.4) to crop out an edge problem for free
 
 
 class Overlay(BaseModel):
@@ -55,6 +58,7 @@ class Overlay(BaseModel):
     y: float = 0.18                          # fraction of height
     fontsize: int = 64
     color: str = "white"
+    font: Literal["sans", "serif", "mono"] = "sans"
 
 
 class VoiceLine(BaseModel):
@@ -70,6 +74,7 @@ class EndCard(BaseModel):
     color: str = "white"
     background: str = "black"
     fontsize: int = 110
+    font: Literal["sans", "serif", "mono"] = "sans"
 
 
 class RenderRequest(BaseModel):
@@ -169,8 +174,10 @@ def clip_duration(clip: Clip, req: RenderRequest) -> float:
 
 def normalize_clip(src: str, out: str, clip: Clip, duration: float, job_dir: str):
     base = [f"scale={W}:{H}:force_original_aspect_ratio=increase", f"crop={W}:{H}"]
+    if clip.zoom and clip.zoom > 1.0:
+        base = [f"crop=iw/{clip.zoom}:ih/{clip.zoom}"] + base
     if clip.look == "camcorder":
-        base = []  # the camcorder look frames the source as 4:3 itself
+        base = base[:1] if clip.zoom > 1.0 else []  # the camcorder look frames the source as 4:3 itself
     vf = ",".join(base + look_filters(clip, job_dir) + [f"fps={FPS}", "format=yuv420p"])
     if clip.reverse and not is_image(src):
         # reverse the whole source first, then trim, so trim_start_s counts from the new start
@@ -188,10 +195,10 @@ def normalize_clip(src: str, out: str, clip: Clip, duration: float, job_dir: str
 def make_end_card(card: EndCard, out: str, job_dir: str):
     main = text_file(job_dir, card.text)
     fade_out = max(card.duration_s - 0.4, 0)
-    filters = [drawtext(main, FONT_FILE, card.fontsize, card.color, "(w-tw)/2", "(h-th)/2-40")]
+    filters = [drawtext(main, FONTS[card.font], card.fontsize, card.color, "(w-tw)/2", "(h-th)/2-40")]
     if card.subtext:
         sub = text_file(job_dir, card.subtext)
-        filters.append(drawtext(sub, FONT_FILE, 40, f"{card.color}@0.75", "(w-tw)/2", "(h/2)+70"))
+        filters.append(drawtext(sub, FONTS[card.font], 40, f"{card.color}@0.75", "(w-tw)/2", "(h/2)+70"))
     filters += ["fade=t=in:st=0:d=0.4", f"fade=t=out:st={fade_out}:d=0.4", "format=yuv420p"]
     run_ffmpeg(["ffmpeg", "-y", "-f", "lavfi",
                 "-i", f"color=c={card.background}:s={W}x{H}:r={FPS}:d={card.duration_s}",
@@ -255,7 +262,7 @@ def render_video(req: RenderRequest):
             vfilters.append("vignette=PI/5")
         for ov in req.overlays:
             tf = text_file(job_dir, ov.text)
-            vfilters.append(drawtext(tf, FONT_FILE, ov.fontsize, ov.color, "(w-tw)/2",
+            vfilters.append(drawtext(tf, FONTS[ov.font], ov.fontsize, ov.color, "(w-tw)/2",
                                      f"h*{ov.y}",
                                      f"enable='between(t,{ov.start_s},{ov.end_s})'"))
         styled = os.path.join(job_dir, "styled.mp4")

@@ -1,0 +1,62 @@
+{
+  "_notes": "LA MALLE Day 0 teaser (30 Nov). Silent: add piano/strings in-app.",
+  "clips": [
+    {
+      "url": "assets/la-malle-d0/01.mp4",
+      "duration_s": 3.0,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/la-malle-d0/02.mp4",
+      "duration_s": 3.0,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/la-malle-d0/03.mp4",
+      "duration_s": 3.0,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/la-malle-d0/04.mp4",
+      "duration_s": 3.0,
+      "trim_start_s": 0.5,
+      "zoom": 1.45
+    },
+    {
+      "url": "assets/la-malle-d0/05.mp4",
+      "duration_s": 3.0,
+      "trim_start_s": 0.5
+    }
+  ],
+  "grain": true,
+  "vignette": false,
+  "overlays": [
+    {
+      "text": "24 DAYS.",
+      "start_s": 9.0,
+      "end_s": 15.0,
+      "y": 0.1,
+      "fontsize": 115,
+      "color": "#F3E6C8",
+      "font": "serif"
+    },
+    {
+      "text": "1 DECEMBER.",
+      "start_s": 10.5,
+      "end_s": 15.0,
+      "y": 0.16,
+      "fontsize": 89,
+      "color": "#F3E6C8",
+      "font": "serif"
+    }
+  ],
+  "end_card": {
+    "text": "DREAMREACH.",
+    "subtext": "LA MALLE · N° 017 / 170",
+    "duration_s": 2.0,
+    "color": "#F3E6C8",
+    "background": "black",
+    "font": "serif",
+    "fontsize": 90
+  }
+}

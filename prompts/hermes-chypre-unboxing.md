@@ -47,3 +47,15 @@ _Request via EPL Performance · luxury boutique stockroom · 9:16 · ~25s · ref
 ## Cost estimate
 - **Images:** 10 (8 shots + 2 end frames) × 2 options, medium 2K ≈ **20 credits**
 - **Video:** 3 × 4K (30) + 5 × Pro (7.5), sound on (to price) ≈ **130–150 credits**
+
+## Image picks (Gate 3 passed: awaiting "go"). Title card has no price until one is supplied
+| Shot | Start | End | Model |
+|---|---|---|---|
+| 1 Stockroom + title | 2d412003-9ba4-45e4-9977-389f17b33abe | — | Pro |
+| 2 Ribbon | 7133db3b-73e6-485b-8845-9dbf0d270f01 | — | Pro |
+| 3 Lid lifts | 96d7508a-2ff5-4298-848a-86534e8a54e3 | c27d13b9-864d-4578-95ba-82e5345d0faa | Pro |
+| 4 Tissue parts | 5858d5a3-f3b6-4ca3-901f-337d18742817 | — | Pro |
+| 5 Sandal out of the bag | 8a689fc0-b697-468e-9e9d-1949e6e41135 | — | 4K |
+| 6 Scales macro | 7b086a0a-d0fc-4edd-9907-ede6b68f52f2 | — | 4K |
+| 7 Side profile | 548a0217-0c14-495b-8976-7077f0e05396 | — | Pro |
+| 8 Pair + box | 2c7a1f68-f020-43ff-81d9-380f66f953e4 | — | Pro |

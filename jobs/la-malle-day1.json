@@ -1,0 +1,41 @@
+{
+  "_notes": "LA MALLE Day 1. Silent: add music in-app.",
+  "clips": [
+    {
+      "url": "assets/la-malle-d1/01.mp4",
+      "duration_s": 3.2,
+      "trim_start_s": 0.0
+    },
+    {
+      "url": "assets/la-malle-d1/02.mp4",
+      "duration_s": 2.6,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/la-malle-d1/03.mp4",
+      "duration_s": 1.8,
+      "trim_start_s": 0.0
+    }
+  ],
+  "grain": true,
+  "overlays": [
+    {
+      "text": "DAY 1 / 24",
+      "start_s": 0.0,
+      "end_s": 2.5,
+      "y": 0.1,
+      "fontsize": 102,
+      "color": "#F3E6C8",
+      "font": "serif"
+    }
+  ],
+  "end_card": {
+    "text": "DREAMREACH.",
+    "subtext": "LA MALLE · DAY 1 / 24",
+    "duration_s": 1.5,
+    "color": "#F3E6C8",
+    "background": "black",
+    "font": "serif",
+    "fontsize": 90
+  }
+}

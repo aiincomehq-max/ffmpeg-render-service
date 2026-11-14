@@ -50,3 +50,11 @@ logo legible only on the sign and bag. Prices and names go in as **text overlays
 1. Is this **commissioned by Wenzel's** (then we can use their logo file, real bag, store photos), or spec to win them?
 2. A photo of the **real Wenzel's paper bag**.
 3. Which **store** (the signage differs slightly per site)?
+
+## Video 1 (Christmas Donut) image picks (Gate 3 passed: awaiting "go")
+Rejected: W3b (the sign reads "Wenzel's bakers", missing "the").
+| Shot | Image | Model |
+|---|---|---|
+| 1 White choc drizzle | 2d3d1bbc-7106-4e71-9f55-9844420829fe | 4K |
+| 2 Drip falling | 043b1d35-daad-42f6-9932-2d89ff1db706 | Pro |
+| 3 Tray + bag + sign | 238a148e-4ec3-48a7-a0a8-bf80efcd430e | Pro |

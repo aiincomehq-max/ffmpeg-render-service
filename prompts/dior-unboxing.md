@@ -43,3 +43,18 @@ _Gloved hands only · luxury home kitchen · Christmas · 9:16 · ~30s · refere
 ## Cost estimate
 - **Images:** 13 (10 shots + 3 end frames) × 2 options, medium quality 2K ≈ **26 credits**
 - **Video:** 4 × 4K (30) + 6 × Pro (7.5), with sound on (to be priced) ≈ **165–190 credits**
+
+## Image picks (Gate 3 passed: awaiting "go")
+Rejected: D2 a/b (drawers on the outside of the closed cabinet), D3S a/b (closed state showing drawers), D3Eb, D8a (Eiffel-like tower in the globe).
+Dropped the "top lifts" shot: the open state already shows the raised top, as in Dior's photo.
+| Shot | Start | End | Model |
+|---|---|---|---|
+| 1 Wide closed + title | 1322b341-86ab-4ee8-9a60-7ade2063bf24 | — | 4K |
+| 2 Gold clasp | 4a4248ad-57fe-4b18-91ec-971104a502d2 | — | Pro |
+| 3 Wings open | cd8b78fc-2b4d-4d34-a06e-7f1523785130 | dc266a6e-e99b-4cce-8215-10667cb76f10 | 4K |
+| 5 Gingerbread alcove | 5001eda9-e6c8-4d3d-906f-b9de1ee56630 | — | 4K |
+| 6 Drawer → perfume | 2a1442e4-3e50-4323-a4c0-5243810975b1 | b17b06af-6171-417a-9c61-a0012bd37693 | Pro |
+| 7 Bottle lifted | 1e7b6c06-b667-411c-9166-062e623ae354 | — | Pro |
+| 8 Snow globe | 63489507-e164-4c86-8354-fee0edbdfe1a | — | Pro |
+| 9 Lotion set down | 77625257-411b-46fb-b5c3-6c9a850df573 | — | Pro |
+| 10 Wide open + end card | ccd1e0c7-8bd9-485f-b494-a833eca75a68 | — | 4K |
