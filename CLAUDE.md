@@ -1,0 +1,45 @@
+# DreamReach AI video production: rules for Claude
+
+These rules exist because skipping them has already cost real money. They are not optional.
+
+## The money rule
+Image credits are cheap (~0.25). Video credits are not (7.5+ per clip). **Every mistake must be caught at the
+prompt or still-image stage, before any video generation.** Never call a video-generation tool until the
+gates below have passed **and the user has replied "go" to the stills sheet.**
+
+## Gate 1: shot bible (before writing any prompt)
+For each video, write a short shot bible at the top of `prompts/<video>.md` and get it right first:
+- **Location facts:** underground or above ground, interior or exterior, city, time of day, weather.
+- **What is visible through every window/door:** e.g. "subway: windows show tunnel wall only, never sky or city".
+- **Vehicles:** type, and **one direction of travel** per shot.
+- **Text/numbers that must read correctly**, and which shots risk mirroring them (gates, doors, reflections).
+- **The artist rule:** the stand-in's face is never visible.
+
+## Gate 2: prompt lint (before generating stills)
+Check every image prompt and motion prompt against the bible. Reject and rewrite any prompt that:
+- doesn't **state the location fact in words** (e.g. "deep underground: no sky, no buildings outside");
+- gives a motion with **two directions or an ambiguous path** ("toward and past", "comes and goes"):
+  one subject, one action, one direction, and the camera stated ("locked-off static camera");
+- asks for a moving object whose direction matters (vehicles, doors, gates, escalators) **without an
+  end frame**. Use the model's `end_image` role to pin where it finishes, or plan to reverse it in the edit;
+- asks something to rotate or swing while it carries text/numbers (the text will mirror). Keep text facing camera.
+
+Show the user the bible and a one-line summary per shot, with any risky shots flagged, before generating.
+
+## Gate 3: stills check (before any video credit)
+Generate stills (2 per shot), then check **each still against the bible**, not just "does it look good":
+- Is anything outside a window/door that contradicts the location? (city outside a subway = reject)
+- Is the vehicle the right type? Are the text and numbers readable?
+- Does the start frame make the planned motion physically possible?
+Send the user the contact sheet with picks **and stop. Generate video only after the user says "go".**
+
+## Gate 4: clip QC (after video, before render)
+Run `python qc_sheet.py assets/<video>` and check one frame per second of every clip.
+- **Wrong direction (bus reversing, door closing):** fix it for free with `"reverse": true` on that clip in
+  `jobs/<video>.json`. Don't re-generate.
+- **Mirrored text:** trim around it with `trim_start_s` / `duration_s`.
+- Re-generate only when trimming or reversing can't fix it, and tell the user the credit cost first.
+
+## Reporting
+- Report credits used and remaining after every batch.
+- Never call something "checked" unless every frame-per-second row was looked at against the bible.

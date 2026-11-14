@@ -45,6 +45,7 @@ class Clip(BaseModel):
     trim_start_s: float = 0.0                # where in the source clip to start
     look: Literal["none", "cctv", "camcorder"] = "none"
     look_text: Optional[str] = None          # CCTV timestamp / camcorder date text
+    reverse: bool = False                    # play the clip backwards (fix wrong-direction motion for free)
 
 
 class Overlay(BaseModel):
@@ -171,6 +172,11 @@ def normalize_clip(src: str, out: str, clip: Clip, duration: float, job_dir: str
     if clip.look == "camcorder":
         base = []  # the camcorder look frames the source as 4:3 itself
     vf = ",".join(base + look_filters(clip, job_dir) + [f"fps={FPS}", "format=yuv420p"])
+    if clip.reverse and not is_image(src):
+        # reverse the whole source first, then trim, so trim_start_s counts from the new start
+        rev = out + ".rev.mp4"
+        run_ffmpeg(["ffmpeg", "-y", "-i", src, "-vf", "reverse", "-an", *VENC, rev])
+        src = rev
     if is_image(src):
         inputs = ["-loop", "1", "-i", src]
     else:
