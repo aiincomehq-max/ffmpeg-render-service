@@ -1,0 +1,74 @@
+{
+  "_notes": "RIMZEE HOMETOWN. 13 clips at 140 BPM, 4 beats each (1.71s). Shot 1 gets the CCTV look, shot 9 the camcorder 4:3 look. For socials post WITHOUT music_url and add the track in-app; preview.mp3 is for timing only.",
+  "clips": [
+    {
+      "url": "assets/rimzee-hometown/01.mp4",
+      "trim_start_s": 0.5,
+      "look": "cctv",
+      "look_text": "CAM 03  23:73:00"
+    },
+    {
+      "url": "assets/rimzee-hometown/02.mp4",
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/rimzee-hometown/03.mp4",
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/rimzee-hometown/04.mp4",
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/rimzee-hometown/05.mp4",
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/rimzee-hometown/06.mp4",
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/rimzee-hometown/07.mp4",
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/rimzee-hometown/08.mp4",
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/rimzee-hometown/09.mp4",
+      "trim_start_s": 0.5,
+      "look": "camcorder",
+      "look_text": "NOV 14 '73"
+    },
+    {
+      "url": "assets/rimzee-hometown/10.mp4",
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/rimzee-hometown/11.mp4",
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/rimzee-hometown/12.mp4",
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/rimzee-hometown/13.mp4",
+      "trim_start_s": 0.5
+    }
+  ],
+  "bpm": 140,
+  "beats_per_shot": 4,
+  "music_url": "assets/rimzee-hometown/preview.mp3",
+  "music_start_s": 0,
+  "grain": true,
+  "vignette": true,
+  "end_card": {
+    "text": "DREAMREACH.",
+    "subtext": "HOMETOWN · RIMZEE · FREE AT LAST, LIVE",
+    "duration_s": 1.8,
+    "color": "white",
+    "background": "black"
+  }
+}

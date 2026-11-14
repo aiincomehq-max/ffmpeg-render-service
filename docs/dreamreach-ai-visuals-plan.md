@@ -2,7 +2,7 @@
 _Analysis of @visualsbybdot + Video #1 plan · 14 Nov 2026_
 
 > **Claude Code terminal handoff:** open this repo (`ffmpeg-render-service`) on the Mac and run
-> `claude "Read docs/dreamreach-ai-visuals-plan.md and start on the Terminal Tasks section"`.
+> `claude "Read docs/dreamreach-ai-visuals-plan.md section 6 and help me render jobs/bemz-dnd.json"`.
 
 ---
 
@@ -177,15 +177,28 @@ make a spec piece. *(Swap the brand if you prefer. The same template works for L
 
 ---
 
-## 6. Terminal tasks (for the Mac session)
-The repo's `app.py` render service needs these changes before it can assemble Video #1:
+## 6. Render service: DONE (upgraded and tested)
+`app.py` now supports:
+- **Per-clip length:** `duration_s` and `trim_start_s`, or `bpm` + `beats_per_shot` to cut on the beat. Images are accepted as well as video.
+- **Audio:** a `music_url` with `music_start_s`, several `voice_lines` at set times, and automatic **ducking** of the music under the voice. The video is never cut short by a short audio file.
+- **Looks:** `grain`, `vignette`, and per-clip `look`: `"cctv"` (fisheye, timestamp, noise) or `"camcorder"` (4:3 inside 9:16, a blinking REC dot, date).
+- **Text:** overlays and the **"DREAMREACH." end card** (`end_card`). Quotes and colons in text are safe.
+- **Download:** `GET /render/{job_id}` returns the finished MP4.
+- **Old payloads** still work exactly as before.
+- **Local files** are only read when `ALLOW_LOCAL_FILES=1`, so a public deployment can't be made to read the server's disk.
 
-1. **Clip duration is hard-coded to 1.5s.** Add `duration_s` and `trim_start_s` per clip, so each 5s generated clip can be cut down to its best 1–3s.
-2. **No music track.** Add `music_url` and mix it with `voiceover_url` (ducking the music under the dialogue).
-3. **The finished video can't be retrieved.** `/render` returns a `job_id`, but nothing serves `final.mp4`. Add a `GET /render/{job_id}` download endpoint, or upload the file and return a URL.
-4. **Look:** add an optional film-grain + vignette filter, plus an end card (text, font and colour) for the "DREAMREACH." sign-off.
-5. **Beat sync:** optionally take a BPM and snap cut points to the beat (140 BPM ≈ a cut every 1.71s, 2 beats per shot).
-6. Then write a `jobs/block-lore.json` with the 12-shot list above and test a render.
+**Render on the Mac without running the server:**
+```
+python render_job.py jobs/bemz-dnd.json     # → out/bemz-dnd.mp4
+```
+It lists any shot files still missing before it renders.
+
+**Files:**
+- `jobs/*.json` contains the cut lists for all three videos.
+- `prompts/*.md` has the copy-paste image and motion prompts for every shot, plus the file name to save each clip as.
+- `assets/<video>/` is where the clips go (named `01.mp4`, `02.mp4`, …).
+
+**On the Mac, once:** `pip install -r requirements.txt` (and `brew install ffmpeg` if you don't have it).
 
 ---
 
@@ -293,7 +306,7 @@ Plugging his show in the caption gives him a commercial reason to repost. **DM**
 
 ## 10. Production order
 1. **BEMZ first** (the warmer target: 27.7K followers, open to collabs). If it gets a repost or more than 5K views, do **Rimzee** next.
-2. **All three videos use the same pipeline:** stills, then **every shot animated**, then assembly in `ffmpeg-render-service`. That needs the section 6 upgrades, plus overlays for **CCTV timestamp / camcorder REC** and a **4:3-in-9:16 crop** (Rimzee).
+2. **All three videos use the same pipeline:** stills, then **every shot animated**, then assembly in `ffmpeg-render-service`. The section 6 upgrades, including the CCTV and camcorder looks, are already done.
 3. **Generations:** GRM about 16, BEMZ about 11, Rimzee about 17, so **about 44 video generations for all three**, plus about 35 stills.
 
 **Terminal next step:**

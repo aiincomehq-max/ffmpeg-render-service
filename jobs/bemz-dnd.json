@@ -1,0 +1,50 @@
+{
+  "_notes": "BEMZ DND. 8 clips at 90 BPM, 4 beats each (2.67s). For Instagram/TikTok post WITHOUT music_url and add DND from the in-app library. preview.mp3 (any copy of the track) is only for checking timing locally.",
+  "clips": [
+    {
+      "url": "assets/bemz-dnd/01.mp4",
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/bemz-dnd/02.mp4",
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/bemz-dnd/03.mp4",
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/bemz-dnd/04.mp4",
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/bemz-dnd/05.mp4",
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/bemz-dnd/06.mp4",
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/bemz-dnd/07.mp4",
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/bemz-dnd/08.mp4",
+      "trim_start_s": 0.5
+    }
+  ],
+  "bpm": 90,
+  "beats_per_shot": 4,
+  "music_url": "assets/bemz-dnd/preview.mp3",
+  "music_start_s": 0,
+  "grain": true,
+  "vignette": false,
+  "end_card": {
+    "text": "DREAMREACH.",
+    "subtext": "\"DND\" by BEMZ · out now · unofficial spec visual",
+    "duration_s": 2.7,
+    "color": "#F5E14B",
+    "background": "black"
+  }
+}

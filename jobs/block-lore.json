@@ -1,0 +1,85 @@
+{
+  "_notes": "GRM Daily BLOCK LORE. Put the 12 animated 5s clips in assets/block-lore/01.mp4..12.mp4. trim_start_s picks where the best 2s starts. Shot 12 is the stencil reveal; if the AI text warps, delete clip 12 and uncomment-style: add an end_card instead.",
+  "clips": [
+    {
+      "url": "assets/block-lore/01.mp4",
+      "duration_s": 2,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/block-lore/02.mp4",
+      "duration_s": 2,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/block-lore/03.mp4",
+      "duration_s": 1,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/block-lore/04.mp4",
+      "duration_s": 2,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/block-lore/05.mp4",
+      "duration_s": 2,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/block-lore/06.mp4",
+      "duration_s": 2,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/block-lore/07.mp4",
+      "duration_s": 2,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/block-lore/08.mp4",
+      "duration_s": 2,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/block-lore/09.mp4",
+      "duration_s": 2,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/block-lore/10.mp4",
+      "duration_s": 2,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/block-lore/11.mp4",
+      "duration_s": 3,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/block-lore/12.mp4",
+      "duration_s": 2,
+      "trim_start_s": 0.5
+    }
+  ],
+  "music_url": "assets/block-lore/beat.mp3",
+  "music_start_s": 0,
+  "music_volume": 0.85,
+  "duck_music": true,
+  "voice_lines": [
+    {
+      "url": "assets/block-lore/line1.mp3",
+      "start_s": 0.2
+    },
+    {
+      "url": "assets/block-lore/line2.mp3",
+      "start_s": 2.1
+    },
+    {
+      "url": "assets/block-lore/line3.mp3",
+      "start_s": 22.2
+    }
+  ],
+  "grain": true,
+  "vignette": true
+}
