@@ -75,7 +75,24 @@ Yes, Claude can read a full book in chunks and pull out lore, timelines, and scr
 
 **Why Lovecraft:** biggest demand of the public-domain options, overlaps with the horror audience, about 60+ stories all free on Project Gutenberg / Wikisource, and the material suits creepy AI visuals, Ken Burns pans on dark art, and a calm narrator. It also works as sleep-content (long 1 to 3 h videos, which several new breakout channels already use).
 
-**First 5 video ideas:** The Complete Cthulhu Mythos Explained · Every Great Old One Ranked by Power · The Full History of R'lyeh · What Actually Happens in At the Mountains of Madness · The Necronomicon: Everything Lovecraft Wrote About It.
+### Paid series compared (vidIQ keyword data, 14 Nov)
+Searches for the *lore* keyword specifically (what a lore channel actually ranks for):
+
+| Series | Lore searches / month | Competition | Notes |
+|---|---|---|---|
+| **Warhammer 40k** | **116k** ("40k lore"), "warhammer lore" 91k **+78%**, "40k lore to sleep to" 17k | 52 | Biggest and growing. 500+ Black Library novels: too many for any human to read, which suits AI well. Crowded with big channels (Luetin09 etc.). Black Library sells ebooks DRM-free on its own store (check before buying) |
+| **Game of Thrones / ASOIAF** | 60k, **"lore to sleep to" 20k at competition 32** | 51 / 32 | The sleep angle has low competition. Only 5 main books + Fire & Blood + World of Ice & Fire |
+| **Dune** | 17k + "explained" 11k | 46 to 48 | **Timing:** Dune Part Three is due mid-Dec 2026, so search spikes are coming. 6 core books |
+| Witcher | 9k (+53%) | 46 | Mid-size, growing |
+| Red Rising | 3.5k | **26** (summary: 13) | Small but very easy to rank |
+| Lovecraft (free) | 5.3k lore (+103k "cosmic horror") | 42 | Free text, no DRM hassle |
+| Sanderson/Cosmere, Wheel of Time, Malazan, Expanse | under 750 to 5k | n/a | ✗ Too small for lore searches |
+
+**Verdict:** Warhammer 40k (scale) and GoT-sleep (easy win) beat Lovecraft on demand. Dune is the timing play.
+
+**Legal workflow for paid books:** buy a **DRM-free ebook** (EPUB). Don't strip DRM from Kindle books, which is illegal in the UK and US. Put it in a local `books/` folder in the terminal project, **git-ignored and never committed or pushed**. Claude reads it and scripts **in its own words** with only short quotes. Fan-commentary lore channels are standard practice.
+
+**First 5 video ideas (Lovecraft):** The Complete Cthulhu Mythos Explained · Every Great Old One Ranked by Power · The Full History of R'lyeh · What Actually Happens in At the Mountains of Madness · The Necronomicon: Everything Lovecraft Wrote About It.
 
 ---
 
