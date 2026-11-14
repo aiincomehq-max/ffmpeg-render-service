@@ -160,3 +160,21 @@ The repo's `app.py` render service needs these changes before it can assemble Vi
 4. **Look:** add an optional film-grain + vignette filter, plus an end card (text, font and colour) for the "DREAMREACH." sign-off.
 5. **Beat sync:** optionally take a BPM and snap cut points to the beat (140 BPM ≈ a cut every 1.71s, 2 beats per shot).
 6. Then write a `jobs/block-lore.json` with the 12-shot list above and test a render.
+
+---
+
+## 7. Tier B target list: 5 UK rappers with fresh releases (checked 14 Nov 2026)
+
+| # | Artist | Handle | Size | Fresh release | AI visual concept | Confidence |
+|---|---|---|---|---|---|---|
+| **1** | **BEMZ** (Glasgow) | IG `@bigbemz1` ✓ | **27.7K IG** | **"DND"**, out 6 Nov. His promo reel did 153.7K, **100x his usual** | **"Do Not Disturb"**: a 90s Glasgow subway at night, the train carriage turns into hotel corridors with DND signs on every door, and the "DND" letters hidden in tunnel lights, graffiti and the carriage numbers | ✅ Verified (IG + release) |
+| **2** | **Rinsa Malone** (NW London) | TikTok `@rinsamalonemilli100` | **17.2K TikTok** | **"Pedal Bike" ft K1**, video out 7 Nov (133K views, 38x his median) | **"Pedal Bike: The Getaway"**: 2000s estate BMX chase, kids on bikes outrunning a police helicopter, a wheelie through the high street at golden hour | ⚠️ TikTok verified, IG handle not found |
+| **3** | **LawdGad** (Manchester) | IG `@1lawdgad` | **10.2K IG**, bio says "ROAD TO 20K" | Recent "Siddung Deh" video, plus a viral on-stage moment with Bobby Shmurda (97K, 160x his median) | **"Gyalchester Carnival"**: a Manchester rain-soaked street turning into a carnival, sound systems on the trams, colour bursting into a grey city | ✅ Verified IG; release date of "Siddung Deh" unconfirmed |
+| **4** | **KOJ** (Liverpool) | IG not confirmed (`@bigdaddykoj` not found) | Rising (SXSW London, Youth Music Awards) | **"Humble Abode"**, which opened the Youth Music Awards (28 Oct) with a new video | **"Humble Abode"**: a terraced Scouse house that grows into a mansion room by room as the verse builds, then collapses back to the small front room | ⚠️ Release verified, find his current IG handle |
+| **5** | **Rimzee** (East London) | IG `@therealrimzee` ✓ | **130.3K IG** (stretch target) | **"Hometown Freestyle"** (12 Nov) and the "Free At Last" headline show | **"Free At Last"**: a prison gate opening onto a 2000s East London morning, with the headline-show date hidden on bus blinds and shop signs | ✅ Verified (IG + release) |
+
+**Start with BEMZ.** He's indie and managed (`@turbo_mgmt`), and his bio literally says "Brands/Collabs", so he's open to this. His "DND" promo is his biggest reel by far, which means he's actively pushing it right now, and a slick AI visual gives him more to repost.
+
+**Order of attack:** BEMZ → LawdGad (he's chasing followers, so he's the most likely to repost) → Rinsa Malone → KOJ → Rimzee.
+
+**For each one:** make the visual in about 20–25s using the section 4 pipeline. Use the track from IG/TikTok's in-app audio. Tag the artist, send a Collab invite, and DM them (and their management where listed): *"Made a spec AI visual for DND, free to repost with a credit 🎬"*. Keep faces backs-to-camera, masked or stand-ins (no AI copy of the artist).
