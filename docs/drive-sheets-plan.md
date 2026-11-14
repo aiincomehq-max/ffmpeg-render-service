@@ -33,8 +33,9 @@ Status values: `Planned → Stills → Stills approved → Animating → QC → 
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 **QC result** = pass/fail plus the reason, e.g. *"bottle taller than drawer"*. **Fix applied** = trim / zoom / reverse / regenerated.
 
-**Rejected** (what failed and why: the record that stops the same mistake twice)
-| Date | Video | Shot | Problem | Caught at (prompt / still / clip / final) | Credits wasted |
+**Rejected: LOCKED** (mirrors `prompts/rejected.md`; append only, never edited or deleted. The tab is protected)
+| # | Date | Video / shot | What went wrong | Rejected prompt (exact wording that caused it) | LOCKED fix wording | Rule | Caught at (prompt / still / clip / final) | Credits wasted |
+Every new prompt is checked against this tab before generating (CLAUDE.md Gate 2). 27 entries so far (R01–R27).
 
 **Credits** (the spend log)
 | Date | What | Credits | Balance after |

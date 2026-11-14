@@ -1,0 +1,34 @@
+# LOCKED: rejected prompts and the fixes that replace them
+**Gate 2 rule:** before generating anything, check every new image or motion prompt against this list.
+If a prompt repeats a rejected pattern, or lacks the "locked fix" wording for that situation, **rewrite it first**.
+This file is mirrored to the **Rejected** tab of the DreamReach Production Tracker sheet. Append only, never delete.
+
+| # | Video / shot | What went wrong | Rejected prompt (the cause) | LOCKED fix wording | Rule |
+|---|---|---|---|---|---|
+| R01 | BEMZ DND, subway shots 1/2/3/7 | Above-ground city outside an underground train; looked like a bus | "Glasgow subway carriage at 5am" (location not stated) | "deep underground: windows show ONLY black tunnel wall with passing tunnel lights; no sky, no buildings, no city" | State the location fact in words in every prompt |
+| R02 | Rimzee, bus shot 3 | The bus drove forward, then reversed | "drives forward toward and past the camera" | "locked-off static camera; the bus keeps driving forward in ONE continuous direction; never stops, never reverses" (or fix free with `reverse: true`) | One subject, one action, one direction, camera stated |
+| R03 | Rimzee, gate shot 13 | The "73" mirrored as the gate swung | "metal gate swinging open, its bars form 73" | Keep text/numbers facing camera; trim before the swing | Nothing carrying text rotates or swings |
+| R04 | Rimzee, camcorder shot 9 | Crew faces visible | "young men laughing on a wall" | "filmed from BEHIND… faces not visible at all… nobody turns around" | No visible faces without consent |
+| R05 | LA MALLE trunk (T4) | Drawer numbers 009/010/021, Eiffel Tower in the window | "24 drawers with brass number plates", "Paris rooftops" | "numbered 1–24, single digits, NO leading zeros"; "Paris zinc rooftops ONLY, NO Eiffel Tower, no landmarks" | Spell out numbers and exclude clichés |
+| R06 | LA MALLE D1-3 / D2-3 | Eiffel Tower in the window again | prompt with no reference image and no landmark ban | Pass the approved salon image as a reference + "NO Eiffel Tower" | Re-use approved images as references for continuity |
+| R07 | LA MALLE D2-1 end frame | Plates "02/01/03" vs "2/1/3" in the start frame (would morph) | end frame generated without the start frame as reference | Pass the START frame as a reference + "exactly the same plates and numbering" | Start and end frames must match except the action |
+| R08 | LA MALLE drawers | Table-sized trunk, so a full-size bottle couldn't fit | (caught at planning) | "slim 30ml flacon lying on its side, sized to fit the small drawer" | Check object scale against its container |
+| R09 | LA MALLE gown shot | Side plates read "03/09" | — | Fixed in the edit: `zoom: 1.45` | Fix in the edit first (free) |
+| R10 | Wenzel's donut W3b | Sign read "Wenzel's bakers" (missing "the") | — | Check spelling of every sign and bag at the image stage | Check brand text letter by letter |
+| R11 | Wenzel's donut, title overlay | The price card covered the Wenzel's sign | overlay at y=0.12 on the sign shot | Put price cards over empty areas (the dark tray), never over the logo | Overlays never cover brand marks |
+| R12 | Wenzel's latte L2 | A ceramic MUG with a handle instead of the takeaway cup | "matte black cup" | "disposable paper TAKEAWAY cup, NO handle, NOT a mug" + the cup still as a reference | Name the exact container type |
+| R13 | Wenzel's latte L3 | Gingerbread biscuit topper (not on the real product) | "topped with whipped cream and a gingerbread syrup drizzle" (model added a biscuit) | "topped ONLY with whipped cream and syrup; NO biscuit, no other toppings" | Real products: list exactly what's on them, and "nothing else" |
+| R14 | Dior D2 clasp | Drawers on the outside of the closed cabinet | "the closed cabinet… side" | "plain smooth glossy white side panel with NO drawers visible" | Closed state shows no interior |
+| R15 | Dior D3 start frame | The "closed" frame showed drawers and alcove | "both side wings CLOSED" | Generate the closed frame FROM the approved open frame: "EXACTLY the same framing… but fully CLOSED, no drawers/alcove/bottles visible" | Build start/end frames from each other |
+| R16 | Dior wings clip | The cabinet split into two towers mid-animation | start/end frames with different framing | Start and end frames with identical framing + "each wing rotates around its own hinge; the base stays fixed; never splits" | Hinged motion: name the hinge and the fixed base |
+| R17 | Dior drawer clip | Jumped to a different drawer | start/end drawer in different positions | Same drawer in both frames, or cut between two short clips | — |
+| R18 | Dior, whole video | **Cabinet the wrong size**: 60 cm on the worktop; the real one is ~1.1 m furniture | "advent cabinet on the marble island" | "floor-standing furniture about 1.1 m tall, standing ON THE FLOOR in front of the island" | Measure real scale from the brand photo before prompting |
+| R19 | Dior drawer + open cabinet | **Bottle taller than its drawer**; bottles standing on top of drawers | "bottle standing upright… cap peeking above the drawer edge"; copying Dior's staged photo | "lies ON ITS SIDE, ENTIRELY BELOW the drawer rim; nothing sticks out of any drawer" | Stored items must fit inside their container when closed |
+| R20 | Dior bottle in hand | **Bottle the full length of the hand** (~17 cm, 50% too big) | "hand lifts a tall rectangular perfume bottle" | "SMALL 100ml bottle about 11 cm: ~⅔ of the hand; fingers wrap right round, palm and wrist visible" | Give the size relative to the hand |
+| R21 | Dior clasp close-up | Cabinet on the worktop while the wide shots had it on the floor | old still re-used after the scale change | Remake every shot when the scale/location changes | One location truth across all shots |
+| R22 | Dior snow globe D8a | An Eiffel-like tower inside the globe | "snow globe with a gingerbread figure" | "gingerbread HOUSE inside"; pick the clean option | Exclude landmarks |
+| R23 | Hermès Chypre shot 5 | The sandal changed shape after ~2 s | — | Trim to the first 2 s | Check every second of every clip |
+| R24 | Image quality | Images generated at the "low" default | `gpt_image_2_6` with no quality setting | `quality: "medium", resolution: "2k"` | Set the quality explicitly |
+| R25 | Video model | 4K spend with no visible benefit (you upscale in CapCut) | `mode: "4k"` | `mode: "pro"` | Spend on correctness, not resolution |
+| R26 | GTA series (request) | Fake "did you know" money/bank claims; real Rockstar characters | — | Original characters; joke/"what if" captions only | No false factual claims, no copied IP |
+| R27 | Dior / Hermès unboxings | AI can't reproduce exact real products (labels, details) | — | Labels turned away/soft; caption "AI-imagined"; prefer formats where products don't need to match exactly | Real-product accuracy limits |

@@ -37,7 +37,9 @@ Show stored items **fully inside, below the rim** (lying down if needed). Don't 
 At Gate 3, reject any still where an item sticks out of the container it lives in.
 
 ## Gate 2: prompt lint (before generating stills)
-Check every image prompt and motion prompt against the bible. Reject and rewrite any prompt that:
+**First, check every prompt against `prompts/rejected.md` (LOCKED list, mirrored to the tracker's Rejected tab).** Any prompt that repeats a rejected pattern, or lacks the locked fix wording for that situation, must be rewritten. Add every new rejection to that file the moment it's found (append only).
+
+Then check every image prompt and motion prompt against the bible. Reject and rewrite any prompt that:
 - doesn't **state the location fact in words** (e.g. "deep underground: no sky, no buildings outside");
 - gives a motion with **two directions or an ambiguous path** ("toward and past", "comes and goes"):
   one subject, one action, one direction, and the camera stated ("locked-off static camera");
