@@ -311,5 +311,5 @@ Plugging his show in the caption gives him a commercial reason to repost. **DM**
 
 **Terminal next step:**
 ```
-claude "Read docs/dreamreach-ai-visuals-plan.md sections 6, 8 and 9. Add the render-service upgrades, then write jobs/block-lore.json, jobs/bemz-dnd.json and jobs/rimzee-hometown.json from the shot lists"
+claude "Read docs/dreamreach-ai-visuals-plan.md section 6. I have put the BEMZ clips in assets/bemz-dnd, so render jobs/bemz-dnd.json and help me tune the trims"
 ```
