@@ -58,3 +58,19 @@ Dropped the "top lifts" shot: the open state already shows the raised top, as in
 | 8 Snow globe | 63489507-e164-4c86-8354-fee0edbdfe1a | — | Pro |
 | 9 Lotion set down | 77625257-411b-46fb-b5c3-6c9a850df573 | — | Pro |
 | 10 Wide open + end card | ccd1e0c7-8bd9-485f-b494-a833eca75a68 | — | 4K |
+
+## SCALE (measured from Dior's own product photo, 14 Nov)
+Dior doesn't publish dimensions, so these are measured against the **real 100ml La Collection Privée bottles standing in the drawers** in Dior's photo:
+| Item | Size in the photo | Ratio |
+|---|---|---|
+| 100ml eau de parfum bottle | ~100 px | **1 unit** (≈12 cm tall, estimated: Dior's 100ml travel case is 16.9 cm inside) |
+| Drawer front height | ~95–100 px | ≈ 1 bottle: **a 100ml bottle stands about as tall as a drawer** |
+| Wing drawer width | ~190 px | ≈ 2 bottles |
+| 300ml Gris Dior lotion (with pump) | ~145 px | ≈ 1.45 bottles |
+| Whole cabinet, open (height) | ~920 px | **≈ 9 bottles → about 1.1 m tall** |
+| Whole cabinet, open (width) | ~1,115 px | ≈ 11 bottles → about 1.3 m wide |
+
+**What this means for the video:** it's a **floor-standing piece of furniture about 1.1 m tall**, not a box for the worktop. On a kitchen island it would
+nearly touch the ceiling. Our shots made it island-sized (~60 cm), which made the full-size bottles look oversized in the drawers.
+**Fix:** the cabinet stands **on the kitchen floor in front of the marble island**, with the marble front behind and beside it. Bottles about as tall as a drawer front.
+Shots to redo: 1 (wide closed), 3 (wings open), 6 (drawer → bottle), 10 (wide open). The close-ups 2, 5, 7, 8 and 9 hold up.
