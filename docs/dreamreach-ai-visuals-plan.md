@@ -60,7 +60,7 @@ backs up exactly what he told you.
 
 ## 2. Where DreamReach.x starts from
 - IG: 0 followers, 1 post (sunset/water reel, 150 views). Starting fresh is fine: the borrowed audience comes from the tag.
-- **Higgsfield balance checked: 0 credits, free plan.** The plan below keeps generation cheap until a video proves the model works.
+- **Higgsfield balance checked: 0 credits, free plan.** Every shot in every video gets animated, so budget for a paid plan (see the credit maths in section 4).
 - You already have a free assembly tool in this repo (`ffmpeg-render-service`). We use it so the paid tools only make raw shots, not the edit.
 
 ### Pivot the profile before posting (5 minutes)
@@ -111,15 +111,41 @@ make a spec piece. *(Swap the brand if you prefer. The same template works for L
 | 11 | 19–22s | Wide: crew walking toward camera under a railway bridge, backlit | Bridge girders frame the shape | Beat rides out |
 | 12 | 22–24s | Black card: **"DREAMREACH."**, and small text under it: "unofficial spec film for @grmdaily" | — | Final dialogue: *"Told you. Everyone's seen it."* |
 
-### Low-cost production pipeline
-1. **Stills first (cheap):** generate 12 keyframe images, one per shot, in an image model. That's the cheapest step, so re-roll stills until each one is right.
-2. **Animate only the moving shots:** shots **1, 3, 6 and 11** as 5s image-to-video clips. Shots 2, 4, 5, 7, 8, 9 and 10 can be stills with a slow push-in/zoom done in ffmpeg (free).
-   → about **4 video generations instead of 12**, roughly a third of the cost of doing them all as video.
-3. **Voice:** generate 2 dialogue lines in ElevenLabs (a London male voice).
-4. **Assemble in `ffmpeg-render-service`** with a beat-synced cut, grain overlay, end card and audio mix (needs the upgrades in section 6).
-5. **Run a virality check** before posting (Higgsfield `virality_predictor` or vidIQ) to compare hook options.
+### Production pipeline (every shot animated)
+1. **Stills first:** generate the 12 keyframe images below. Images are the cheap step, so re-roll each one until it's right **before** animating. For the logo shots, give the image model the **GRM Daily logo as a reference image** so the shape comes out correctly.
+2. **Animate every shot:** run image-to-video on all 12 stills with the motion prompts below. Generate **5s clips** and trim each to its 1–3s slot in the edit, using the best 2s of motion.
+3. **Credit maths:** 12 clips, plus about 4 re-rolls for the shots that come out wrong, is **about 16 video generations per video**. Check the per-clip cost on whichever Higgsfield plan you pick and make sure one month covers about 3 videos (about 50 generations).
+4. **Voice:** generate 2 dialogue lines in ElevenLabs (a London male voice).
+5. **Assemble in `ffmpeg-render-service`** with a beat-synced cut, grain overlay, end card and audio mix (needs the upgrades in section 6).
+6. **Run a virality check** before posting (Higgsfield `virality_predictor` or vidIQ) to compare hook options.
 
-**Higgsfield, if you do subscribe:** take the cheapest monthly plan for one month only, use it just for the 4 animated shots, and cancel if Video #1–#3 don't get a repost.
+### Image prompts: GRM Daily "BLOCK LORE" (12 shots)
+
+**Style prefix (paste in front of every prompt):**
+`cinematic 35mm film still, vertical 9:16, London 2006 at night, sodium-orange streetlights against teal shadows, wet surfaces, heavy film grain, halation on highlights, crushed blacks, anamorphic shallow depth of field, gritty UK rap music video, photoreal, no text except where stated`
+
+**Negative prompt (if the model takes one):**
+`cartoon, 3d render, plastic skin, extra fingers, warped letters, misspelled text, watermark, modern 2020s cars, clean digital look, faces looking at camera`
+
+| # | Image prompt (after the style prefix) | Motion prompt (image-to-video) |
+|---|---|---|
+| 1 | Extreme close-up of a man's hand pulling a heavy silver chain out from the collar of a black hoodie, the pendant is a chunky silver **"GRM" letter pendant**, his breath fog drifting across frame, a single orange streetlight above, face out of frame | The hand slowly lifts the chain out; the pendant swings and catches the light; breath fog drifts; slight handheld sway |
+| 2 | Interior of a black 2006 VW Golf GTI at night, shot into the rear-view mirror, the mirror reflects two young men in black North Face puffer jackets in the back seat, faces in shadow; hanging from the mirror is a cardboard **air freshener shaped like the letters "GRM"** | The air freshener swings gently; streetlights sweep across the car interior as it drives; the reflections shift |
+| 3 | Top-down drone view of a wet, empty council-estate car park at night under orange floodlights, a black hatchback mid-doughnut, tyre smoke; **the black tyre marks on the wet tarmac spell "GRM"** in big curving letters | The car finishes a doughnut and drives out of frame; smoke drifts; the camera rises slowly to reveal the full "GRM" tyre marks |
+| 4 | Inside a 2000s London barbershop at night, fluorescent strip light, a young man in the chair seen from behind, a barber's hand with clippers shaping a fade; **the razor line design shaved into the back of his head reads "GRM"**; the mirror and product shelves are soft in the background | The clippers make one final pass along the design; the barber brushes the hair off; a slow push-in on the lettering |
+| 5 | A London fried chicken shop counter at night seen through the steamed-up front window, warm fryer steam, menu boards; **a red and white neon sign in the window spells "GRM"**, glowing and reflected in the wet pavement outside | Steam rises; the neon flickers once and then holds; a figure passes in front of the window, out of focus |
+| 6 | A brutalist London tower block at night, shot from the ground looking up, hundreds of windows dark; **a small group of lit windows forms the letters "GRM"** across the middle floors, orange sky glow | The windows flick on one by one until "GRM" is complete; slow tilt up; a plane light crosses the sky |
+| 7 | Low-angle close-up of a pair of black Air Max 95 trainers stepping into a puddle on a London pavement at night; **the puddle reflection shows a street sign reading "GRM"** | The foot lands; the splash breaks the reflection; the ripples settle and the "GRM" sign reappears in the water |
+| 8 | Inside a small home recording booth at night, red "ON AIR" bulb, a large condenser mic with a round pop filter in sharp focus, foam panels behind; **the mesh of the pop filter has the "GRM" letters subtly woven into its pattern**, back-lit | The red light pulses; a slow rack focus from the pop filter to the mic; the pop filter vibrates slightly as if someone is rapping |
+| 9 | The top deck of a red London night bus, front seats, rain outside, the front window fogged with condensation; **a finger has drawn "GRM" in the condensation**, streetlights blurred beyond | Rain streaks down; the streetlights stream past through the letters; a drop runs down through the "G" |
+| 10 | A graffiti wall under a railway arch at night, a hooded figure from behind, mid-spray with a can; **a fresh wildstyle graffiti piece reads "GRM"** in chrome and black, paint mist in the air | The spray can hisses; paint mist drifts; the final outline of the "M" is sprayed in; drips start to run |
+| 11 | Wide shot under a Victorian railway bridge in East London at night, a crew of 6 young men in puffer jackets walking toward camera, strong backlight from one lamp behind them, faces in silhouette; **the iron girders overhead form the shape of a giant "G"** | The crew walks toward camera in slow motion; a train rumbles across the bridge above, shaking light through the girders |
+| 12 | A dark brick wall at night; a paint stencil being lifted off it to reveal **"DREAMREACH."** sprayed in clean white capitals; a small tag underneath reads "spec film for @grmdaily" | The stencil peels away to reveal the text; a last puff of paint mist; the light fades to black |
+
+**Tips for the hidden logos:**
+- AI image models often misspell letters. Generate 4 variations per logo shot and keep the cleanest.
+- If the letters keep warping, use an **image edit** pass on the best still: paste in the GRM logo and ask the model to "blend this logo into the scene as [tyre marks / neon / condensation]".
+- Shots 1, 3, 5, 6, 10 are where the logo is most visible. The others (4, 7, 8, 11) are meant to be subtle, the ones viewers spot on a rewatch.
 
 ### Posting (same day, all four DreamReach accounts)
 - **Caption:**
@@ -154,7 +180,7 @@ make a spec piece. *(Swap the brand if you prefer. The same template works for L
 ## 6. Terminal tasks (for the Mac session)
 The repo's `app.py` render service needs these changes before it can assemble Video #1:
 
-1. **Clip duration is hard-coded to 1.5s.** Add a `duration_s` per clip (accept still images too) plus an optional Ken Burns push-in for stills.
+1. **Clip duration is hard-coded to 1.5s.** Add `duration_s` and `trim_start_s` per clip, so each 5s generated clip can be cut down to its best 1–3s.
 2. **No music track.** Add `music_url` and mix it with `voiceover_url` (ducking the music under the dialogue).
 3. **The finished video can't be retrieved.** `/render` returns a `job_id`, but nothing serves `final.mp4`. Add a `GET /render/{job_id}` download endpoint, or upload the file and return a URL.
 4. **Look:** add an optional film-grain + vignette filter, plus an end card (text, font and colour) for the "DREAMREACH." sign-off.
@@ -193,19 +219,19 @@ The repo's `app.py` render service needs these changes before it can assemble Vi
 **Style prefix for every image prompt:**
 `cinematic 35mm film still, vertical 9:16, Glasgow 5am, cold blue-grey pre-dawn light, desaturated, single neon-yellow accent, soft film grain, shallow depth of field, moody, high-end music video`
 
-| # | Time | Shot | Hidden 🌙 | Lyric hit | Animate? |
+| # | Time | Shot | Hidden 🌙 | Lyric hit | Motion prompt |
 |---|---|---|---|---|---|
-| 1 | 0–2.7s | ECU of a phone face-down on a subway seat, buzzing; the screen glow leaks out yellow round the edges | Crescent-shaped scratch on the phone case | *"Do not disturb me…"* | ✅ (the buzz) |
-| 2 | 2.7–5.3s | Wide: an empty Glasgow subway carriage at 5am, fluorescent lights; the figure in the tracksuit is sat alone, head down | The carriage window reflection of a ceiling light forms a crescent | *"…please don't call me"* | Still + push-in |
-| 3 | 5.3–8s | Over-the-shoulder shot of the lock screen: the time reads **05:00**, with 47 notifications stacking up | The DND moon icon in the status bar (the one place it's obvious) | *"5:00 a.m. in the morning"* | ✅ (notifications stacking) |
-| 4 | 8–10.7s | Overhead: a Glasgow tenement close (stairwell) spiral, with one landing light on | The spiral stairwell from above forms a crescent | Beat | Still + slow rotate |
-| 5 | 10.7–13.3s | Street level: the Clyde at dawn; the Squinty Bridge's arch lights reflecting in black water | The bridge arch plus its reflection make a crescent | Beat | Still + push-in |
-| 6 | 13.3–16s | A wall of 20 tenement windows; each one has a phone screen glowing behind the curtain | The lit windows form a 🌙 | *"Text by text by text…"* | ✅ (windows lighting up one by one) |
-| 7 | 16–18.7s | Close-up: neon-yellow trainers stepping off the train onto a wet platform | Crescent in the puddle reflection | *"…why's my phone all buzzing?"* | Still + push-in |
-| 8 | 18.7–21.3s | Wide, from behind: the figure walking up the subway escalator into the daylight, flicking his phone to silent | Escalator handrail light curves into a crescent | *"Do not disturb me, please… I beg don't call"* | ✅ (walk + light) |
-| 9 | 21.3–24s | Black screen, a DND toggle switches ON (yellow) → **"DND." · BEMZ · out now** → **"DREAMREACH."** | — | Song tail | Text only (ffmpeg) |
+| 1 | 0–2.7s | ECU of a phone face-down on a subway seat, buzzing; the screen glow leaks out yellow round the edges | Crescent-shaped scratch on the phone case | *"Do not disturb me…"* | The phone vibrates against the seat; yellow light pulses out from under it with each buzz |
+| 2 | 2.7–5.3s | Wide: an empty Glasgow subway carriage at 5am, fluorescent lights; the figure in the tracksuit is sat alone, head down | The carriage window reflection of a ceiling light forms a crescent | *"…please don't call me"* | The train sways; the lights flicker; the tunnel walls rush past the windows; slow push-in on the figure |
+| 3 | 5.3–8s | Over-the-shoulder shot of the lock screen: the time reads **05:00**, with 47 notifications stacking up | The DND moon icon in the status bar (the one place it's obvious) | *"5:00 a.m. in the morning"* | Notifications drop in and stack faster and faster down the screen; the thumb hovers |
+| 4 | 8–10.7s | Overhead: a Glasgow tenement close (stairwell) spiral, with one landing light on | The spiral stairwell from above forms a crescent | Beat | Slow overhead rotation; the landing light flickers on, then off |
+| 5 | 10.7–13.3s | Street level: the Clyde at dawn; the Squinty Bridge's arch lights reflecting in black water | The bridge arch plus its reflection make a crescent | Beat | Black water ripples; the reflection wobbles; dawn light slowly lifts behind the bridge |
+| 6 | 13.3–16s | A wall of 20 tenement windows; each one has a phone screen glowing behind the curtain | The lit windows form a 🌙 | *"Text by text by text…"* | Windows light up one by one with phone glow until the 🌙 shape is complete |
+| 7 | 16–18.7s | Close-up: neon-yellow trainers stepping off the train onto a wet platform | Crescent in the puddle reflection | *"…why's my phone all buzzing?"* | The trainer steps down; the puddle splashes; the reflection breaks and re-forms |
+| 8 | 18.7–21.3s | Wide, from behind: the figure walking up the subway escalator into the daylight, flicking his phone to silent | Escalator handrail light curves into a crescent | *"Do not disturb me, please… I beg don't call"* | He rides the escalator up into the daylight; his thumb flicks the silent switch; the light blooms |
+| 9 | 21.3–24s | Black screen, a DND toggle switches ON (yellow) → **"DND." · BEMZ · out now** → **"DREAMREACH."** | — | Song tail | The DND toggle slides on and glows yellow; the text fades in (this one is done in ffmpeg, no generation) |
 
-**Animated shots:** 1, 3, 6, 8 (4 video generations). Everything else is a still with an ffmpeg push-in.
+**Every shot is animated:** 8 video generations (shots 1–8), and shot 9 is built in ffmpeg. Allow about 3 re-rolls, so **about 11 generations**.
 **Caption:**
 ```
 DO NOT DISTURB. 🌙
@@ -232,24 +258,24 @@ That last caption line drives rewatches and comments. **DM** @bigbemz1, cc `@tur
 **Style prefix for every image prompt:**
 `gritty 16mm film still, vertical 9:16, East London estate at night, slate-blue and sodium-orange street light, wet pavement, heavy grain, crushed blacks, handheld documentary realism, UK drill music video`
 
-| # | Time | Shot | Hidden "73" | Audio | Animate? |
+| # | Time | Shot | Hidden "73" | Audio | Motion prompt |
 |---|---|---|---|---|---|
-| 1 | 0–1.7s | CCTV angle (fisheye, timestamp burned in) of an estate stairwell; blue lights flicker across the wall | CCTV timestamp reads **23:73**… then glitches | Siren, then the beat drops | ✅ (lights flicker) |
-| 2 | 1.7–3.4s | ECU: an iced "73" pendant swinging in the dark, catching one sodium lamp | The pendant (the obvious one) | *"Ain't no peace…"* | ✅ (swing glint) |
-| 3 | 3.4–5.1s | Night bus pulling past; the destination blind glows | Blind reads **73 · HOMETOWN** | *"…in my hometown"* | Still + push |
-| 4 | 5.1–6.9s | Underpass, crew of 6 in silhouette, backlit by one lamp | Graffiti tag "73" on the tunnel wall | Beat | Still + push |
-| 5 | 6.9–8.6s | Corner shop front, a "£ PLUS" sign flickering, shutters half down | Price sticker "73p" in the window | Beat | Still + push |
-| 6 | 8.6–10.3s | Low angle: saucony-style trainers on wet tarmac, stepping into a puddle reflecting blue lights | — (pure texture) | *"I got beef…"* | Still + push |
-| 7 | 10.3–12s | A moped's tail light flaring as it rides off down an estate road | Number plate ends in **73** | *"…in my hometown"* | ✅ (motion) |
-| 8 | 12–13.7s | Estate balcony walkway; one door ajar, light spilling out | Door number **73** | Beat | Still + push |
-| 9 | 13.7–15.4s | Camcorder-style shot (4:3 crop inside the 9:16, with a REC dot): the crew laughing on a wall | Date on the camcorder overlay: **'73** | Beat | Still + jitter |
-| 10 | 15.4–17.1s | Pigeons scattering off a phone box, sodium light | — | Beat | Still + push |
-| 11 | 17.1–18.9s | Ambulance and police lights washing across a tower block | Lit windows form "73" (blink and you miss it) | Siren under the beat | Still + flicker (ffmpeg) |
-| 12 | 18.9–20.6s | From behind: the figure in the slate-blue tracksuit walking alone toward a closed gate | — | Beat | Still + push |
-| 13 | 20.6–22.3s | **The gate swings open**: dawn light floods in (from night to morning, the turn to "Free At Last") | Gate bars form "73" | Beat lifts | ✅ (gate opens) |
-| 14 | 22.3–24s | Title card **"HOMETOWN." · RIMZEE · FREE AT LAST, LIVE** → **"DREAMREACH."** | — | Song tail | Text only |
+| 1 | 0–1.7s | CCTV angle (fisheye, timestamp burned in) of an estate stairwell; blue lights flicker across the wall | CCTV timestamp reads **23:73**… then glitches | Siren, then the beat drops | Blue lights flicker across the wall; the CCTV timestamp ticks and glitches; a shadow passes |
+| 2 | 1.7–3.4s | ECU: an iced "73" pendant swinging in the dark, catching one sodium lamp | The pendant (the obvious one) | *"Ain't no peace…"* | The pendant swings slowly; a glint flares across the diamonds |
+| 3 | 3.4–5.1s | Night bus pulling past; the destination blind glows | Blind reads **73 · HOMETOWN** | *"…in my hometown"* | The bus pulls past left to right; the glowing blind slides through frame; rain streaks |
+| 4 | 5.1–6.9s | Underpass, crew of 6 in silhouette, backlit by one lamp | Graffiti tag "73" on the tunnel wall | Beat | The crew steps forward in slow motion; the lamp behind them flickers |
+| 5 | 6.9–8.6s | Corner shop front, a "£ PLUS" sign flickering, shutters half down | Price sticker "73p" in the window | Beat | The sign flickers; the shutter rattles down another foot |
+| 6 | 8.6–10.3s | Low angle: saucony-style trainers on wet tarmac, stepping into a puddle reflecting blue lights | — (pure texture) | *"I got beef…"* | The trainer steps down hard; the puddle splashes; blue light ripples |
+| 7 | 10.3–12s | A moped's tail light flaring as it rides off down an estate road | Number plate ends in **73** | *"…in my hometown"* | The moped pulls away fast; the tail light streaks; exhaust smoke lingers |
+| 8 | 12–13.7s | Estate balcony walkway; one door ajar, light spilling out | Door number **73** | Beat | The door creaks open a little more; the light spills out further; slow push-in |
+| 9 | 13.7–15.4s | Camcorder-style shot (4:3 crop inside the 9:16, with a REC dot): the crew laughing on a wall | Date on the camcorder overlay: **'73** | Beat | Handheld camcorder shake; the crew laughs and shoves each other; the REC dot blinks |
+| 10 | 15.4–17.1s | Pigeons scattering off a phone box, sodium light | — | Beat | Pigeons burst off the phone box and scatter through the light |
+| 11 | 17.1–18.9s | Ambulance and police lights washing across a tower block | Lit windows form "73" (blink and you miss it) | Siren under the beat | Red and blue lights sweep across the tower; the "73" windows blink on for a beat, then off |
+| 12 | 18.9–20.6s | From behind: the figure in the slate-blue tracksuit walking alone toward a closed gate | — | Beat | He walks away from camera toward the gate; his breath steams; the camera follows handheld |
+| 13 | 20.6–22.3s | **The gate swings open**: dawn light floods in (from night to morning, the turn to "Free At Last") | Gate bars form "73" | Beat lifts | The gate swings open; dawn light floods the frame; lens flare |
+| 14 | 22.3–24s | Title card **"HOMETOWN." · RIMZEE · FREE AT LAST, LIVE** → **"DREAMREACH."** | — | Song tail | Text fades in over black (built in ffmpeg, no generation) |
 
-**Animated shots:** 1, 2, 7, 13 (4 video generations). The rest are stills with ffmpeg push/jitter/flicker effects.
+**Every shot is animated:** 13 video generations (shots 1–13), and shot 14 is built in ffmpeg. Allow about 4 re-rolls, so **about 17 generations**.
 **Caption:**
 ```
 HOMETOWN. NO PEACE.
@@ -267,10 +293,10 @@ Plugging his show in the caption gives him a commercial reason to repost. **DM**
 
 ## 10. Production order
 1. **BEMZ first** (the warmer target: 27.7K followers, open to collabs). If it gets a repost or more than 5K views, do **Rimzee** next.
-2. **Both use the same pipeline:** stills, then 4 animated shots, then assembly in `ffmpeg-render-service`. That needs the section 6 upgrades, plus these effects: **push-in**, **jitter (camcorder)**, **flicker (sirens)**, **CCTV/REC overlays**, and a **4:3-in-9:16 crop**.
-3. **Total generation per video:** 12–14 stills plus 4 short clips.
+2. **All three videos use the same pipeline:** stills, then **every shot animated**, then assembly in `ffmpeg-render-service`. That needs the section 6 upgrades, plus overlays for **CCTV timestamp / camcorder REC** and a **4:3-in-9:16 crop** (Rimzee).
+3. **Generations:** GRM about 16, BEMZ about 11, Rimzee about 17, so **about 44 video generations for all three**, plus about 35 stills.
 
 **Terminal next step:**
 ```
-claude "Read docs/dreamreach-ai-visuals-plan.md sections 6, 8 and 9. Add the render-service upgrades, then write jobs/bemz-dnd.json and jobs/rimzee-hometown.json from the shot lists"
+claude "Read docs/dreamreach-ai-visuals-plan.md sections 6, 8 and 9. Add the render-service upgrades, then write jobs/block-lore.json, jobs/bemz-dnd.json and jobs/rimzee-hometown.json from the shot lists"
 ```
