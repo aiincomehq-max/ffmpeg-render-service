@@ -1,0 +1,49 @@
+{
+  "_notes": "Wenzel's Gingerbread Person. Clip foley kept; add festive music in-app.",
+  "clips": [
+    {
+      "url": "assets/wenzels-gingerbread/01.mp4",
+      "duration_s": 4.0,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/wenzels-gingerbread/02.mp4",
+      "duration_s": 3.0,
+      "trim_start_s": 0.5
+    },
+    {
+      "url": "assets/wenzels-gingerbread/03.mp4",
+      "duration_s": 4.0,
+      "trim_start_s": 0.5
+    }
+  ],
+  "keep_clip_audio": true,
+  "overlays": [
+    {
+      "text": "GINGERBREAD PERSON",
+      "start_s": 4.2,
+      "end_s": 7.0,
+      "y": 0.78,
+      "fontsize": 80,
+      "color": "white",
+      "font": "sans"
+    },
+    {
+      "text": "£1.95",
+      "start_s": 4.2,
+      "end_s": 7.0,
+      "y": 0.84,
+      "fontsize": 76,
+      "color": "#FF5500",
+      "font": "sans"
+    }
+  ],
+  "end_card": {
+    "text": "DREAMREACH.",
+    "subtext": "Christmas at @wenzelsthebakers",
+    "duration_s": 2.0,
+    "color": "#FF5500",
+    "background": "black",
+    "fontsize": 100
+  }
+}

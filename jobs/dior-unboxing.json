@@ -1,5 +1,5 @@
 {
-  "_notes": "Dior unboxing (AI-imagined). Caption must start 'AI-imagined unboxing'; turn on AI label. Foley kept. QC fixes: 03 uses only the settled-open end (the wings split unnaturally at 1-2s); 06 uses only 3.0s+ (it jumps to a different drawer at ~2.5s).",
+  "_notes": "Dior unboxing (AI-imagined), TRUE SCALE: the cabinet stands on the floor in front of the island (~1.1 m). Caption must start 'AI-imagined unboxing'; turn on AI label. Foley kept.",
   "clips": [
     {
       "url": "assets/dior-unboxing/01.mp4",
@@ -13,8 +13,8 @@
     },
     {
       "url": "assets/dior-unboxing/03.mp4",
-      "duration_s": 2.0,
-      "trim_start_s": 2.8
+      "duration_s": 4.5,
+      "trim_start_s": 0.3
     },
     {
       "url": "assets/dior-unboxing/05.mp4",
@@ -23,8 +23,13 @@
     },
     {
       "url": "assets/dior-unboxing/06.mp4",
-      "duration_s": 1.8,
-      "trim_start_s": 3.0
+      "duration_s": 1.6,
+      "trim_start_s": 0.3
+    },
+    {
+      "url": "assets/dior-unboxing/16.mp4",
+      "duration_s": 2.2,
+      "trim_start_s": 0.5
     },
     {
       "url": "assets/dior-unboxing/07.mp4",
