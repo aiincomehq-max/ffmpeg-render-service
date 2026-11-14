@@ -32,6 +32,10 @@ MONO_FONT_FILE = os.environ.get("MONO_FONT_FILE", "/usr/share/fonts/truetype/dej
 
 W, H, FPS = 1080, 1920, 30
 
+# Bitrate-capped H.264 so grain/noise can't balloon file size (~12 Mbps suits IG/TikTok uploads).
+VENC = ["-c:v", "libx264", "-preset", "medium", "-crf", "20",
+        "-maxrate", "12M", "-bufsize", "24M", "-pix_fmt", "yuv420p"]
+
 
 # ---------- request models ----------
 
@@ -164,13 +168,15 @@ def clip_duration(clip: Clip, req: RenderRequest) -> float:
 
 def normalize_clip(src: str, out: str, clip: Clip, duration: float, job_dir: str):
     base = [f"scale={W}:{H}:force_original_aspect_ratio=increase", f"crop={W}:{H}"]
+    if clip.look == "camcorder":
+        base = []  # the camcorder look frames the source as 4:3 itself
     vf = ",".join(base + look_filters(clip, job_dir) + [f"fps={FPS}", "format=yuv420p"])
     if is_image(src):
         inputs = ["-loop", "1", "-i", src]
     else:
         inputs = ["-ss", str(clip.trim_start_s), "-i", src]
     run_ffmpeg(["ffmpeg", "-y", *inputs, "-t", str(duration), "-vf", vf, "-an",
-                "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-pix_fmt", "yuv420p", out])
+                *VENC, out])
 
 
 def make_end_card(card: EndCard, out: str, job_dir: str):
@@ -183,8 +189,7 @@ def make_end_card(card: EndCard, out: str, job_dir: str):
     filters += ["fade=t=in:st=0:d=0.4", f"fade=t=out:st={fade_out}:d=0.4", "format=yuv420p"]
     run_ffmpeg(["ffmpeg", "-y", "-f", "lavfi",
                 "-i", f"color=c={card.background}:s={W}x{H}:r={FPS}:d={card.duration_s}",
-                "-vf", ",".join(filters), "-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
-                "-pix_fmt", "yuv420p", out])
+                "-vf", ",".join(filters), *VENC, out])
 
 
 def video_duration(path: str) -> float:
@@ -250,7 +255,7 @@ def render_video(req: RenderRequest):
         styled = os.path.join(job_dir, "styled.mp4")
         if vfilters:
             run_ffmpeg(["ffmpeg", "-y", "-i", base, "-vf", ",".join(vfilters + ["format=yuv420p"]),
-                        "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-an", styled])
+                        *VENC, "-an", styled])
         else:
             shutil.copy(base, styled)
 

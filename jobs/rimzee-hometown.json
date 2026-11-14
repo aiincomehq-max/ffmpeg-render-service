@@ -1,5 +1,5 @@
 {
-  "_notes": "RIMZEE HOMETOWN. 13 clips at 140 BPM, 4 beats each (1.71s). Shot 1 gets the CCTV look, shot 9 the camcorder 4:3 look. For socials post WITHOUT music_url and add the track in-app; preview.mp3 is for timing only.",
+  "_notes": "RIMZEE HOMETOWN. 13 clips at 140 BPM, 4 beats each (1.71s). Shot 1 gets the CCTV look, shot 9 the camcorder 4:3 look. Rendered silent: add the track from the IG/TikTok in-app music library when posting. To preview timing locally, add \"music_url\": \"assets/<folder>/preview.mp3\".",
   "clips": [
     {
       "url": "assets/rimzee-hometown/01.mp4",
@@ -55,18 +55,16 @@
     },
     {
       "url": "assets/rimzee-hometown/13.mp4",
-      "trim_start_s": 0.5
+      "trim_start_s": 0.0
     }
   ],
   "bpm": 140,
   "beats_per_shot": 4,
-  "music_url": "assets/rimzee-hometown/preview.mp3",
-  "music_start_s": 0,
   "grain": true,
   "vignette": true,
   "end_card": {
     "text": "DREAMREACH.",
-    "subtext": "HOMETOWN · RIMZEE · FREE AT LAST, LIVE",
+    "subtext": "HOMETOWN · RIMZEE · FREE AT LAST",
     "duration_s": 1.8,
     "color": "white",
     "background": "black"
