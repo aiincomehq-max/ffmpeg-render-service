@@ -84,3 +84,13 @@ Shots to redo: 1 (wide closed), 3 (wings open), 6 (drawer → bottle), 10 (wide 
 | 6b Drawer out + bottle | 56fec8da-6707-4603-913d-f6e637702972 | — | Pro | last few cm, the bottle settles |
 | 10 Wide open | 4ecd1c5c-666b-4cd8-a1e4-52494e4a39f7 | — | 4K | pull-back |
 Estimate: 3 × 30 + 2 × 10 = **110 credits**.
+
+## BOTTLE vs HAND SCALE (use in every prompt that shows a bottle in a hand)
+A woman's hand is ~17–18 cm from wrist to fingertip.
+| Bottle | Real height | In the hand |
+|---|---|---|
+| 100ml EDP | ~11–12 cm (est.) | ~⅔ of the hand; fingers wrap right round, fingertips overlap, palm and wrist visible below |
+| 80ml esprit | ~10–11 cm | just over ½ the hand |
+| 40ml hair perfume | ~8–9 cm | ~½ the hand; fits in the palm |
+| Travel spray | ~9–10 cm, slim | the length of the fingers |
+Rejected: the earlier "bottle lifted" shot, where the bottle was the full length of the hand (~17–18 cm, ~50% too big).
