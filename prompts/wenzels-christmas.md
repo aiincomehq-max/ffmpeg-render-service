@@ -58,3 +58,13 @@ Rejected: W3b (the sign reads "Wenzel's bakers", missing "the").
 | 1 White choc drizzle | 2d3d1bbc-7106-4e71-9f55-9844420829fe | 4K |
 | 2 Drip falling | 043b1d35-daad-42f6-9932-2d89ff1db706 | Pro |
 | 3 Tray + bag + sign | 238a148e-4ec3-48a7-a0a8-bf80efcd430e | Pro |
+
+## Videos 2–5 image picks (Gate 3 passed: awaiting "go")
+Rejected: L2 a/b (a ceramic mug with a handle instead of the black takeaway cup); L3 a/b (gingerbread biscuit topper: not on the real Gingerbread Latte).
+| Video | 1 Make (4K) | 2 Detail (Pro) | 3 Tray + bag + sign (Pro) | Price card |
+|---|---|---|---|---|
+| 2 Gingerbread Person | f54b28e7-ca13-416a-b5d3-65f12147ded5 | c656ac1e-f5ba-4099-b7c3-1779760c497a | 6f11fc88-8172-447e-87a1-e2d4c3d5d8e1 | £1.95 |
+| 3 Snowman Cupcake | cc26a86e-c77d-4e57-b15c-c4e7236e7b8d | d687a744-9741-4914-a549-bc15ca21ed48 | b8ce3c18-23ea-48ed-8f2a-297e6d1c688c | £2.50 |
+| 4 Christmas Cookie | 090aff93-d595-4b6a-9bb7-7543b7201a1a | 77e2efcf-c76e-46cd-91c6-436a46cbcb45 | 7e0dba77-e4f1-4147-ad46-9c9c934238b4 | £1.95 |
+| 5 Gingerbread Latte | 7fbff879-2811-4530-9579-cc5743ed84cc | 5c850300-b69d-4b0a-aacf-1243dce89ed5 | 8ff6dd75-ed7b-476f-80c9-d44228837fd0 | £3.25 |
+Estimate: 4 × (30 + 10 + 10) = **200 credits**.
