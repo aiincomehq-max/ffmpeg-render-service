@@ -7,6 +7,17 @@ Image credits are cheap (~0.25). Video credits are not (7.5+ per clip). **Every 
 prompt or still-image stage, before any video generation.** Never call a video-generation tool until the
 gates below have passed **and the user has replied "go" to the stills sheet.**
 
+## The goal: photoreal enough that the artist/brand reposts it
+Every shot should look like it was filmed on a real cinema camera, not generated. In every prompt:
+- **Real camera language:** name a lens and stock ("35mm lens, Kodak Vision3 500T, shot on ARRI Alexa"),
+  practical light sources only (streetlights, phone screens, shop signs), natural motion blur.
+- **Imperfection:** grime, wear, uneven light, people slightly out of focus, nothing too symmetrical or clean.
+- **Hidden motifs must be plausible in the real world** (a scratch, a sticker, a reflection, a number plate).
+  Never giant glowing shapes on buildings or windows lit in a perfect pattern. Those read as CGI and kill the realism.
+- **No visible AI faces** of crew/extras unless the artist supplied consent and photos; use backs,
+  silhouettes, masks, or out-of-focus faces.
+- Before generating, flag any shot whose idea itself looks artificial, and propose a realistic version.
+
 ## Gate 1: shot bible (before writing any prompt)
 For each video, write a short shot bible at the top of `prompts/<video>.md` and get it right first:
 - **Location facts:** underground or above ground, interior or exterior, city, time of day, weather.
