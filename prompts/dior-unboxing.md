@@ -74,3 +74,13 @@ Dior doesn't publish dimensions, so these are measured against the **real 100ml 
 nearly touch the ceiling. Our shots made it island-sized (~60 cm), which made the full-size bottles look oversized in the drawers.
 **Fix:** the cabinet stands **on the kitchen floor in front of the marble island**, with the marble front behind and beside it. Bottles about as tall as a drawer front.
 Shots to redo: 1 (wide closed), 3 (wings open), 6 (drawer → bottle), 10 (wide open). The close-ups 2, 5, 7, 8 and 9 hold up.
+
+## True-scale fix: image picks (awaiting animation)
+| Shot | Start | End | Model | Motion |
+|---|---|---|---|---|
+| 1 Wide closed (on the floor) | 8cd4a222-261c-468a-9d6b-577a81e9983a | — | 4K | dolly forward |
+| 3 Wings open | 8cd4a222-261c-468a-9d6b-577a81e9983a | 4ecd1c5c-666b-4cd8-a1e4-52494e4a39f7 | 4K | wings swing out on hinges, base fixed |
+| 6a Drawer grip | fa8c5e3b-cf86-4b12-b89f-9edf2da8721b | — | Pro | starts pulling |
+| 6b Drawer out + bottle | 56fec8da-6707-4603-913d-f6e637702972 | — | Pro | last few cm, the bottle settles |
+| 10 Wide open | 4ecd1c5c-666b-4cd8-a1e4-52494e4a39f7 | — | 4K | pull-back |
+Estimate: 3 × 30 + 2 × 10 = **110 credits**.
