@@ -62,7 +62,20 @@ Method: (a) vidIQ channel search for faceless channels created since 14 May 2026
 Yes, Claude can read a full book in chunks and pull out lore, timelines, and script drafts. But:
 1. **Getting the text legally.** Claude can't fetch copyrighted novels. You'd provide your own purchased copy (no DRM-stripping). Or, the strongest option, **pick public-domain series**, where Claude can legally read the full text (Project Gutenberg): **Lovecraft's Cthulhu Mythos, Robert E. Howard's Conan, Burroughs' Barsoom/John Carter, Oz, Arthurian legend, Norse/Greek myth.** That's a fresh twist almost nobody uses, and you can quote the text directly with no copyright problem.
 2. **Accuracy.** Lore fans catch every mistake. Working from memory, AI will invent details. Working from the actual text it's reliable, but you still fact-check.
-3. **The moat changes, it doesn't vanish.** If AI does the reading, anyone can, so the edge becomes **your voice, taste and editing**. Channels winning here advertise "human-narrated, no AI" (Bolter & Blade) because AI-voiced lore gets called out in the comments. Best combination: Claude does the reading and drafting, **you narrate** (or at least edit hard).
+3. ~~The moat changes~~ **Decision (14 Nov):** no human reading needed. Workflow: Claude reads the full public-domain text, writes the script, then fact-checks every claim back to the text (chapter/page refs in a source sheet). Narration: ElevenLabs voice is fine to start. Optionally test human narration later.
+
+### Lore pick (vidIQ keyword data, 14 Nov)
+| Series (public domain) | Monthly searches | Competition | Verdict |
+|---|---|---|---|
+| **Lovecraft / Cthulhu Mythos** | cosmic horror 103k · Cthulhu 77k · Lovecraft 55k · HP Lovecraft 18k · "lovecraft lore" 5.3k | 42 to 60 (moderate) | 🥇 **Pick this one** |
+| Conan (Robert E. Howard) | "conan the barbarian" 53k, **+63% growth** | 40 (low) | 🥈 Second channel / series 2 |
+| Norse mythology (Eddas) | 121k | 52, crowded (Jon Solo etc.) | Big but crowded |
+| King Arthur | 45k | 59 | OK |
+| John Carter / Barsoom | under 750 | n/a | ✗ Too small |
+
+**Why Lovecraft:** biggest demand of the public-domain options, overlaps with the horror audience, about 60+ stories all free on Project Gutenberg / Wikisource, and the material suits creepy AI visuals, Ken Burns pans on dark art, and a calm narrator. It also works as sleep-content (long 1 to 3 h videos, which several new breakout channels already use).
+
+**First 5 video ideas:** The Complete Cthulhu Mythos Explained · Every Great Old One Ranked by Power · The Full History of R'lyeh · What Actually Happens in At the Mountains of Madness · The Necronomicon: Everything Lovecraft Wrote About It.
 
 ---
 
