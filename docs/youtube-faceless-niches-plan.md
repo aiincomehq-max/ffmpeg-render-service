@@ -44,6 +44,28 @@ Use vidIQ to check whether [NICHE] is still early:
 
 ---
 
+## 2b. Niche check results (run 14 Nov 2026 via vidIQ)
+
+Method: (a) vidIQ channel search for faceless channels created since 14 May 2026 with ≤50 videos; (b) YouTube search for the title format in the last 90 days (since 16 Aug 2026), up to 50 results, counting distinct channels.
+
+| Niche | Distinct channels using format (90 d) | New breakout channels found | Verdict |
+|-------|--------------------------------------|-----------------------------|---------|
+| **#4 Historical autopsies** | **About 1** (a single 6-view Short matched "autopsy of historical figure") | **The DNA Casebook** (created June, 18 videos, 314k views, +38% views in 30 d), Candlelit History (sleep-history, 420k views) | 🟢 **WIDE OPEN. Best result.** |
+| **#6 Book lore** | Many lore videos, but spread across many fandoms; most are big channels on games/comics | Bolter & Blade (10.5k subs, human-narrated 40k), SOTI More (40k, 15k avg views), Legends of Arrakis (Dune, 41 videos, 3-hour videos), **Echoes of Panem** (101 subs, 25k views on its *first* 2-hour Hunger Games video) | 🟢 **GO, if you pick an under-served fandom** |
+| **#2 Economic rise and fall** | 44 channels / 47 videos, but it's a broad genre, not one title format. Big players (WSJ, RealLifeLore) mixed with small breakouts | Truth Vault (2.9k subs → 1.17M views, "Rise and Fall of Big Bazaar"), What Used to Be (5k subs → 163k), The Last Day (36k subs → 5.2M). New: Golden Age Lost, Forgotten Fortunes (AI-made, weak: about 700 avg views) | 🟡 **GO with a tight angle** (e.g. UK high-street brands). Generic AI versions are failing |
+| **#1 Horror "How I'd Survive"** | **About 11 channels.** Spo0ky dominates (20+ videos, 1.9M top video). Copycats appeared in Sept/Oct: Crash Test Horror, The Real Horror, Bonsey, Reap (copied Spo0ky's description word for word), Survival Quests, gR!m, Dreggo, Dave's Survival Guide | Copycats under 400 subs still get 15 to 20k on early videos | 🟠 **Closing.** In the 10 to 40 band, so it needs a twist. Copyright risk with film clips |
+| **#3 POV finance** | 🔴 **36 distinct channels in 90 days** (POV Finance, Money Life POV, Finance With Henry, Sean On Money, Maxwell Explains, Quiet Money Stories, Retired Life POV…) | Ollie Finance is still growing, but the format is flooded | 🔴 **NO-GO.** Already the "Living in [Country]" trap |
+
+**Updated ranking:** 1) Historical autopsies → 2) Book lore (chosen fandom) → 3) Economic rise and fall (tight angle) → 4) Horror survival (only with a twist) → ✗ POV finance.
+
+### On book lore and "can't AI just read the book?"
+Yes, Claude can read a full book in chunks and pull out lore, timelines, and script drafts. But:
+1. **Getting the text legally.** Claude can't fetch copyrighted novels. You'd provide your own purchased copy (no DRM-stripping). Or, the strongest option, **pick public-domain series**, where Claude can legally read the full text (Project Gutenberg): **Lovecraft's Cthulhu Mythos, Robert E. Howard's Conan, Burroughs' Barsoom/John Carter, Oz, Arthurian legend, Norse/Greek myth.** That's a fresh twist almost nobody uses, and you can quote the text directly with no copyright problem.
+2. **Accuracy.** Lore fans catch every mistake. Working from memory, AI will invent details. Working from the actual text it's reliable, but you still fact-check.
+3. **The moat changes, it doesn't vanish.** If AI does the reading, anyone can, so the edge becomes **your voice, taste and editing**. Channels winning here advertise "human-narrated, no AI" (Bolter & Blade) because AI-voiced lore gets called out in the comments. Best combination: Claude does the reading and drafting, **you narrate** (or at least edit hard).
+
+---
+
 ## 3. Recommended shortlist
 
 Since you're running several channels next to existing projects, choose by **how much effort each video takes against how well it's protected from copycats**:
