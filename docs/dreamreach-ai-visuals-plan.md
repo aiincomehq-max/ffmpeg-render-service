@@ -187,6 +187,14 @@ make a spec piece. *(Swap the brand if you prefer. The same template works for L
 - **Old payloads** still work exactly as before.
 - **Local files** are only read when `ALLOW_LOCAL_FILES=1`, so a public deployment can't be made to read the server's disk.
 
+**Check before rendering (required):** `python qc_sheet.py assets/<video>` lays out one frame per second of every clip. Check every row for:
+- **location continuity:** underground stays underground, with no sky or city outside a subway window
+- **physics:** vehicles never reverse, and people don't morph
+- **text and numbers:** they stay readable and never mirror
+- **faces:** no artist face
+
+Also write the location into every prompt in so many words, e.g. *"deep underground: no sky, no buildings outside"*. The AI fills any gap with whatever looks pretty.
+
 **Render on the Mac without running the server:**
 ```
 python render_job.py jobs/bemz-dnd.json     # → out/bemz-dnd.mp4
