@@ -1,5 +1,5 @@
 {
-  "_notes": "Dior unboxing (AI-imagined), TRUE SCALE: the cabinet stands on the floor in front of the island (~1.1 m). Caption must start 'AI-imagined unboxing'; turn on AI label. Foley kept.",
+  "_notes": "Dior unboxing (AI-imagined). TRUE SCALE + CONTAINMENT: the cabinet is on the floor; the bottle lies fully inside the drawer; the bottle in hand is ~2/3 of the hand. Caption must start 'AI-imagined unboxing'; turn on AI label.",
   "clips": [
     {
       "url": "assets/dior-unboxing/01.mp4",
@@ -22,14 +22,9 @@
       "trim_start_s": 0.5
     },
     {
-      "url": "assets/dior-unboxing/06.mp4",
-      "duration_s": 1.6,
-      "trim_start_s": 0.3
-    },
-    {
       "url": "assets/dior-unboxing/16.mp4",
-      "duration_s": 2.2,
-      "trim_start_s": 0.5
+      "duration_s": 2.5,
+      "trim_start_s": 0.3
     },
     {
       "url": "assets/dior-unboxing/07.mp4",
